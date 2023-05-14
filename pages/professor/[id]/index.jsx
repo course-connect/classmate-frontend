@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function Professor() {
-	return <div>Professor</div>;
+	return <h1>Professor</h1>;
 }

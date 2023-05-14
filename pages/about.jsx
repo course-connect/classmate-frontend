@@ -1,10 +1,10 @@
 import React from 'react';
 import page from '../styles/page.module.scss';
 
-export default function SignUp() {
+export default function About() {
 	return (
 		<div className={page.container}>
-			<h1>Sign Up</h1>
+			<h1>About</h1>
 		</div>
 	);
 }
