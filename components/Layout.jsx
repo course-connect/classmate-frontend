@@ -1,7 +1,8 @@
-import React from 'react';
 import Link from 'next/link';
-import layout from '../styles/layout.module.scss';
+import React from 'react';
+
 import button from '../styles/button.module.scss';
+import layout from '../styles/layout.module.scss';
 
 export default function Layout({ children }) {
 	return (
