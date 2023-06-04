@@ -1,15 +1,14 @@
 import Link from 'next/link';
 import React from 'react';
 
-import button from '../styles/button.module.scss';
 import layout from '../styles/layout.module.scss';
 
 export default function Layout({ children }) {
 	return (
 		<>
 			<nav className={layout.navbar}>
-				<button className={`${button.btn} ${button.btn_blank}`}>
-					<Link className={layout.logo} href='/'>
+				<button className='btn btn--blank'>
+					<Link className='font-extrabold text-2xl' href='/'>
 						CLASSMATE
 					</Link>
 				</button>
@@ -27,16 +26,14 @@ export default function Layout({ children }) {
 						<Link href='/account'>ACCOUNT</Link>
 					</li>
 				</ul>
-				<div className={button.two_button_wrapper}>
-					<button
-						className={`${button.btn} ${button.btn_link} ${button.btn_outline}`}>
-						<Link className={button.link} href='/signin'>
+				<div className='two-btn-wrapper'>
+					<button className='btn btn--link btn--hover btn--outline'>
+						<Link className='link' href='/signin'>
 							SIGN IN
 						</Link>
 					</button>
-					<button
-						className={`${button.btn} ${button.btn_link} ${button.btn_primary}`}>
-						<Link className={button.link} href='/signup'>
+					<button className='btn btn--link btn--hover btn--primary '>
+						<Link className='link' href='/signup'>
 							SIGN UP
 						</Link>
 					</button>

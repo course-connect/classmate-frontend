@@ -4,33 +4,85 @@
 /* typography stuff */
 /* manipulation stuff */
 
-* {
-	box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html,
-body {
-	padding: 0;
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
 
-a {
-	color: inherit;
-	text-decoration: none;
-}
-
-.container {
-	margin-inline: 5rem
-}
-
-@media (prefers-color-scheme: dark) {
-	html {
-		color-scheme: dark;
+@layer components{
+	// Button layouts
+	.two-btn-wrapper{
+		@apply flex gap-2
 	}
-	body {
-		color: white;
-		background: black;
+	
+	// Buttons
+	.btn {
+		@apply rounded-lg px-7 py-3 text-sm font-semibold text-white whitespace-nowrap cursor-pointer
+	}
+
+	.btn--blank {
+		@apply bg-transparent p-0 rounded-none text-black 
+	}
+
+	.btn--hover {
+		@apply transition ease-in-out hover:scale-105 duration-300
+	}
+
+	.btn--primary {
+		@apply bg-black
+	}
+
+	.btn--outline {
+		@apply border-2 border-black text-black
+	}
+
+	.btn--link {
+		@apply box-border p-0
+	}
+
+	.link {
+		@apply flex justify-center items-center w-full h-full py-3 px-7
 	}
 }
+
+// .link{
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+
+// 	width: 100%;
+// 	height: 100%;
+// 	padding: 0.8em 1.8em;
+// }
+
+
+// * {
+// 	box-sizing: border-box;
+// }
+
+// html,
+// body {
+// 	padding: 0;
+// 	margin: 0;
+// 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+// 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+// }
+
+// a {
+// 	color: inherit;
+// 	text-decoration: none;
+// }
+
+// .container {
+// 	margin-inline: 5rem;
+// }
+
+// @media (prefers-color-scheme: dark) {
+// 	html {
+// 		color-scheme: dark;
+// 	}
+// 	body {
+// 		color: white;
+// 		background: black;
+// 	}
+// }
