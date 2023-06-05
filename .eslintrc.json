@@ -15,6 +15,7 @@
 		}
 	},
 	"extends": [
+		"next/babel","next/core-web-vitals",
 		"eslint:recommended",
 		"plugin:import/errors",
 		"plugin:react/recommended",

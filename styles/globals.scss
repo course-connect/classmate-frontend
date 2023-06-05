@@ -17,7 +17,7 @@
 	
 	// Buttons
 	.btn {
-		@apply rounded-lg px-7 py-3 text-sm font-semibold text-white whitespace-nowrap cursor-pointer
+		@apply rounded-lg px-7 py-2 text-sm font-medium text-white whitespace-nowrap cursor-pointer font-classmate-georgia
 	}
 
 	.btn--blank {
@@ -29,11 +29,11 @@
 	}
 
 	.btn--primary {
-		@apply bg-black
+		@apply bg-classmate-green-2
 	}
 
 	.btn--outline {
-		@apply border-2 border-black text-black
+		@apply border border-black text-black
 	}
 
 	.btn--link {
@@ -41,48 +41,30 @@
 	}
 
 	.link {
-		@apply flex justify-center items-center w-full h-full py-3 px-7
+		@apply flex justify-center items-center w-full h-full py-2 px-7
 	}
 }
 
-// .link{
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
+@font-face {
+	font-family: 'georgia';
+	src: url('/fonts/georgia.ttf'); // pattern: /directoryName/file.extension
+   }
 
-// 	width: 100%;
-// 	height: 100%;
-// 	padding: 0.8em 1.8em;
-// }
+.font-classmate-georgia {
+	font-family: 'georgia';
+}
 
-
-// * {
-// 	box-sizing: border-box;
-// }
-
-// html,
-// body {
-// 	padding: 0;
-// 	margin: 0;
-// 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-// 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-// }
-
-// a {
-// 	color: inherit;
-// 	text-decoration: none;
-// }
-
-// .container {
-// 	margin-inline: 5rem;
-// }
-
-// @media (prefers-color-scheme: dark) {
-// 	html {
-// 		color-scheme: dark;
-// 	}
-// 	body {
-// 		color: white;
-// 		background: black;
-// 	}
-// }
+:root {
+	--classmate-green-1: #031E03;
+	--classmate-green-2: #144514;
+	--classmate-green-3: #699659;
+	--classmate-green-4: #A3BF98;
+	--classmate-green-5: #C8F9B1;
+	--classmate-green-6: #4D5E4A;
+	--classmate-gray-1: #848480;
+	--classmate-gray-2: #AFADAC;
+	--classmate-pink-1: #DA8088;
+	--classmate-gold-1: #D0A13D;
+	--classmate-tan-1: #EFEBDD;
+	--classmate-tan-2: #F8F4EE;
+  }
