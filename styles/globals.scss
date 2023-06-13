@@ -17,7 +17,7 @@
 	
 	// Buttons
 	.btn {
-		@apply rounded-lg px-7 py-2 text-sm font-medium text-white whitespace-nowrap cursor-pointer font-classmate-georgia
+		@apply rounded-lg px-7 py-2 text-sm font-medium text-white whitespace-nowrap cursor-pointer font-classmate-georgia-bold antialiased
 	}
 
 	.btn--blank {
@@ -45,13 +45,60 @@
 	}
 }
 
+
 @font-face {
-	font-family: 'georgia';
-	src: url('/fonts/georgia.ttf'); // pattern: /directoryName/file.extension
-   }
+font-family: 'georgia';
+font-style: normal;
+font-weight: normal;
+src: local('georgia'), url('../public/fonts/georgia.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'georgia-italic';
+font-style: normal;
+font-weight: normal;
+src: local('georgia-italic'), url('../public/fonts/georgiai.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'georgia-bold';
+font-style: normal;
+font-weight: normal;
+src: local('georgia-bold'), url('../public/fonts/georgiab.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'georgia-bold-italic';
+font-style: normal;
+font-weight: normal;
+src: local('georgia-bold-italic'), url('../public/fonts/georgiaz.woff') format('woff');
+}
 
 .font-classmate-georgia {
 	font-family: 'georgia';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.font-classmate-georgia-bold {
+	font-family: 'georgia-bold';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.font-classmate-georgia-italic {
+	font-family: 'georgia-italic';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.font-classmate-georgia-bold-italic {
+	font-family: 'georgia-bold-italic';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 :root {

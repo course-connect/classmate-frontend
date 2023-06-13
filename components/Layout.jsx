@@ -1,31 +1,47 @@
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
+import useWindowSize from '../hooks/useWindowSize';
 
 export default function Layout({ children }) {
+	const { width, height } = useWindowSize();
+
 	return (
 		<>
-			<nav className='flex justify-center bg-classmate-tan-1 items-center py-4 px-60'>
+			{/* px-60 justify-center */}
+			<nav className='flex h-16 items-center justify-between space-x-5 bg-classmate-tan-2 px-6 py-4'>
 				<button className='btn btn--blank'>
-					<Link className='font-extrabold text-2xl' href='/'>
-						<Image src='./logo.svg' width={120} height={18} />
+					<Link className='text-2xl font-extrabold' href='/'>
+						{width > 640 ? (
+							<Image
+								src='./logo.svg'
+								width={0}
+								height={0}
+								className='h-6 w-auto'
+							/>
+						) : (
+							<Image
+								src='./logo-small.svg'
+								width={0}
+								height={0}
+								className='h-6 w-auto'
+							/>
+						)}
 					</Link>
 				</button>
-				<ul className='flex gap-14 mx-20 text-classmate-green-6'>
-					<li className='font-classmate-georgia text-xs'>
-						<Link href='/'>Home</Link>
-					</li>
-					<li className='font-classmate-georgia text-xs'>
+				<ul className='absolute left-0  top-0 m-0 w-full grow list-none bg-black p-0 text-classmate-green-6'>
+					<li className='font-classmate-georgia ml- text-xs'>
 						<Link href='/search'>Search</Link>
 					</li>
-					<li className='font-classmate-georgia text-xs'>
-						<Link href='/about'>About</Link>
-					</li>
-					<li className='font-classmate-georgia text-xs'>
+					<li className='font-classmate-georgia ml- text-xs'>
 						<Link href='/account'>Account</Link>
 					</li>
 				</ul>
-				<div className='two-btn-wrapper  ml-auto'>
+				<button className=''>
+					<Image src='./hamburger.svg' width={25} height={25} />
+				</button>
+
+				{/* <div className='two-btn-wrapper  ml-auto'>
 					<button className='btn btn--link btn--hover btn--outline text-classmate-green-2 border-classmate-green-2'>
 						<Link className='link' href='/signin'>
 							Sign In
@@ -36,7 +52,7 @@ export default function Layout({ children }) {
 							Sign Up
 						</Link>
 					</button>
-				</div>
+				</div> */}
 			</nav>
 			{children}
 		</>

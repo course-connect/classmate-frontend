@@ -1,7 +1,7 @@
 import Layout from '../components/Layout';
 import { Provider } from 'react-redux';
 import '../styles/globals.scss';
-import { wrapper } from '../store/store';
+import { wrapper } from '../redux/store';
 
 export default function MyApp({ Component, pageProps }) {
 	const { store } = wrapper.useWrappedStore(pageProps);

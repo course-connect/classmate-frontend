@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function Home() {
-	return <div className='mx-64'></div>;
+	return <div className=''></div>;
 }
