@@ -17,7 +17,15 @@
 	
 	// Buttons
 	.btn {
-		@apply rounded-lg px-7 py-2 text-sm font-medium text-white whitespace-nowrap cursor-pointer font-classmate-georgia-bold antialiased
+		@apply rounded-md text-sm font-medium text-white whitespace-nowrap cursor-pointer font-classmate-bold antialiased
+	}
+
+	.btn--small {
+		@apply w-28 h-9
+	}
+
+	.btn--large {
+		@apply w-40 h-11 text-base
 	}
 
 	.btn--blank {
@@ -26,10 +34,6 @@
 
 	.btn--hover {
 		@apply transition ease-in-out hover:scale-105 duration-300
-	}
-
-	.btn--primary {
-		@apply bg-classmate-green-2
 	}
 
 	.btn--outline {
@@ -41,7 +45,7 @@
 	}
 
 	.link {
-		@apply flex justify-center items-center w-full h-full py-2 px-7
+		@apply flex justify-center items-center
 	}
 }
 
@@ -77,25 +81,25 @@ font-weight: normal;
 src: local('georgia-bold-italic'), url('../public/fonts/georgiaz.woff') format('woff');
 }
 
-.font-classmate-georgia {
+.font-classmate {
 	font-family: 'georgia';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.font-classmate-georgia-bold {
+.font-classmate-bold {
 	font-family: 'georgia-bold';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.font-classmate-georgia-italic {
+.font-classmate-italic {
 	font-family: 'georgia-italic';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.font-classmate-georgia-bold-italic {
+.font-classmate-bold-italic {
 	font-family: 'georgia-bold-italic';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
