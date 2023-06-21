@@ -10,7 +10,7 @@ import plane from '../public/plane.svg';
 
 export default function Hero() {
 	return (
-		<div className='relative flex h-[680px] w-full items-center justify-center bg-classmate-tan-1 px-8 2xl:h-[740px]'>
+		<section className='section-padding relative flex h-[680px] w-full items-center justify-center bg-classmate-tan-1 2xl:h-[740px]'>
 			<Image
 				src={swinging}
 				width={0}
@@ -61,6 +61,6 @@ export default function Hero() {
 					Get Started
 				</button>
 			</div>
-		</div>
+		</section>
 	);
 }

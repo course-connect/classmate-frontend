@@ -14,7 +14,7 @@ export default function Layout({ children }) {
 	return (
 		<>
 			{/* px-60 justify-center */}
-			<nav className='flex h-16 items-center justify-between space-x-5 bg-classmate-tan-2 px-6 py-4 md:h-20 md:justify-normal md:px-10 xl:px-20 2xl:px-60'>
+			<nav className='section-padding flex h-16 items-center justify-between space-x-5 bg-classmate-tan-2 py-4 md:h-20 md:justify-normal'>
 				<button className='btn btn--blank'>
 					<Link className='text-2xl font-extrabold' href='/'>
 						{width > 640 ? (

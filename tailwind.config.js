@@ -25,6 +25,7 @@ module.exports = {
 				'classmate-green-4': 'var(--classmate-green-4)',
 				'classmate-green-5': 'var(--classmate-green-5)',
 				'classmate-green-6': 'var(--classmate-green-6)',
+				'classmate-green-7': 'var(--classmate-green-7)',
 				'classmate-gray-1': 'var(--classmate-gray-1)',
 				'classmate-gray-2': 'var(--classmate-gray-2)',
 				'classmate-pink-1': 'var(--classmate-pink-1)',

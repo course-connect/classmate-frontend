@@ -10,6 +10,11 @@
 
 
 @layer components{
+	// Section layout
+	.section-padding{
+		@apply px-6 md:px-10 xl:px-20 2xl:px-60
+	}
+
 	// Button layouts
 	.two-btn-wrapper{
 		@apply flex gap-2
@@ -112,6 +117,7 @@ src: local('georgia-bold-italic'), url('../public/fonts/georgiaz.woff') format('
 	--classmate-green-4: #A3BF98;
 	--classmate-green-5: #C8F9B1;
 	--classmate-green-6: #4D5E4A;
+	--classmate-green-7: #788473;
 	--classmate-gray-1: #848480;
 	--classmate-gray-2: #AFADAC;
 	--classmate-pink-1: #DA8088;
