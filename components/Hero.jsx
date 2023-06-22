@@ -57,7 +57,7 @@ export default function Hero() {
 				<h2 className='font-classmate my-4 text-center text-2xl sm:my-6 sm:text-3xl'>
 					The easiest way to find a professor
 				</h2>
-				<button className='btn btn--large btn--hover bg-classmate-green-4 text-center text-classmate-tan-1'>
+				<button className='btn btn-large btn-hover bg-classmate-green-4 text-center text-classmate-tan-1'>
 					Get Started
 				</button>
 			</div>

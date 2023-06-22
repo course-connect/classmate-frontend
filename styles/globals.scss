@@ -25,27 +25,27 @@
 		@apply rounded-md text-sm font-medium text-white whitespace-nowrap cursor-pointer font-classmate-bold antialiased
 	}
 
-	.btn--small {
+	.btn-small {
 		@apply w-28 h-9
 	}
 
-	.btn--large {
+	.btn-large {
 		@apply w-40 h-11 text-base
 	}
 
-	.btn--blank {
+	.btn-blank {
 		@apply bg-transparent p-0 rounded-none text-black 
 	}
 
-	.btn--hover {
+	.btn-hover {
 		@apply transition ease-in-out hover:scale-105 duration-300
 	}
 
-	.btn--outline {
+	.btn-outline {
 		@apply border border-black text-black
 	}
 
-	.btn--link {
+	.btn-link {
 		@apply box-border p-0
 	}
 

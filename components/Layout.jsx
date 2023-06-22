@@ -15,7 +15,7 @@ export default function Layout({ children }) {
 		<>
 			{/* px-60 justify-center */}
 			<nav className='section-padding flex h-16 items-center justify-between space-x-5 bg-classmate-tan-2 py-4 md:h-20 md:justify-normal'>
-				<button className='btn btn--blank'>
+				<button className='btn btn-blank'>
 					<Link className='text-2xl font-extrabold' href='/'>
 						{width > 640 ? (
 							<Image
@@ -74,12 +74,12 @@ export default function Layout({ children }) {
 				</button>
 
 				<div className='!ml-auto hidden gap-2 md:flex'>
-					<button className='btn btn--link btn--hover btn--outline btn--small  border-classmate-green-2 text-classmate-green-2'>
+					<button className='btn btn-link btn-hover btn-outline btn-small  border-classmate-green-2 text-classmate-green-2'>
 						<Link className='link' href='/signin'>
 							Sign In
 						</Link>
 					</button>
-					<button className='btn btn--link btn--hover btn--small bg-classmate-green-2 text-classmate-tan-2'>
+					<button className='btn btn-link btn-hover btn-small bg-classmate-green-2 text-classmate-tan-2'>
 						<Link className='link' href='/signup'>
 							Sign Up
 						</Link>
