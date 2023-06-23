@@ -2,6 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import HomepageHeading from './HomepageHeading';
 import folder from '../public/folder.svg';
+import pie from '../public/pie.svg';
+import robot from '../public/robot.svg';
+import handHeart from '../public/hand-heart.svg';
 
 export default function WhatWeOffer() {
 	return (
@@ -33,27 +36,27 @@ export default function WhatWeOffer() {
 						</p>
 					</div>
 					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
-						<Image src={folder} width={0} height={0} className='w-10' />
+						<Image src={pie} width={0} height={0} className='w-10' />
 						<h6 className='font-classmate-bold py-3 text-xl text-classmate-green-1'>
-							Save Your Courses
+							Better Insights
 						</h6>
 						<p className='font-classmate text-sm text-classmate-green-7 2xl:text-base'>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						</p>
 					</div>
 					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
-						<Image src={folder} width={0} height={0} className='w-10' />
+						<Image src={robot} width={0} height={0} className='w-10' />
 						<h6 className='font-classmate-bold py-3 text-xl text-classmate-green-1'>
-							Save Your Courses
+							AI Powered
 						</h6>
 						<p className='font-classmate text-sm text-classmate-green-7 2xl:text-base'>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						</p>
 					</div>
 					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
-						<Image src={folder} width={0} height={0} className='w-10' />
+						<Image src={handHeart} width={0} height={0} className='w-10' />
 						<h6 className='font-classmate-bold py-3 text-xl text-classmate-green-1'>
-							Save Your Courses
+							Easy To Use
 						</h6>
 						<p className='font-classmate text-sm text-classmate-green-7 2xl:text-base'>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit.
