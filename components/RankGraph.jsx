@@ -1,23 +1,106 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useWindowSize from '../hooks/useWindowSize';
 
 export default function RankGraph() {
 	const { width } = useWindowSize();
 
 	return (
-		<div className='p-6'>
-			<div>
-				<p>Professor Rank</p>
+		<div className='bg-slate-500 p-8'>
+			<div className='mb-10'>
+				<p className='font-classmate-bold text-2xl'>Professor rank</p>
 			</div>
-			<div className='grid-col-5 grid h-56 grid-flow-col'>
-				<div className='relative h-full bg-red-500'>
-					<div className='absolute left-0 h-full w-1 rounded-full bg-slate-700' />
-					<p className='font-classmate absolute bottom-0 left-1 leading-3'>0</p>
+			<div className='flex'>
+				<div className='relative flex w-full '>
+					<div className='z-10  w-full -translate-y-[26px]'>
+						<div className='relative h-16 w-full'>
+							<p className='font-classmate absolute bottom-[40px] text-xs'>
+								Benjamin Mitchell
+							</p>
+							<div className='absolute bottom-0 flex h-3/5 w-full items-center rounded-md bg-classmate-green-2'>
+								<span className='font-classmate absolute -right-4'>5</span>
+							</div>
+						</div>
+						<div className='relative h-16 w-full'>
+							<p className='font-classmate absolute bottom-[40px] text-xs'>
+								Benjamin Mitchell
+							</p>
+							<div className='absolute bottom-0 flex h-3/5 w-full items-center rounded-md bg-classmate-green-2'>
+								<span className='font-classmate absolute -right-4'>5</span>
+							</div>
+						</div>
+						<div className='relative h-16 w-full'>
+							<p className='font-classmate absolute bottom-[40px] text-xs'>
+								Benjamin Mitchell
+							</p>
+							<div className='absolute bottom-0 flex h-3/5 w-full items-center rounded-md bg-classmate-green-2'>
+								<span className='font-classmate absolute -right-4'>5</span>
+							</div>
+						</div>
+						<div className='relative h-16 w-full'>
+							<p className='font-classmate absolute bottom-[40px] text-xs'>
+								Benjamin Mitchell
+							</p>
+							<div className='absolute bottom-0 flex h-3/5 w-full items-center rounded-md bg-classmate-green-2'>
+								<span className='font-classmate absolute -right-4'>5</span>
+							</div>
+						</div>
+						<div className='relative h-16 w-full'>
+							<p className='font-classmate absolute bottom-[40px] text-xs'>
+								Benjamin Mitchell
+							</p>
+							<div className='absolute bottom-0 flex h-3/5 w-full items-center rounded-md bg-classmate-green-2'>
+								<span className='font-classmate absolute -right-4'>5</span>
+							</div>
+						</div>
+						<div className='relative h-16 w-full'>
+							<p className='font-classmate absolute bottom-[40px] text-xs'>
+								Benjamin Mitchell
+							</p>
+							<div className='absolute bottom-0 flex h-3/5 w-full items-center rounded-md bg-classmate-green-2'>
+								<span className='font-classmate absolute -right-4'>5</span>
+							</div>
+						</div>
+					</div>
+
+					<div className='absolute grid h-full  w-full grid-flow-col grid-cols-5  text-sm'>
+						<div className='relative h-full'>
+							<div className='absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3' />
+							<p className='font-classmate absolute bottom-0 left-2 leading-3 text-classmate-green-6'>
+								0
+							</p>
+						</div>
+						<div className='relative h-full'>
+							<div className='absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3' />
+							<p className='font-classmate absolute bottom-0 left-2 leading-3 text-classmate-green-6'>
+								1
+							</p>
+						</div>
+						<div className='relative h-full'>
+							<div className='absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3' />
+							<p className='font-classmate absolute bottom-0 left-2 leading-3 text-classmate-green-6'>
+								2
+							</p>
+						</div>
+						<div className='relative h-full'>
+							<div className='absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3' />
+							<p className='font-classmate absolute bottom-1 left-2 leading-3 text-classmate-green-6'>
+								3
+							</p>
+						</div>
+						<div className='relative h-full'>
+							<div className='absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3' />
+							<p className='font-classmate absolute bottom-1 left-2 leading-3 text-classmate-green-6'>
+								4
+							</p>
+						</div>
+					</div>
 				</div>
-				<div className='h-full border-l-4 border-indigo-500  bg-green-500'></div>
-				<div className='h-full border-l-4 border-indigo-500 bg-blue-500'></div>
-				<div className='h-full border-l-4 border-indigo-500 bg-yellow-500'></div>
-				<div className='h-full border-l-4 border-indigo-500 bg-purple-500'></div>
+				<div className='relative block w-[18px] -translate-x-1  items-stretch text-sm'>
+					<div className='absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3' />
+					<p className='font-classmate absolute bottom-1 left-2 leading-3 text-classmate-green-6'>
+						5
+					</p>
+				</div>
 			</div>
 		</div>
 	);
