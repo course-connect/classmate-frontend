@@ -19,6 +19,7 @@ export default function HowItWorks() {
 						width={0}
 						height={0}
 						className='my-10 h-48 w-fit 3xl:h-auto 3xl:w-72'
+						alt='An illustration of a person searching for their school in a book, flipping through the pages with curiosity.'
 					/>
 					<p className='font-classmate max-w-[280px] text-center text-classmate-green-7'>
 						Consequuntur magni dolores eos qui ratione voluptatem sequi
@@ -36,6 +37,7 @@ export default function HowItWorks() {
 						width={0}
 						height={0}
 						className='my-10 h-48 w-fit 3xl:h-auto 3xl:w-72'
+						alt='An illustration of a person clumsily fumbling and dropping paper, displaying a moment of mishap or clumsiness.'
 					/>
 					<p className='font-classmate max-w-[280px] text-center text-classmate-green-7'>
 						Consequuntur magni dolores eos qui ratione voluptatem sequi
@@ -53,6 +55,7 @@ export default function HowItWorks() {
 						width={0}
 						height={0}
 						className='my-10 h-48 w-fit 3xl:h-auto 3xl:w-72'
+						alt='An illustration of a person with a joyful expression, content and satisfied with their choice.'
 					/>
 					<p className='font-classmate max-w-[280px] text-center text-classmate-green-7'>
 						Consequuntur magni dolores eos qui ratione voluptatem sequi

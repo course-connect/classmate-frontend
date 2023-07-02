@@ -27,7 +27,13 @@ export default function WhatWeOffer() {
 				</div>
 				<div className='grid grid-cols-1 grid-rows-4 gap-6 sm:grid-cols-2 sm:grid-rows-2 lg:max-w-[585px] 3xl:max-w-none 3xl:gap-10'>
 					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
-						<Image src={folder} width={0} height={0} className='w-10' />
+						<Image
+							src={folder}
+							width={0}
+							height={0}
+							className='w-10'
+							alt='An icon of a folder with a bookmark, representing a bookmarked or saved collection of files or documents.'
+						/>
 						<h6 className='font-classmate-bold py-3 text-xl text-classmate-green-1'>
 							Save Your Courses
 						</h6>
@@ -36,7 +42,13 @@ export default function WhatWeOffer() {
 						</p>
 					</div>
 					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
-						<Image src={pie} width={0} height={0} className='w-10' />
+						<Image
+							src={pie}
+							width={0}
+							height={0}
+							className='w-10'
+							alt='An icon of a pie chart, visualizing data distribution and proportions.'
+						/>
 						<h6 className='font-classmate-bold py-3 text-xl text-classmate-green-1'>
 							Better Insights
 						</h6>
@@ -45,7 +57,13 @@ export default function WhatWeOffer() {
 						</p>
 					</div>
 					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
-						<Image src={robot} width={0} height={0} className='w-10' />
+						<Image
+							src={robot}
+							width={0}
+							height={0}
+							className='w-10'
+							alt='An icon of a robot, depicting a mechanical or electronic humanoid figure.'
+						/>
 						<h6 className='font-classmate-bold py-3 text-xl text-classmate-green-1'>
 							AI Powered
 						</h6>
@@ -54,7 +72,13 @@ export default function WhatWeOffer() {
 						</p>
 					</div>
 					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
-						<Image src={handHeart} width={0} height={0} className='w-10' />
+						<Image
+							src={handHeart}
+							width={0}
+							height={0}
+							className='w-10'
+							alt='An icon of a hand holding a heart, symbolizing simplicity and ease of use.'
+						/>
 						<h6 className='font-classmate-bold py-3 text-xl text-classmate-green-1'>
 							Easy To Use
 						</h6>

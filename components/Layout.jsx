@@ -2,10 +2,21 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
 import useWindowSize from '../hooks/useWindowSize';
+import { useRouter } from 'next/router';
 
 export default function Layout({ children }) {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const { width } = useWindowSize();
+
+	// Get url path
+	const router = useRouter();
+	const pathname = router.asPath.split('/')[1];
+
+	// Check if current path should have a light or dark navbar
+	const pagesWithDarkNavbar = [];
+	const bgColor = pagesWithDarkNavbar.includes(pathname)
+		? 'bg-classmate-tan-1'
+		: 'bg-classmate-tan-2';
 
 	const toggleMobileMenu = () => {
 		setMobileMenuOpen((currentState) => !currentState);
@@ -13,8 +24,8 @@ export default function Layout({ children }) {
 
 	return (
 		<>
-			{/* px-60 justify-center */}
-			<nav className='section-padding flex h-16 items-center justify-between space-x-5 bg-classmate-tan-2 py-4 md:h-20 md:justify-normal'>
+			<nav
+				className={`section-padding flex h-16 items-center justify-between space-x-5 ${bgColor} py-4 md:h-20 md:justify-normal`}>
 				<button className='btn btn-blank'>
 					<Link className='text-2xl font-extrabold' href='/'>
 						{width > 640 ? (
@@ -49,6 +60,7 @@ export default function Layout({ children }) {
 							width={25}
 							height={25}
 							className='absolute right-7 top-5  md:hidden'
+							alt='An X icon representing a close button for a menu or window.'
 						/>
 					</button>
 
@@ -70,7 +82,12 @@ export default function Layout({ children }) {
 				</ul>
 
 				<button className='md:hidden' onClick={toggleMobileMenu}>
-					<Image src='./hamburger.svg' width={25} height={25} />
+					<Image
+						src='./hamburger.svg'
+						width={25}
+						height={25}
+						alt='An icon depicting three horizontal lines, commonly known as a hamburger icon, representing a menu opener.'
+					/>
 				</button>
 
 				<div className='!ml-auto hidden gap-2 md:flex'>
