@@ -3,6 +3,7 @@ import Image from 'next/image';
 import useWindowSize from '../hooks/useWindowSize';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import ClassmateButton from '../components/ClassmateButton';
 
 export default function Navbar() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -25,7 +26,7 @@ export default function Navbar() {
 	return (
 		<nav
 			className={`section-padding flex h-16 items-center justify-between space-x-5 ${bgColor} py-4 md:h-20 md:justify-normal`}>
-			<button className='btn btn-blank'>
+			<ClassmateButton styles='text-classmate-green-6 p-1'>
 				<Link className='text-2xl font-extrabold' href='/'>
 					{width > 640 ? (
 						<Image
@@ -45,61 +46,98 @@ export default function Navbar() {
 						/>
 					)}
 				</Link>
-			</button>
+			</ClassmateButton>
 
 			<ul
-				className={`font-classmate absolute left-0 top-0 z-10 !m-0 flex h-full w-full grow list-none flex-col items-center justify-center gap-4  bg-classmate-tan-2 text-xl text-classmate-green-6 transition-opacity duration-500 ease-in-out md:static md:!ml-6 md:w-fit md:grow-0 md:flex-row md:gap-6  md:text-sm lg:gap-16 ${
+				className={`font-classmate absolute left-0 top-0 z-10 !m-0 flex h-full w-full grow list-none flex-col items-center justify-center gap-4 bg-classmate-tan-2  text-xl text-classmate-green-6 transition-opacity duration-500 ease-in-out  md:static md:!ml-10 md:w-fit md:grow-0 md:flex-row md:gap-6  md:text-sm lg:!ml-20 lg:gap-16 ${
 					mobileMenuOpen || width > 768
 						? 'pointer-events-auto opacity-100'
 						: 'pointer-events-none opacity-0'
 				}`}>
-				<button onClick={toggleMobileMenu}>
+				<ClassmateButton
+					styles='absolute right-7 top-5 md:hidden'
+					callback={toggleMobileMenu}>
 					<Image
 						src='./xmark-solid.svg'
 						width={25}
 						height={25}
-						className='absolute right-7 top-5  md:hidden'
 						alt='An X icon representing a close button for a menu or window.'
 					/>
-				</button>
+				</ClassmateButton>
 
 				<li>
 					<Link href='/'>
-						<button onClick={toggleMobileMenu}>Home</button>
+						<ClassmateButton
+							styles='text-lg md:text-sm text-classmate-green-6 px-1'
+							callback={toggleMobileMenu}>
+							Home
+						</ClassmateButton>
 					</Link>
 				</li>
 				<li>
 					<Link href='/search'>
-						<button onClick={toggleMobileMenu}>Search</button>
+						<ClassmateButton
+							styles='text-lg md:text-sm text-classmate-green-6 px-1'
+							callback={toggleMobileMenu}>
+							Search
+						</ClassmateButton>
 					</Link>
 				</li>
 				<li>
 					<Link href='/account'>
-						<button onClick={toggleMobileMenu}>Account</button>
+						<ClassmateButton
+							styles='text-lg md:text-sm text-classmate-green-6 px-1'
+							callback={toggleMobileMenu}>
+							Account
+						</ClassmateButton>
+					</Link>
+				</li>
+				<li className='md:hidden '>
+					<Link href='/signin'>
+						<ClassmateButton
+							styles='text-lg md:text-sm text-classmate-green-6 px-1'
+							callback={toggleMobileMenu}>
+							Sign In
+						</ClassmateButton>
+					</Link>
+				</li>
+				<li className='md:hidden '>
+					<Link href='/signup'>
+						<ClassmateButton
+							styles='text-lg md:text-sm text-classmate-green-6 px-1'
+							callback={toggleMobileMenu}>
+							Sign Up
+						</ClassmateButton>
 					</Link>
 				</li>
 			</ul>
 
-			<button className='md:hidden' onClick={toggleMobileMenu}>
+			<ClassmateButton styles='md:hidden' callback={toggleMobileMenu}>
 				<Image
 					src='./hamburger.svg'
 					width={25}
 					height={25}
 					alt='An icon depicting three horizontal lines, commonly known as a hamburger icon, representing a menu opener.'
 				/>
-			</button>
+			</ClassmateButton>
 
 			<div className='!ml-auto hidden gap-2 md:flex'>
-				<button className='btn btn-link btn-hover btn-outline btn-small  border-classmate-green-2 text-classmate-green-2'>
-					<Link className='link' href='/signin'>
+				<ClassmateButton
+					styles='border-classmate-green-2 text-classmate-green-2'
+					variant='outlined'
+					size='small'>
+					<Link className='link text-classmate-green-2' href='/signin'>
 						Sign In
 					</Link>
-				</button>
-				<button className='btn btn-link btn-hover btn-small bg-classmate-green-2 text-classmate-tan-2'>
-					<Link className='link' href='/signup'>
+				</ClassmateButton>
+				<ClassmateButton
+					styles='border-classmate-green-2 bg-classmate-green-2'
+					variant='contained'
+					size='small'>
+					<Link className='link text-classmate-tan-2' href='/signup'>
 						Sign Up
 					</Link>
-				</button>
+				</ClassmateButton>
 			</div>
 		</nav>
 	);

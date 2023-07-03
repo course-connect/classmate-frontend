@@ -10,42 +10,12 @@
 
 
 @layer components{
-	// Section layout
 	.section-padding{
 		@apply px-6 md:px-10 xl:px-20 2xl:px-60
 	}
 
-	// Buttons
-	.btn {
-		@apply rounded-md text-sm font-medium text-white whitespace-nowrap cursor-pointer font-classmate-bold antialiased
-	}
-
-	.btn-small {
-		@apply w-28 h-9
-	}
-
-	.btn-large {
-		@apply w-40 h-11 text-base
-	}
-
-	.btn-blank {
-		@apply bg-transparent p-0 rounded-none text-black 
-	}
-
-	.btn-hover {
-		@apply transition ease-in-out hover:scale-105 duration-300
-	}
-
-	.btn-outline {
-		@apply border border-black text-black
-	}
-
-	.btn-link {
-		@apply box-border p-0
-	}
-
 	.link {
-		@apply flex justify-center items-center
+		@apply no-underline hover:no-underline focus:no-underline visited:no-underline
 	}
 }
 
@@ -136,18 +106,27 @@ h1,
 h2,
 h3,
 h4,
+h5, 
+h6,
 p,
 figure,
 blockquote,
 dl,
 dd {
   margin: 0;
+  font-weight: normal;
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role='list'],
 ol[role='list'] {
   list-style: none;
+}
+
+ul{
+	list-style: none;
+padding: 0;
+margin: 0;
 }
 
 /* Set core root defaults */

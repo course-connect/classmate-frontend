@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import HomepageHeading from './HomepageHeading';
+import ClassmateButton from '../components/ClassmateButton';
 import box from '../public/box.svg';
 import falling from '../public/falling.svg';
 import love from '../public/love.svg';
@@ -63,9 +64,12 @@ export default function HowItWorks() {
 					</p>
 				</div>
 			</div>
-			<button className='btn btn-outline btn-large btn-hover self-center border-classmate-green-2 text-classmate-green-2'>
+			<ClassmateButton
+				size='large'
+				variant='outlined'
+				styles='self-center border-classmate-green-2 text-classmate-green-2'>
 				Try For Free
-			</button>
+			</ClassmateButton>
 		</section>
 	);
 }
