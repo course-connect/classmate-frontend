@@ -7,6 +7,7 @@ export default function ClassmateButton({
 	styles,
 	size,
 	callback,
+	type,
 }) {
 	let sizeStyles = '';
 	switch (size) {
@@ -42,6 +43,7 @@ export default function ClassmateButton({
 
 	return (
 		<Button
+			type='submit'
 			onClick={callback}
 			className={`${variantStyles} ${sizeStyles} ${styles} capitalize`}
 			variant={variant}>

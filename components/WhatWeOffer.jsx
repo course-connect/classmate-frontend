@@ -5,6 +5,8 @@ import folder from '../public/folder.svg';
 import pie from '../public/pie.svg';
 import robot from '../public/robot.svg';
 import handHeart from '../public/hand-heart.svg';
+import Box from '@mui/material/Box';
+import ClassmateButton from '../components/ClassmateButton';
 
 export default function WhatWeOffer() {
 	return (
@@ -21,12 +23,17 @@ export default function WhatWeOffer() {
 						Neque porro quisquam est, qui dolorem. Neque porro quisquam est, qui
 						dolorem.
 					</p>
-					<button className='btn btn-large btn-hover hidden bg-classmate-gold-1 text-center text-classmate-tan-1 lg:block'>
+					<ClassmateButton
+						variant='contained'
+						size='large'
+						styles='hidden bg-classmate-gold-1 text-classmate-tan-1 lg:block'>
 						Get Started
-					</button>
+					</ClassmateButton>
 				</div>
 				<div className='grid grid-cols-1 grid-rows-4 gap-6 sm:grid-cols-2 sm:grid-rows-2 lg:max-w-[585px] 3xl:max-w-none 3xl:gap-10'>
-					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
+					<Box
+						sx={{ border: 1 }}
+						className='max-w-[280px] rounded-xl border-classmate-green-4 p-8'>
 						<Image
 							src={folder}
 							width={0}
@@ -40,8 +47,11 @@ export default function WhatWeOffer() {
 						<p className='font-classmate text-sm text-classmate-green-7 2xl:text-base'>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						</p>
-					</div>
-					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
+					</Box>
+
+					<Box
+						sx={{ border: 1 }}
+						className='max-w-[280px] rounded-xl border-classmate-green-4 p-8'>
 						<Image
 							src={pie}
 							width={0}
@@ -55,8 +65,10 @@ export default function WhatWeOffer() {
 						<p className='font-classmate text-sm text-classmate-green-7 2xl:text-base'>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						</p>
-					</div>
-					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
+					</Box>
+					<Box
+						sx={{ border: 1 }}
+						className='max-w-[280px] rounded-xl border-classmate-green-4 p-8'>
 						<Image
 							src={robot}
 							width={0}
@@ -70,8 +82,10 @@ export default function WhatWeOffer() {
 						<p className='font-classmate text-sm text-classmate-green-7 2xl:text-base'>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						</p>
-					</div>
-					<div className='max-w-[280px] rounded-xl border-[1px] border-classmate-green-4 p-8'>
+					</Box>
+					<Box
+						sx={{ border: 1 }}
+						className='max-w-[280px] rounded-xl border-classmate-green-4 p-8'>
 						<Image
 							src={handHeart}
 							width={0}
@@ -85,11 +99,14 @@ export default function WhatWeOffer() {
 						<p className='font-classmate text-sm text-classmate-green-7 2xl:text-base'>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						</p>
-					</div>
+					</Box>
 				</div>
-				<button className='btn btn-large btn-hover mt-10 bg-classmate-gold-1 text-center text-classmate-tan-1 lg:hidden'>
+				<ClassmateButton
+					variant='contained'
+					size='large'
+					styles='mt-10 bg-classmate-gold-1  text-classmate-tan-1 lg:hidden'>
 					Get Started
-				</button>
+				</ClassmateButton>
 			</div>
 		</section>
 	);

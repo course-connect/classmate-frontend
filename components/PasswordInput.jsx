@@ -8,10 +8,40 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { styled } from '@mui/material/styles';
 
-export default function PasswordInput({ name, label, rules }) {
+export default function PasswordInput({ name, label, rules, size }) {
 	const [showPassword, setShowPassword] = useState(false);
 	const { control } = useFormContext();
+
+	const CssFormControl = styled(FormControl)({
+		'& label': {
+			color: '#788473',
+		},
+		'& label.Mui-focused': {
+			color: '#D0A13D',
+		},
+		'& label.Mui-error': {
+			color: '#d32f2f',
+		},
+		'& .MuiOutlinedInput-root': {
+			'& fieldset': {
+				borderColor: '#B0B4B0 ',
+			},
+			'&:hover fieldset': {
+				borderColor: '#788473',
+			},
+			'&.Mui-focused fieldset': {
+				borderColor: '#D0A13D',
+			},
+			'&.Mui-error fieldset': {
+				borderColor: '#d32f2f',
+			},
+		},
+		'& .MuiOutlinedInput-input': {
+			color: '#788473',
+		},
+	});
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -25,7 +55,7 @@ export default function PasswordInput({ name, label, rules }) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, value }, fieldState: { error } }) => (
-				<FormControl variant='outlined' fullWidth size='small'>
+				<CssFormControl variant='outlined' fullWidth size={size}>
 					<InputLabel htmlFor='outlined-adornment-password' error={!!error}>
 						{label}
 					</InputLabel>
@@ -55,7 +85,7 @@ export default function PasswordInput({ name, label, rules }) {
 					<FormHelperText id='standard-weight-helper-text' error={!!error}>
 						{error ? error.message : null}
 					</FormHelperText>
-				</FormControl>
+				</CssFormControl>
 			)}
 		/>
 	);

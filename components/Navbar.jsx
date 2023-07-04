@@ -26,9 +26,9 @@ export default function Navbar() {
 	return (
 		<nav
 			className={`section-padding flex h-16 items-center justify-between space-x-5 ${bgColor} py-4 md:h-20 md:justify-normal`}>
-			<ClassmateButton styles='text-classmate-green-6 p-1'>
-				<Link className='text-2xl font-extrabold' href='/'>
-					{width > 640 ? (
+			<Link className='text-2xl font-extrabold' href='/'>
+				<ClassmateButton styles='text-classmate-green-6 p-1'>
+					{width >= 640 ? (
 						<Image
 							src='./logo.svg'
 							width={0}
@@ -45,12 +45,12 @@ export default function Navbar() {
 							className='h-6 w-auto'
 						/>
 					)}
-				</Link>
-			</ClassmateButton>
+				</ClassmateButton>
+			</Link>
 
 			<ul
 				className={`font-classmate absolute left-0 top-0 z-10 !m-0 flex h-full w-full grow list-none flex-col items-center justify-center gap-4 bg-classmate-tan-2  text-xl text-classmate-green-6 transition-opacity duration-500 ease-in-out  md:static md:!ml-10 md:w-fit md:grow-0 md:flex-row md:gap-6  md:text-sm lg:!ml-20 lg:gap-16 ${
-					mobileMenuOpen || width > 768
+					mobileMenuOpen || width >= 768
 						? 'pointer-events-auto opacity-100'
 						: 'pointer-events-none opacity-0'
 				}`}>
@@ -122,22 +122,23 @@ export default function Navbar() {
 			</ClassmateButton>
 
 			<div className='!ml-auto hidden gap-2 md:flex'>
-				<ClassmateButton
-					styles='border-classmate-green-2 text-classmate-green-2'
-					variant='outlined'
-					size='small'>
-					<Link className='link text-classmate-green-2' href='/signin'>
+				<Link className='link text-classmate-green-2' href='/signin'>
+					<ClassmateButton
+						styles='border-classmate-green-2 text-classmate-green-2'
+						variant='outlined'
+						size='small'>
 						Sign In
-					</Link>
-				</ClassmateButton>
-				<ClassmateButton
-					styles='border-classmate-green-2 bg-classmate-green-2'
-					variant='contained'
-					size='small'>
-					<Link className='link text-classmate-tan-2' href='/signup'>
+					</ClassmateButton>
+				</Link>
+
+				<Link className='link text-classmate-tan-2' href='/signup'>
+					<ClassmateButton
+						styles='bg-classmate-green-2 text-classmate-tan-2'
+						variant='contained'
+						size='small'>
 						Sign Up
-					</Link>
-				</ClassmateButton>
+					</ClassmateButton>
+				</Link>
 			</div>
 		</nav>
 	);
