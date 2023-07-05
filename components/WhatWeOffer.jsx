@@ -13,7 +13,7 @@ export default function WhatWeOffer() {
 		<section className='section-padding flex justify-center bg-classmate-tan-2 py-20 xl:py-44'>
 			<div className='xl:gap-18 flex flex-col items-center lg:flex-row lg:gap-20 3xl:gap-40'>
 				<div className=''>
-					<HomepageHeading headingClasses={'lg:justify-start'}>
+					<HomepageHeading headingStyles={'lg:justify-start'}>
 						What We Offer
 					</HomepageHeading>
 					<p className='font-classmate mx-auto max-w-[280px] py-12 text-center text-classmate-green-7 sm:max-w-xl  lg:mx-0 lg:max-w-[450px] lg:py-10 lg:text-left'>
