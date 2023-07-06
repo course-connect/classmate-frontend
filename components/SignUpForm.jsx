@@ -3,13 +3,16 @@ import Link from 'next/link';
 import useWindowSize from '../hooks/useWindowSize';
 import { useForm, FormProvider } from 'react-hook-form';
 import ClassmateButton from '../components/ClassmateButton';
+import { signUp } from '../redux/auth/authActions';
+import { useDispatch } from 'react-redux';
 
 import BasicInput from './BasicInput';
 import PasswordInput from './PasswordInput';
 
 export default function SignUpForm() {
-	const { width: windowWidth } = useWindowSize();
+	const dispatch = useDispatch();
 
+	const { width: windowWidth } = useWindowSize();
 	const methods = useForm({
 		defaultValues: {
 			email: '',
@@ -17,7 +20,6 @@ export default function SignUpForm() {
 			confirmPassword: '',
 		},
 	});
-
 	const { handleSubmit, setError } = methods;
 
 	function validateEmail(email) {
@@ -89,7 +91,7 @@ export default function SignUpForm() {
 		);
 
 		if (!emailError && !passwordError && !confirmPasswordError) {
-			alert(JSON.stringify({ email, password, confirmPassword }));
+			dispatch(signUp({ email, password }));
 		}
 	}
 

@@ -7,6 +7,32 @@ import {
 } from './authTypes';
 
 // Authenticate User
+export const signUp =
+	({ email, password }) =>
+	async (dispatch) => {
+		// Flag autherization as loading
+		dispatch(authLoading());
+
+		try {
+			// Attempt to sign in with creditials given
+			const res = await attemptSignUp({ email, password });
+
+			// Autherization attempt succeeded
+			dispatch(authSuccess(res.payload));
+		} catch (res) {
+			// Autherization attempt failed
+			dispatch(authFailure(res.payload));
+		}
+	};
+
+// Attempt to sign up with creditials given
+const attemptSignUp = ({ email, password }) => {
+	return new Promise((resolve, reject) => {
+		resolve({ payload: 'user data' });
+	});
+};
+
+// Authenticate User
 export const signIn = () => async (dispatch) => {
 	// Flag autherization as loading
 	dispatch(authLoading());
