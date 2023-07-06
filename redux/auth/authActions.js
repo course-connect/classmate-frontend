@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 import {
 	AUTH_FAILURE,
 	AUTH_SUCCESS,
 	AUTH_LOADING,
 	UN_AUTH_USER,
-} from './authTypes';
+} from "./authTypes";
 
 // Authenticate User
 export const signUp =
@@ -27,9 +27,15 @@ export const signUp =
 
 // Attempt to sign up with creditials given
 const attemptSignUp = ({ email, password }) => {
-	return new Promise((resolve, reject) => {
-		resolve({ payload: 'user data' });
-	});
+	const body = {
+		account_info: { email, password },
+	};
+	const header = {
+		headers: {
+			"content-type": "application/json",
+		},
+	};
+	return axios.post("/account/register", body, header);
 };
 
 // Authenticate User
@@ -55,17 +61,16 @@ export const signOut = () => (dispatch) => {
 };
 
 // Attempt to sign in with creditials given
-const attemptSignIn = () => {
-	return new Promise((resolve, reject) => {
-		setTimeout(() => {
-			const randomInt = Math.floor(Math.random() * 100) % 2;
-			if (randomInt == 0) {
-				resolve({ payload: 'user data' });
-			} else {
-				reject({ payload: 'This is an error message' });
-			}
-		}, 2000);
-	});
+const attemptSignIn = ({ email, password }) => {
+	const body = {
+		account_info: { email, password },
+	};
+	const header = {
+		headers: {
+			"content-type": "application/json",
+		},
+	};
+	return axios.post("/account/login", body, header);
 };
 
 // Flag autherization as loading
@@ -77,6 +82,7 @@ const authLoading = () => (dispatch) => {
 
 // Autherization attempt succeeded
 const authSuccess = (payload) => (dispatch) => {
+	console.log(payload);
 	dispatch({
 		type: AUTH_SUCCESS,
 		payload: payload,
