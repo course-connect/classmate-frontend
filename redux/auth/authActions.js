@@ -40,7 +40,7 @@ const attemptSignUp = ({ email, password }) => {
 			"content-type": "application/json",
 		},
 	};
-	return axios.post("/account/register", body, header);
+	return axios.post("/user/register", body, header);
 };
 
 // Attempt to authenticate with the token stored in local storage
@@ -70,6 +70,7 @@ export const signIn =
 			// Autherization attempt succeeded
 			dispatch(authSuccess(res.data));
 		} catch (err) {
+			console.log(err);
 			// Autherization attempt failed
 			dispatch(authFailure(err));
 		}
@@ -91,7 +92,7 @@ const attemptSignIn = ({ email, password }) => {
 			"content-type": "application/json",
 		},
 	};
-	return axios.post("/account/login", body, header);
+	return axios.post("/user/login", body, header);
 };
 
 // Flag autherization as loading

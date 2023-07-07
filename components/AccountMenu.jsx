@@ -30,13 +30,13 @@ export default function AccountMenu() {
 	const handleAction = (target) => {
 		switch (target.id) {
 			case "profile":
-				alert("profile");
+				console.log("profile");
 				break;
 			case "account":
-				alert("account");
+				console.log("account");
 				break;
 			case "reviews":
-				alert("reviews");
+				console.log("reviews");
 				break;
 			case "logout":
 				dispatch(signOut());
