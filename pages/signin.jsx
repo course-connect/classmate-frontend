@@ -1,28 +1,25 @@
-import SignUpOrSignIn from '../components/SignUpOrSignIn';
-import SignInForm from '..//components/SignInForm';
-
-import React from 'react';
+import SignUpOrSignIn from "../components/SignUpOrSignIn";
+import SignInForm from "..//components/SignInForm";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function signin() {
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+	const router = useRouter();
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			router.push("/account");
+		}
+	}, [isAuthenticated]);
+
 	return (
 		<SignUpOrSignIn
-			heading='Welcome Back'
-			subheading='Sign in to manage your courses and create the prefect semester'
+			heading="Welcome Back"
+			subheading="Sign in to manage your courses and create the prefect semester"
 			form={<SignInForm />}
-			variant='signin'
+			variant="signin"
 		/>
 	);
 }
-
-// import { signIn, signOut } from '../redux/auth/authActions';
-// import { useDispatch } from 'react-redux';
-
-// export default function SignIn() {
-// 	const dispatch = useDispatch();
-// 	return (
-// 		<div className='px-5'>
-// 			<button onClick={() => dispatch(signIn())}>Sign In</button>
-// 			<button onClick={() => dispatch(signOut())}>Sign Out</button>
-// 		</div>
-// 	);
-// }

@@ -1,5 +1,10 @@
 import axios from "axios";
 import {
+	setTokenInLocalStorage,
+	getTokenInLocalStorage,
+	removeTokenInLocalStorage,
+} from "./authHelpers";
+import {
 	AUTH_FAILURE,
 	AUTH_SUCCESS,
 	AUTH_LOADING,
@@ -18,10 +23,10 @@ export const signUp =
 			const res = await attemptSignUp({ email, password });
 
 			// Autherization attempt succeeded
-			dispatch(authSuccess(res.payload));
-		} catch (res) {
+			dispatch(authSuccess(res.data));
+		} catch (err) {
 			// Autherization attempt failed
-			dispatch(authFailure(res.payload));
+			dispatch(authFailure(err));
 		}
 	};
 
@@ -38,25 +43,41 @@ const attemptSignUp = ({ email, password }) => {
 	return axios.post("/account/register", body, header);
 };
 
-// Authenticate User
-export const signIn = () => async (dispatch) => {
+// Attempt to authenticate with the token stored in local storage
+export const authWithTokenInLocalStorage = () => async (dispatch) => {
 	// Flag autherization as loading
 	dispatch(authLoading());
 
-	try {
-		// Attempt to sign in with creditials given
-		const res = await attemptSignIn();
-
-		// Autherization attempt succeeded
-		dispatch(authSuccess(res.payload));
-	} catch (res) {
-		// Autherization attempt failed
-		dispatch(authFailure(res.payload));
+	const accessToken = getTokenInLocalStorage();
+	if (accessToken) {
+		dispatch(authSuccess({ accessToken }));
+	} else {
+		dispatch(authFailure());
 	}
 };
 
+// Authenticate User
+export const signIn =
+	({ email, password }) =>
+	async (dispatch) => {
+		// Flag autherization as loading
+		dispatch(authLoading());
+
+		try {
+			// Attempt to sign in with creditials given
+			const res = await attemptSignIn({ email, password });
+
+			// Autherization attempt succeeded
+			dispatch(authSuccess(res.data));
+		} catch (err) {
+			// Autherization attempt failed
+			dispatch(authFailure(err));
+		}
+	};
+
 // Unauthenticate User
 export const signOut = () => (dispatch) => {
+	removeTokenInLocalStorage();
 	dispatch({ type: UN_AUTH_USER });
 };
 
@@ -82,7 +103,7 @@ const authLoading = () => (dispatch) => {
 
 // Autherization attempt succeeded
 const authSuccess = (payload) => (dispatch) => {
-	console.log(payload);
+	setTokenInLocalStorage(payload.accessToken);
 	dispatch({
 		type: AUTH_SUCCESS,
 		payload: payload,
@@ -90,9 +111,8 @@ const authSuccess = (payload) => (dispatch) => {
 };
 
 // Autherization attempt failed
-const authFailure = (payload) => (dispatch) => {
+const authFailure = (err) => (dispatch) => {
 	dispatch({
 		type: AUTH_FAILURE,
-		payload: payload,
 	});
 };

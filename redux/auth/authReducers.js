@@ -8,7 +8,7 @@ import {
 const initialState = {
 	authLoading: false,
 	isAuthenticated: false,
-	accessToken: NULL,
+	accessToken: null,
 };
 
 export default (state = initialState, action) => {
@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
 				...state,
 				authLoading: true,
 				isAuthenticated: false,
-				accessToken: NULL,
+				accessToken: null,
 			};
 		case AUTH_SUCCESS:
 			return {
@@ -34,13 +34,13 @@ export default (state = initialState, action) => {
 				...state,
 				authLoading: false,
 				isAuthenticated: false,
-				accessToken: NULL,
+				accessToken: null,
 			};
 		case UN_AUTH_USER:
 			return {
 				...state,
 				isAuthenticated: false,
-				accessToken: NULL,
+				accessToken: null,
 			};
 		default:
 			return state;

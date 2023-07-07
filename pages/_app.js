@@ -1,3 +1,4 @@
+import CookieHandler from "../components/CookieHandler";
 import Layout from "../components/Layout";
 import { Provider } from "react-redux";
 import "../styles/globals.scss";
@@ -8,11 +9,12 @@ import {
 	StyledEngineProvider,
 } from "@mui/material";
 import axios from "axios";
+import { PersistGate } from "redux-persist/integration/react";
 
 axios.defaults.baseURL =
 	process.env.NODE_ENV == "production" ? "" : "http://localhost:5000";
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps, router }) {
 	const { store } = wrapper.useWrappedStore(pageProps);
 	const theme = createTheme({
 		typography: {
@@ -36,9 +38,12 @@ export default function MyApp({ Component, pageProps }) {
 		<ThemeProvider theme={theme}>
 			<StyledEngineProvider injectFirst>
 				<Provider store={store}>
-					<Layout>
-						<Component {...pageProps} />
-					</Layout>
+					<PersistGate persistor={store.__PERSISTOR} loading={null}>
+						<CookieHandler />
+						<Layout>
+							<Component {...pageProps} />
+						</Layout>
+					</PersistGate>
 				</Provider>
 			</StyledEngineProvider>
 		</ThemeProvider>
