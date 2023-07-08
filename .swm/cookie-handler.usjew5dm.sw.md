@@ -14,13 +14,10 @@ This component is used at the \_\_app.js (root) level of our next app. It tracks
 <br/>
 
 This gives us access to the auth state from our redux store
-
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
-
 ### 📄 components/CookieHandler.jsx
-
 ```javascript
-6      	const auth = useSelector((state) => state.auth);
+6        const auth = useSelector((state) => state.auth);
 ```
 
 <br/>
