@@ -5,9 +5,20 @@ file_version: 1.1.3
 app_version: 1.12.12
 ---
 
+## Overview
+
+This component is used at the \_\_app.js (root) level of our next app. It tracks all changes \` and isAuthenticated state from our redux auth state and updates the cookies to match the current state.
+
+<br/>
+
+<br/>
+
 This gives us access to the auth state from our redux store
+
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+
 ### 📄 components/CookieHandler.jsx
+
 ```javascript
 6      	const auth = useSelector((state) => state.auth);
 ```
