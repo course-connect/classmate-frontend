@@ -30,7 +30,7 @@ const ClassmateButton: FC<ClassmateButtonProps> = ({
   styles,
   size,
   callback,
-  type,
+  type = "button",
 }) => {
   const sizeStyles = sizeStylesMap[size] || '';
   const variantStyles = variantStylesMap[variant] || '';
