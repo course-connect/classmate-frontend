@@ -2,9 +2,8 @@ import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
 
-function HeroSearchInput({ name, size }) {
+function HeroSearchInput({ name, size, searchType }) {
 	const { control } = useFormContext();
 	const CssTextField = styled(TextField)({
 		"& .MuiOutlinedInput-root": {
@@ -32,9 +31,10 @@ function HeroSearchInput({ name, size }) {
 			control={control}
 			name={name}
 			size={size}
+			defaultValue=""
 			render={({ field: { onChange, value } }) => (
 				<CssTextField
-					placeholder="Search"
+					placeholder={`Enter ${searchType} name`}
 					size={size}
 					onChange={onChange}
 					value={value}
@@ -47,27 +47,3 @@ function HeroSearchInput({ name, size }) {
 }
 
 export default HeroSearchInput;
-
-{
-	/* <OutlinedInput
-autoFocus={true}
-placeholder="Search"
-size={size}
-onChange={onChange}
-value={value}
-fullWidth
-sx={{
-	minWidth: 100,
-	"& .MuiInputBase-input": {
-		p: 1.32,
-	},
-	"& .MuiOutlinedInput-input": {
-		color: "#788473",
-	},
-	"& fieldset": {
-		borderColor: "transparent",
-		borderRadius: "0px",
-	},
-}}
-/> */
-}

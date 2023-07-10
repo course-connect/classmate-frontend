@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import HeroSearchSelect from "./HeroSearchSelect";
 import HeroSearchInput from "./HeroSearchInput";
-import Box from "@mui/material/Box";
 
 const HeroSelectableSearch = () => {
+	const [searchType, setSearchType] = useState("school");
 	const methods = useForm();
-	const { handleSubmit, setError } = methods;
+	const { handleSubmit, watch, getValues, setValue } = methods;
+
+	useEffect(() => {
+		const subscription = watch(() => {
+			const { searchType } = getValues();
+			setSearchType((currentValue) => {
+				const searchTypeChanged = currentValue !== searchType;
+				if (!searchTypeChanged) {
+					handleSubmit(onSubmit)();
+				}
+				return searchType;
+			});
+		});
+		return () => subscription.unsubscribe();
+	}, [watch]);
+
+	const onSubmit = (values) => {
+		console.log("submitting", values);
+	};
 
 	return (
-		<div className="relative flex w-96 items-center">
-			<div className="absolute left-[109px] h-7 w-[2px] rounded-xl bg-classmate-green-7" />
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className="relative flex w-96 items-center">
+			<div className="absolute left-[109px] h-7 w-[1px] rounded-xl bg-classmate-green-7" />
 			<FormProvider {...methods}>
-				<HeroSearchSelect />
-				<HeroSearchInput name="search" size="small" />
+				<HeroSearchSelect name="searchType" />
+				<HeroSearchInput name="search" size="small" searchType={searchType} />
 			</FormProvider>
-		</div>
+		</form>
 	);
 };
 
