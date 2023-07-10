@@ -8,9 +8,9 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { signOut } from "../redux/auth/authActions";
+import { menuStyles } from "../styles/accountMenuStyles";
 
 export default function AccountMenu() {
 	const dispatch = useDispatch();
@@ -68,38 +68,7 @@ export default function AccountMenu() {
 				open={open}
 				onClose={handleClose}
 				onClick={handleClose}
-				PaperProps={{
-					elevation: 0,
-					sx: {
-						borderRadius: "8px",
-						filter: "drop-shadow(2px 3px 10px rgba(0,0,0,0.2))",
-						bgcolor: "#F8F4EE",
-						p: 0,
-						mt: 1,
-						"& .MuiAvatar-root": {
-							width: 32,
-							height: 32,
-							ml: -0.5,
-							mr: 1,
-						},
-						"& .MuiMenuItem-root": {
-							py: 1.8,
-							px: 3,
-							fontSize: "15px",
-							color: "#4D5E4A",
-						},
-
-						"& .MuiMenuItem-root:hover": {
-							bgcolor: "#F2EFE5",
-						},
-						"& .MuiDivider-root": {
-							m: 0,
-						},
-						"& .MuiMenu-list": {
-							p: 0,
-						},
-					},
-				}}
+				PaperProps={menuStyles}
 				transformOrigin={{ horizontal: "right", vertical: "top" }}
 				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
 				<Link href="/account" className="link">

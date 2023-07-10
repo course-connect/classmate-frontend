@@ -97,7 +97,7 @@ export default function Hero() {
 					src={logo}
 					width={0}
 					height={0}
-					className="pointer-events-none h-12 w-auto sm:h-16 lg:h-20"
+					className="pointer-events-none h-12 w-auto sm:h-16 lg:h-20 xl:h-24"
 					alt="The Classmate company logo, featuring the word 'Classmate' in a distinct design."
 				/>
 				<h2 className="font-classmate my-4 text-center text-2xl sm:my-6 sm:text-3xl">

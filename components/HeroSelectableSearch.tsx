@@ -29,8 +29,8 @@ const HeroSelectableSearch = () => {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className="relative flex w-96 items-center">
-			<div className="absolute left-[109px] h-7 w-[1px] rounded-xl bg-classmate-green-7" />
+			className="relative flex  w-full max-w-sm items-center">
+			<div className="absolute left-[114px] h-7 w-[1px] rounded-xl bg-classmate-green-7" />
 			<FormProvider {...methods}>
 				<HeroSearchSelect name="searchType" />
 				<HeroSearchInput name="search" size="small" searchType={searchType} />
