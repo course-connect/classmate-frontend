@@ -14,7 +14,7 @@ import { PersistGate } from "redux-persist/integration/react";
 axios.defaults.baseURL =
 	process.env.NODE_ENV == "production" ? "" : "http://localhost:5000";
 
-export default function MyApp({ Component, pageProps, router }) {
+export default function MyApp({ Component, pageProps }) {
 	const { store } = wrapper.useWrappedStore(pageProps);
 	const theme = createTheme({
 		typography: {

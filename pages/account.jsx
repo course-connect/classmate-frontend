@@ -8,7 +8,7 @@ export default function Account() {
 
 	useEffect(() => {
 		if (!isAuthenticated) {
-			router.push("/");
+			router.push("/signin");
 		}
 	}, [isAuthenticated]);
 

@@ -1,3 +1,9 @@
+export const boxStyles = {
+	display: "flex",
+	alignItems: "center",
+	textAlign: "center",
+};
+
 export const menuStyles = {
 	elevation: 0,
 	sx: {
