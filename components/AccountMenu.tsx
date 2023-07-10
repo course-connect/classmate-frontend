@@ -56,7 +56,7 @@ const AccountMenu = () => {
 			logout: () => dispatch(signOut()),
 		};
 
-		actions[id]?.();
+		actions[id]();
 	};
 
 	const menuItems = [
