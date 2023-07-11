@@ -2,12 +2,12 @@ import React, { FC, ReactNode } from "react";
 
 type ClassmateButtonProps = {
 	variant: "filled" | "outlined" | "text";
-	fullWidth: boolean;
+	fullWidth?: boolean;
 	children: ReactNode;
 	styles?: string;
 	size: "xs" | "sm" | "md" | "lg";
 	callback: () => void;
-	type: "button" | "submit" | "reset";
+	type?: "button" | "submit" | "reset";
 };
 
 const variantStylesMap = {
