@@ -1,7 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-export default function BasicInput({ name, label, rules }) {
+type InputProps = {
+	name: string;
+	label: string;
+	rules: {};
+};
+
+const BasicInput: FC<InputProps> = ({ name, label, rules }) => {
 	const { control } = useFormContext();
 
 	return (
@@ -23,4 +29,6 @@ export default function BasicInput({ name, label, rules }) {
 			)}
 		/>
 	);
-}
+};
+
+export default BasicInput;
