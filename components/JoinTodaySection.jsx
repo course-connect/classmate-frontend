@@ -14,13 +14,13 @@ export default function JoinTodaySection() {
 				<div className="mt-8 flex flex-col items-center justify-center gap-2 sm:mt-0 lg:flex-row xl:gap-8">
 					<ClassmateButton
 						size="md"
-						styles="bg-classmate-green-2 text-classmate-tan-1">
+						styles="bg-classmate-green-2 text-classmate-tan-1 hover:!bg-classmate-hover-green-2">
 						Join Today
 					</ClassmateButton>
 					<ClassmateButton
 						size="md"
 						variant="outlined"
-						styles="border-classmate-green-2 text-classmate-green-2">
+						styles="border-classmate-green-2 text-classmate-green-2 hover:!bg-classmate-hover-tan-1">
 						Contact Us
 					</ClassmateButton>
 				</div>

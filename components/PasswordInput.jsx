@@ -36,6 +36,7 @@ export default function PasswordInput({ name, label, rules, size }) {
 							height={20}
 							width={20}
 							src={showPassword ? closedEye : openEye}
+							alt="Icon of an eye used to toggle password visibility."
 						/>
 					</button>
 				</div>

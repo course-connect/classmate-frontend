@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import useWindowSize from "../hooks/useWindowSize";
@@ -6,8 +7,10 @@ import { useState } from "react";
 import ClassmateButton from "../components/ClassmateButton";
 import { useSelector } from "react-redux";
 import AccountMenu from "./AccountMenu";
+import useLockScroll from "../hooks/useLockScroll";
 
 export default function Navbar() {
+	const [blockScroll, allowScroll] = useLockScroll();
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const { width } = useWindowSize();
@@ -22,7 +25,18 @@ export default function Navbar() {
 		? "bg-classmate-tan-1"
 		: "bg-classmate-tan-2";
 
+	useEffect(() => {
+		if (mobileMenuOpen && width >= 768) {
+			setMobileMenuOpen((current) => !current);
+		}
+	}, [width]);
+
 	const toggleMobileMenu = () => {
+		if (!mobileMenuOpen) {
+			blockScroll();
+		} else {
+			allowScroll();
+		}
 		setMobileMenuOpen((currentState) => !currentState);
 	};
 
@@ -30,7 +44,9 @@ export default function Navbar() {
 		<nav
 			className={`section-padding flex h-16 items-center justify-between space-x-5 ${bgColor} py-4 md:h-20 md:justify-normal`}>
 			<Link className="text-2xl font-extrabold" href="/">
-				<ClassmateButton styles="text-classmate-green-6 p-1">
+				<ClassmateButton
+					size="xs"
+					styles="text-classmate-green-6 p-1 hover:!bg-classmate-hover-tan-2">
 					{width >= 640 ? (
 						<Image
 							src="./logo.svg"
@@ -73,7 +89,7 @@ export default function Navbar() {
 						<ClassmateButton
 							variant="text"
 							size="xs"
-							styles="!text-lg md:!text-sm text-classmate-green-6 px-1"
+							styles="!text-lg md:!text-sm text-classmate-green-6 px-1 hover:!bg-classmate-hover-tan-2"
 							callback={toggleMobileMenu}>
 							Home
 						</ClassmateButton>
@@ -84,7 +100,7 @@ export default function Navbar() {
 						<ClassmateButton
 							variant="text"
 							size="xs"
-							styles="!text-lg md:!text-sm text-classmate-green-6 px-1"
+							styles="!text-lg md:!text-sm text-classmate-green-6 px-1 hover:!bg-classmate-hover-tan-2"
 							callback={toggleMobileMenu}>
 							Search
 						</ClassmateButton>
@@ -127,7 +143,7 @@ export default function Navbar() {
 				<div className="!ml-auto hidden gap-2 md:flex">
 					<Link href="/signin">
 						<ClassmateButton
-							styles="border-classmate-green-2 text-classmate-green-2"
+							styles="border-classmate-green-2 text-classmate-green-2 hover:!bg-classmate-hover-tan-2"
 							variant="outlined"
 							size="sm">
 							Sign In
@@ -136,7 +152,7 @@ export default function Navbar() {
 
 					<Link href="/signup">
 						<ClassmateButton
-							styles="bg-classmate-green-2 text-classmate-tan-2"
+							styles="bg-classmate-green-2 text-classmate-tan-2 hover:!bg-classmate-hover-green-2"
 							variant="filled"
 							size="sm">
 							Sign Up

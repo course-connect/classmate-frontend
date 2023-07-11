@@ -23,7 +23,8 @@ const sizeStylesMap = {
 	lg: "text-base px-10 py-3 rounded-lg font-classmate-bold",
 };
 
-const baseStyles = "whitespace-nowrap";
+const baseStyles =
+	"whitespace-nowrap transition-colors ease-in-out duration-200";
 
 const ClassmateButton: FC<ClassmateButtonProps> = ({
 	type = "button",

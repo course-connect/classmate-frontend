@@ -34,7 +34,7 @@ export default function Hero() {
 					variant="filled"
 					size="lg"
 					callback={handleNextButton}
-					styles="bg-classmate-green-4 text-classmate-tan-1">
+					styles="bg-classmate-green-4 text-classmate-tan-1 hover:!bg-classmate-hover-green-4">
 					Get Started
 				</ClassmateButton>
 			);

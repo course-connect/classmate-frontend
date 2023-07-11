@@ -17,6 +17,7 @@
 	.link {
 		@apply no-underline hover:no-underline focus:no-underline visited:no-underline
 	}
+
 }
 
 
@@ -75,6 +76,33 @@ src: local('georgia-bold-italic'), url('../public/fonts/georgiaz.woff') format('
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.section-fade-in{
+	opacity: 0;
+	transform: translateY(100px);
+	animation: fade-in 1.2s forwards, slide-in 1.2s ease-out forwards;
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+  }
+
+  @keyframes slide-in {
+	from {
+		transform: translateY(100px);
+	}
+	to {
+		transform: translateY(0px);
+	}
+  }
+
+
+
+
 :root {
 	--classmate-green-1: #031E03;
 	--classmate-green-2: #144514;
@@ -87,11 +115,17 @@ src: local('georgia-bold-italic'), url('../public/fonts/georgiaz.woff') format('
 	--classmate-gray-2: #AFADAC;
 	--classmate-gray-3: #C7C9BF;
 	--classmate-gray-4: #DCD9CE;
+	--classmate-gray-5: #e8e5dc;
 	--classmate-pink-1: #DA8088;
 	--classmate-gold-1: #D0A13D;
 	--classmate-tan-1: #EFEBDD;
 	--classmate-tan-2: #F8F4EE;
 	--classmate-red-1: #B43E3D;
 	--classmate-error-red: #d32f2f;
-	
+	--classmate-hover-green-2: #2b662b;
+	--classmate-hover-green-4: #afcaa4;
+	--classmate-hover-tan-1: #e6e1d2;
+	--classmate-hover-tan-2: #e9e6dd;
+	--classmate-hover-gold-1: #dcad46;
+
   }

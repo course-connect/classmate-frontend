@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import HomepageHeading from "./HomepageHeading";
 import folder from "../public/folder.svg";
@@ -7,11 +7,17 @@ import robot from "../public/robot.svg";
 import handHeart from "../public/hand-heart.svg";
 import Box from "@mui/material/Box";
 import ClassmateButton from "../components/ClassmateButton";
+import useFadeIn from "../hooks/useFadeIn";
 
 export default function WhatWeOffer() {
+	const elementRef = useRef();
+	useFadeIn(elementRef);
+
 	return (
 		<section className="section-padding flex justify-center bg-classmate-tan-2 py-20 xl:py-44">
-			<div className="xl:gap-18 flex flex-col items-center lg:flex-row lg:gap-20 3xl:gap-40">
+			<div
+				ref={elementRef}
+				className="xl:gap-18 flex flex-col items-center lg:flex-row lg:gap-20 3xl:gap-40">
 				<div className="">
 					<HomepageHeading headingStyles={"lg:justify-start"}>
 						What We Offer
@@ -24,9 +30,9 @@ export default function WhatWeOffer() {
 						dolorem.
 					</p>
 					<ClassmateButton
-						variant="contained"
-						size="large"
-						styles="hidden bg-classmate-gold-1 text-classmate-tan-1 lg:block">
+						variant="filled"
+						size="lg"
+						styles="hidden bg-classmate-gold-1 text-classmate-tan-1 lg:block hover:!bg-classmate-hover-gold-1">
 						Get Started
 					</ClassmateButton>
 				</div>
@@ -96,7 +102,7 @@ export default function WhatWeOffer() {
 				<ClassmateButton
 					variant="filled"
 					size="lg"
-					styles="mt-10 bg-classmate-gold-1  text-classmate-tan-1 lg:hidden">
+					styles="mt-10 bg-classmate-gold-1 text-classmate-tan-1 lg:hidden">
 					Get Started
 				</ClassmateButton>
 			</div>
