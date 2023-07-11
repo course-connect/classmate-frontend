@@ -16,7 +16,7 @@ export default function signin() {
 
 	return (
 		<SignUpOrSignIn
-			heading="Welcome Back"
+			heading="Welcome"
 			subheading="Sign in to manage your courses and create the prefect semester"
 			form={<SignInForm />}
 			variant="signin"

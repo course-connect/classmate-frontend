@@ -31,8 +31,8 @@ export default function Hero() {
 		case 0:
 			callToAction = (
 				<ClassmateButton
-					variant="contained"
-					size="large"
+					variant="filled"
+					size="lg"
 					callback={handleNextButton}
 					styles="bg-classmate-green-4 text-classmate-tan-1">
 					Get Started

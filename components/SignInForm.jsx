@@ -12,6 +12,7 @@ import PasswordInput from "./PasswordInput";
 export default function SignInForm() {
 	const dispatch = useDispatch();
 	const { width: windowWidth } = useWindowSize();
+
 	const methods = useForm({
 		defaultValues: {
 			email: "",
@@ -53,7 +54,6 @@ export default function SignInForm() {
 					<BasicInput
 						name="email"
 						label="Email"
-						size={windowWidth >= 640 ? "medium" : "small"}
 						rules={{
 							required: true,
 						}}
@@ -75,9 +75,10 @@ export default function SignInForm() {
 			</p>
 			<ClassmateButton
 				type="submit"
-				variant="contained"
-				size={windowWidth >= 640 ? "large-full" : "small-full"}
-				styles="my-6 bg-classmate-gold-1 text-classmate-tan-2 sm:my-10">
+				variant="filled"
+				fullWidth="true"
+				size={windowWidth >= 640 ? "lg" : "sm"}
+				styles="my-6 bg-classmate-gold-1 text-classmate-tan-2 sm:my-12">
 				Sign In
 			</ClassmateButton>
 		</form>

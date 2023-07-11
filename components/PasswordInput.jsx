@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { formControlStyles } from "../styles/passwordInputStyles";
+import openEye from "../public/eye-open.svg";
+import closedEye from "../public/eye-closed.svg";
+import Image from "next/image";
 
 export default function PasswordInput({ name, label, rules, size }) {
 	const [showPassword, setShowPassword] = useState(false);
@@ -16,51 +10,35 @@ export default function PasswordInput({ name, label, rules, size }) {
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-	const handleMouseDownPassword = (event) => {
-		event.preventDefault();
-	};
-
 	return (
 		<Controller
 			control={control}
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, value }, fieldState: { error } }) => (
-				<FormControl
-					variant="outlined"
-					fullWidth
-					size={size}
-					sx={formControlStyles}>
-					<InputLabel htmlFor="outlined-adornment-password" error={!!error}>
-						{label}
-					</InputLabel>
-					<OutlinedInput
-						error={!!error}
-						value={value}
-						onChange={onChange}
-						id="outlined-adornment-password"
+				<div className="relative flex w-full items-center">
+					<input
 						type={showPassword ? "text" : "password"}
-						endAdornment={
-							<InputAdornment position="end">
-								<IconButton
-									aria-label="toggle password visibility"
-									onClick={handleClickShowPassword}
-									onMouseDown={handleMouseDownPassword}
-									edge="end">
-									{showPassword ? (
-										<VisibilityOff style={{ color: "#788473" }} />
-									) : (
-										<Visibility style={{ color: "#788473" }} />
-									)}
-								</IconButton>
-							</InputAdornment>
-						}
-						label={label}
+						onChange={onChange}
+						value={value}
+						placeholder={label}
+						className={`font-classmate w-full rounded-md border-[1px] border-classmate-gray-2 bg-transparent px-4 py-3 text-classmate-green-7 placeholder-classmate-green-7  ${
+							!!error
+								? `!border-classmate-error-red !placeholder-classmate-error-red focus:!outline-classmate-error-red`
+								: "focus:!outline-classmate-gold-1"
+						}`}
 					/>
-					<FormHelperText id="standard-weight-helper-text" error={!!error}>
-						{error ? error.message : null}
-					</FormHelperText>
-				</FormControl>
+					<button
+						onClick={handleClickShowPassword}
+						type="button"
+						className="absolute right-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-classmate-tan-2 transition-colors duration-300 ease-in-out hover:bg-classmate-gray-4">
+						<Image
+							height={20}
+							width={20}
+							src={showPassword ? closedEye : openEye}
+						/>
+					</button>
+				</div>
 			)}
 		/>
 	);

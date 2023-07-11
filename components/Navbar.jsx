@@ -52,7 +52,7 @@ export default function Navbar() {
 			</Link>
 
 			<ul
-				className={`font-classmate absolute left-0 top-0 z-10 !m-0 flex h-full w-full grow list-none flex-col items-center justify-center gap-4 bg-classmate-tan-2  text-xl text-classmate-green-6 transition-opacity duration-500 ease-in-out  md:static md:!ml-10 md:w-fit md:grow-0 md:flex-row md:gap-6  md:text-sm lg:!ml-12 lg:gap-10 ${
+				className={`font-classmate absolute left-0 top-0 z-10 !m-0 flex h-full w-full grow list-none flex-col items-center justify-center gap-4 bg-classmate-tan-2  text-xl text-classmate-green-6 transition-opacity duration-500 ease-in-out  md:static md:!ml-10 md:w-fit md:grow-0 md:flex-row md:gap-6  md:text-sm lg:!ml-12 lg:gap-8 ${
 					mobileMenuOpen || width >= 768
 						? "pointer-events-auto opacity-100"
 						: "pointer-events-none opacity-0"
@@ -71,7 +71,9 @@ export default function Navbar() {
 				<li>
 					<Link href="/">
 						<ClassmateButton
-							styles="text-lg md:text-sm text-classmate-green-6 px-1"
+							variant="text"
+							size="xs"
+							styles="!text-lg md:!text-sm text-classmate-green-6 px-1"
 							callback={toggleMobileMenu}>
 							Home
 						</ClassmateButton>
@@ -80,7 +82,9 @@ export default function Navbar() {
 				<li>
 					<Link href="/search">
 						<ClassmateButton
-							styles="text-lg md:text-sm text-classmate-green-6 px-1"
+							variant="text"
+							size="xs"
+							styles="!text-lg md:!text-sm text-classmate-green-6 px-1"
 							callback={toggleMobileMenu}>
 							Search
 						</ClassmateButton>
@@ -89,6 +93,7 @@ export default function Navbar() {
 				<li className="md:hidden ">
 					<Link href="/signin">
 						<ClassmateButton
+							variant="text"
 							styles="text-lg md:text-sm text-classmate-green-6 px-1"
 							callback={toggleMobileMenu}>
 							Sign In
@@ -98,6 +103,7 @@ export default function Navbar() {
 				<li className="md:hidden ">
 					<Link href="/signup">
 						<ClassmateButton
+							variant="text"
 							styles="text-lg md:text-sm text-classmate-green-6 px-1"
 							callback={toggleMobileMenu}>
 							Sign Up
@@ -119,20 +125,20 @@ export default function Navbar() {
 				<AccountMenu />
 			) : (
 				<div className="!ml-auto hidden gap-2 md:flex">
-					<Link className="link text-classmate-green-2" href="/signin">
+					<Link href="/signin">
 						<ClassmateButton
 							styles="border-classmate-green-2 text-classmate-green-2"
 							variant="outlined"
-							size="small">
+							size="sm">
 							Sign In
 						</ClassmateButton>
 					</Link>
 
-					<Link className="link text-classmate-tan-2" href="/signup">
+					<Link href="/signup">
 						<ClassmateButton
 							styles="bg-classmate-green-2 text-classmate-tan-2"
-							variant="contained"
-							size="small">
+							variant="filled"
+							size="sm">
 							Sign Up
 						</ClassmateButton>
 					</Link>

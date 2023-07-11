@@ -1,9 +1,7 @@
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { TextField } from "@mui/material";
-import { textFieldStyles } from "../styles/basicInputStyles";
 
-export default function BasicInput({ name, label, rules, size }) {
+export default function BasicInput({ name, label, rules }) {
 	const { control } = useFormContext();
 
 	return (
@@ -11,18 +9,16 @@ export default function BasicInput({ name, label, rules, size }) {
 			control={control}
 			name={name}
 			rules={rules}
-			size={size}
 			render={({ field: { onChange, value }, fieldState: { error } }) => (
-				<TextField
-					helperText={error ? error.message : null}
-					sx={textFieldStyles}
-					size={size}
-					error={!!error}
+				<input
 					onChange={onChange}
 					value={value}
-					label={label}
-					fullWidth
-					variant="outlined"
+					placeholder={label}
+					className={`font-classmate w-full rounded-md border-[1px] border-classmate-gray-2 bg-transparent px-4 py-3 text-classmate-green-7 placeholder-classmate-green-7  ${
+						!!error
+							? `!border-classmate-error-red !placeholder-classmate-error-red focus:!outline-classmate-error-red`
+							: "focus:!outline-classmate-gold-1"
+					}`}
 				/>
 			)}
 		/>
