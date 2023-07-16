@@ -22,17 +22,17 @@ const Footer = () => {
 
 	const socialMediaLinks = [
 		{
-			href: "https://stackoverflow.com/",
+			href: "https://webdevlex.com/",
 			imgSrc: "./footer-instagram-logo.svg",
 			alt: "instagram logo",
 		},
 		{
-			href: "https://stackoverflow.com/",
+			href: "https://webdevlex.com/",
 			imgSrc: "./footer-linkedin-logo.svg",
 			alt: "linkedin logo",
 		},
 		{
-			href: "https://stackoverflow.com/",
+			href: "https://webdevlex.com/",
 			imgSrc: "./footer-twitter-logo.svg",
 			alt: "twitter logo",
 		},
@@ -60,12 +60,8 @@ const Footer = () => {
 				</ul>
 				<div className="h-[2px] w-full rounded-lg bg-classmate-green-5" />
 				<div className="flex items-center justify-center gap-4">
-					{socialMediaLinks.map((link) => (
-						<Link
-							key={link.href}
-							href={link.href}
-							target="_blank"
-							passHref={true}>
+					{socialMediaLinks.map((link, index) => (
+						<Link key={index} href={link.href} target="_blank" passHref={true}>
 							<Image
 								src={link.imgSrc}
 								width={0}

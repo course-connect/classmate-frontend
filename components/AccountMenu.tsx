@@ -1,8 +1,10 @@
 import React, { useState, SyntheticEvent } from "react";
+import ToolTip from "./ToolTip";
 
 // Next.js components
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 // Redux components
 import { useAppDispatch } from "../hooks/reduxHooks";
@@ -32,31 +34,33 @@ const icons = {
 const AccountMenu = () => {
 	// This code block defines and utilizes state variables and functions for handling
 	// a menu anchor element, dispatching actions, and managing the open state of the menu.
-	const [anchorEl, setAnchorEl] = useState(null);
 	const dispatch = useAppDispatch();
-	const open = Boolean(anchorEl);
+	const [menuOpen, toggleMenuOpen] = useState(false);
+	const router = useRouter();
 
 	// Set the menu anchor to the DOM element that was clicked
-	const handleClick = (e) => {
-		setAnchorEl(e.currentTarget);
+	const handleMenuClick = () => {
+		toggleMenuOpen((current) => !current);
 	};
 
-	// Set the menu anchor to null and perform the action
-	const handleClose = (e) => {
-		setAnchorEl(null);
-		console.log(e.target.id);
-		handleAction(e.target.id);
-	};
-
-	const handleAction = (id: string) => {
+	const handleMenuItemClick = (e) => {
+		handleMenuClick();
 		const actions = {
-			profile: () => console.log("profile"),
-			account: () => console.log("account"),
-			reviews: () => console.log("reviews"),
+			profile: () => {
+				router.push("/account");
+				console.log("profile");
+			},
+			account: () => {
+				router.push("/account");
+				console.log("account");
+			},
+			reviews: () => {
+				router.push("/account");
+				console.log("reviews");
+			},
 			logout: () => dispatch(signOut()),
 		};
-
-		actions[id]();
+		actions[e.target.id]();
 	};
 
 	const menuItems = [
@@ -87,56 +91,55 @@ const AccountMenu = () => {
 			href: "/account",
 			alt: "Star icon linking to my reviews",
 		},
+		{
+			icon: "logout",
+			label: "Logout",
+			id: "logout",
+			width: 20,
+			height: 20,
+			href: "/account",
+			alt: "logout button",
+		},
 	];
 
 	const getMenuItems = () =>
 		menuItems.map(({ icon, label, width, height, href, alt, id }) => (
-			<Link href={href} className="link" key={label}>
-				<MenuItem onClick={handleClose} divider={true} id={id}>
-					<ListItemIcon>
-						<Image src={icons[icon]} width={width} height={height} alt={alt} />
-					</ListItemIcon>
+			<div
+				key={label}
+				onClick={(e) => handleMenuItemClick(e)}
+				id={id}
+				className=" flex cursor-pointer whitespace-nowrap border-b-[1px] border-classmate-gray-5 px-5 py-4 transition delay-0 duration-75 hover:bg-classmate-gray-5">
+				<div className="pointer-events-none mr-4 flex w-5 items-center justify-center">
+					<Image src={icons[icon]} width={width} height={height} alt={alt} />
+				</div>
+				<p className="font-classmate pointer-events-none text-classmate-green-6">
 					{label}
-				</MenuItem>
-			</Link>
+				</p>
+			</div>
 		));
 
 	return (
-		<>
-			<Box sx={boxStyles} className="!ml-auto">
-				<Tooltip title="Account settings">
-					<IconButton
-						onClick={handleClick}
-						size="small"
-						sx={{ ml: 2 }}
-						aria-controls={open ? "account-menu" : undefined}
-						aria-haspopup="true"
-						aria-expanded={open ? "true" : undefined}>
-						<Avatar alt="default account image" src={icons.defaultUserImage} />
-					</IconButton>
-				</Tooltip>
-			</Box>
-			<Menu
-				anchorEl={anchorEl}
-				id="account-menu"
-				open={open}
-				PaperProps={menuStyles}
-				transformOrigin={{ horizontal: "right", vertical: "top" }}
-				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
+		<div className="relative">
+			<ToolTip hideOn={menuOpen} spacing={10}>
+				<div
+					onClick={handleMenuClick}
+					style={{ transition: "all 200ms", transitionDelay: "100ms" }}
+					className="flex cursor-pointer items-center justify-center rounded-full bg-transparent p-1 hover:bg-classmate-tan-1">
+					<div className="font-classmate-bold text-classmate-green-1r flex h-10 w-10 select-none items-center justify-center rounded-full bg-classmate-tan-1 text-lg">
+						A
+					</div>
+				</div>
+			</ToolTip>
+
+			<div
+				className={` absolute right-0 z-20 mt-1 origin-top-right  overflow-hidden rounded-lg bg-classmate-tan-2  drop-shadow-xl transition ${
+					menuOpen
+						? "pointer-events-auto scale-100 opacity-100"
+						: "pointer-events-none scale-75 opacity-0"
+				}`}>
 				{getMenuItems()}
-				<MenuItem onClick={(e) => handleClose(e)} divider={true} id="logout">
-					<ListItemIcon>
-						<Image
-							src={icons.logout}
-							width={18}
-							height={18}
-							alt="Logout icon - click to log out of my account."
-						/>
-					</ListItemIcon>
-					Logout
-				</MenuItem>
-			</Menu>
-		</>
+			</div>
+		</div>
 	);
 };
 

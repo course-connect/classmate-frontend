@@ -42,7 +42,7 @@ export default function Navbar() {
 
 	return (
 		<nav
-			className={`section-padding flex h-16 items-center justify-between space-x-5 ${bgColor} py-4 md:h-20 md:justify-normal`}>
+			className={`section-padding flex h-16 items-center justify-between space-x-5 ${bgColor} py-4 md:h-20 md:justify-normal `}>
 			<Link className="text-2xl font-extrabold" href="/">
 				<ClassmateButton
 					size="xs"

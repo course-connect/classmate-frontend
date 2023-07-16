@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ClassmateButton from "./ClassmateButton";
 import HeroSelectableSearch from "./HeroSelectableSearch";
+import ToolTip from "./ToolTip";
 
 const HeroCallToAction = (): JSX.Element | null => {
 	const [callToActionIdx, setCallToActionIdx] = useState(0);
