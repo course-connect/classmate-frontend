@@ -43,28 +43,26 @@ export default function Navbar() {
 	return (
 		<nav
 			className={`section-padding flex h-16 items-center justify-between space-x-5 ${bgColor} py-4 md:h-20 md:justify-normal `}>
-			<Link className="text-2xl font-extrabold" href="/">
-				<ClassmateButton
-					size="xs"
-					styles="text-classmate-green-6 p-1 hover:!bg-classmate-hover-tan-2">
-					{width >= 640 ? (
-						<Image
-							src="./logo.svg"
-							width={0}
-							height={0}
-							alt="large navbar classmate logo"
-							className="h-6 w-auto"
-						/>
-					) : (
-						<Image
-							src="./logo-small.svg"
-							width={0}
-							height={0}
-							alt="small navbar classmate logo"
-							className="h-6 w-auto"
-						/>
-					)}
-				</ClassmateButton>
+			<Link
+				className="rounded-md p-2 text-2xl font-extrabold text-classmate-green-6 transition hover:!bg-classmate-hover-tan-2"
+				href="/">
+				{width >= 640 ? (
+					<Image
+						src="./logo.svg"
+						width={0}
+						height={0}
+						alt="large navbar classmate logo"
+						className="h-6 w-auto"
+					/>
+				) : (
+					<Image
+						src="./logo-small.svg"
+						width={0}
+						height={0}
+						alt="small navbar classmate logo"
+						className="h-6 w-auto"
+					/>
+				)}
 			</Link>
 
 			<ul
@@ -85,46 +83,42 @@ export default function Navbar() {
 				</ClassmateButton>
 
 				<li>
-					<Link href="/">
-						<ClassmateButton
-							variant="text"
-							size="xs"
-							styles="!text-lg md:!text-sm text-classmate-green-6 px-1 hover:!bg-classmate-hover-tan-2"
-							callback={toggleMobileMenu}>
-							Home
-						</ClassmateButton>
-					</Link>
+					<ClassmateButton
+						href="/"
+						variant="text"
+						size="xs"
+						styles="px-1 !text-lg text-classmate-green-6 hover:!bg-classmate-hover-tan-2 md:!text-sm"
+						callback={toggleMobileMenu}>
+						Home
+					</ClassmateButton>
 				</li>
 				<li>
-					<Link href="/search">
-						<ClassmateButton
-							variant="text"
-							size="xs"
-							styles="!text-lg md:!text-sm text-classmate-green-6 px-1 hover:!bg-classmate-hover-tan-2"
-							callback={toggleMobileMenu}>
-							Search
-						</ClassmateButton>
-					</Link>
+					<ClassmateButton
+						href="/search"
+						variant="text"
+						size="xs"
+						styles="!text-lg md:!text-sm text-classmate-green-6 px-1 hover:!bg-classmate-hover-tan-2"
+						callback={toggleMobileMenu}>
+						Search
+					</ClassmateButton>
 				</li>
 				<li className="md:hidden ">
-					<Link href="/signin">
-						<ClassmateButton
-							variant="text"
-							styles="text-lg md:text-sm text-classmate-green-6 px-1"
-							callback={toggleMobileMenu}>
-							Sign In
-						</ClassmateButton>
-					</Link>
+					<ClassmateButton
+						href="/signin"
+						variant="text"
+						styles="text-lg md:text-sm text-classmate-green-6 px-1"
+						callback={toggleMobileMenu}>
+						Sign In
+					</ClassmateButton>
 				</li>
 				<li className="md:hidden ">
-					<Link href="/signup">
-						<ClassmateButton
-							variant="text"
-							styles="text-lg md:text-sm text-classmate-green-6 px-1"
-							callback={toggleMobileMenu}>
-							Sign Up
-						</ClassmateButton>
-					</Link>
+					<ClassmateButton
+						href="/signin"
+						variant="text"
+						styles="text-lg md:text-sm text-classmate-green-6 px-1"
+						callback={toggleMobileMenu}>
+						Sign Up
+					</ClassmateButton>
 				</li>
 			</ul>
 
@@ -141,23 +135,21 @@ export default function Navbar() {
 				<AccountMenu />
 			) : (
 				<div className="!ml-auto hidden gap-2 md:flex">
-					<Link href="/signin">
-						<ClassmateButton
-							styles="border-classmate-green-2 text-classmate-green-2 hover:!bg-classmate-hover-tan-2"
-							variant="outlined"
-							size="sm">
-							Sign In
-						</ClassmateButton>
-					</Link>
+					<ClassmateButton
+						href="/signin"
+						styles="border-classmate-green-2 text-classmate-green-2 hover:!bg-classmate-hover-tan-2"
+						variant="outlined"
+						size="sm">
+						Sign In
+					</ClassmateButton>
 
-					<Link href="/signup">
-						<ClassmateButton
-							styles="bg-classmate-green-2 text-classmate-tan-2 hover:!bg-classmate-hover-green-2"
-							variant="filled"
-							size="sm">
-							Sign Up
-						</ClassmateButton>
-					</Link>
+					<ClassmateButton
+						href="/signup"
+						styles="bg-classmate-green-2 text-classmate-tan-2 hover:!bg-classmate-hover-green-2"
+						variant="filled"
+						size="sm">
+						Sign Up
+					</ClassmateButton>
 				</div>
 			)}
 		</nav>

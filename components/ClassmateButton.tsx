@@ -1,8 +1,10 @@
 import React, { FC, ReactNode } from "react";
+import Link from "next/link";
 
 type ClassmateButtonProps = {
-	variant: "filled" | "outlined" | "text";
+	variant: "filled" | "outlined" | "text" | "link";
 	fullWidth?: boolean;
+	href?: string;
 	children: ReactNode;
 	styles?: string;
 	size: "xs" | "sm" | "md" | "lg";
@@ -29,6 +31,7 @@ const baseStyles =
 const ClassmateButton: FC<ClassmateButtonProps> = ({
 	type = "button",
 	fullWidth = false,
+	href,
 	variant,
 	size,
 	styles,
@@ -38,12 +41,22 @@ const ClassmateButton: FC<ClassmateButtonProps> = ({
 	const variantStyles = variantStylesMap[variant] || "";
 	const sizeStyles = sizeStylesMap[size] || "";
 
-	return (
+	return href ? (
+		<Link
+			href={href}
+			type={type}
+			onClick={callback}
+			className={`${baseStyles} ${variantStyles} ${sizeStyles} ${styles} ${
+				fullWidth ? "w-full" : ""
+			}`}>
+			{children}
+		</Link>
+	) : (
 		<button
 			type={type}
 			onClick={callback}
 			className={`${baseStyles} ${variantStyles} ${sizeStyles} ${styles} ${
-				fullWidth && "w-full"
+				fullWidth ? "w-full" : ""
 			}`}>
 			{children}
 		</button>
