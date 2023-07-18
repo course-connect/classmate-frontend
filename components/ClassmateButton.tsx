@@ -1,4 +1,6 @@
 import React, { FC, ReactNode } from "react";
+
+// Next.js components
 import Link from "next/link";
 
 type ClassmateButtonProps = {

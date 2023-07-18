@@ -1,15 +1,48 @@
 import React from "react";
+
+// Next.js components
 import Link from "next/link";
 import Image from "next/image";
+
+// Redux components
 import { useSelector } from "react-redux";
 import { AuthState } from "../redux/auth/authInterface";
 
-const Footer = () => {
+interface SocialMediaLink {
+	href: string;
+	imgSrc: string;
+	alt: string;
+}
+
+interface MenuItem {
+	text: string;
+	link: string;
+}
+
+const socialMediaLinks: SocialMediaLink[] = [
+	{
+		href: "https://webdevlex.com/",
+		imgSrc: "./footer-instagram-logo.svg",
+		alt: "Instagram",
+	},
+	{
+		href: "https://webdevlex.com/",
+		imgSrc: "./footer-linkedin-logo.svg",
+		alt: "LinkedIn",
+	},
+	{
+		href: "https://webdevlex.com/",
+		imgSrc: "./footer-twitter-logo.svg",
+		alt: "Twitter",
+	},
+];
+
+const Footer: React.FC = () => {
 	const { isAuthenticated } = useSelector(
 		(state: { auth: AuthState }) => state.auth
 	);
 
-	const menuItems = [
+	const menuItems: MenuItem[] = [
 		{ text: "Home", link: "/" },
 		{ text: "Search", link: "/search" },
 		...(isAuthenticated
@@ -18,24 +51,6 @@ const Footer = () => {
 					{ text: "Sign In", link: "/signin" },
 					{ text: "Sign Up", link: "/signup" },
 			  ]),
-	];
-
-	const socialMediaLinks = [
-		{
-			href: "https://webdevlex.com/",
-			imgSrc: "./footer-instagram-logo.svg",
-			alt: "instagram logo",
-		},
-		{
-			href: "https://webdevlex.com/",
-			imgSrc: "./footer-linkedin-logo.svg",
-			alt: "linkedin logo",
-		},
-		{
-			href: "https://webdevlex.com/",
-			imgSrc: "./footer-twitter-logo.svg",
-			alt: "twitter logo",
-		},
 	];
 
 	return (

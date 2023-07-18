@@ -1,11 +1,32 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
+// Next.js components
 import Image from "next/image";
-const DropMenu = ({
+
+export interface MenuItem {
+	icon: string;
+	label: string;
+	width: number;
+	height: number;
+	alt: string;
+	id: string;
+	href?: string;
+}
+
+interface DropMenuProps {
+	menuItems: MenuItem[];
+	callback: (
+		e: React.MouseEvent<HTMLLIElement, globalThis.MouseEvent>,
+		href: string
+	) => void;
+	menuOpen: boolean;
+	styles?: string;
+}
+
+const DropMenu: React.FC<DropMenuProps> = ({
 	menuItems,
 	callback,
 	menuOpen,
-	handleMenuClick,
 	styles = "",
 }) => {
 	return (
@@ -16,21 +37,23 @@ const DropMenu = ({
 						? "pointer-events-auto scale-100 opacity-100"
 						: "pointer-events-none scale-75 opacity-0"
 				} ${styles}`}>
-				{menuItems.map(({ icon, label, width, height, alt, id, href }) => (
-					<li
-						tabIndex={1}
-						key={label}
-						onClick={(e) => callback(e, href)}
-						id={id}
-						className="flex cursor-pointer whitespace-nowrap border-b-[1px] border-classmate-gray-5 px-5 py-4 transition delay-0 duration-75 hover:bg-classmate-gray-5">
-						<div className="pointer-events-none mr-4 flex w-5 select-none items-center justify-center">
-							<Image src={icon} width={width} height={height} alt={alt} />
-						</div>
-						<p className="font-classmate pointer-events-none text-classmate-green-6">
-							{label}
-						</p>
-					</li>
-				))}
+				{menuItems.map(
+					({ icon, label, width, height, alt, id, href }: MenuItem) => (
+						<li
+							tabIndex={1}
+							key={label}
+							onClick={(e) => callback(e, href || "")}
+							id={id}
+							className="flex cursor-pointer whitespace-nowrap border-b-[1px] border-classmate-gray-5 px-5 py-4 transition delay-0 duration-75 hover:bg-classmate-gray-5">
+							<div className="pointer-events-none mr-4 flex w-5 select-none items-center justify-center">
+								<Image src={icon} width={width} height={height} alt={alt} />
+							</div>
+							<p className="font-classmate pointer-events-none text-classmate-green-6">
+								{label}
+							</p>
+						</li>
+					)
+				)}
 			</ul>
 		</>
 	);

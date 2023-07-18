@@ -7,9 +7,36 @@ app_version: 1.13.10
 
 ## Overview
 
-The `AccountMenu` component represents a menu that displays a list of items. Each item consists of an icon and a label. The component allows the user to interact with the menu by clicking on an anchor element.
+The `AccountMenu`<swm-token data-swm-token=":components/AccountMenu.tsx:53:2:2:`const AccountMenu = () =&gt; {`"/> component represents an account menu with dropdown functionality and menu items. It provides a user interface for managing account-related actions such as navigating to different account sections and logging out.
 
-<br/>
+.
+
+## Props
+
+The `AccountMenu`<swm-token data-swm-token=":components/AccountMenu.tsx:53:2:2:`const AccountMenu = () =&gt; {`"/> component accepts the following props:
+
+- `None`
+
+  <br/>
+
+### **Dependencies**
+
+The `AccountMenu`<swm-token data-swm-token=":components/AccountMenu.tsx:53:2:2:`const AccountMenu = () =&gt; {`"/> component depends on the following components:
+
+- `ToolTip`<swm-token data-swm-token=":components/ToolTip.tsx:3:2:2:`const ToolTip = ({ children, spacing = 5, hideOn: hideToolTip }) =&gt; {`"/>`` ` `` component: Renders a tooltip for the menu button.
+
+- `DropMenu`<swm-token data-swm-token=":components/DropMenu.tsx:26:2:2:`const DropMenu: React.FC&lt;DropMenuProps&gt; = ({`"/> component: Renders the dropdown menu with menu items.
+
+  <br/>
+
+### **Notes**
+
+- The `AccountMenu`<swm-token data-swm-token=":components/AccountMenu.tsx:53:2:2:`const AccountMenu = () =&gt; {`"/> component assumes that the necessary CSS classes and styles are applied for proper rendering and functionality.
+
+- The `AccountMenu`<swm-token data-swm-token=":components/AccountMenu.tsx:53:2:2:`const AccountMenu = () =&gt; {`"/> component assumes that the provided icons exist in the specified paths.
+
+- The `AccountMenu`<swm-token data-swm-token=":components/AccountMenu.tsx:53:2:2:`const AccountMenu = () =&gt; {`"/> component assumes that the `MenuItem`<swm-token data-swm-token=":components/DropMenu.tsx:6:4:4:`export interface MenuItem {`"/> array is correctly defined and contains the necessary properties for each menu item.
+  <br/>
 
 <br/>
 

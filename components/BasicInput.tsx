@@ -4,7 +4,7 @@ import { Controller, useFormContext } from "react-hook-form";
 type InputProps = {
 	name: string;
 	label: string;
-	rules: {};
+	rules: Record<string, unknown>;
 };
 
 const BasicInput: FC<InputProps> = ({ name, label, rules }) => {

@@ -2,6 +2,25 @@ import React, { useState } from "react";
 import DropMenu from "./DropMenu";
 import Image from "next/image";
 
+const menuItems = [
+	{
+		icon: "./graduation-cap.svg",
+		label: "School",
+		id: "school",
+		width: 20,
+		height: 20,
+		alt: "",
+	},
+	{
+		icon: "./glasses.svg",
+		label: "Professor",
+		id: "professor",
+		width: 20,
+		height: 20,
+		alt: "",
+	},
+];
+
 const HeroSelect = ({ methods }) => {
 	const { getValues, setValue } = methods;
 	const { searchType } = getValues();
@@ -11,30 +30,14 @@ const HeroSelect = ({ methods }) => {
 		toggleMenuOpen((current) => !current); // Toggle the menu open state
 	};
 
-	const handleMenuItemClick = (e) => {
-		setValue("searchType", e.target.id);
-		if (e.target.id !== searchType) setValue("search", "");
+	const handleMenuItemClick = (
+		e: React.MouseEvent<HTMLLIElement, globalThis.MouseEvent>
+	) => {
+		const { id } = e.target as HTMLLIElement; // Destructure the id property from e.target
+		setValue("searchType", id);
+		if (id !== searchType) setValue("search", "");
 		handleMenuClick(); // Close the menu
 	};
-
-	const menuItems = [
-		{
-			icon: "./graduation-cap.svg",
-			label: "School",
-			id: "school",
-			width: 20,
-			height: 20,
-			alt: "",
-		},
-		{
-			icon: "./glasses.svg",
-			label: "Professor",
-			id: "professor",
-			width: 20,
-			height: 20,
-			alt: "",
-		},
-	];
 
 	return (
 		<div className="relative h-[50px] ">
@@ -73,7 +76,6 @@ const HeroSelect = ({ methods }) => {
 				styles="right-auto left-0 sm:right-0 sm:left-auto"
 				menuItems={menuItems}
 				callback={handleMenuItemClick}
-				handleMenuClick={handleMenuClick}
 				menuOpen={menuOpen}
 			/>
 		</div>

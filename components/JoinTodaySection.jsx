@@ -1,9 +1,6 @@
 import ClassmateButton from "../components/ClassmateButton";
-import useWindowSize from "../hooks/useWindowSize";
 
 export default function JoinTodaySection() {
-	const { width } = useWindowSize();
-
 	return (
 		<section className="section-padding bg-classmate-tan-1">
 			<div className="xl:gap-22 flex flex-col  items-center  justify-center px-10 py-12 sm:flex-row sm:gap-12 xl:py-16 2xl:px-16 3xl:gap-28">

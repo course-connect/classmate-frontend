@@ -1,13 +1,19 @@
-import React, { useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import useWindowSize from "../hooks/useWindowSize";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+// Project components
 import ClassmateButton from "../components/ClassmateButton";
-import { useSelector } from "react-redux";
 import AccountMenu from "./AccountMenu";
+
+// Project hooks
+import useWindowSize from "../hooks/useWindowSize";
 import useLockScroll from "../hooks/useLockScroll";
+
+// Next.js components
+import Image from "next/image";
+import { useRouter } from "next/router";
+
+// Redux components
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
 	const [blockScroll, allowScroll] = useLockScroll();

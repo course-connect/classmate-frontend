@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import ToolTip from "./ToolTip";
 
-import DropMenu from "./DropMenu";
+// Project components
+import ToolTip from "./ToolTip";
+import DropMenu, { MenuItem } from "./DropMenu";
 
 // Next.js components
 import { useRouter } from "next/router";
@@ -9,6 +10,45 @@ import { useRouter } from "next/router";
 // Redux components
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { signOut } from "../redux/auth/authActions";
+
+const menuItems: MenuItem[] = [
+	{
+		icon: "./graduation-cap.svg",
+		label: "Profile",
+		id: "profile",
+		width: 20,
+		height: 20,
+		href: "/account",
+		alt: "Graduation cap icon linking to my profile",
+	},
+	{
+		icon: "./user-solid.svg",
+		label: "Account",
+		id: "account",
+		width: 17,
+		height: 17,
+		href: "/account",
+		alt: "User icon linking to my account",
+	},
+	{
+		icon: "./star-solid.svg",
+		label: "My Reviews",
+		id: "reviews",
+		width: 20,
+		height: 20,
+		href: "/account",
+		alt: "Star icon linking to my reviews",
+	},
+	{
+		icon: "./logout.svg",
+		label: "Sign Out",
+		id: "sign-out",
+		width: 20,
+		height: 20,
+		href: "/signin",
+		alt: "Sign out icon to sign out of your account",
+	},
+];
 
 const AccountMenu = () => {
 	const dispatch = useAppDispatch();
@@ -19,51 +59,17 @@ const AccountMenu = () => {
 		toggleMenuOpen((current) => !current); // Toggle the menu open state
 	};
 
-	const handleMenuItemClick = (e, href: string) => {
-		handleMenuClick(); // Close the menu
-		if (e.target.id === "sign-out") dispatch(signOut()); // Dispatch sign out action if the "Sign Out" item is clicked
+	const handleMenuItemClick = (
+		e: React.MouseEvent<HTMLLIElement, globalThis.MouseEvent>,
+		href: string
+	) => {
+		const { id } = e.target as HTMLLIElement; // Destructure the id property from e.target
+		if (id === "sign-out") {
+			dispatch(signOut()); // Dispatch sign out action if the "Sign Out" item is clicked
+		}
 		router.push(href); // Navigate to the specified href
-		console.log(href);
+		handleMenuClick(); // Close the menu
 	};
-
-	const menuItems = [
-		{
-			icon: "./graduation-cap.svg",
-			label: "Profile",
-			id: "profile",
-			width: 20,
-			height: 20,
-			href: "/account",
-			alt: "Graduation cap icon linking to my profile",
-		},
-		{
-			icon: "./user-solid.svg",
-			label: "Account",
-			id: "account",
-			width: 17,
-			height: 17,
-			href: "/account",
-			alt: "User icon linking to my account",
-		},
-		{
-			icon: "./star-solid.svg",
-			label: "My Reviews",
-			id: "reviews",
-			width: 20,
-			height: 20,
-			href: "/account",
-			alt: "Star icon linking to my reviews",
-		},
-		{
-			icon: "./logout.svg",
-			label: "Sign Out",
-			id: "sign-out",
-			width: 20,
-			height: 20,
-			href: "/signin",
-			alt: "Sign out icon to sign out of your account",
-		},
-	];
 
 	return (
 		<div className="relative">
@@ -79,8 +85,8 @@ const AccountMenu = () => {
 					</div>
 				</button>
 			</ToolTip>
+			{/* DropMenu component */}
 			<DropMenu
-				handleMenuClick={handleMenuClick}
 				menuItems={menuItems}
 				callback={handleMenuItemClick}
 				menuOpen={menuOpen}
