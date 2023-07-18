@@ -14,7 +14,7 @@ const icons: Record<string, string> = {
 
 const Hero = (): JSX.Element => {
 	return (
-		<section className="section-padding relative flex h-[680px] w-full items-center justify-center bg-classmate-tan-1 2xl:h-[740px]">
+		<section className="section-padding relative flex h-[680px] w-full items-center justify-center overflow-hidden bg-classmate-tan-1 2xl:h-[740px]">
 			<Image
 				src={icons.swinging}
 				width={0}

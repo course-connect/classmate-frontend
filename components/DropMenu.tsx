@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+
 import Image from "next/image";
 const DropMenu = ({
 	menuItems,
@@ -9,12 +10,6 @@ const DropMenu = ({
 }) => {
 	return (
 		<>
-			{menuOpen && (
-				<div
-					onClick={() => handleMenuClick()}
-					className="fixed left-0 top-0 z-30 h-screen w-screen "
-				/>
-			)}
 			<ul
 				className={`absolute right-0 z-40 mt-1 origin-top-right overflow-hidden rounded-lg bg-classmate-tan-2 drop-shadow-xl transition ${
 					menuOpen

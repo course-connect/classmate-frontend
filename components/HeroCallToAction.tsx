@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ClassmateButton from "./ClassmateButton";
 import HeroSelectableSearch from "./HeroSelectableSearch";
-import ToolTip from "./ToolTip";
 
 const HeroCallToAction = (): JSX.Element | null => {
 	const [callToActionIdx, setCallToActionIdx] = useState(0);
@@ -18,10 +17,30 @@ const HeroCallToAction = (): JSX.Element | null => {
 		}
 	};
 
-	let callToAction: JSX.Element | null;
+	let buttonStyles = "";
+	let searchOneStyles = "";
+	let searchTwoStyles = "";
+
 	switch (callToActionIdx) {
 		case 0:
-			callToAction = (
+			break;
+		case 1:
+			buttonStyles = "-translate-x-80 opacity-0";
+			searchOneStyles = "!translate-x-0 opacity-100";
+			break;
+		case 2:
+			// code block
+			break;
+		default:
+		// code block
+	}
+
+	return (
+		<div className="flex w-full justify-center ">
+			<div
+				className={`transition-[transform,opacity] duration-500 ${buttonStyles} ${
+					callToActionIdx === 0 ? "block" : "absolute"
+				}`}>
 				<ClassmateButton
 					variant="filled"
 					size="lg"
@@ -29,19 +48,15 @@ const HeroCallToAction = (): JSX.Element | null => {
 					styles="bg-classmate-green-4 text-classmate-tan-1 hover:!bg-classmate-hover-green-4">
 					Get Started
 				</ClassmateButton>
-			);
-			break;
-		case 1:
-			callToAction = <HeroSelectableSearch />;
-			break;
-		case 2:
-			callToAction = null;
-			break;
-		default:
-			callToAction = null;
-	}
-
-	return callToAction;
+			</div>
+			<div
+				className={`flex w-full max-w-sm translate-x-80 justify-center opacity-0 transition-[transform,opacity] duration-500 ${searchOneStyles} ${
+					callToActionIdx === 1 ? "block" : "absolute"
+				}`}>
+				<HeroSelectableSearch />
+			</div>
+		</div>
+	);
 };
 
 export default HeroCallToAction;
