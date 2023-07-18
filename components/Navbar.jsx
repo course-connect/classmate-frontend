@@ -43,8 +43,8 @@ export default function Navbar() {
 	return (
 		<nav
 			className={`section-padding flex h-16 items-center justify-between space-x-5 ${bgColor} py-4 md:h-20 md:justify-normal `}>
-			<Link
-				className="rounded-md p-2 text-2xl font-extrabold text-classmate-green-6 transition hover:!bg-classmate-hover-tan-2"
+			<ClassmateButton
+				styles="rounded-md p-2 text-2xl font-extrabold text-classmate-green-6 transition hover:!bg-classmate-hover-tan-2"
 				href="/">
 				{width >= 640 ? (
 					<Image
@@ -63,7 +63,7 @@ export default function Navbar() {
 						className="h-6 w-auto"
 					/>
 				)}
-			</Link>
+			</ClassmateButton>
 
 			<ul
 				className={`font-classmate absolute left-0 top-0 z-10 !m-0 flex h-full w-full grow list-none flex-col items-center justify-center gap-4 bg-classmate-tan-2  text-xl text-classmate-green-6 transition-opacity duration-500 ease-in-out  md:static md:!ml-10 md:w-fit md:grow-0 md:flex-row md:gap-6  md:text-sm lg:!ml-12 lg:gap-8 ${

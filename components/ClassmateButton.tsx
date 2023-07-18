@@ -26,7 +26,7 @@ const sizeStylesMap = {
 };
 
 const baseStyles =
-	"whitespace-nowrap transition-colors ease-in-out duration-200";
+	"whitespace-nowrap transition-colors ease-in-out duration-200 outline-none ring-classmate-gold-1 focus:ring";
 
 const ClassmateButton: FC<ClassmateButtonProps> = ({
 	type = "button",
