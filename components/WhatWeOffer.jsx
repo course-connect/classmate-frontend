@@ -5,7 +5,6 @@ import folder from "../public/folder.svg";
 import pie from "../public/pie.svg";
 import robot from "../public/robot.svg";
 import handHeart from "../public/hand-heart.svg";
-import Box from "@mui/material/Box";
 import ClassmateButton from "../components/ClassmateButton";
 import useFadeIn from "../hooks/useFadeIn";
 
