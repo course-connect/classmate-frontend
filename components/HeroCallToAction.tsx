@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import HeroSchoolAndProfessorSearch from "./HeroSchoolAndProfessorSearch";
-import HeroCourseAndProfessorSearch from "./HeroCourseAndProfessorSearch";
+import HeroSearchOne from "./HeroSearchOne";
+import HeroSearchTwo from "./HeroSearchTwo";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import Filter from "./Filter";
 import Image from "next/image";
@@ -28,18 +28,18 @@ const HeroCallToAction = (): JSX.Element | null => {
 						? ""
 						: "pointer-events-none -translate-x-96 !opacity-0"
 				}`}>
-				<HeroSchoolAndProfessorSearch
+				<HeroSearchOne
 					setSchoolFilter={setSchoolFilter}
 					setShowFirstSearch={setShowFirstSearch}
 				/>
 			</div>
-			<div
+			{/* <div
 				className={`pointer-events-none absolute flex w-full max-w-sm translate-x-96 justify-center opacity-0 transition-[transform,opacity] duration-500 ${
 					showFirstSearch
 						? ""
 						: "!pointer-events-auto !translate-x-0 opacity-100"
 				}`}>
-				<HeroCourseAndProfessorSearch
+				<HeroSearchTwo
 					setSchoolFilter={setSchoolFilter}
 					setShowFirstSearch={setShowFirstSearch}
 				/>
@@ -57,7 +57,7 @@ const HeroCallToAction = (): JSX.Element | null => {
 					className="pointer flex h-4 w-4 items-center justify-center rounded-full bg-classmate-tan-2">
 					<Image src="./xmark-solid-green.svg" width={8} height={8} alt="" />
 				</button>
-			</Filter>
+			</Filter> */}
 		</div>
 	);
 };

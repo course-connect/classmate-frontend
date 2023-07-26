@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import HeroCourseAndProfessorSelect from "./HeroCourseAndProfessorSelect";
+import HeroSearchTwoSelect from "./HeroSearchTwoSelect";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { search, clearSearch } from "../redux/search/searchActions";
-import HeroCourseAndProfessorResults from "./HeroCourseAndProfessorResults";
+import HeroSearchTwoResults from "./HeroSearchTwoResults";
 
 const HeroSchoolAndProfessorSearch = ({
 	setSchoolFilter,
@@ -44,7 +44,7 @@ const HeroSchoolAndProfessorSearch = ({
 		<form
 			onSubmit={handleSubmit(onSubmit)}
 			className="relative flex w-full items-center rounded-full bg-classmate-tan-2  shadow-lg">
-			<HeroCourseAndProfessorSelect methods={methods} />
+			<HeroSearchTwoSelect methods={methods} />
 			<input
 				{...register("search")}
 				placeholder={`Enter ${
@@ -60,7 +60,7 @@ const HeroSchoolAndProfessorSearch = ({
 				className="absolute right-[4px] z-20 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-classmate-tan-2 outline-none ring-classmate-gold-1 transition-colors hover:bg-classmate-gray-5 focus:ring">
 				<Image src="./search.svg" width={22} height={22} alt="" />
 			</button>
-			<HeroCourseAndProfessorResults
+			<HeroSearchTwoResults
 				setValue={setValue}
 				setSchoolFilter={setSchoolFilter}
 				setShowFirstSearch={setShowFirstSearch}
