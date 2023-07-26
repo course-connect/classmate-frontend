@@ -47,7 +47,11 @@ const HeroSchoolAndProfessorSearch = ({
 			<HeroCourseAndProfessorSelect methods={methods} />
 			<input
 				{...register("search")}
-				placeholder={`Enter ${searchType}`}
+				placeholder={`Enter ${
+					searchType === "school" || searchType === "course"
+						? "course"
+						: "professor"
+				}`}
 				type="text"
 				className="font-classmate z-10 h-[55px] w-full rounded-br-full rounded-tr-full bg-transparent pl-3 text-lg text-classmate-green-6 placeholder-classmate-green-6 outline-none ring-classmate-gold-1 focus:ring"
 			/>

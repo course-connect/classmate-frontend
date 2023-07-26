@@ -36,58 +36,62 @@ const HeroCourseAndProfessorResults = ({
 		router.push(`/professor/${professor.user_id}`);
 	};
 
-	const results =
-		searchType === "school"
-			? searchResults.map((school, index: number) => {
-					return (
-						<button
-							onClick={() => handleSchoolClick(school)}
-							key={index}
-							type="button"
-							className={`flex w-full items-center border-b-[1px] bg-classmate-tan-2 px-5 py-5 text-left outline-none ring-classmate-gold-1 hover:bg-classmate-gray-5 focus:bg-classmate-gray-5`}>
-							<Image
-								height={25}
-								width={25}
-								src="./graduation-cap.svg"
-								className="mr-5 "
-								alt=""
-							/>
-							<div className="flex flex-col justify-center gap-1">
-								<p className="font-classmate leading-none text-classmate-green-6">
-									{school.school_name}
-								</p>
-								<p className="font-classmate w-fit text-sm leading-none text-classmate-green-7">
-									{school.school_zip}
-								</p>
-							</div>
-						</button>
-					);
-			  })
-			: searchResults.map((professor, index: number) => {
-					return (
-						<button
-							onClick={() => handleProfessorClick(professor)}
-							key={index}
-							type="button"
-							className={`flex w-full items-center border-b-[1px] bg-classmate-tan-2 px-5 py-5 text-left outline-none ring-classmate-gold-1 hover:bg-classmate-gray-5 focus:bg-classmate-gray-5`}>
-							<Image
-								height={25}
-								width={25}
-								src="./glasses.svg"
-								className="mr-5 "
-								alt=""
-							/>
-							<div className="flex flex-col justify-center gap-1">
-								<p className="font-classmate leading-none text-classmate-green-6">
-									{`${professor.first_name} ${professor.last_name}`}
-								</p>
-								<p className="font-classmate w-fit text-sm leading-none text-classmate-green-7">
-									{professor.school_names[0]}
-								</p>
-							</div>
-						</button>
-					);
-			  });
+	const results = searchResults.map((item, index) => {
+		switch (searchType) {
+			case "course":
+				return (
+					<button
+						onClick={() => handleSchoolClick(item)}
+						key={index}
+						type="button"
+						className={`flex w-full items-center border-b-[1px] bg-classmate-tan-2 px-5 py-5 text-left outline-none ring-classmate-gold-1 hover:bg-classmate-gray-5 focus:bg-classmate-gray-5`}>
+						<Image
+							height={25}
+							width={25}
+							src="./book-solid.svg"
+							className="mr-5"
+							alt=""
+						/>
+						{/* <div className="flex flex-col justify-center gap-1">
+							<p className="font-classmate leading-none text-classmate-green-6">
+								{item.school_name}
+							</p>
+							<p className="font-classmate w-fit text-sm leading-none text-classmate-green-7">
+								{item.school_zip}
+							</p>
+						</div> */}
+					</button>
+				);
+
+			case "professor":
+				return (
+					<button
+						onClick={() => handleProfessorClick(item)}
+						key={index}
+						type="button"
+						className={`flex w-full items-center border-b-[1px] bg-classmate-tan-2 px-5 py-5 text-left outline-none ring-classmate-gold-1 hover:bg-classmate-gray-5 focus:bg-classmate-gray-5`}>
+						<Image
+							height={25}
+							width={25}
+							src="./glasses.svg"
+							className="mr-5"
+							alt=""
+						/>
+						<div className="flex flex-col justify-center gap-1">
+							<p className="font-classmate leading-none text-classmate-green-6">
+								{`${item.first_name} ${item.last_name}`}
+							</p>
+							<p className="font-classmate w-fit text-sm leading-none text-classmate-green-7">
+								{item.school_names[0]}
+							</p>
+						</div>
+					</button>
+				);
+
+			default:
+				return null; // Handle any other cases, or return an empty element as fallback
+		}
+	});
 
 	return (
 		<div className="absolute top-16 z-10 w-full overflow-hidden rounded-xl shadow-lg">

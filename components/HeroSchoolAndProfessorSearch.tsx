@@ -4,7 +4,11 @@ import HeroSchoolAndProfessorSelect from "./HeroSchoolAndProfessorSelect";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../hooks/reduxHooks";
-import { search, clearSearch } from "../redux/search/searchActions";
+import {
+	search,
+	clearSearch,
+	setSearchType,
+} from "../redux/search/searchActions";
 import HeroSchoolAndProfessorResults from "./HeroSchoolAndProfessorResults";
 
 const HeroSchoolAndProfessorSearch = ({
@@ -36,6 +40,10 @@ const HeroSchoolAndProfessorSearch = ({
 		};
 	}, [watch]);
 
+	useEffect(() => {
+		dispatch(setSearchType("school"));
+	}, []);
+
 	const onSubmit = (value: { search: string; searchType: string }) => {
 		dispatch(search(value));
 	};
@@ -47,7 +55,11 @@ const HeroSchoolAndProfessorSearch = ({
 			<HeroSchoolAndProfessorSelect methods={methods} />
 			<input
 				{...register("search")}
-				placeholder={`Enter ${searchType}`}
+				placeholder={`Enter ${
+					searchType === "school" || searchType === "course"
+						? "school"
+						: "professor"
+				}`}
 				type="text"
 				className="font-classmate z-10 h-[55px] w-full rounded-br-full rounded-tr-full bg-transparent pl-3 text-lg text-classmate-green-6 placeholder-classmate-green-6 outline-none ring-classmate-gold-1 focus:ring"
 			/>
