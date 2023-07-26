@@ -23,7 +23,7 @@ const menuItems = [
 	},
 ];
 
-const HeroSelect = ({ methods }) => {
+const HeroSchoolAndProfessorSelect = ({ methods }) => {
 	const dispatch = useDispatch();
 	const { getValues, setValue } = methods;
 	const { searchType } = getValues();
@@ -37,11 +37,10 @@ const HeroSelect = ({ methods }) => {
 		e: React.MouseEvent<HTMLLIElement, globalThis.MouseEvent>
 	) => {
 		const { id } = e.target as HTMLLIElement; // Destructure the id property from e.target
-		console.log("item clicked");
 		setValue("searchType", id);
 		if (id !== searchType) {
 			setValue("search", "");
-			dispatch(setSearchType(searchType));
+			dispatch(setSearchType(id));
 		}
 		handleMenuClick(); // Close the menu
 	};
@@ -84,9 +83,10 @@ const HeroSelect = ({ methods }) => {
 				menuItems={menuItems}
 				callback={handleMenuItemClick}
 				menuOpen={menuOpen}
+				handleMenuClick={handleMenuClick}
 			/>
 		</div>
 	);
 };
 
-export default HeroSelect;
+export default HeroSchoolAndProfessorSelect;

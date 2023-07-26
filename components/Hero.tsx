@@ -14,7 +14,7 @@ const icons: Record<string, string> = {
 
 const Hero = (): JSX.Element => {
 	return (
-		<section className="section-padding relative flex h-[680px] w-full items-center justify-center overflow-hidden bg-classmate-tan-1 2xl:h-[740px]">
+		<section className="section-padding relative flex h-[680px] w-full items-center justify-center bg-classmate-tan-1 2xl:h-[740px]">
 			<Image
 				src={icons.swinging}
 				width={0}
@@ -58,7 +58,7 @@ const Hero = (): JSX.Element => {
 				className="absolute bottom-[111px] ml-[315px] hidden w-fit xl:flex 2xl:bottom-[128px] 2xl:h-40"
 				alt="An illustration of a paper airplane, a folded paper object resembling an airplane shape."
 			/>
-			<div className="z-10 flex flex-col items-center">
+			<div className="z-10 flex flex-col items-center ">
 				<Image
 					src={icons.logo}
 					width={0}

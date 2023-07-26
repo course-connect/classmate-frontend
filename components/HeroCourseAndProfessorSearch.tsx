@@ -1,30 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import HeroSelect from "./HeroSelect";
+import HeroCourseAndProfessorSelect from "./HeroCourseAndProfessorSelect";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { search } from "../redux/search/searchActions";
-import HeroSearchResults from "./HeroSearchResults";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { search, clearSearch } from "../redux/search/searchActions";
+import HeroCourseAndProfessorResults from "./HeroCourseAndProfessorResults";
 
-const HeroSelectableSearch = () => {
-	const dispatch = useDispatch();
-	const [searchType, setSearchType] = useState("school");
+const HeroSchoolAndProfessorSearch = ({
+	setSchoolFilter,
+	setShowFirstSearch,
+}) => {
+	const dispatch = useAppDispatch();
+	const searchType = useSelector((state) => state.search.searchType);
 	const methods = useForm({
 		defaultValues: {
-			searchType: "school",
+			searchType: searchType,
 			search: "",
 		},
 	});
-	const { handleSubmit, watch, register } = methods;
+	const { handleSubmit, watch, register, setValue } = methods;
 
 	useEffect(() => {
 		const subscription = watch((value, { name }) => {
 			const hasSearchInput = value.search !== "";
 			if (name === "search" && hasSearchInput) {
 				handleSubmit(onSubmit)();
+			} else if (name === "search") {
+				dispatch(clearSearch());
 			}
 		});
-		return () => subscription.unsubscribe();
+		return () => {
+			dispatch(clearSearch());
+			subscription.unsubscribe();
+		};
 	}, [watch]);
 
 	const onSubmit = (value: { search: string; searchType: string }) => {
@@ -34,8 +43,8 @@ const HeroSelectableSearch = () => {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className="relative  flex w-full items-center rounded-full bg-classmate-tan-2 shadow-lg">
-			<HeroSelect methods={methods} />
+			className="relative flex w-full items-center rounded-full bg-classmate-tan-2  shadow-lg">
+			<HeroCourseAndProfessorSelect methods={methods} />
 			<input
 				{...register("search")}
 				placeholder={`Enter ${searchType}`}
@@ -47,9 +56,13 @@ const HeroSelectableSearch = () => {
 				className="absolute right-[4px] z-20 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-classmate-tan-2 outline-none ring-classmate-gold-1 transition-colors hover:bg-classmate-gray-5 focus:ring">
 				<Image src="./search.svg" width={22} height={22} alt="" />
 			</button>
-			<HeroSearchResults />
+			<HeroCourseAndProfessorResults
+				setValue={setValue}
+				setSchoolFilter={setSchoolFilter}
+				setShowFirstSearch={setShowFirstSearch}
+			/>
 		</form>
 	);
 };
 
-export default HeroSelectableSearch;
+export default HeroSchoolAndProfessorSearch;

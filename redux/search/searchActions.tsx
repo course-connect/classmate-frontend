@@ -4,6 +4,9 @@ import {
 	SEARCH_SUCCESS,
 	SEARCH_LOADING,
 	SET_SEARCH_TYPE,
+	CLEAR_SEARCH,
+	SET_SEARCH_FILTER,
+	CLEAR_SEARCH_FILTERS,
 } from "./searchTypes";
 
 // Search for school, professor, and course
@@ -17,7 +20,7 @@ export const search =
 			// Attempt to search with credentials given
 			const res = await attemptSearch({ search, searchType });
 			// Search attempt succeeded
-			dispatch(searchSuccess({ searchResults: res.data, searchType }));
+			dispatch(searchSuccess(res.data));
 		} catch (err) {
 			// Search attempt failed
 			dispatch(searchFailure(err));
@@ -28,6 +31,31 @@ export const setSearchType = (searchType) => (dispatch) => {
 	dispatch({
 		type: SET_SEARCH_TYPE,
 		payload: searchType,
+	});
+	dispatch({
+		type: CLEAR_SEARCH,
+	});
+};
+
+// Clear search results
+export const clearSearch = () => (dispatch) => {
+	dispatch({
+		type: CLEAR_SEARCH,
+	});
+};
+
+// Clear search filters
+export const clearSearchFilters = () => (dispatch) => {
+	dispatch({
+		type: CLEAR_SEARCH_FILTERS,
+	});
+};
+
+// Set search filters to be applied on every search
+export const setSearchFilter = (searchFilter) => (dispatch) => {
+	dispatch({
+		type: SET_SEARCH_FILTER,
+		payload: searchFilter,
 	});
 };
 
