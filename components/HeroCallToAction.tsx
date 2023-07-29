@@ -33,7 +33,7 @@ const HeroCallToAction = (): JSX.Element | null => {
 					setShowFirstSearch={setShowFirstSearch}
 				/>
 			</div>
-			{/* <div
+			<div
 				className={`pointer-events-none absolute flex w-full max-w-sm translate-x-96 justify-center opacity-0 transition-[transform,opacity] duration-500 ${
 					showFirstSearch
 						? ""
@@ -57,7 +57,7 @@ const HeroCallToAction = (): JSX.Element | null => {
 					className="pointer flex h-4 w-4 items-center justify-center rounded-full bg-classmate-tan-2">
 					<Image src="./xmark-solid-green.svg" width={8} height={8} alt="" />
 				</button>
-			</Filter> */}
+			</Filter>
 		</div>
 	);
 };

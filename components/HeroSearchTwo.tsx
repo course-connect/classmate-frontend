@@ -1,62 +1,73 @@
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+
+// Project components
 import HeroSearchTwoSelect from "./HeroSearchTwoSelect";
-import Image from "next/image";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "../hooks/reduxHooks";
-import { search, clearSearch } from "../redux/search/searchActions";
 import HeroSearchTwoResults from "./HeroSearchTwoResults";
 
-const HeroSchoolAndProfessorSearch = ({
-	setSchoolFilter,
-	setShowFirstSearch,
-}) => {
+// React Hook Form components
+import { useForm } from "react-hook-form";
+
+// Next.js components
+import Image from "next/image";
+import { useRouter } from "next/router";
+
+// Redux components
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import {
+	searchTwo,
+	clearSearchTwo,
+	setSearchTwoType,
+} from "../redux/hero-search-two/heroSearchTwoActions";
+
+const HeroSearchTwo = ({ setSchoolFilter, setShowFirstSearch }) => {
+	const router = useRouter();
 	const dispatch = useAppDispatch();
-	const searchType = useSelector((state) => state.search.searchType);
-	const methods = useForm({
-		defaultValues: {
-			searchType: searchType,
-			search: "",
-		},
-	});
-	const { handleSubmit, watch, register, setValue } = methods;
+	const heroSearchTwo = useSelector((state) => state.heroSearchTwo);
+	const { handleSubmit, watch, register, setValue, getValues } = useForm();
 
 	useEffect(() => {
 		const subscription = watch((value, { name }) => {
-			const hasSearchInput = value.search !== "";
-			if (name === "search" && hasSearchInput) {
+			const hasSearchInput = value.userInput !== "";
+			if (name === "userInput" && hasSearchInput) {
 				handleSubmit(onSubmit)();
-			} else if (name === "search") {
-				dispatch(clearSearch());
+			} else if (name === "userInput") {
+				dispatch(clearSearchTwo());
 			}
 		});
 		return () => {
-			dispatch(clearSearch());
+			dispatch(clearSearchTwo());
 			subscription.unsubscribe();
 		};
 	}, [watch]);
 
-	const onSubmit = (value: { search: string; searchType: string }) => {
-		dispatch(search(value));
+	useEffect(() => {
+		dispatch(setSearchTwoType("course"));
+	}, []);
+
+	const onSubmit = ({ userInput }) => {
+		dispatch(searchTwo(userInput));
+	};
+
+	const handleSearchClick = () => {
+		router.push("/search");
 	};
 
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
 			className="relative flex w-full items-center rounded-full bg-classmate-tan-2  shadow-lg">
-			<HeroSearchTwoSelect methods={methods} />
+			<HeroSearchTwoSelect setValue={setValue} />
 			<input
-				{...register("search")}
-				placeholder={`Enter ${
-					searchType === "school" || searchType === "course"
-						? "course"
-						: "professor"
-				}`}
+				defaultValue=""
+				{...register("userInput")}
+				placeholder={`Enter ${heroSearchTwo.type}`}
 				type="text"
 				className="font-classmate z-10 h-[55px] w-full rounded-br-full rounded-tr-full bg-transparent pl-3 text-lg text-classmate-green-6 placeholder-classmate-green-6 outline-none ring-classmate-gold-1 focus:ring"
 			/>
 			<button
-				type="submit"
+				type="button"
+				onClick={handleSearchClick}
 				className="absolute right-[4px] z-20 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-classmate-tan-2 outline-none ring-classmate-gold-1 transition-colors hover:bg-classmate-gray-5 focus:ring">
 				<Image src="./search.svg" width={22} height={22} alt="" />
 			</button>
@@ -69,4 +80,4 @@ const HeroSchoolAndProfessorSearch = ({
 	);
 };
 
-export default HeroSchoolAndProfessorSearch;
+export default HeroSearchTwo;
