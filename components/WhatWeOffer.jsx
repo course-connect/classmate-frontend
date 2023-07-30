@@ -13,7 +13,7 @@ export default function WhatWeOffer() {
 	useFadeIn(elementRef);
 
 	return (
-		<section className="section-padding flex justify-center bg-classmate-tan-2 py-20 xl:py-44">
+		<section className="section-padding flex justify-center bg-classmate-tan-2 py-20 sm:pb-10 xl:py-44 xl:pb-24">
 			<div
 				ref={elementRef}
 				className="xl:gap-18 flex flex-col items-center lg:flex-row lg:gap-20 3xl:gap-40">

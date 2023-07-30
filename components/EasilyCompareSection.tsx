@@ -8,18 +8,18 @@ const EasilyCompareSection = () => {
 	const { width } = useWindowSize();
 
 	return (
-		<div className="section-padding flex flex-col items-center justify-center  bg-classmate-tan-2 bg-red-500 py-20  sm:bg-blue-500 xl:py-44">
+		<div className="section-padding flex flex-col items-center justify-center  bg-classmate-tan-2 py-20 sm:pt-10  xl:py-44 xl:pt-24">
 			{/* sm:max-w-xl lg:max-w-none */}
-			<div className=" flex w-full flex-col  gap-10 lg:flex-row">
+			<div className=" flex w-full flex-col items-center justify-between gap-14 md:gap-16 lg:flex-row lg:justify-center xl:gap-20 3xl:gap-32">
 				{width <= 1024 && (
 					<HomepageHeading headingStyles={"lg:justify-start"}>
 						Easily Compare
 					</HomepageHeading>
 				)}
-				<div className="h-fit bg-orange-500 lg:w-[500px]">
-					<RankGraph styles="p-0" />
+				<div className="h-fit w-full max-w-[600px] lg:w-1/2 lg:max-w-[650px]">
+					<RankGraph styles="!p-4" />
 				</div>
-				<div className="flex w-full flex-col items-center  justify-center gap-10 bg-slate-300 lg:items-start">
+				<div className="flex w-full max-w-[600px] flex-col items-center justify-center gap-14 lg:max-w-[450px] lg:items-start">
 					{width > 1024 && (
 						<HomepageHeading headingStyles={"lg:justify-start"}>
 							Easily Compare

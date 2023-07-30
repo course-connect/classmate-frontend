@@ -23,23 +23,23 @@ const results = [
 		score: 5,
 	},
 	{
-		name: "Benjamin Mitchell",
+		name: "Olivia Reynolds",
 		score: 4.2,
 	},
 	{
-		name: "Benjamin Mitchell",
+		name: "Alexander Ramirez",
 		score: 3.1,
 	},
 	{
-		name: "Benjamin Mitchell",
+		name: "Sophia Morgan",
 		score: 3.3,
 	},
 	{
-		name: "Benjamin Mitchell",
+		name: "Christopher Anderson",
 		score: 2.1,
 	},
 	{
-		name: "Benjamin Mitchell",
+		name: "Emily Thompson",
 		score: 1.5,
 	},
 ];
@@ -55,34 +55,63 @@ export default function RankGraph({ styles }) {
 		setGraphWidth(graphWidth);
 	}, [width]);
 
-	// useEffect(() => {
-	// 	setTimeout(() => setTransitionEffect(""), 1000);
-	// }, []);
+	useEffect(() => {
+		setTimeout(() => setTransitionEffect(""), 1000);
+	}, []);
 
 	return (
-		<div className={`bg-slate-500 p-8 ${styles}`}>
-			<div className="mb-10">
-				<p className="font-classmate-bold-italic text-2xl">Professor rank</p>
+		<div className={`p-8 ${styles} bg-red-500`}>
+			<div className="mb-14">
+				<p className="font-classmate-bold-italic text-2xl sm:text-3xl lg:text-4xl">
+					Professor rank
+				</p>
 			</div>
 			<div className="flex">
-				<div id="graph-wrapper" className="relative flex w-full">
-					<div className="z-10 w-full -translate-y-[26px]">
+				{width > 550 && (
+					<div className="mr-2 flex w-[75px] flex-col gap-3 bg-slate-400">
+						{results.map((professor, index) => {
+							const professorName = professor.name
+								.trimStart()
+								.trimEnd()
+								.split(" ");
+							return (
+								<div
+									key={index}
+									className="font-classmate text-right text-sm text-classmate-green-6">
+									<p>{professorName[0]}</p>
+									<p key={index}>{professorName[1]}</p>
+								</div>
+							);
+						})}
+					</div>
+				)}
+				<div id="graph-wrapper" className="relative flex w-full bg-slate-400">
+					<div
+						className={`z-10 w-full -translate-y-[26px] ${
+							width > 550 ? "flex translate-y-[0px] flex-col gap-3 " : ""
+						}`}>
 						{results.map((professor, index) => {
 							const resultColor = getColor(professor.score);
 							return (
 								<div
 									key={index}
-									className={`relative h-16 transition duration-1000`}
+									className={`relative h-16 transition-transform duration-1000 ${
+										width > 550 ? "!h-10" : ""
+									}`}
 									style={{
-										width: graphWidth ? (professor.score / 5) * graphWidth : 0,
+										// width: graphWidth ? (professor.score / 5) * graphWidth : 0,
 										transition: transitionEffect,
 									}}>
-									<p className="font-classmate absolute bottom-[40px] whitespace-nowrap text-xs">
-										{professor.name}
-									</p>
+									{width <= 550 && (
+										<p className="font-classmate absolute bottom-[40px] whitespace-nowrap text-xs text-classmate-green-6">
+											{professor.name}
+										</p>
+									)}
 									<div
-										className={`absolute bottom-0 flex h-3/5 w-full items-center rounded-md ${resultColor}`}>
-										<span className="font-classmate absolute -right-2 w-0">
+										className={`absolute bottom-0 flex h-3/5 w-full items-center rounded-md ${resultColor} ${
+											width > 550 ? "h-full" : ""
+										}`}>
+										<span className="font-classmate absolute -right-2 w-0 text-classmate-green-6">
 											{professor.score}
 										</span>
 									</div>
@@ -95,7 +124,7 @@ export default function RankGraph({ styles }) {
 						{[...Array(5)].map((_, index) => (
 							<div key={index} className="relative h-full">
 								<div
-									className={`absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3 ${
+									className={`absolute left-0 h-full w-[2px] rounded-full bg-classmate-gray-5 ${
 										index > 0 ? "-left-1" : ""
 									}`}
 								/>
@@ -107,7 +136,7 @@ export default function RankGraph({ styles }) {
 					</div>
 				</div>
 				<div className="relative block w-[18px] items-stretch text-sm">
-					<div className="absolute -left-1  h-full w-[3px] rounded-full bg-classmate-gray-3" />
+					<div className="absolute -left-1  h-full w-[2px] rounded-full bg-classmate-gray-5" />
 					<p className="font-classmate absolute bottom-1 left-2 leading-3 text-classmate-green-6">
 						5
 					</p>
@@ -183,31 +212,31 @@ export default function RankGraph({ styles }) {
 
 // 					<div className="absolute grid h-full  w-full grid-flow-col grid-cols-5  text-sm">
 // 						<div className="relative h-full">
-// 							<div className="absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3" />
+// 							<div className="absolute left-0 h-full w-[2px] rounded-full bg-classmate-gray-5" />
 // 							<p className="font-classmate absolute bottom-0 left-2 leading-3 text-classmate-green-6">
 // 								0
 // 							</p>
 // 						</div>
 // 						<div className="relative h-full">
-// 							<div className="absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3" />
+// 							<div className="absolute left-0 h-full w-[2px] rounded-full bg-classmate-gray-5" />
 // 							<p className="font-classmate absolute bottom-0 left-2 leading-3 text-classmate-green-6">
 // 								1
 // 							</p>
 // 						</div>
 // 						<div className="relative h-full">
-// 							<div className="absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3" />
+// 							<div className="absolute left-0 h-full w-[2px] rounded-full bg-classmate-gray-5" />
 // 							<p className="font-classmate absolute bottom-0 left-2 leading-3 text-classmate-green-6">
 // 								2
 // 							</p>
 // 						</div>
 // 						<div className="relative h-full">
-// 							<div className="absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3" />
+// 							<div className="absolute left-0 h-full w-[2px] rounded-full bg-classmate-gray-5" />
 // 							<p className="font-classmate absolute bottom-1 left-2 leading-3 text-classmate-green-6">
 // 								3
 // 							</p>
 // 						</div>
 // 						<div className="relative h-full">
-// 							<div className="absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3" />
+// 							<div className="absolute left-0 h-full w-[2px] rounded-full bg-classmate-gray-5" />
 // 							<p className="font-classmate absolute bottom-1 left-2 leading-3 text-classmate-green-6">
 // 								4
 // 							</p>
@@ -215,7 +244,7 @@ export default function RankGraph({ styles }) {
 // 					</div>
 // 				</div>
 // 				<div className="relative block w-[18px] -translate-x-1  items-stretch text-sm">
-// 					<div className="absolute left-0 h-full w-[3px] rounded-full bg-classmate-gray-3" />
+// 					<div className="absolute left-0 h-full w-[2px] rounded-full bg-classmate-gray-5" />
 // 					<p className="font-classmate absolute bottom-1 left-2 leading-3 text-classmate-green-6">
 // 						5
 // 					</p>
