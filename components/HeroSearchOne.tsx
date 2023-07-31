@@ -23,7 +23,7 @@ const HeroSearchOne = ({ setSchoolFilter, setShowFirstSearch }) => {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
 	const heroSearchOne = useSelector((state) => state.heroSearchOne);
-	const { handleSubmit, watch, register, setValue, getValues } = useForm();
+	const { handleSubmit, watch, register, setValue } = useForm();
 
 	useEffect(() => {
 		const subscription = watch((value, { name }) => {

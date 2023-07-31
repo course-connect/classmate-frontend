@@ -1,18 +1,18 @@
 import {
-	MAIN_SEARCH_SUCCESS,
-	MAIN_SEARCH_FAILURE,
-	MAIN_SEARCH_LOADING,
-	SET_MAIN_SEARCH_TYPE,
-	CLEAR_MAIN_SEARCH,
-	SET_MAIN_SEARCH_FILTER,
-	CLEAR_MAIN_SEARCH_FILTERS,
-	RESET_MAIN_SEARCH,
-} from "./mainSearchTypes";
+	FILTER_SEARCH_SUCCESS,
+	FILTER_SEARCH_FAILURE,
+	FILTER_SEARCH_LOADING,
+	SET_FILTER_SEARCH_TYPE,
+	CLEAR_FILTER_SEARCH,
+	SET_FILTER_SEARCH_FILTER,
+	CLEAR_FILTER_SEARCH_FILTERS,
+	RESET_FILTER_SEARCH,
+} from "./filterSearchTypes";
 
 const initialState = {
 	loading: false,
 	results: [],
-	type: "professor",
+	type: "school",
 	filters: {
 		professor: null,
 		department: null,
@@ -28,44 +28,44 @@ export default (state = initialState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
-		case RESET_MAIN_SEARCH:
+		case RESET_FILTER_SEARCH:
 			return initialState;
-		case MAIN_SEARCH_LOADING:
+		case FILTER_SEARCH_LOADING:
 			return {
 				...state,
 				loading: true,
 			};
-		case MAIN_SEARCH_SUCCESS:
+		case FILTER_SEARCH_SUCCESS:
 			return {
 				...state,
 				loading: false,
 				results: payload,
 			};
-		case MAIN_SEARCH_FAILURE:
+		case FILTER_SEARCH_FAILURE:
 			return {
 				...state,
 				loading: false,
 				results: [],
 			};
-		case SET_MAIN_SEARCH_TYPE:
+		case SET_FILTER_SEARCH_TYPE:
 			return {
 				...state,
 				type: payload,
 				filters: initialState.filters,
 			};
-		case CLEAR_MAIN_SEARCH:
+		case CLEAR_FILTER_SEARCH:
 			return {
 				...state,
 				results: [],
 			};
-		case SET_MAIN_SEARCH_FILTER:
+		case SET_FILTER_SEARCH_FILTER:
 			return {
 				...state,
 				filters: {
 					...payload,
 				},
 			};
-		case CLEAR_MAIN_SEARCH_FILTERS:
+		case CLEAR_FILTER_SEARCH_FILTERS:
 			return {
 				...state,
 				filters: initialState.filters,

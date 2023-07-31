@@ -22,11 +22,11 @@ export const resetMainSearch = (userInput) => async (dispatch, getState) => {
 export const search = (userInput) => async (dispatch, getState) => {
 	// Flag search as loading
 	dispatch(mainSearchLoading());
-	const { type: searchType } = getState().mainSearch;
+	const { type: searchType, filters } = getState().mainSearch;
 
 	try {
 		// Attempt to search with credentials given
-		const res = await attemptMainSearch(userInput, searchType);
+		const res = await attemptMainSearch(userInput, searchType, filters);
 		// Search attempt succeeded
 		dispatch(mainSearchSuccess(res.data));
 	} catch (err) {
@@ -65,18 +65,19 @@ export const setMainSearchFilter = (searchFilter) => (dispatch) => {
 };
 
 // Attempt to search with credentials given
-const attemptMainSearch = (userInput, searchType) => {
+const attemptMainSearch = (userInput, searchType, filters) => {
+	const data = {
+		query: userInput,
+		filters,
+	};
+
 	const config = {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		// params: {
-		// 	search,
-		// 	searchType,
-		// },
 	};
-	console.log(searchType);
-	return axios.get(`${searchType}/search`, config);
+
+	return axios.post(`${searchType}/search`, data, config);
 };
 
 // Flag search as loading
