@@ -11,7 +11,7 @@ import {
 } from "./filterSearchTypes";
 
 // Reset to initial state
-export const resetFilterearch = (userInput) => async (dispatch, getState) => {
+export const resetFilterSearch = (userInput) => async (dispatch, getState) => {
 	// Flag search as loading
 	dispatch({
 		type: RESET_FILTER_SEARCH,
@@ -22,7 +22,16 @@ export const resetFilterearch = (userInput) => async (dispatch, getState) => {
 export const search = (userInput) => async (dispatch, getState) => {
 	// Flag search as loading
 	dispatch(filterSearchLoading());
-	const { type: searchType, filters } = getState().filterSearch;
+	const { type: searchType } = getState().filterSearch;
+	const filters = {
+		professor: null,
+		department: null,
+		school: null,
+		score: null,
+		difficulty: null,
+		reviews: null,
+		course: null,
+	};
 
 	try {
 		// Attempt to search with credentials given
@@ -35,7 +44,7 @@ export const search = (userInput) => async (dispatch, getState) => {
 	}
 };
 
-export const setFilterearchType = (searchType) => (dispatch) => {
+export const setFilterSearchType = (searchType) => (dispatch) => {
 	dispatch({
 		type: SET_FILTER_SEARCH_TYPE,
 		payload: searchType,
@@ -57,7 +66,7 @@ export const clearFilterSearchFilters = () => (dispatch) => {
 };
 
 // Set search filters to be applied on every search
-export const setFilterearchFilter = (searchFilter) => (dispatch) => {
+export const setFilterSearchFilter = (searchFilter) => (dispatch) => {
 	dispatch({
 		type: SET_FILTER_SEARCH_FILTER,
 		payload: searchFilter,

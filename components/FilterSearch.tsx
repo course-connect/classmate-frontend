@@ -14,10 +14,10 @@ import {
 	clearFilterSearch,
 } from "../redux/filter-search/filterSearchActions";
 
-const FilterSearch = () => {
+const FilterSearch = ({ showSlideUp }) => {
 	const dispatch = useAppDispatch();
 	const filterSearch = useSelector((state) => state.filterSearch);
-	const { handleSubmit, watch, register } = useForm();
+	const { handleSubmit, watch, register, setValue } = useForm();
 
 	useEffect(() => {
 		const subscription = watch((value, { name }) => {
@@ -33,12 +33,16 @@ const FilterSearch = () => {
 		};
 	}, [watch]);
 
+	useEffect(() => {
+		setTimeout(() => setValue("userInput", ""), 100);
+	}, [showSlideUp]);
+
 	const onSubmit = ({ userInput }) => {
 		dispatch(search(userInput));
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="h-[384px] w-full p-6">
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="flex overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
 				<Image
 					src="./search.svg"
@@ -52,7 +56,7 @@ const FilterSearch = () => {
 					{...register("userInput")}
 					placeholder={`Enter ${filterSearch.type}`}
 					type="text"
-					className="font-classmate z-10 h-10 w-full bg-transparent text-lg text-classmate-green-6 placeholder-classmate-green-6 outline-none"
+					className="font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-6 placeholder-classmate-green-6 outline-none"
 				/>
 			</div>
 		</form>

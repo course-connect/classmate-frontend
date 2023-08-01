@@ -4,10 +4,16 @@ import MobileSlideUp from "../components/MobileSlideUp";
 import ClassmateButton from "./ClassmateButton";
 
 import FilterSearch from "./FilterSearch";
+import FilterSearchResults from "./FilterSearchResults";
 
 // Redux components
 import { useAppDispatch } from "../hooks/reduxHooks";
-import { setFilterearchType } from "../redux/filter-search/filterSearchActions";
+import {
+	clearFilterSearch,
+	resetFilterSearch,
+	setFilterSearchType,
+	setFilterSearchFilter,
+} from "../redux/filter-search/filterSearchActions";
 
 const Filters = () => {
 	const dispatch = useAppDispatch();
@@ -22,17 +28,20 @@ const Filters = () => {
 	const [showReviewsFilterSearch, toggleReviewsFilterSearch] = useState(false);
 
 	const handleSchoolFilterClick = () => {
-		dispatch(setFilterearchType("school"));
+		dispatch(clearFilterSearch());
+		dispatch(setFilterSearchType("school"));
 		toggleSchoolFilterSearch((current) => !current);
 	};
 
 	const handleProfessorFilterClick = () => {
-		dispatch(setFilterearchType("professor"));
+		dispatch(clearFilterSearch());
+		dispatch(setFilterSearchType("professor"));
 		toggleProfessorFilterSearch((current) => !current);
 	};
 
 	const handleCourseFilterClick = () => {
-		dispatch(setFilterearchType("course"));
+		dispatch(clearFilterSearch());
+		dispatch(setFilterSearchType("course"));
 		toggleCourseFilterSearch((current) => !current);
 	};
 
@@ -48,6 +57,16 @@ const Filters = () => {
 		toggleReviewsFilterSearch((current) => !current);
 	};
 
+	const handleResetClick = () => {
+		dispatch(resetFilterSearch());
+	};
+
+	const handleAddFilterClick = (e) => {
+		const filterType = e.target.dataset.filtertype;
+		const filterValue = e.target.dataset.filtervalue;
+		dispatch(setFilterSearchFilter([filterType, filterValue]));
+	};
+
 	return (
 		<>
 			<div className="flex w-full flex-col gap-2 p-6">
@@ -56,7 +75,7 @@ const Filters = () => {
 						Filters
 					</p>
 					<ClassmateButton
-						callback={() => console.log("hello")}
+						callback={handleResetClick}
 						variant="text"
 						size="xs"
 						styles="!px-2 !py-0 !text-lg">
@@ -110,61 +129,140 @@ const Filters = () => {
 			<MobileSlideUp
 				showSlideUp={showSchoolFilterSearch}
 				toggleSlideUp={toggleSchoolFilterSearch}>
-				<FilterSearch />
+				<div className="flex h-[384px] w-full flex-col p-6">
+					<FilterSearch showSlideUp={showSchoolFilterSearch} />
+					<FilterSearchResults />
+				</div>
 			</MobileSlideUp>
 			<MobileSlideUp
 				showSlideUp={showProfessorFilterSearch}
 				toggleSlideUp={toggleProfessorFilterSearch}>
-				<FilterSearch />
+				<div className="flex h-[384px] w-full flex-col p-6">
+					<FilterSearch showSlideUp={showSchoolFilterSearch} />
+					<FilterSearchResults />
+				</div>
 			</MobileSlideUp>
 			<MobileSlideUp
 				showSlideUp={showCourseFilterSearch}
 				toggleSlideUp={toggleCourseFilterSearch}>
-				<FilterSearch />
+				<div className="flex h-[384px] w-full flex-col p-6">
+					<FilterSearch showSlideUp={showSchoolFilterSearch} />
+					<FilterSearchResults />
+				</div>
 			</MobileSlideUp>
 			<MobileSlideUp
 				showSlideUp={showScoreFilterSearch}
 				toggleSlideUp={toggleScoreFilterSearch}>
-				<div className="font-classmate flex w-full flex-col items-start gap-2 p-6">
+				<div
+					className="font-classmate flex w-full flex-col items-start gap-2 p-6"
+					onClick={handleAddFilterClick}>
 					<p className="font-classmate-bold mb-2 w-full text-lg text-classmate-green-6">
 						Score
 					</p>
-					<FilterButton text="4.5 or above" />
-					<FilterButton text="4 or above" />
-					<FilterButton text="3 or above" />
-					<FilterButton text="2 or above" />
-					<FilterButton text="1 or above" />
-					<FilterButton text="none" />
+					<FilterButton
+						filterType="score"
+						filterValue={"4.5"}
+						text="4.5 or above"
+					/>
+					<FilterButton
+						filterType="score"
+						filterValue={"4"}
+						text="4 or above"
+					/>
+					<FilterButton
+						filterType="score"
+						filterValue={"3"}
+						text="3 or above"
+					/>
+					<FilterButton
+						filterType="score"
+						filterValue={"2"}
+						text="2 or above"
+					/>
+					<FilterButton
+						filterType="score"
+						filterValue={"1"}
+						text="1 or above"
+					/>
+					<FilterButton filterType="score" filterValue={"-1"} text="none" />
 				</div>
 			</MobileSlideUp>
 			<MobileSlideUp
 				showSlideUp={showDifficultyFilterSearch}
 				toggleSlideUp={toggleDifficultyFilterSearch}>
-				<div className="font-classmate flex w-full flex-col items-start gap-2 p-6">
+				<div
+					onClick={handleAddFilterClick}
+					className="font-classmate flex w-full flex-col items-start gap-2 p-6">
 					<p className="font-classmate-bold mb-2 w-full text-lg text-classmate-green-6">
 						Difficulty
 					</p>
-					<FilterButton text="1 or below" />
-					<FilterButton text="2 or below" />
-					<FilterButton text="3 or below" />
-					<FilterButton text="4 or below" />
-					<FilterButton text="4.5 or below" />
-					<FilterButton text="none" />
+					<FilterButton
+						filterType="difficulty"
+						filterValue={"1"}
+						text="1 or below"
+					/>
+					<FilterButton
+						filterType="difficulty"
+						filterValue={"2"}
+						text="2 or below"
+					/>
+					<FilterButton
+						filterType="difficulty"
+						filterValue={"3"}
+						text="3 or below"
+					/>
+					<FilterButton
+						filterType="difficulty"
+						filterValue={"4"}
+						text="4 or below"
+					/>
+					<FilterButton
+						filterType="difficulty"
+						filterValue={"4.5"}
+						text="4.5 or below"
+					/>
+					<FilterButton
+						filterType="difficulty"
+						filterValue={"-1"}
+						text="none"
+					/>
 				</div>
 			</MobileSlideUp>
 			<MobileSlideUp
 				showSlideUp={showReviewsFilterSearch}
 				toggleSlideUp={toggleReviewsFilterSearch}>
-				<div className="font-classmate flex w-full flex-col items-start gap-2 p-6">
+				<div
+					onClick={handleAddFilterClick}
+					className="font-classmate flex w-full flex-col items-start gap-2 p-6">
 					<p className="font-classmate-bold mb-2 w-full text-lg text-classmate-green-6">
 						Number of Reviews
 					</p>
-					<FilterButton text="45 or above" />
-					<FilterButton text="35 or above" />
-					<FilterButton text="25 or above" />
-					<FilterButton text="15 or above" />
-					<FilterButton text="5 or above" />
-					<FilterButton text="none" />
+					<FilterButton
+						filterType="reviews"
+						filterValue={"45"}
+						text="45 or above"
+					/>
+					<FilterButton
+						filterType="reviews"
+						filterValue={"35"}
+						text="35 or above"
+					/>
+					<FilterButton
+						filterType="reviews"
+						filterValue={"25"}
+						text="25 or above"
+					/>
+					<FilterButton
+						filterType="reviews"
+						filterValue={"15"}
+						text="15 or above"
+					/>
+					<FilterButton
+						filterType="reviews"
+						filterValue={"5"}
+						text="5 or above"
+					/>
+					<FilterButton filterType="reviews" filterValue={"-1"} text="none" />
 				</div>
 			</MobileSlideUp>
 		</>
