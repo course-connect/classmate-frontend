@@ -1,17 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../hooks/reduxHooks";
+import FilterButton from "./FilterButton";
 
 const FilterSearchResults = () => {
-	const dispatch = useAppDispatch();
 	const filterSearch = useSelector((state) => state.filterSearch);
 
 	let searchResults;
 	switch (filterSearch.type) {
 		case "school":
-			searchResults = filterSearch.results.map(({ data: school }, index) => (
-				<div key={index}>{school.school_name}</div>
-			));
+			searchResults = filterSearch.results.map(
+				({ firebaseID, data: school }, index) => (
+					<FilterButton
+						key={index}
+						text={school.school_name}
+						icon="./graduation-cap.svg"
+						iconAlt="Graduration Cap"
+						filterValue={firebaseID}
+						filterType={"school"}
+						styles="whitespace-nowrap text-sm h-[40px]"
+					/>
+				)
+			);
 			break;
 		case "professor":
 			searchResults = filterSearch.results.map(({ data: professor }, index) => (

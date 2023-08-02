@@ -63,7 +63,7 @@ export default (state = initialState, action) => {
 				...state,
 				filters: {
 					...state.filters,
-					[payload[0]]: payload[1] === "-1" ? null : Number(payload[1]),
+					[payload[0]]: payload[1] === "-1" ? null : payload[1],
 				},
 			};
 		case CLEAR_FILTER_SEARCH_FILTERS:

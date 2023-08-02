@@ -64,6 +64,7 @@ const Filters = () => {
 	const handleAddFilterClick = (e) => {
 		const filterType = e.target.dataset.filtertype;
 		const filterValue = e.target.dataset.filtervalue;
+		console.log(filterType, filterValue);
 		dispatch(setFilterSearchFilter([filterType, filterValue]));
 	};
 
@@ -129,9 +130,13 @@ const Filters = () => {
 			<MobileSlideUp
 				showSlideUp={showSchoolFilterSearch}
 				toggleSlideUp={toggleSchoolFilterSearch}>
-				<div className="flex h-[384px] w-full flex-col p-6">
+				<div className="flex h-[384px] w-full flex-col gap-3 p-6">
 					<FilterSearch showSlideUp={showSchoolFilterSearch} />
-					<FilterSearchResults />
+					<div
+						onClick={handleAddFilterClick}
+						className="flex w-full flex-col gap-3">
+						<FilterSearchResults />
+					</div>
 				</div>
 			</MobileSlideUp>
 			<MobileSlideUp
