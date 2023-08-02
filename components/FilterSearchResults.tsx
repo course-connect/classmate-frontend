@@ -4,12 +4,13 @@ import FilterButton from "./FilterButton";
 
 const FilterSearchResults = () => {
 	const filterSearch = useSelector((state) => state.filterSearch);
+	const hasSearchResults = filterSearch.results.length !== 0;
 
 	let searchResults;
 	switch (filterSearch.type) {
 		case "school":
-			searchResults = filterSearch.results.map(
-				({ firebaseID, data: school }, index) => (
+			searchResults = hasSearchResults ? (
+				filterSearch.results.map(({ firebaseID, data: school }, index) => (
 					<FilterButton
 						key={index}
 						text={school.school_name}
@@ -17,21 +18,52 @@ const FilterSearchResults = () => {
 						iconAlt="Graduration Cap"
 						filterValue={firebaseID}
 						filterType={"school"}
-						styles="whitespace-nowrap text-sm h-[40px]"
+						styles="whitespace-nowrap text-sm h-[40px] overflow-hidden"
 					/>
-				)
+				))
+			) : (
+				<p className="font-classmate pointer-events-none text-classmate-green-7">
+					No Results
+				</p>
 			);
 			break;
 		case "professor":
-			searchResults = filterSearch.results.map(({ data: professor }, index) => (
-				<div
-					key={index}>{`${professor.first_name} ${professor.last_name}`}</div>
-			));
+			searchResults = hasSearchResults ? (
+				filterSearch.results.map(({ firebaseID, data: professor }, index) => (
+					<FilterButton
+						key={index}
+						text={`${professor.first_name} ${professor.last_name}`}
+						icon="./glasses.svg"
+						iconAlt="Glasses"
+						filterValue={firebaseID}
+						filterType={"professor"}
+						styles="whitespace-nowrap text-sm h-[40px] overflow-hidden"
+					/>
+				))
+			) : (
+				<p className="font-classmate pointer-events-none text-classmate-green-7">
+					No Results
+				</p>
+			);
 			break;
 		default:
-			searchResults = filterSearch.results.map(({ data: course }, index) => (
-				<div key={index}>{`${course.course_name} ${course.course_code}`}</div>
-			));
+			searchResults = hasSearchResults ? (
+				filterSearch.results.map(({ firebaseID, data: course }, index) => (
+					<FilterButton
+						key={index}
+						text={`${course.course_name}`}
+						icon="./book-solid.svg"
+						iconAlt="Book"
+						filterValue={firebaseID}
+						filterType={"course"}
+						styles="whitespace-nowrap text-sm h-[40px] overflow-hidden"
+					/>
+				))
+			) : (
+				<p className="font-classmate pointer-events-none text-classmate-green-7">
+					No Results
+				</p>
+			);
 			break;
 	}
 

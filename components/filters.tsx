@@ -142,17 +142,25 @@ const Filters = () => {
 			<MobileSlideUp
 				showSlideUp={showProfessorFilterSearch}
 				toggleSlideUp={toggleProfessorFilterSearch}>
-				<div className="flex h-[384px] w-full flex-col p-6">
+				<div className="flex h-[384px] w-full flex-col gap-3 p-6">
 					<FilterSearch showSlideUp={showSchoolFilterSearch} />
-					<FilterSearchResults />
+					<div
+						onClick={handleAddFilterClick}
+						className="flex w-full flex-col gap-3">
+						<FilterSearchResults />
+					</div>
 				</div>
 			</MobileSlideUp>
 			<MobileSlideUp
 				showSlideUp={showCourseFilterSearch}
 				toggleSlideUp={toggleCourseFilterSearch}>
-				<div className="flex h-[384px] w-full flex-col p-6">
+				<div className="flex h-[384px] w-full flex-col gap-3 p-6">
 					<FilterSearch showSlideUp={showSchoolFilterSearch} />
-					<FilterSearchResults />
+					<div
+						onClick={handleAddFilterClick}
+						className="flex w-full flex-col gap-3">
+						<FilterSearchResults />
+					</div>
 				</div>
 			</MobileSlideUp>
 			<MobileSlideUp
