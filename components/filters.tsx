@@ -28,6 +28,7 @@ const Filters = () => {
 	const filterSearch = useSelector((state) => state.filterSearch);
 	const dispatch = useAppDispatch();
 
+	// Show slide up menu state
 	const [showSchoolFilterSearch, toggleSchoolFilterSearch] = useState(false);
 	const [showProfessorFilterSearch, toggleProfessorFilterSearch] =
 		useState(false);
@@ -38,6 +39,11 @@ const Filters = () => {
 	const [showDifficultyFilterSearch, toggleDifficultyFilterSearch] =
 		useState(false);
 	const [showReviewsFilterSearch, toggleReviewsFilterSearch] = useState(false);
+
+	// Filter value state
+	const [scoreFilter, setScoreFilter] = useState("");
+	const [difficultyFilter, setDifficultyFilter] = useState("");
+	const [reviewsFilter, setReviewsFilter] = useState("");
 
 	const handleSchoolFilterClick = () => {
 		// dispatch(clearFilterSearch());
@@ -91,7 +97,10 @@ const Filters = () => {
 		toggleReviewsFilterSearch((current) => !current);
 	};
 
-	const handleResetClick = () => {
+	const handleClearClick = () => {
+		setScoreFilter("");
+		setDifficultyFilter("");
+		setReviewsFilter("");
 		dispatch(resetMainSearchFilters());
 		dispatch(resetFilterSearch());
 	};
@@ -99,8 +108,25 @@ const Filters = () => {
 	const handleAddFilterClick = (e) => {
 		const filterType = e.target.dataset.filtertype;
 		const filterValue = e.target.dataset.filtervalue;
-		console.log(filterType, filterValue);
+		const filterText = e.target.dataset.filtertext;
+		setFilterDisplay(filterType, filterText);
 		dispatch(setFilterSearchFilter([filterType, filterValue]));
+	};
+
+	const setFilterDisplay = (filterType, filterText) => {
+		filterText = filterText === "none" ? "" : filterText;
+		switch (filterType) {
+			case "score":
+				setScoreFilter(filterText);
+				break;
+			case "difficulty":
+				setDifficultyFilter(filterText);
+				break;
+			case "reviews":
+				setReviewsFilter(filterText);
+				break;
+			default:
+		}
 	};
 
 	const handleAppleyClick = () => {
@@ -139,21 +165,21 @@ const Filters = () => {
 
 		{
 			text: "Score",
-			filter: "All",
+			filter: scoreFilter,
 			icon: "./star-solid.svg",
 			iconAlt: "",
 			callback: handleScoreFilterClick,
 		},
 		{
 			text: "Difficulty",
-			filter: "All",
+			filter: difficultyFilter,
 			icon: "./weight-light-green.svg",
 			iconAlt: "",
 			callback: handleDifficultyFilterClick,
 		},
 		{
 			text: "Reviews",
-			filter: "All",
+			filter: reviewsFilter,
 			icon: "./thumbs-up-light-green.svg",
 			iconAlt: "",
 			callback: handleReviewsFilterClick,
@@ -161,30 +187,30 @@ const Filters = () => {
 	];
 
 	const scoreFilterButtons = [
-		{ filterValue: "4.5", text: "4.5 or above" },
-		{ filterValue: "4", text: "4 or above" },
-		{ filterValue: "3", text: "3 or above" },
-		{ filterValue: "2", text: "2 or above" },
-		{ filterValue: "1", text: "1 or above" },
-		{ filterValue: "-1", text: "none" },
+		{ filterValue: "4.5", filterText: "4.5 or above" },
+		{ filterValue: "4", filterText: "4 or above" },
+		{ filterValue: "3", filterText: "3 or above" },
+		{ filterValue: "2", filterText: "2 or above" },
+		{ filterValue: "1", filterText: "1 or above" },
+		{ filterValue: "-1", filterText: "none" },
 	];
 
 	const difficultyFilterButtons = [
-		{ filterValue: "1", text: "1 or below" },
-		{ filterValue: "2", text: "2 or below" },
-		{ filterValue: "3", text: "3 or below" },
-		{ filterValue: "4", text: "4 or below" },
-		{ filterValue: "4.5", text: "4.5 or below" },
-		{ filterValue: "-1", text: "none" },
+		{ filterValue: "1", filterText: "1 or below" },
+		{ filterValue: "2", filterText: "2 or below" },
+		{ filterValue: "3", filterText: "3 or below" },
+		{ filterValue: "4", filterText: "4 or below" },
+		{ filterValue: "4.5", filterText: "4.5 or below" },
+		{ filterValue: "-1", filterText: "none" },
 	];
 
 	const reviewsFilterButtons = [
-		{ filterValue: "45", text: "45 or above" },
-		{ filterValue: "35", text: "35 or above" },
-		{ filterValue: "25", text: "25 or above" },
-		{ filterValue: "15", text: "15 or above" },
-		{ filterValue: "5", text: "5 or above" },
-		{ filterValue: "-1", text: "none" },
+		{ filterValue: "45", filterText: "45 or above" },
+		{ filterValue: "35", filterText: "35 or above" },
+		{ filterValue: "25", filterText: "25 or above" },
+		{ filterValue: "15", filterText: "15 or above" },
+		{ filterValue: "5", filterText: "5 or above" },
+		{ filterValue: "-1", filterText: "none" },
 	];
 
 	return (
@@ -212,7 +238,7 @@ const Filters = () => {
 						variant="filled"
 						size="md"
 						fullWidth={true}
-						callback={handleResetClick}
+						callback={handleClearClick}
 						styles="bg-classmate-gray-6 text-classmate-green-7">
 						Clear
 					</ClassmateButton>
@@ -315,10 +341,12 @@ const Filters = () => {
 								key={index}
 								filterType="score"
 								filterValue={button.filterValue}
-								text={button.text}
+								filterText={button.filterText}
 								styles="">
 								<div className="bri relative flex w-full items-center justify-between overflow-hidden ">
-									<p className={`text-classmate-green-6`}>{button.text}</p>
+									<p className={`text-classmate-green-6`}>
+										{button.filterText}
+									</p>
 									{/* Add the check mark when filter is already added */}
 									{filterSelected && (
 										<div className="absolute right-0 flex h-full w-8 items-center justify-center">
@@ -353,9 +381,9 @@ const Filters = () => {
 								key={index}
 								filterType="difficulty"
 								filterValue={button.filterValue}
-								text={button.text}>
+								filterText={button.filterText}>
 								<div className="relative flex w-full items-center justify-between overflow-hidden">
-									<p className="text-classmate-green-6">{button.text}</p>
+									<p className="text-classmate-green-6">{button.filterText}</p>
 									{/* Add the check mark when filter is already added */}
 									{filterSelected && (
 										<div className="absolute right-0 flex h-full w-8 items-center justify-center bg-classmate-gray-6">
@@ -390,9 +418,9 @@ const Filters = () => {
 								key={index}
 								filterType="reviews"
 								filterValue={button.filterValue}
-								text={button.text}>
+								filterText={button.filterText}>
 								<div className="relative flex w-full items-center justify-between overflow-hidden">
-									<p className="text-classmate-green-6">{button.text}</p>
+									<p className="text-classmate-green-6">{button.filterText}</p>
 									{/* Add the check mark when filter is already added */}
 									{filterSelected && (
 										<div className="absolute right-0 flex h-full w-8 items-center justify-center bg-classmate-gray-6">

@@ -9,6 +9,7 @@ interface FilterButtonProps {
 	callback?: () => void;
 	filterValue?: string;
 	filterType?: string;
+	filterText?: string;
 	styles?: string;
 	children: any;
 }
@@ -20,6 +21,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 	callback,
 	filterValue,
 	filterType,
+	filterText,
 	styles,
 	children,
 }) => {
@@ -27,6 +29,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 		<button
 			data-filtervalue={filterValue}
 			data-filtertype={filterType}
+			data-filtertext={filterText}
 			onClick={callback}
 			className={`font-classmate flex w-full items-center justify-between rounded-md bg-classmate-gray-6 px-3 py-2 text-left text-classmate-green-7 outline-none ring-classmate-gold-1 focus:ring ${styles}`}>
 			<div className="pointer-events-none flex w-full gap-4">
