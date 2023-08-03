@@ -33,6 +33,7 @@ module.exports = {
 				"classmate-gray-3": "var(--classmate-gray-3)",
 				"classmate-gray-4": "var(--classmate-gray-4)",
 				"classmate-gray-5": "var(--classmate-gray-5)",
+				"classmate-gray-6": "var(--classmate-gray-6)",
 				"classmate-pink-1": "var(--classmate-pink-1)",
 				"classmate-gold-1": "var(--classmate-gold-1)",
 				"classmate-tan-1": "var(--classmate-tan-1)",

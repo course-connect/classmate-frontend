@@ -8,13 +8,19 @@ import {
 	SET_MAIN_SEARCH_FILTER,
 	CLEAR_MAIN_SEARCH_FILTERS,
 	RESET_MAIN_SEARCH,
+	RESET_MAIN_SEARCH_FILTERS,
 } from "./mainSearchTypes";
 
 // Reset to initial state
-export const resetMainSearch = (userInput) => async (dispatch, getState) => {
-	// Flag search as loading
+export const resetMainSearch = () => async (dispatch) => {
 	dispatch({
 		type: RESET_MAIN_SEARCH,
+	});
+};
+
+export const resetMainSearchFilters = () => async (dispatch) => {
+	dispatch({
+		type: RESET_MAIN_SEARCH_FILTERS,
 	});
 };
 

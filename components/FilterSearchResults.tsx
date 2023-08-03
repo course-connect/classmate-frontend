@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import FilterButton from "./FilterButton";
+import Image from "next/image";
 
 const FilterSearchResults = () => {
 	const filterSearch = useSelector((state) => state.filterSearch);
@@ -10,17 +11,33 @@ const FilterSearchResults = () => {
 	switch (filterSearch.type) {
 		case "school":
 			searchResults = hasSearchResults ? (
-				filterSearch.results.map(({ firebaseID, data: school }, index) => (
-					<FilterButton
-						key={index}
-						text={school.school_name}
-						icon="./graduation-cap.svg"
-						iconAlt="Graduration Cap"
-						filterValue={firebaseID}
-						filterType={"school"}
-						styles="whitespace-nowrap text-sm h-[40px] overflow-hidden"
-					/>
-				))
+				filterSearch.results.map(({ firebaseID, data: school }, index) => {
+					const filterAlreadyAdded = firebaseID === filterSearch.filters.school;
+
+					return (
+						<FilterButton
+							key={index}
+							icon="./graduation-cap.svg"
+							iconAlt="Graduation Cap"
+							filterValue={firebaseID}
+							filterType={"school"}
+							styles="whitespace-nowrap text-sm h-[40px] overflow-hidden">
+							<div className="relative flex w-full items-center justify-between overflow-hidden ">
+								<p className="text-classmate-green-6">{school.school_name}</p>
+								{filterAlreadyAdded && (
+									<div className="absolute right-0 flex h-full w-8 items-center justify-center bg-classmate-gray-6">
+										<Image
+											width={16}
+											height={10}
+											src="./check-green.svg"
+											alt="check mark"
+										/>
+									</div>
+								)}
+							</div>
+						</FilterButton>
+					);
+				})
 			) : (
 				<p className="font-classmate pointer-events-none text-classmate-green-7">
 					No Results
@@ -29,17 +46,34 @@ const FilterSearchResults = () => {
 			break;
 		case "professor":
 			searchResults = hasSearchResults ? (
-				filterSearch.results.map(({ firebaseID, data: professor }, index) => (
-					<FilterButton
-						key={index}
-						text={`${professor.first_name} ${professor.last_name}`}
-						icon="./glasses.svg"
-						iconAlt="Glasses"
-						filterValue={firebaseID}
-						filterType={"professor"}
-						styles="whitespace-nowrap text-sm h-[40px] overflow-hidden"
-					/>
-				))
+				filterSearch.results.map(({ firebaseID, data: professor }, index) => {
+					const filterAlreadyAdded =
+						firebaseID === filterSearch.filters.professor;
+					return (
+						<FilterButton
+							text={`${professor.first_name} ${professor.last_name}`}
+							icon="./glasses.svg"
+							iconAlt="Glasses"
+							filterValue={firebaseID}
+							filterType={"professor"}
+							styles="whitespace-nowrap text-sm h-[40px] overflow-hidden">
+							<div className="relative flex w-full items-center justify-between overflow-hidden ">
+								<p className="text-classmate-green-6">{`${professor.first_name} ${professor.last_name}`}</p>
+								{/* Add the check mark when filter is already added */}
+								{filterAlreadyAdded && (
+									<div className="absolute right-0 flex h-full w-8 items-center justify-center bg-classmate-gray-6">
+										<Image
+											width={16}
+											height={10}
+											src="./check-green.svg"
+											alt="check mark"
+										/>
+									</div>
+								)}
+							</div>
+						</FilterButton>
+					);
+				})
 			) : (
 				<p className="font-classmate pointer-events-none text-classmate-green-7">
 					No Results
@@ -48,17 +82,33 @@ const FilterSearchResults = () => {
 			break;
 		default:
 			searchResults = hasSearchResults ? (
-				filterSearch.results.map(({ firebaseID, data: course }, index) => (
-					<FilterButton
-						key={index}
-						text={`${course.course_name}`}
-						icon="./book-solid.svg"
-						iconAlt="Book"
-						filterValue={firebaseID}
-						filterType={"course"}
-						styles="whitespace-nowrap text-sm h-[40px] overflow-hidden"
-					/>
-				))
+				filterSearch.results.map(({ firebaseID, data: course }, index) => {
+					const filterAlreadyAdded = firebaseID === filterSearch.filters.course;
+					return (
+						<FilterButton
+							key={index}
+							icon="./book-solid.svg"
+							iconAlt="Book"
+							filterValue={firebaseID}
+							filterType={"course"}
+							styles="whitespace-nowrap text-sm h-[40px] overflow-hidden">
+							<div className="relative flex w-full items-center justify-between overflow-hidden">
+								<p className="text-classmate-green-6">{course.course_name}</p>
+								{/* Add the check mark when filter is already added */}
+								{filterAlreadyAdded && (
+									<div className="absolute right-0 flex h-full w-8 items-center justify-center bg-classmate-gray-6">
+										<Image
+											width={16}
+											height={10}
+											src="./check-green.svg"
+											alt="check mark"
+										/>
+									</div>
+								)}
+							</div>
+						</FilterButton>
+					);
+				})
 			) : (
 				<p className="font-classmate pointer-events-none text-classmate-green-7">
 					No Results

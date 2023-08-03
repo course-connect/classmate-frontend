@@ -7,6 +7,7 @@ import {
 	SET_MAIN_SEARCH_FILTER,
 	CLEAR_MAIN_SEARCH_FILTERS,
 	RESET_MAIN_SEARCH,
+	RESET_MAIN_SEARCH_FILTERS,
 } from "./mainSearchTypes";
 
 const initialState = {
@@ -30,6 +31,13 @@ export default (state = initialState, action) => {
 	switch (type) {
 		case RESET_MAIN_SEARCH:
 			return initialState;
+		case RESET_MAIN_SEARCH_FILTERS:
+			return {
+				...state,
+				filters: {
+					...initialState.filters,
+				},
+			};
 		case MAIN_SEARCH_LOADING:
 			return {
 				...state,

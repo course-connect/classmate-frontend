@@ -51,7 +51,6 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				type: payload,
-				filters: initialState.filters,
 			};
 		case CLEAR_FILTER_SEARCH:
 			return {
