@@ -13,12 +13,12 @@ const FilterSearchResults = () => {
 			searchResults = hasSearchResults ? (
 				filterSearch.results.map(({ firebaseID, data: school }, index) => {
 					const filterAlreadyAdded = firebaseID === filterSearch.filters.school;
-
 					return (
 						<FilterButton
 							key={index}
 							icon="./graduation-cap.svg"
 							iconAlt="Graduation Cap"
+							filterText={school.school_name}
 							filterValue={firebaseID}
 							filterType={"school"}
 							styles="whitespace-nowrap text-sm h-[40px] overflow-hidden">
@@ -51,9 +51,11 @@ const FilterSearchResults = () => {
 						firebaseID === filterSearch.filters.professor;
 					return (
 						<FilterButton
+							key={index}
 							text={`${professor.first_name} ${professor.last_name}`}
 							icon="./glasses.svg"
 							iconAlt="Glasses"
+							filterText={`${professor.first_name} ${professor.last_name}`}
 							filterValue={firebaseID}
 							filterType={"professor"}
 							styles="whitespace-nowrap text-sm h-[40px] overflow-hidden">
@@ -89,6 +91,7 @@ const FilterSearchResults = () => {
 							key={index}
 							icon="./book-solid.svg"
 							iconAlt="Book"
+							filterText={course.course_name}
 							filterValue={firebaseID}
 							filterType={"course"}
 							styles="whitespace-nowrap text-sm h-[40px] overflow-hidden">

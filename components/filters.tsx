@@ -4,28 +4,20 @@ import MobileSlideUp from "../components/MobileSlideUp";
 import ClassmateButton from "./ClassmateButton";
 
 import FilterSearch from "./FilterSearch";
+import FilterOptions from "./FilterOptions";
 import FilterSearchResults from "./FilterSearchResults";
-
-// Next
-import Image from "next/image";
 
 // Redux components
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { useSelector } from "react-redux";
 import {
-	resetFilterSearch,
 	setFilterSearchType,
 	setFilterSearchFilter,
 } from "../redux/filter-search/filterSearchActions";
 
-import {
-	setMainSearchFilter,
-	resetMainSearch,
-	resetMainSearchFilters,
-} from "../redux/main-search/mainSearchActions";
+import FilterActions from "./FilterActions";
 
 const Filters = () => {
-	const filterSearch = useSelector((state) => state.filterSearch);
 	const dispatch = useAppDispatch();
 
 	// Show slide up menu state
@@ -41,12 +33,23 @@ const Filters = () => {
 	const [showReviewsFilterSearch, toggleReviewsFilterSearch] = useState(false);
 
 	// Filter value state
+	const [schoolFilter, setSchoolFilter] = useState("");
+	const [professorFilter, setProfessorFilter] = useState("");
+	const [courseFilter, setCourseFilter] = useState("");
 	const [scoreFilter, setScoreFilter] = useState("");
 	const [difficultyFilter, setDifficultyFilter] = useState("");
 	const [reviewsFilter, setReviewsFilter] = useState("");
+	const resetHandlers = [
+		setSchoolFilter,
+		setProfessorFilter,
+		setCourseFilter,
+		setScoreFilter,
+		setDifficultyFilter,
+		setReviewsFilter,
+	];
 
+	// School Handlers
 	const handleSchoolFilterClick = () => {
-		// dispatch(clearFilterSearch());
 		dispatch(setFilterSearchType("school"));
 		toggleSchoolFilterSearch((current) => !current);
 	};
@@ -55,28 +58,27 @@ const Filters = () => {
 		toggleSchoolFilterSearch((current) => !current);
 	};
 
-	const handleDepartmentFilterClick = () => {
-		// dispatch(clearFilterSearch());
-		dispatch(setFilterSearchType("department"));
-		toggleDepartmentFilterSearch((current) => !current);
-	};
+	// const handleDepartmentFilterClick = () => {
+	// 	dispatch(setFilterSearchType("department"));
+	// 	toggleDepartmentFilterSearch((current) => !current);
+	// };
 
-	const handleDepartmentCancel = () => {
-		toggleDepartmentFilterSearch((current) => !current);
-	};
+	// const handleDepartmentCancel = () => {
+	// 	toggleDepartmentFilterSearch((current) => !current);
+	// };
 
+	// Professor Handlers
 	const handleProfessorFilterClick = () => {
-		// dispatch(clearFilterSearch());
 		dispatch(setFilterSearchType("professor"));
 		toggleProfessorFilterSearch((current) => !current);
 	};
 
-	const handlProfessorCancel = () => {
+	const handleProfessorCancel = () => {
 		toggleProfessorFilterSearch((current) => !current);
 	};
 
+	// Course Handlers
 	const handleCourseFilterClick = () => {
-		// dispatch(clearFilterSearch());
 		dispatch(setFilterSearchType("course"));
 		toggleCourseFilterSearch((current) => !current);
 	};
@@ -85,24 +87,19 @@ const Filters = () => {
 		toggleCourseFilterSearch((current) => !current);
 	};
 
+	// Score Handlers
 	const handleScoreFilterClick = () => {
 		toggleScoreFilterSearch((current) => !current);
 	};
 
+	// Difficulty Handlers
 	const handleDifficultyFilterClick = () => {
 		toggleDifficultyFilterSearch((current) => !current);
 	};
 
+	// Review Handlers
 	const handleReviewsFilterClick = () => {
 		toggleReviewsFilterSearch((current) => !current);
-	};
-
-	const handleClearClick = () => {
-		setScoreFilter("");
-		setDifficultyFilter("");
-		setReviewsFilter("");
-		dispatch(resetMainSearchFilters());
-		dispatch(resetFilterSearch());
 	};
 
 	const handleAddFilterClick = (e) => {
@@ -115,7 +112,17 @@ const Filters = () => {
 
 	const setFilterDisplay = (filterType, filterText) => {
 		filterText = filterText === "none" ? "" : filterText;
+		console.log(filterText);
 		switch (filterType) {
+			case "school":
+				setSchoolFilter(filterText);
+				break;
+			case "professor":
+				setProfessorFilter(filterText);
+				break;
+			case "course":
+				setCourseFilter(filterText);
+				break;
 			case "score":
 				setScoreFilter(filterText);
 				break;
@@ -129,35 +136,31 @@ const Filters = () => {
 		}
 	};
 
-	const handleAppleyClick = () => {
-		dispatch(setMainSearchFilter(filterSearch.filters));
-	};
-
 	const filterButtons = [
 		{
 			text: "School",
-			filter: "All",
+			filter: schoolFilter,
 			icon: "./graduation-cap.svg",
 			iconAlt: "",
 			callback: handleSchoolFilterClick,
 		},
-		{
-			text: "Department",
-			filter: "All",
-			icon: "./thumbs-up-light-green.svg",
-			iconAlt: "",
-			callback: handleDepartmentFilterClick,
-		},
+		// {
+		// 	text: "Department",
+		// 	filter: "All",
+		// 	icon: "./thumbs-up-light-green.svg",
+		// 	iconAlt: "",
+		// 	callback: handleDepartmentFilterClick,
+		// },
 		{
 			text: "Professor",
-			filter: "All",
+			filter: professorFilter,
 			icon: "./glasses.svg",
 			iconAlt: "",
 			callback: handleProfessorFilterClick,
 		},
 		{
 			text: "Course",
-			filter: "All",
+			filter: courseFilter,
 			icon: "./book-solid.svg",
 			iconAlt: "",
 			callback: handleCourseFilterClick,
@@ -183,6 +186,27 @@ const Filters = () => {
 			icon: "./thumbs-up-light-green.svg",
 			iconAlt: "",
 			callback: handleReviewsFilterClick,
+		},
+	];
+
+	const searchableFilters = [
+		{
+			name: "School",
+			showSlideUp: showSchoolFilterSearch,
+			toggleSlideUp: toggleSchoolFilterSearch,
+			handleCancel: handleSchoolCancel,
+		},
+		{
+			name: "Professor",
+			showSlideUp: showProfessorFilterSearch,
+			toggleSlideUp: toggleProfessorFilterSearch,
+			handleCancel: handleProfessorCancel,
+		},
+		{
+			name: "Course",
+			showSlideUp: showCourseFilterSearch,
+			toggleSlideUp: toggleCourseFilterSearch,
+			handleCancel: handleCourseCancel,
 		},
 	];
 
@@ -213,6 +237,30 @@ const Filters = () => {
 		{ filterValue: "-1", filterText: "none" },
 	];
 
+	const selectableFilters = [
+		{
+			showSlideUp: showScoreFilterSearch,
+			toggleSlideUp: toggleScoreFilterSearch,
+			filterOptions: scoreFilterButtons,
+			title: "Score",
+			filterType: "score",
+		},
+		{
+			showSlideUp: showDifficultyFilterSearch,
+			toggleSlideUp: toggleDifficultyFilterSearch,
+			filterOptions: difficultyFilterButtons,
+			title: "Difficulty",
+			filterType: "difficulty",
+		},
+		{
+			showSlideUp: showReviewsFilterSearch,
+			toggleSlideUp: toggleReviewsFilterSearch,
+			filterOptions: reviewsFilterButtons,
+			title: "Reviews",
+			filterType: "reviews",
+		},
+	];
+
 	return (
 		<>
 			<div className="flex w-full flex-col gap-2 p-6">
@@ -225,7 +273,6 @@ const Filters = () => {
 				{filterButtons.map((button, index) => (
 					<FilterButton
 						key={index}
-						text={button.text}
 						filter={button.filter}
 						icon={button.icon}
 						iconAlt={button.iconAlt}
@@ -233,211 +280,48 @@ const Filters = () => {
 						<p className="text-classmate-green-6">{button.text}</p>
 					</FilterButton>
 				))}
-				<div className="mt-3 flex gap-2">
-					<ClassmateButton
-						variant="filled"
-						size="md"
-						fullWidth={true}
-						callback={handleClearClick}
-						styles="bg-classmate-gray-6 text-classmate-green-7">
-						Clear
-					</ClassmateButton>
-					<ClassmateButton
-						variant="filled"
-						size="md"
-						fullWidth={true}
-						callback={handleAppleyClick}
-						styles="bg-classmate-gold-1 text-classmate-tan-2">
-						Apply
-					</ClassmateButton>
-				</div>
+				<FilterActions resetHandlers={resetHandlers} />
 			</div>
-			<MobileSlideUp
-				showSlideUp={showSchoolFilterSearch}
-				toggleSlideUp={toggleSchoolFilterSearch}>
-				<div className="flex h-[484px] w-full flex-col gap-3 p-6">
-					<div className="font-classmate flex items-center justify-between text-lg text-classmate-green-6">
-						<p className="font-classmate-bold  w-full text-lg text-classmate-green-6">
-							School
-						</p>
-						<ClassmateButton
-							callback={handleSchoolCancel}
-							variant="text"
-							size="xs"
-							styles="!px-2 !py-0 !text-lg ">
-							back
-						</ClassmateButton>
+			{searchableFilters.map((category, index) => (
+				<MobileSlideUp
+					key={index}
+					showSlideUp={category.showSlideUp}
+					toggleSlideUp={category.toggleSlideUp}>
+					<div className="flex h-[484px] w-full flex-col gap-3 p-6">
+						<div className="font-classmate flex items-center justify-between text-lg text-classmate-green-6">
+							<p className="font-classmate-bold w-full text-lg text-classmate-green-6">
+								{category.name}
+							</p>
+							<ClassmateButton
+								callback={category.handleCancel}
+								variant="text"
+								size="xs"
+								styles="!px-2 !py-0 !text-lg">
+								back
+							</ClassmateButton>
+						</div>
+						<FilterSearch showSlideUp={category.showSlideUp} />
+						<div
+							onClick={handleAddFilterClick}
+							className="flex w-full flex-col gap-3">
+							<FilterSearchResults />
+						</div>
 					</div>
-					<FilterSearch showSlideUp={showSchoolFilterSearch} />
-					<div
-						onClick={handleAddFilterClick}
-						className="flex w-full flex-col gap-3">
-						<FilterSearchResults />
-					</div>
-				</div>
-			</MobileSlideUp>
-			<MobileSlideUp
-				showSlideUp={showProfessorFilterSearch}
-				toggleSlideUp={toggleProfessorFilterSearch}>
-				<div className="flex h-[484px] w-full flex-col gap-3 p-6">
-					<div className="font-classmate flex items-center justify-between text-lg text-classmate-green-6">
-						<p className="font-classmate-bold  w-full text-lg text-classmate-green-6">
-							Professor
-						</p>
-						<ClassmateButton
-							callback={handlProfessorCancel}
-							variant="text"
-							size="xs"
-							styles="!px-2 !py-0 !text-lg">
-							back
-						</ClassmateButton>
-					</div>
-					<FilterSearch showSlideUp={showProfessorFilterSearch} />
-					<div
-						onClick={handleAddFilterClick}
-						className="flex w-full flex-col gap-3">
-						<FilterSearchResults />
-					</div>
-				</div>
-			</MobileSlideUp>
-			<MobileSlideUp
-				showSlideUp={showCourseFilterSearch}
-				toggleSlideUp={toggleCourseFilterSearch}>
-				<div className="flex h-[484px] w-full flex-col gap-3 p-6">
-					<div className="font-classmate flex items-center justify-between text-lg text-classmate-green-6">
-						<p className="font-classmate-bold  w-full text-lg text-classmate-green-6">
-							Course
-						</p>
-						<ClassmateButton
-							callback={handleCourseCancel}
-							variant="text"
-							size="xs"
-							styles="!px-2 !py-0 !text-lg">
-							back
-						</ClassmateButton>
-					</div>
-					<FilterSearch showSlideUp={showCourseFilterSearch} />
-					<div
-						onClick={handleAddFilterClick}
-						className="flex w-full flex-col gap-3">
-						<FilterSearchResults />
-					</div>
-				</div>
-			</MobileSlideUp>
-			<MobileSlideUp
-				showSlideUp={showScoreFilterSearch}
-				toggleSlideUp={toggleScoreFilterSearch}>
-				<div
-					className="font-classmate flex h-[484px] w-full flex-col items-start gap-2 p-6"
-					onClick={handleAddFilterClick}>
-					<p className="font-classmate-bold pointer-events-none mb-2 w-full text-lg text-classmate-green-6">
-						Score
-					</p>
-					{scoreFilterButtons.map((button, index) => {
-						const filterSelected =
-							button.filterValue === filterSearch.filters.score;
-						return (
-							<FilterButton
-								key={index}
-								filterType="score"
-								filterValue={button.filterValue}
-								filterText={button.filterText}
-								styles="">
-								<div className="bri relative flex w-full items-center justify-between overflow-hidden ">
-									<p className={`text-classmate-green-6`}>
-										{button.filterText}
-									</p>
-									{/* Add the check mark when filter is already added */}
-									{filterSelected && (
-										<div className="absolute right-0 flex h-full w-8 items-center justify-center">
-											<Image
-												width={16}
-												height={10}
-												src="./check-green.svg"
-												alt="check mark"
-											/>
-										</div>
-									)}
-								</div>
-							</FilterButton>
-						);
-					})}
-				</div>
-			</MobileSlideUp>
-			<MobileSlideUp
-				showSlideUp={showDifficultyFilterSearch}
-				toggleSlideUp={toggleDifficultyFilterSearch}>
-				<div
-					onClick={handleAddFilterClick}
-					className="font-classmate flex h-[484px] w-full flex-col items-start gap-2 p-6">
-					<p className="font-classmate-bold pointer-events-none mb-2 w-full text-lg text-classmate-green-6">
-						Difficulty
-					</p>
-					{difficultyFilterButtons.map((button, index) => {
-						const filterSelected =
-							button.filterValue === filterSearch.filters.difficulty;
-						return (
-							<FilterButton
-								key={index}
-								filterType="difficulty"
-								filterValue={button.filterValue}
-								filterText={button.filterText}>
-								<div className="relative flex w-full items-center justify-between overflow-hidden">
-									<p className="text-classmate-green-6">{button.filterText}</p>
-									{/* Add the check mark when filter is already added */}
-									{filterSelected && (
-										<div className="absolute right-0 flex h-full w-8 items-center justify-center bg-classmate-gray-6">
-											<Image
-												width={16}
-												height={10}
-												src="./check-green.svg"
-												alt="check mark"
-											/>
-										</div>
-									)}
-								</div>
-							</FilterButton>
-						);
-					})}
-				</div>
-			</MobileSlideUp>
-			<MobileSlideUp
-				showSlideUp={showReviewsFilterSearch}
-				toggleSlideUp={toggleReviewsFilterSearch}>
-				<div
-					onClick={handleAddFilterClick}
-					className="font-classmate flex h-[484px] w-full flex-col items-start gap-2 p-6">
-					<p className="font-classmate-bold mb-2 w-full text-lg text-classmate-green-6">
-						Number of Reviews
-					</p>
-					{reviewsFilterButtons.map((button, index) => {
-						const filterSelected =
-							button.filterValue === filterSearch.filters.reviews;
-						return (
-							<FilterButton
-								key={index}
-								filterType="reviews"
-								filterValue={button.filterValue}
-								filterText={button.filterText}>
-								<div className="relative flex w-full items-center justify-between overflow-hidden">
-									<p className="text-classmate-green-6">{button.filterText}</p>
-									{/* Add the check mark when filter is already added */}
-									{filterSelected && (
-										<div className="absolute right-0 flex h-full w-8 items-center justify-center bg-classmate-gray-6">
-											<Image
-												width={16}
-												height={10}
-												src="./check-green.svg"
-												alt="check mark"
-											/>
-										</div>
-									)}
-								</div>
-							</FilterButton>
-						);
-					})}
-				</div>
-			</MobileSlideUp>
+				</MobileSlideUp>
+			))}
+			{selectableFilters.map((filterData, index) => (
+				<MobileSlideUp
+					key={index}
+					showSlideUp={filterData.showSlideUp}
+					toggleSlideUp={filterData.toggleSlideUp}>
+					<FilterOptions
+						filterOptions={filterData.filterOptions}
+						callback={handleAddFilterClick}
+						title={filterData.title}
+						filterType={filterData.filterType}
+					/>
+				</MobileSlideUp>
+			))}
 		</>
 	);
 };
