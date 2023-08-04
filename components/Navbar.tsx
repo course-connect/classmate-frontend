@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // Project components
-import ClassmateButton from "../components/ClassmateButton";
+import ClassmateButton from "./ClassmateButton";
 import AccountMenu from "./AccountMenu";
 
 // Project hooks

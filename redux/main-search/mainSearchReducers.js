@@ -15,13 +15,34 @@ const initialState = {
 	results: [],
 	type: "professor",
 	filters: {
-		professor: null,
-		department: null,
-		school: null,
-		score: null,
-		difficulty: null,
-		reviews: null,
-		course: null,
+		professor: {
+			filter_value: null,
+			filter_text: null,
+		},
+		department: {
+			filter_value: null,
+			filter_text: null,
+		},
+		school: {
+			filter_value: null,
+			filter_text: null,
+		},
+		score: {
+			filter_value: null,
+			filter_text: null,
+		},
+		difficulty: {
+			filter_value: null,
+			filter_text: null,
+		},
+		reviews: {
+			filter_value: null,
+			filter_text: null,
+		},
+		course: {
+			filter_value: null,
+			filter_text: null,
+		},
 	},
 };
 

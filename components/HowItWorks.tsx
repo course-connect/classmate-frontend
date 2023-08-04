@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import HomepageHeading from "./HomepageHeading";
-import ClassmateButton from "../components/ClassmateButton";
+import ClassmateButton from "./ClassmateButton";
 import box from "../public/box.svg";
 import falling from "../public/falling.svg";
 import love from "../public/love.svg";

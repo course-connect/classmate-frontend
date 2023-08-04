@@ -8,12 +8,11 @@ import {
 	resetMainSearchFilters,
 } from "../redux/main-search/mainSearchActions";
 
-const FilterActions = ({ resetHandlers }) => {
+const FilterActions = () => {
 	const dispatch = useAppDispatch();
 	const filterSearch = useSelector((state) => state.filterSearch);
 
 	const handleClearClick = () => {
-		resetHandlers.forEach((handler) => handler());
 		dispatch(resetMainSearchFilters());
 		dispatch(resetFilterSearch());
 	};

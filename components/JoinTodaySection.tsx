@@ -1,4 +1,4 @@
-import ClassmateButton from "../components/ClassmateButton";
+import ClassmateButton from "./ClassmateButton";
 
 export default function JoinTodaySection() {
 	return (

@@ -5,7 +5,7 @@ import folder from "../public/folder.svg";
 import pie from "../public/pie.svg";
 import robot from "../public/robot.svg";
 import handHeart from "../public/hand-heart.svg";
-import ClassmateButton from "../components/ClassmateButton";
+import ClassmateButton from "./ClassmateButton";
 import useFadeIn from "../hooks/useFadeIn";
 
 export default function WhatWeOffer() {

@@ -15,7 +15,7 @@ const FilterOptions = ({ filterOptions, callback, title, filterType }) => {
 			</p>
 			{filterOptions.map((button, index) => {
 				const filterSelected =
-					button.filterValue === filterSearch.filters[filterType];
+					button.filterValue === filterSearch.filters[filterType].filter_value;
 				return (
 					<FilterButton
 						key={index}

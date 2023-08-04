@@ -1,5 +1,5 @@
-import HomepageHeading from "../components/HomepageHeading";
-import ClassmateButton from "../components/ClassmateButton";
+import HomepageHeading from "./HomepageHeading";
+import ClassmateButton from "./ClassmateButton";
 import Image from "next/image";
 import googleLogo from "../public/google.png";
 import appleLogo from "../public/apple.png";

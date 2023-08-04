@@ -7,6 +7,7 @@ import {
 	SET_FILTER_SEARCH_FILTER,
 	CLEAR_FILTER_SEARCH_FILTERS,
 	RESET_FILTER_SEARCH,
+	SET_MULTI_FILTER_SEARCH_FILTER,
 } from "./filterSearchTypes";
 
 const initialState = {
@@ -14,13 +15,34 @@ const initialState = {
 	results: [],
 	type: "school",
 	filters: {
-		professor: null,
-		department: null,
-		school: null,
-		score: null,
-		difficulty: null,
-		reviews: null,
-		course: null,
+		professor: {
+			filter_value: null,
+			filter_text: null,
+		},
+		department: {
+			filter_value: null,
+			filter_text: null,
+		},
+		school: {
+			filter_value: null,
+			filter_text: null,
+		},
+		score: {
+			filter_value: null,
+			filter_text: null,
+		},
+		difficulty: {
+			filter_value: null,
+			filter_text: null,
+		},
+		reviews: {
+			filter_value: null,
+			filter_text: null,
+		},
+		course: {
+			filter_value: null,
+			filter_text: null,
+		},
 	},
 };
 
@@ -62,7 +84,20 @@ export default (state = initialState, action) => {
 				...state,
 				filters: {
 					...state.filters,
-					[payload[0]]: payload[1] === "-1" ? null : payload[1],
+					[payload[0]]:
+						payload[1].filter_value === "-1"
+							? {
+									filter_value: null,
+									filter_text: null,
+							  }
+							: payload[1],
+				},
+			};
+		case SET_MULTI_FILTER_SEARCH_FILTER:
+			return {
+				...state,
+				filters: {
+					...payload,
 				},
 			};
 		case CLEAR_FILTER_SEARCH_FILTERS:

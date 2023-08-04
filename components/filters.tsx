@@ -6,19 +6,19 @@ import ClassmateButton from "./ClassmateButton";
 import FilterSearch from "./FilterSearch";
 import FilterOptions from "./FilterOptions";
 import FilterSearchResults from "./FilterSearchResults";
+import FilterActions from "./FilterActions";
 
 // Redux components
-import { useAppDispatch } from "../hooks/reduxHooks";
 import { useSelector } from "react-redux";
+import { useAppDispatch } from "../hooks/reduxHooks";
 import {
 	setFilterSearchType,
 	setFilterSearchFilter,
 } from "../redux/filter-search/filterSearchActions";
 
-import FilterActions from "./FilterActions";
-
 const Filters = () => {
 	const dispatch = useAppDispatch();
+	const filterSearch = useSelector((state) => state.filterSearch);
 
 	// Show slide up menu state
 	const [showSchoolFilterSearch, toggleSchoolFilterSearch] = useState(false);
@@ -31,22 +31,6 @@ const Filters = () => {
 	const [showDifficultyFilterSearch, toggleDifficultyFilterSearch] =
 		useState(false);
 	const [showReviewsFilterSearch, toggleReviewsFilterSearch] = useState(false);
-
-	// Filter value state
-	const [schoolFilter, setSchoolFilter] = useState("");
-	const [professorFilter, setProfessorFilter] = useState("");
-	const [courseFilter, setCourseFilter] = useState("");
-	const [scoreFilter, setScoreFilter] = useState("");
-	const [difficultyFilter, setDifficultyFilter] = useState("");
-	const [reviewsFilter, setReviewsFilter] = useState("");
-	const resetHandlers = [
-		setSchoolFilter,
-		setProfessorFilter,
-		setCourseFilter,
-		setScoreFilter,
-		setDifficultyFilter,
-		setReviewsFilter,
-	];
 
 	// School Handlers
 	const handleSchoolFilterClick = () => {
@@ -106,40 +90,19 @@ const Filters = () => {
 		const filterType = e.target.dataset.filtertype;
 		const filterValue = e.target.dataset.filtervalue;
 		const filterText = e.target.dataset.filtertext;
-		setFilterDisplay(filterType, filterText);
-		dispatch(setFilterSearchFilter([filterType, filterValue]));
-	};
 
-	const setFilterDisplay = (filterType, filterText) => {
-		filterText = filterText === "none" ? "" : filterText;
-		console.log(filterText);
-		switch (filterType) {
-			case "school":
-				setSchoolFilter(filterText);
-				break;
-			case "professor":
-				setProfessorFilter(filterText);
-				break;
-			case "course":
-				setCourseFilter(filterText);
-				break;
-			case "score":
-				setScoreFilter(filterText);
-				break;
-			case "difficulty":
-				setDifficultyFilter(filterText);
-				break;
-			case "reviews":
-				setReviewsFilter(filterText);
-				break;
-			default:
-		}
+		const payload = {
+			filter_value: filterValue,
+			filter_text: filterText,
+		};
+
+		dispatch(setFilterSearchFilter([filterType, payload]));
 	};
 
 	const filterButtons = [
 		{
 			text: "School",
-			filter: schoolFilter,
+			filter: filterSearch.filters.school.filter_text,
 			icon: "./graduation-cap.svg",
 			iconAlt: "",
 			callback: handleSchoolFilterClick,
@@ -153,14 +116,14 @@ const Filters = () => {
 		// },
 		{
 			text: "Professor",
-			filter: professorFilter,
+			filter: filterSearch.filters.professor.filter_text,
 			icon: "./glasses.svg",
 			iconAlt: "",
 			callback: handleProfessorFilterClick,
 		},
 		{
 			text: "Course",
-			filter: courseFilter,
+			filter: filterSearch.filters.course.filter_text,
 			icon: "./book-solid.svg",
 			iconAlt: "",
 			callback: handleCourseFilterClick,
@@ -168,21 +131,21 @@ const Filters = () => {
 
 		{
 			text: "Score",
-			filter: scoreFilter,
+			filter: filterSearch.filters.score.filter_text,
 			icon: "./star-solid.svg",
 			iconAlt: "",
 			callback: handleScoreFilterClick,
 		},
 		{
 			text: "Difficulty",
-			filter: difficultyFilter,
+			filter: filterSearch.filters.difficulty.filter_text,
 			icon: "./weight-light-green.svg",
 			iconAlt: "",
 			callback: handleDifficultyFilterClick,
 		},
 		{
 			text: "Reviews",
-			filter: reviewsFilter,
+			filter: filterSearch.filters.reviews.filter_text,
 			icon: "./thumbs-up-light-green.svg",
 			iconAlt: "",
 			callback: handleReviewsFilterClick,
@@ -280,7 +243,7 @@ const Filters = () => {
 						<p className="text-classmate-green-6">{button.text}</p>
 					</FilterButton>
 				))}
-				<FilterActions resetHandlers={resetHandlers} />
+				<FilterActions />
 			</div>
 			{searchableFilters.map((category, index) => (
 				<MobileSlideUp
@@ -296,7 +259,7 @@ const Filters = () => {
 								callback={category.handleCancel}
 								variant="text"
 								size="xs"
-								styles="!px-2 !py-0 !text-lg">
+								styles="!px-2 !py-0 !text-base">
 								back
 							</ClassmateButton>
 						</div>

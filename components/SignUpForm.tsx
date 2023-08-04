@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import useWindowSize from "../hooks/useWindowSize";
 import { useForm, FormProvider } from "react-hook-form";
-import ClassmateButton from "../components/ClassmateButton";
+import ClassmateButton from "./ClassmateButton";
 import { signUp } from "../redux/auth/authActions";
 import { useDispatch } from "react-redux";
 
