@@ -1,22 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import MainSearchResult from "./MainSearchResult";
 
 const MainSearchResults = () => {
 	const mainSearch = useSelector((state) => state.mainSearch);
 
-	let searchResult;
-
-	switch (mainSearch.type) {
-		case "school":
-			searchResult = <div>school</div>;
-			break;
-		case "professor":
-			searchResult = <div>professor</div>;
-			break;
-		default:
-			searchResult = <div>course</div>;
-	}
-	return <div>{mainSearch.results.map((result) => searchResult)}</div>;
+	return (
+		<div className="flex flex-col gap-10">
+			{mainSearch.results.map((result, index) => (
+				<MainSearchResult
+					key={index}
+					result={result}
+					userInput={mainSearch.userInput}
+					resultType={mainSearch.type}
+				/>
+			))}
+		</div>
+	);
 };
 
 export default MainSearchResults;

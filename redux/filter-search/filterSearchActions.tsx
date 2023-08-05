@@ -9,6 +9,7 @@ import {
 	CLEAR_FILTER_SEARCH_FILTERS,
 	RESET_FILTER_SEARCH,
 	SET_MULTI_FILTER_SEARCH_FILTER,
+	REMOVE_FILTER_SEARCH_FILTER,
 } from "./filterSearchTypes";
 
 // Reset to initial state
@@ -70,6 +71,13 @@ export const clearFilterSearchFilters = () => (dispatch) => {
 export const setFilterSearchFilter = (searchFilter) => (dispatch) => {
 	dispatch({
 		type: SET_FILTER_SEARCH_FILTER,
+		payload: searchFilter,
+	});
+};
+
+export const removeFilterSearchFilter = (searchFilter) => (dispatch) => {
+	dispatch({
+		type: REMOVE_FILTER_SEARCH_FILTER,
 		payload: searchFilter,
 	});
 };

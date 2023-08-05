@@ -8,9 +8,12 @@ import {
 	CLEAR_MAIN_SEARCH_FILTERS,
 	RESET_MAIN_SEARCH,
 	RESET_MAIN_SEARCH_FILTERS,
+	REMOVE_MAIN_SEARCH_FILTER,
+	SAVE_MAIN_SEARCH_INPUT,
 } from "./mainSearchTypes";
 
 const initialState = {
+	userInput: "",
 	loading: false,
 	results: [],
 	type: "professor",
@@ -59,6 +62,11 @@ export default (state = initialState, action) => {
 					...initialState.filters,
 				},
 			};
+		case SAVE_MAIN_SEARCH_INPUT:
+			return {
+				...state,
+				userInput: payload,
+			};
 		case MAIN_SEARCH_LOADING:
 			return {
 				...state,
@@ -86,12 +94,24 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				results: [],
+				userInput: "",
 			};
 		case SET_MAIN_SEARCH_FILTER:
 			return {
 				...state,
 				filters: {
 					...payload,
+				},
+			};
+		case REMOVE_MAIN_SEARCH_FILTER:
+			return {
+				...state,
+				filters: {
+					...state.filters,
+					[payload]: {
+						filter_value: null,
+						filter_text: null,
+					},
 				},
 			};
 		case CLEAR_MAIN_SEARCH_FILTERS:

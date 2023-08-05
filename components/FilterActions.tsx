@@ -4,6 +4,7 @@ import { useAppDispatch } from "../hooks/reduxHooks";
 import { useSelector } from "react-redux";
 import { resetFilterSearch } from "../redux/filter-search/filterSearchActions";
 import {
+	search,
 	setMainSearchFilter,
 	resetMainSearchFilters,
 } from "../redux/main-search/mainSearchActions";
@@ -11,6 +12,7 @@ import {
 const FilterActions = () => {
 	const dispatch = useAppDispatch();
 	const filterSearch = useSelector((state) => state.filterSearch);
+	const mainSearch = useSelector((state) => state.mainSearch);
 
 	const handleClearClick = () => {
 		dispatch(resetMainSearchFilters());
@@ -19,6 +21,7 @@ const FilterActions = () => {
 
 	const handleAppleyClick = () => {
 		dispatch(setMainSearchFilter(filterSearch.filters));
+		dispatch(search(mainSearch.userInput));
 	};
 
 	return (

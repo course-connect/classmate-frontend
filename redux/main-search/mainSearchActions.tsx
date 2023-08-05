@@ -9,6 +9,8 @@ import {
 	CLEAR_MAIN_SEARCH_FILTERS,
 	RESET_MAIN_SEARCH,
 	RESET_MAIN_SEARCH_FILTERS,
+	REMOVE_MAIN_SEARCH_FILTER,
+	SAVE_MAIN_SEARCH_INPUT,
 } from "./mainSearchTypes";
 
 // Reset to initial state
@@ -30,6 +32,8 @@ export const search = (userInput) => async (dispatch, getState) => {
 	dispatch(mainSearchLoading());
 	const { type: searchType, filters } = getState().mainSearch;
 
+	dispatch(saveMainSearchInput(userInput));
+
 	try {
 		// Attempt to search with credentials given
 		const res = await attemptMainSearch(userInput, searchType, filters);
@@ -39,6 +43,13 @@ export const search = (userInput) => async (dispatch, getState) => {
 		// Search attempt failed
 		dispatch(mainSearchFailure(err));
 	}
+};
+
+export const saveMainSearchInput = (userInput) => async (dispatch) => {
+	dispatch({
+		type: SAVE_MAIN_SEARCH_INPUT,
+		payload: userInput,
+	});
 };
 
 export const setMainSearchType = (searchType) => (dispatch) => {
@@ -70,11 +81,32 @@ export const setMainSearchFilter = (searchFilter) => (dispatch) => {
 	});
 };
 
+export const removeMainSearchFilter = (searchFilter) => (dispatch) => {
+	console.log(searchFilter);
+	dispatch({
+		type: REMOVE_MAIN_SEARCH_FILTER,
+		payload: searchFilter,
+	});
+};
+
 // Attempt to search with credentials given
 const attemptMainSearch = (userInput, searchType, filters) => {
+	const formattedFilters = Object.entries(filters).reduce(
+		(obj, [key, value]) => {
+			const valueIsNotNullAndIsNumber =
+				value.filter_value !== null && !isNaN(value.filter_value);
+
+			obj[key] = valueIsNotNullAndIsNumber
+				? Number(value.filter_value)
+				: value.filter_value;
+			return obj;
+		},
+		{}
+	);
+
 	const data = {
 		query: userInput,
-		filters,
+		filters: formattedFilters,
 	};
 
 	const config = {

@@ -12,7 +12,8 @@ const FilterSearchResults = () => {
 		case "school":
 			searchResults = hasSearchResults ? (
 				filterSearch.results.map(({ firebaseID, data: school }, index) => {
-					const filterAlreadyAdded = firebaseID === filterSearch.filters.school;
+					const filterAlreadyAdded =
+						firebaseID === filterSearch.filters.school.filter_value;
 					return (
 						<FilterButton
 							key={index}
@@ -48,7 +49,7 @@ const FilterSearchResults = () => {
 			searchResults = hasSearchResults ? (
 				filterSearch.results.map(({ firebaseID, data: professor }, index) => {
 					const filterAlreadyAdded =
-						firebaseID === filterSearch.filters.professor;
+						firebaseID === filterSearch.filters.professor.filter_value;
 					return (
 						<FilterButton
 							key={index}
@@ -85,7 +86,8 @@ const FilterSearchResults = () => {
 		default:
 			searchResults = hasSearchResults ? (
 				filterSearch.results.map(({ firebaseID, data: course }, index) => {
-					const filterAlreadyAdded = firebaseID === filterSearch.filters.course;
+					const filterAlreadyAdded =
+						firebaseID === filterSearch.filters.course.filter_value;
 					return (
 						<FilterButton
 							key={index}

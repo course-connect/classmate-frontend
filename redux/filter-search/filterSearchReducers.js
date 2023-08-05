@@ -8,6 +8,7 @@ import {
 	CLEAR_FILTER_SEARCH_FILTERS,
 	RESET_FILTER_SEARCH,
 	SET_MULTI_FILTER_SEARCH_FILTER,
+	REMOVE_FILTER_SEARCH_FILTER,
 } from "./filterSearchTypes";
 
 const initialState = {
@@ -91,6 +92,17 @@ export default (state = initialState, action) => {
 									filter_text: null,
 							  }
 							: payload[1],
+				},
+			};
+		case REMOVE_FILTER_SEARCH_FILTER:
+			return {
+				...state,
+				filters: {
+					...state.filters,
+					[payload]: {
+						filter_value: null,
+						filter_text: null,
+					},
 				},
 			};
 		case SET_MULTI_FILTER_SEARCH_FILTER:

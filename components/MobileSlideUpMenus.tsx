@@ -1,37 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import RankGraph from "../components/RankGraph";
 import ClassmateButton from "../components/ClassmateButton";
 import Filters from "../components/Filters";
 import Image from "next/image";
 import MobileSlideUp from "../components/MobileSlideUp";
-import { useAppDispatch } from "../hooks/reduxHooks";
-import { useSelector } from "react-redux";
-import {
-	resetFilterSearch,
-	setMultiFilterSearchFilters,
-} from "../redux/filter-search/filterSearchActions";
 
-const MobileSlideUpMenus = () => {
-	const dispatch = useAppDispatch();
-	const mainSearchFilters = useSelector((state) => state.mainSearch.filters);
-
-	const [showGraph, toggleGraph] = useState(false);
-	const [showFilters, toggleFilters] = useState(false);
-
-	const handleShowGraphClick = () => {
-		toggleGraph((current) => !current);
-	};
-
-	const handleOpenFilterMenu = () => {
-		dispatch(setMultiFilterSearchFilters(mainSearchFilters));
-		toggleFilters((current) => !current);
-	};
-
-	const handleCloseFilterMenu = () => {
-		setTimeout(() => dispatch(resetFilterSearch()), 100);
-		toggleFilters((current) => !current);
-	};
-
+const MobileSlideUpMenus = ({
+	showGraph,
+	showFilters,
+	handleShowGraphClick,
+	handleOpenFilterMenu,
+	handleCloseFilterMenu,
+}) => {
 	return (
 		<>
 			<div className="flex justify-center">
@@ -39,7 +19,7 @@ const MobileSlideUpMenus = () => {
 					callback={handleShowGraphClick}
 					variant="filled"
 					size="md"
-					styles="fixed bottom-10 bg-classmate-gold-1 text-classmate-tan-2 shadow-md !px-5  flex justify-center items-center ">
+					styles="fixed bottom-6 bg-classmate-gold-1 text-classmate-tan-2 shadow-md !px-5  flex justify-center items-center ">
 					Graph
 					<Image
 						className="ml-2"
@@ -49,12 +29,14 @@ const MobileSlideUpMenus = () => {
 						src="./caret-up-light-tan.svg"
 					/>
 				</ClassmateButton>
-				<button
-					onClick={handleOpenFilterMenu}
+				<ClassmateButton
+					variant="filled"
+					size="xs"
+					callback={handleOpenFilterMenu}
 					type="button"
-					className="fixed bottom-10 right-4 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-classmate-tan-2 shadow-md xs:right-20">
+					styles="fixed bottom-6 !rounded-full right-4 flex !h-[44px] !w-[44px] items-center justify-center rounded-full bg-classmate-tan-2 shadow-md xs:right-20">
 					<Image height={20} width={20} alt="" src="./settings.svg" />
-				</button>
+				</ClassmateButton>
 			</div>
 
 			<MobileSlideUp

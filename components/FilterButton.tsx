@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
+
+// Redux components
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { removeFilterSearchFilter } from "../redux/filter-search/filterSearchActions";
 
 interface FilterButtonProps {
 	filter?: string;
@@ -25,10 +29,21 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 	styles,
 	children,
 }) => {
+	const dispatch = useAppDispatch();
+	const buttonRef = useRef();
+
+	const shortenText = (value) => {
+		if (value.length > 16) {
+			return value.slice(0, 14) + "...";
+		}
+		return value;
+	};
+
 	const handleButtonClick = (e) => {
 		const buttonName = e.target.id;
 		if (buttonName === "remove") {
-			alert("remove");
+			buttonRef.current.blur();
+			dispatch(removeFilterSearchFilter(e.target.dataset.filtertype));
 		} else {
 			callback?.();
 		}
@@ -36,6 +51,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 
 	return (
 		<button
+			ref={buttonRef}
 			id="open"
 			data-filtervalue={filterValue}
 			data-filtertype={filterType}
@@ -49,11 +65,12 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 
 			{filter && (
 				<div className="flex items-center gap-2">
-					<p className="pointer-events-none whitespace-nowrap text-[15px]">
-						{filter}
+					<p className="max-w-10 pointer-events-none whitespace-nowrap text-[15px]">
+						{shortenText(filter)}
 					</p>
 					{filter !== "" && (
 						<div
+							data-filtertype={filterType}
 							id="remove"
 							className="flex h-[14px] w-[14px] items-center justify-center rounded-full bg-classmate-green-7">
 							<Image

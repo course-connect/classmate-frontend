@@ -19,6 +19,7 @@ import {
 const Filters = () => {
 	const dispatch = useAppDispatch();
 	const filterSearch = useSelector((state) => state.filterSearch);
+	const mainSearchType = useSelector((state) => state.mainSearch.type);
 
 	// Show slide up menu state
 	const [showSchoolFilterSearch, toggleSchoolFilterSearch] = useState(false);
@@ -103,6 +104,8 @@ const Filters = () => {
 		{
 			text: "School",
 			filter: filterSearch.filters.school.filter_text,
+			allowedFor: ["professor", "course"],
+			filterType: "school",
 			icon: "./graduation-cap.svg",
 			iconAlt: "",
 			callback: handleSchoolFilterClick,
@@ -117,6 +120,8 @@ const Filters = () => {
 		{
 			text: "Professor",
 			filter: filterSearch.filters.professor.filter_text,
+			allowedFor: ["course"],
+			filterType: "professor",
 			icon: "./glasses.svg",
 			iconAlt: "",
 			callback: handleProfessorFilterClick,
@@ -124,6 +129,8 @@ const Filters = () => {
 		{
 			text: "Course",
 			filter: filterSearch.filters.course.filter_text,
+			allowedFor: ["professor"],
+			filterType: "course",
 			icon: "./book-solid.svg",
 			iconAlt: "",
 			callback: handleCourseFilterClick,
@@ -132,6 +139,8 @@ const Filters = () => {
 		{
 			text: "Score",
 			filter: filterSearch.filters.score.filter_text,
+			allowedFor: ["professor"],
+			filterType: "score",
 			icon: "./star-solid.svg",
 			iconAlt: "",
 			callback: handleScoreFilterClick,
@@ -139,6 +148,8 @@ const Filters = () => {
 		{
 			text: "Difficulty",
 			filter: filterSearch.filters.difficulty.filter_text,
+			allowedFor: ["professor"],
+			filterType: "difficulty",
 			icon: "./weight-light-green.svg",
 			iconAlt: "",
 			callback: handleDifficultyFilterClick,
@@ -146,6 +157,8 @@ const Filters = () => {
 		{
 			text: "Reviews",
 			filter: filterSearch.filters.reviews.filter_text,
+			allowedFor: ["professor"],
+			filterType: "reviews",
 			icon: "./thumbs-up-light-green.svg",
 			iconAlt: "",
 			callback: handleReviewsFilterClick,
@@ -233,16 +246,19 @@ const Filters = () => {
 					</p>
 				</div>
 
-				{filterButtons.map((button, index) => (
-					<FilterButton
-						key={index}
-						filter={button.filter}
-						icon={button.icon}
-						iconAlt={button.iconAlt}
-						callback={button.callback}>
-						<p className="text-classmate-green-6">{button.text}</p>
-					</FilterButton>
-				))}
+				{filterButtons
+					.filter(({ allowedFor }) => allowedFor.includes(mainSearchType))
+					.map((button, index) => (
+						<FilterButton
+							key={index}
+							filter={button.filter}
+							filterType={button.filterType}
+							icon={button.icon}
+							iconAlt={button.iconAlt}
+							callback={button.callback}>
+							<p className="text-classmate-green-6">{button.text}</p>
+						</FilterButton>
+					))}
 				<FilterActions />
 			</div>
 			{searchableFilters.map((category, index) => (
