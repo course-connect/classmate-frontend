@@ -19,33 +19,6 @@ const getColor = (score) => {
 	}
 };
 
-// const results = [
-// 	{
-// 		name: "Benjamin Mitchell",
-// 		score: 5,
-// 	},
-// 	{
-// 		name: "Olivia Reynolds",
-// 		score: 4.2,
-// 	},
-// 	{
-// 		name: "Alexander Ramirez",
-// 		score: 3.1,
-// 	},
-// 	{
-// 		name: "Sophia Morgan",
-// 		score: 3.3,
-// 	},
-// 	{
-// 		name: "Christopher Anderson",
-// 		score: 2.1,
-// 	},
-// 	{
-// 		name: "Emily Thompson",
-// 		score: 1.5,
-// 	},
-// ];
-
 export default function RankGraph({ styles }) {
 	const { width } = useWindowSize();
 	const [graphWidth, setGraphWidth] = useState(0);
