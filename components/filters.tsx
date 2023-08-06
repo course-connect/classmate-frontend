@@ -295,6 +295,7 @@ const Filters = () => {
 					toggleSlideUp={filterData.toggleSlideUp}>
 					<FilterOptions
 						filterOptions={filterData.filterOptions}
+						toggleSlideUp={filterData.toggleSlideUp}
 						callback={handleAddFilterClick}
 						title={filterData.title}
 						filterType={filterData.filterType}

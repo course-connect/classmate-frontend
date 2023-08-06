@@ -19,7 +19,7 @@ const MainSearchResult = ({ result, userInput, resultType }) => {
 						<div className="flex flex-wrap gap-4">
 							<div>
 								<p className="font-classmate-bold text-2xl capitalize text-classmate-green-1">{`${result.data.title}. ${result.data.first_name} ${result.data.last_name}`}</p>
-								<p className="text-sm">{result.data.school_names?.[0]}</p>
+								<p className="text-sm">{result.data.school_name?.[0]}</p>
 							</div>
 							<ResultQualityTag score={result.data.score} />
 						</div>

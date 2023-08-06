@@ -17,11 +17,16 @@ const FilterActions = () => {
 	const handleClearClick = () => {
 		dispatch(resetMainSearchFilters());
 		dispatch(resetFilterSearch());
+		if (mainSearch.userInput) {
+			dispatch(search(mainSearch.userInput));
+		}
 	};
 
 	const handleAppleyClick = () => {
 		dispatch(setMainSearchFilter(filterSearch.filters));
-		dispatch(search(mainSearch.userInput));
+		if (mainSearch.userInput) {
+			dispatch(search(mainSearch.userInput));
+		}
 	};
 
 	return (

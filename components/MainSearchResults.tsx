@@ -7,14 +7,20 @@ const MainSearchResults = () => {
 
 	return (
 		<div className="flex flex-col gap-10">
-			{mainSearch.results.map((result, index) => (
-				<MainSearchResult
-					key={index}
-					result={result}
-					userInput={mainSearch.userInput}
-					resultType={mainSearch.type}
-				/>
-			))}
+			{mainSearch.results.length === 0 ? (
+				<p className="font-classmate text-center text-classmate-green-7">
+					No Results...
+				</p>
+			) : (
+				mainSearch.results.map((result, index) => (
+					<MainSearchResult
+						key={index}
+						result={result}
+						userInput={mainSearch.userInput}
+						resultType={mainSearch.type}
+					/>
+				))
+			)}
 		</div>
 	);
 };

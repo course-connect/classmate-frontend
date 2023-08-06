@@ -34,11 +34,10 @@ export default function Search() {
 
 	return (
 		<div className="section-padding bg-classmate-tan-1 py-10">
-			<button onClick={() => dispatch(resetMainSearch())}>reset</button>
 			<div>
 				<MainSearchCard handleOpenFilterMenu={handleOpenFilterMenu} />
 			</div>
-			<div className="mt-10">
+			<div className="mt-10 min-h-[500px]">
 				<MainSearchResults />
 			</div>
 			<MobileSlideUpMenus
