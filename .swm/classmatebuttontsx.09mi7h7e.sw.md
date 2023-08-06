@@ -5,125 +5,86 @@ file_version: 1.1.3
 app_version: 1.12.0
 ---
 
-## Overview
+## **Overview**
 
-`ClassmateButtonProps`<swm-token data-swm-token=":components/ClassmateButton.tsx:27:7:7:`const ClassmateButton: FC&lt;ClassmateButtonProps&gt; = ({`"/> is a [Material-UI Button](https://mui.com/material-ui/react-button/) wrapper that overwrites the default Material UI styles with the custom classmate colors, fonts, and styles.
+The `ClassmateButton` component represents a button that can be styled and configured with different variants, sizes, and behaviors.
 
-## **ClassmateButtonProps**
+.
 
-<br/>
+### **Props**
 
-The props accepted by the `ClassmateButton`<swm-token data-swm-token=":components/ClassmateButton.tsx:27:2:2:`const ClassmateButton: FC&lt;ClassmateButtonProps&gt; = ({`"/> component and their corresponding types
+The `ClassmateButton` component accepts the following props:
 
-<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+- `variant` (`"filled" | "outlined" | "text" | "link"`): The variant of the button. It determines the visual style of the button.
 
-### 📄 components/ClassmateButton.tsx
+- `fullWidth` (boolean, optional): Specifies whether the button should occupy the full width of its container.
 
-```tsx
-5      type ClassmateButtonProps = {
-6        variant?: 'contained' | 'outlined' | "text";
-7        children: ReactNode;
-8        styles?: string;
-9        size: 'small' | 'large' | 'small-full' | 'large-full';
-10       callback: () => void;
-11       type: 'button' | 'submit' | 'reset';
-12     };
+- `href` (string, optional): The URL to navigate to when the button is clicked. If provided, the button is rendered as a `Link` component from `next/link`.
+
+- `children` (ReactNode): The content of the button, typically text or an icon.
+
+- `styles` (string, optional): Additional CSS styles to apply to the button.
+
+- `size` (`"xs" | "sm" | "md" | "lg"`): The size of the button.
+
+- `callback` (() => void): The callback function to be invoked when the button is clicked.
+
+- `type` (`"button" | "submit" | "reset"`, optional): The type of the button. Defaults to `"button"`.
+
+### **Usage**
+
+Here are some examples of how the `ClassmateButton` component can be used:
+
+Example 1: Basic button with an icon:
+
+```
+import React from "react";
+import ClassmateButton from "../components/ClassmateButton";
+
+export default function ExampleComponent() {
+  return (
+    <ClassmateButton variant="outlined" size="lg" href="/path/to/page" fullWidth>
+      Go to Page
+    </ClassmateButton>
+  );
+}
 ```
 
-<br/>
+Example 2: Button with a link:
 
-## sizeStylesMap
+```javascript
+import React from "react";
+import ClassmateButton from "../components/ClassmateButton";
+import Image from "next/image";
 
-<br/>
-
-The `sizeStylesMap`<swm-token data-swm-token=":components/ClassmateButton.tsx:14:2:2:`const sizeStylesMap = {`"/> object is a mapping that associates different size options with corresponding CSS styles. It defines the styles to be applied to the `ClassmateButton`<swm-token data-swm-token=":components/ClassmateButton.tsx:27:2:2:`const ClassmateButton: FC&lt;ClassmateButtonProps&gt; = ({`"/>component based on its `size`<swm-token data-swm-token=":components/ClassmateButton.tsx:31:1:1:`  size,`"/> prop value.
-
-<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
-
-### 📄 components/ClassmateButton.tsx
-
-```tsx
-14     const sizeStylesMap = {
-15       small: 'w-28 h-9 text-sm',
-16       large: 'w-40 h-11 text-base',
-17       'small-full': 'w-full h-9 text-sm',
-18       'large-full': 'w-full h-11 text-base',
-19     };
+export default function ExampleComponent() {
+	return (
+		<ClassmateButton
+			variant="filled"
+			size="md"
+			callback={() => console.log("Button clicked")}>
+			<Image src="./icon.png" alt="Icon" width={24} height={24} />
+		</ClassmateButton>
+	);
+}
 ```
 
-<br/>
+Example 3: Button with custom styles:
 
-## variantStylesMap
+```javascript
+import React from "react";
+import ClassmateButton from "../components/ClassmateButton";
 
-<br/>
-
-The `variantStylesMap`<swm-token data-swm-token=":components/ClassmateButton.tsx:21:2:2:`const variantStylesMap = {`"/>object is another mapping that associates different variant options with corresponding CSS styles. It defines the styles to be applied to the `ClassmateButtonProps`<swm-token data-swm-token=":components/ClassmateButton.tsx:27:7:7:`const ClassmateButton: FC&lt;ClassmateButtonProps&gt; = ({`"/> component based on its `variant`<swm-token data-swm-token=":components/ClassmateButton.tsx:28:1:1:`  variant = &quot;text&quot;,`"/> prop value.
-
-<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
-
-### 📄 components/ClassmateButton.tsx
-
-```tsx
-21     const variantStylesMap = {
-22       contained: 'font-classmate-bold whitespace-nowrap rounded-md antialiased shadow-none',
-23       outlined: 'font-classmate-bold whitespace-nowrap rounded-md antialiased hover:bg-transparent',
-24       text: 'hover:bg-transparent p-0 min-w-fit',
-25     };
-```
-
-<br/>
-
-## sizeStyles
-
-<br/>
-
-The `sizeStylesMap`<swm-token data-swm-token=":components/ClassmateButton.tsx:14:2:2:`const sizeStylesMap = {`"/> variable retrieves the corresponding size styles from the `sizeStylesMap`<swm-token data-swm-token=":components/ClassmateButton.tsx:14:2:2:`const sizeStylesMap = {`"/> object based on the provided `size`<swm-token data-swm-token=":components/ClassmateButton.tsx:31:1:1:`  size,`"/> value, defaulting to an empty string if no match is found.
-
-<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
-
-### 📄 components/ClassmateButton.tsx
-
-```tsx
-35       const sizeStyles = sizeStylesMap[size] || '';
-```
-
-<br/>
-
-## variantStyles
-
-<br/>
-
-The `variantStyles`<swm-token data-swm-token=":components/ClassmateButton.tsx:36:3:3:`  const variantStyles = variantStylesMap[variant] || &#39;&#39;;`"/> variable retrieves the corresponding variant styles from the `variantStylesMap`<swm-token data-swm-token=":components/ClassmateButton.tsx:21:2:2:`const variantStylesMap = {`"/> object based on the provided `variant`<swm-token data-swm-token=":components/ClassmateButton.tsx:28:1:1:`  variant = &quot;text&quot;,`"/> value, defaulting to an empty string if no match is found.
-
-<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
-
-### 📄 components/ClassmateButton.tsx
-
-```tsx
-36       const variantStyles = variantStylesMap[variant] || '';
-```
-
-<br/>
-
-## Button
-
-<br/>
-
-This [Material-UI Button](https://mui.com/material-ui/react-button/) component renders a button element with the specified type, onClick callback, combined class names for variant, size, and custom styles, and displays the provided children as its content.
-
-<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
-
-### 📄 components/ClassmateButton.tsx
-
-```tsx
-39         <Button
-40           type={type}
-41           onClick={callback}
-42           className={`${variantStyles} ${sizeStyles} ${styles} capitalize`}
-43           variant={variant}
-44         >
-45           {children}
-46         </Button>
+export default function ExampleComponent() {
+	return (
+		<ClassmateButton
+			variant="text"
+			size="sm"
+			callback={() => console.log("Button clicked")}>
+			Click Me
+		</ClassmateButton>
+	);
+}
 ```
 
 <br/>

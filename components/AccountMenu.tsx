@@ -1,142 +1,97 @@
-import React, { useState, SyntheticEvent } from "react";
+import React, { useState } from "react";
+
+// Project components
+import ToolTip from "./ToolTip";
+import DropMenu, { MenuItem } from "./DropMenu";
 
 // Next.js components
-import Link from "next/link";
-import Image from "next/image";
+import { useRouter } from "next/router";
 
 // Redux components
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { signOut } from "../redux/auth/authActions";
 
-// @mui material components
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-
-// @mui styles overide
-import { boxStyles, menuStyles } from "../styles/accountMenuStyles";
-
-// Paths to SVG icons
-const icons = {
-	defaultUserImage: "./default-img.svg",
-	graduationCap: "./graduation-cap.svg",
-	user: "./user-solid.svg",
-	star: "./star-solid.svg",
-	logout: "./logout.svg",
-};
+const menuItems: MenuItem[] = [
+	{
+		icon: "./graduation-cap.svg",
+		label: "Profile",
+		id: "profile",
+		width: 20,
+		height: 20,
+		href: "/account",
+		alt: "Graduation cap icon linking to my profile",
+	},
+	{
+		icon: "./user-solid.svg",
+		label: "Account",
+		id: "account",
+		width: 17,
+		height: 17,
+		href: "/account",
+		alt: "User icon linking to my account",
+	},
+	{
+		icon: "./star-solid.svg",
+		label: "My Reviews",
+		id: "reviews",
+		width: 20,
+		height: 20,
+		href: "/account",
+		alt: "Star icon linking to my reviews",
+	},
+	{
+		icon: "./logout.svg",
+		label: "Sign Out",
+		id: "sign-out",
+		width: 20,
+		height: 20,
+		href: "/signin",
+		alt: "Sign out icon to sign out of your account",
+	},
+];
 
 const AccountMenu = () => {
-	// This code block defines and utilizes state variables and functions for handling
-	// a menu anchor element, dispatching actions, and managing the open state of the menu.
-	const [anchorEl, setAnchorEl] = useState(null);
 	const dispatch = useAppDispatch();
-	const open = Boolean(anchorEl);
+	const [menuOpen, toggleMenuOpen] = useState(false);
+	const router = useRouter();
 
-	// Set the menu anchor to the DOM element that was clicked
-	const handleClick = (e) => {
-		setAnchorEl(e.currentTarget);
+	const handleMenuClick = () => {
+		toggleMenuOpen((current) => !current); // Toggle the menu open state
 	};
 
-	// Set the menu anchor to null and perform the action
-	const handleClose = (e) => {
-		setAnchorEl(null);
-		console.log(e.target.id);
-		handleAction(e.target.id);
+	const handleMenuItemClick = (
+		e: React.MouseEvent<HTMLLIElement, globalThis.MouseEvent>,
+		href: string
+	) => {
+		const { id } = e.target as HTMLLIElement; // Destructure the id property from e.target
+		if (id === "sign-out") {
+			dispatch(signOut()); // Dispatch sign out action if the "Sign Out" item is clicked
+		}
+		router.push(href); // Navigate to the specified href
+		handleMenuClick(); // Close the menu
 	};
-
-	const handleAction = (id: string) => {
-		const actions = {
-			profile: () => console.log("profile"),
-			account: () => console.log("account"),
-			reviews: () => console.log("reviews"),
-			logout: () => dispatch(signOut()),
-		};
-
-		actions[id]();
-	};
-
-	const menuItems = [
-		{
-			icon: "graduationCap",
-			label: "Profile",
-			id: "profile",
-			width: 20,
-			height: 20,
-			href: "/account",
-			alt: "Graduation cap icon linking to my profile",
-		},
-		{
-			icon: "user",
-			label: "Account",
-			id: "account",
-			width: 17,
-			height: 17,
-			href: "/account",
-			alt: "User icon linking to my account",
-		},
-		{
-			icon: "star",
-			label: "My Reviews",
-			id: "reviews",
-			width: 20,
-			height: 20,
-			href: "/account",
-			alt: "Star icon linking to my reviews",
-		},
-	];
-
-	const getMenuItems = () =>
-		menuItems.map(({ icon, label, width, height, href, alt, id }) => (
-			<Link href={href} className="link" key={label}>
-				<MenuItem onClick={handleClose} divider={true} id={id}>
-					<ListItemIcon>
-						<Image src={icons[icon]} width={width} height={height} alt={alt} />
-					</ListItemIcon>
-					{label}
-				</MenuItem>
-			</Link>
-		));
 
 	return (
-		<>
-			<Box sx={boxStyles} className="!ml-auto">
-				<Tooltip title="Account settings">
-					<IconButton
-						onClick={handleClick}
-						size="small"
-						sx={{ ml: 2 }}
-						aria-controls={open ? "account-menu" : undefined}
-						aria-haspopup="true"
-						aria-expanded={open ? "true" : undefined}>
-						<Avatar alt="default account image" src={icons.defaultUserImage} />
-					</IconButton>
-				</Tooltip>
-			</Box>
-			<Menu
-				anchorEl={anchorEl}
-				id="account-menu"
-				open={open}
-				PaperProps={menuStyles}
-				transformOrigin={{ horizontal: "right", vertical: "top" }}
-				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
-				{getMenuItems()}
-				<MenuItem onClick={(e) => handleClose(e)} divider={true} id="logout">
-					<ListItemIcon>
-						<Image
-							src={icons.logout}
-							width={18}
-							height={18}
-							alt="Logout icon - click to log out of my account."
-						/>
-					</ListItemIcon>
-					Logout
-				</MenuItem>
-			</Menu>
-		</>
+		<div className="relative">
+			{/* ToolTip component */}
+			<ToolTip hideOn={menuOpen} spacing={10}>
+				<button
+					type="button"
+					onClick={handleMenuClick}
+					style={{ transition: "all 200ms", transitionDelay: "100ms" }}
+					className="flex cursor-pointer items-center justify-center rounded-full bg-transparent p-1 outline-none ring-classmate-gold-1 transition delay-100 duration-200 hover:bg-classmate-tan-1 focus:ring">
+					<div className="font-classmate-bold text-classmate-green-1r flex h-10 w-10 select-none items-center justify-center rounded-full bg-classmate-tan-1 text-lg">
+						A
+					</div>
+				</button>
+			</ToolTip>
+			{/* DropMenu component */}
+			<DropMenu
+				menuItems={menuItems}
+				callback={handleMenuItemClick}
+				menuOpen={menuOpen}
+			/>
+		</div>
 	);
 };
 

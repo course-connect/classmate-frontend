@@ -1,50 +1,67 @@
-import React, { FC } from "react";
-import Button from "@mui/material/Button";
-import { ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
+
+// Next.js components
+import Link from "next/link";
 
 type ClassmateButtonProps = {
-	variant?: "contained" | "outlined" | "text";
+	variant: "filled" | "outlined" | "text" | "link";
+	fullWidth?: boolean;
+	href?: string;
 	children: ReactNode;
 	styles?: string;
-	size: "small" | "large" | "small-full" | "large-full";
+	size: "xs" | "sm" | "md" | "lg";
 	callback: () => void;
-	type: "button" | "submit" | "reset";
-};
-
-const sizeStylesMap = {
-	small: "w-28 h-9 text-sm",
-	large: "w-40 h-11 text-base",
-	"small-full": "w-full h-9 text-sm",
-	"large-full": "w-full h-11 text-base",
+	type?: "button" | "submit" | "reset";
 };
 
 const variantStylesMap = {
-	contained:
-		"font-classmate-bold whitespace-nowrap rounded-md antialiased shadow-none",
-	outlined:
-		"font-classmate-bold whitespace-nowrap rounded-md antialiased hover:bg-transparent",
-	text: "hover:bg-transparent p-0 min-w-fit",
+	filled: "",
+	outlined: "border-[1px]",
+	text: "rounded-md",
 };
 
-const ClassmateButton: FC<ClassmateButtonProps> = ({
-	variant = "text",
-	children,
-	styles,
-	size,
-	callback,
-	type = "button",
-}) => {
-	const sizeStyles = sizeStylesMap[size] || "";
-	const variantStyles = variantStylesMap[variant] || "";
+const sizeStylesMap = {
+	xs: "text-xs px-2 py-1 rounded-md font-classmate ",
+	sm: "text-sm px-6 py-2 rounded-md font-classmate-bold",
+	md: "text-sm px-8 py-3 rounded-lg font-classmate-bold",
+	lg: "text-base px-10 py-3 rounded-lg font-classmate-bold",
+};
 
-	return (
-		<Button
+const baseStyles =
+	"whitespace-nowrap transition-colors ease-in-out duration-200 outline-none ring-classmate-gold-1 focus:ring w-fit";
+
+const ClassmateButton: FC<ClassmateButtonProps> = ({
+	type = "button",
+	fullWidth = false,
+	href,
+	variant,
+	size,
+	styles,
+	callback,
+	children,
+}) => {
+	const variantStyles = variantStylesMap[variant] || "";
+	const sizeStyles = sizeStylesMap[size] || "";
+
+	return href ? (
+		<Link
+			href={href}
 			type={type}
 			onClick={callback}
-			className={`${variantStyles} ${sizeStyles} ${styles} capitalize`}
-			variant={variant}>
+			className={`${baseStyles} ${variantStyles} ${sizeStyles} ${styles} ${
+				fullWidth ? "w-full" : ""
+			}`}>
 			{children}
-		</Button>
+		</Link>
+	) : (
+		<button
+			type={type}
+			onClick={callback}
+			className={`${baseStyles} ${variantStyles} ${sizeStyles} ${styles} ${
+				fullWidth ? "w-full" : ""
+			}`}>
+			{children}
+		</button>
 	);
 };
 
