@@ -23,12 +23,9 @@ const MainSearch = () => {
 	const { handleSubmit, watch, register, setValue } = useForm();
 
 	useEffect(() => {
-		const subscription = watch((value, { name }) => {
-			const hasSearchInput = value.userInput !== "";
-			if (name === "userInput" && hasSearchInput) {
+		const subscription = watch((_, { name }) => {
+			if (name === "userInput") {
 				handleSubmit(onSubmit)();
-			} else if (name === "userInput") {
-				dispatch(clearMainSearch());
 			}
 		});
 		return () => {
@@ -37,9 +34,23 @@ const MainSearch = () => {
 		};
 	}, [watch]);
 
-	const onSubmit = ({ userInput }) => {
-		dispatch(search(userInput));
+	const useDebounce = (fn, delay) => {
+		let timeoutId;
+		return (...args) => {
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(() => {
+				fn(...args);
+			}, delay);
+		};
 	};
+
+	const onSubmit = useDebounce(({ userInput }) => {
+		if (userInput) {
+			dispatch(search(userInput));
+		} else {
+			dispatch(clearMainSearch());
+		}
+	}, 300);
 
 	const handleSearchClick = () => {
 		alert("does nothing");
