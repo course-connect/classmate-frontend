@@ -3,27 +3,30 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { setSearchTwoFilter } from "../redux/hero-search-two/heroSearchTwoActions";
+import { setMultiMainSearchFilters } from "../redux/main-search/mainSearchActions";
 
-const HeroSchoolAndProfessorResults = ({
-	setValue,
-	setSchoolFilter,
-	setShowFirstSearch,
-}) => {
+const HeroSearchTwoResults = () => {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
+	const heroSearchOne = useSelector((state) => state.heroSearchOne);
 	const heroSearchTwo = useSelector((state) => state.heroSearchTwo);
 
 	const handleCourseClick = (course) => {
-		const searchFilter = {
-			course: course.course_id,
+		const filters = {
+			school: heroSearchOne.filters.school,
+			course: {
+				filter_value: course.firebaseID,
+				filter_text: course.data.course_name,
+			},
 		};
-		dispatch(setSearchTwoFilter(searchFilter));
+
+		console.log(filters);
+		dispatch(setMultiMainSearchFilters(filters));
 		router.push(`/search`);
 	};
 
 	const handleProfessorClick = (professor) => {
-		router.push(`/professor/${professor.user_id}`);
+		router.push(`/professor/${professor.data.user_id}`);
 	};
 
 	return (
@@ -52,13 +55,13 @@ const HeroSchoolAndProfessorResults = ({
 					<div className="flex flex-col justify-center gap-1">
 						<p className="font-classmate leading-none text-classmate-green-6">
 							{heroSearchTwo.type === "course"
-								? item.course_name
-								: `${item.first_name} ${item.last_name}`}
+								? item.data.course_name
+								: `${item.data.first_name} ${item.data.last_name}`}
 						</p>
 						<p className="font-classmate w-fit text-sm leading-none text-classmate-green-7">
 							{heroSearchTwo.type === "course"
-								? item.course_code
-								: item.school_names?.[0]}
+								? item.data.course_code
+								: item.data.school_names?.[0]}
 						</p>
 					</div>
 				</button>
@@ -67,4 +70,4 @@ const HeroSchoolAndProfessorResults = ({
 	);
 };
 
-export default HeroSchoolAndProfessorResults;
+export default HeroSearchTwoResults;

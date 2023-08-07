@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import useDebounce from "../hooks/useDebounce";
+
 // React Hook Form components
 import { useForm } from "react-hook-form";
 
@@ -37,9 +39,9 @@ const FilterSearch = ({ showSlideUp }) => {
 		setTimeout(() => setValue("userInput", ""), 100);
 	}, [showSlideUp]);
 
-	const onSubmit = ({ userInput }) => {
+	const onSubmit = useDebounce(({ userInput }) => {
 		dispatch(search(userInput));
-	};
+	}, 300);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>

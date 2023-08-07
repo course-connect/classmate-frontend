@@ -66,7 +66,7 @@ const ResultScore = ({ title, score }) => {
 		<div>
 			<p className="font-classmate-italic text-classmate-green-1 ">{title}</p>
 			<div
-				className={`font-classmate-bold-italic flex h-[60px] w-[80px] items-center justify-center rounded-lg text-2xl  text-classmate-tan-2  ${color}`}>
+				className={`font-classmate-bold-italic flex h-[50px] w-[70px] items-center justify-center rounded-lg text-xl  text-classmate-tan-2 xs:h-[60px] xs:w-[80px] xs:text-2xl  ${color}`}>
 				<p className="-translate-y-[2px] leading-5">
 					{title !== "Reviews" ? score.toFixed(1) : score}
 				</p>

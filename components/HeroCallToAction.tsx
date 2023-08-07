@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import HeroSearchOne from "./HeroSearchOne";
 import HeroSearchTwo from "./HeroSearchTwo";
+import { useSelector } from "react-redux";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import Filter from "./Filter";
 import Image from "next/image";
@@ -11,8 +12,10 @@ import {
 
 const HeroCallToAction = (): JSX.Element | null => {
 	const dispatch = useAppDispatch();
-	const [schoolFilter, setSchoolFilter] = useState("");
 	const [showFirstSearch, setShowFirstSearch] = useState(true);
+	const schoolFilter = useSelector(
+		(state) => state.heroSearchOne.filters.school
+	);
 
 	const handleRemoveFilter = () => {
 		setShowFirstSearch(true);
@@ -28,10 +31,7 @@ const HeroCallToAction = (): JSX.Element | null => {
 						? ""
 						: "pointer-events-none -translate-x-96 !opacity-0"
 				}`}>
-				<HeroSearchOne
-					setSchoolFilter={setSchoolFilter}
-					setShowFirstSearch={setShowFirstSearch}
-				/>
+				<HeroSearchOne setShowFirstSearch={setShowFirstSearch} />
 			</div>
 			<div
 				className={`pointer-events-none absolute flex w-full max-w-sm translate-x-96 justify-center opacity-0 transition-[transform,opacity] duration-500 ${
@@ -39,10 +39,7 @@ const HeroCallToAction = (): JSX.Element | null => {
 						? ""
 						: "!pointer-events-auto !translate-x-0 opacity-100"
 				}`}>
-				<HeroSearchTwo
-					setSchoolFilter={setSchoolFilter}
-					setShowFirstSearch={setShowFirstSearch}
-				/>
+				<HeroSearchTwo setShowFirstSearch={setShowFirstSearch} />
 			</div>
 
 			<Filter
@@ -51,7 +48,7 @@ const HeroCallToAction = (): JSX.Element | null => {
 						? ""
 						: "!pointer-events-auto !translate-x-0 opacity-100"
 				}`}>
-				{schoolFilter}
+				{schoolFilter.filter_text}
 				<button
 					onClick={handleRemoveFilter}
 					className="pointer flex h-4 w-4 items-center justify-center rounded-full bg-classmate-tan-2">

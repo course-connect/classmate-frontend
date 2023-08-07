@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 // Project components
 import ClassmateButton from "./ClassmateButton";
@@ -19,7 +19,10 @@ export default function Navbar() {
 	const [blockScroll, allowScroll] = useLockScroll();
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
 	const { width } = useWindowSize();
+	const OnMobileDevice = useRef(width < 768);
+	const [addMobileTransitions, setAddMobileTransitions] = useState(width < 768);
 
 	// Get url path
 	const router = useRouter();
@@ -34,6 +37,17 @@ export default function Navbar() {
 	useEffect(() => {
 		if (mobileMenuOpen && width >= 768) {
 			setMobileMenuOpen((current) => !current);
+		}
+
+		// Handle flash when shrinking screen
+		if (width <= 768 && !OnMobileDevice.current) {
+			OnMobileDevice.current = true;
+			setTimeout(() => {
+				setAddMobileTransitions(true);
+			}, 500);
+		} else if (width > 768 && OnMobileDevice.current) {
+			OnMobileDevice.current = false;
+			setAddMobileTransitions(false);
 		}
 	}, [width]);
 
@@ -71,11 +85,16 @@ export default function Navbar() {
 				)}
 			</ClassmateButton>
 
+			{/*   */}
 			<ul
-				className={`font-classmate absolute left-0 top-0 z-40 !m-0 flex h-full w-full grow list-none flex-col items-center justify-center gap-4 bg-classmate-tan-2 text-xl  text-classmate-green-6 transition-opacity duration-500 ease-in-out md:static  md:z-0 md:!ml-10 md:w-fit md:grow-0 md:flex-row md:gap-6  md:text-sm lg:!ml-12 lg:gap-8 ${
+				className={`font-classmate absolute left-0 top-0 z-40 !m-0 flex h-full w-full grow list-none flex-col items-center justify-center gap-4 bg-classmate-tan-2 text-xl  text-classmate-green-6 md:static  md:z-0 md:!ml-10 md:w-fit md:grow-0 md:flex-row md:gap-6  md:text-sm lg:!ml-12 lg:gap-8 ${
 					mobileMenuOpen || width >= 768
 						? "pointer-events-auto opacity-100"
 						: "pointer-events-none opacity-0"
+				} ${
+					addMobileTransitions
+						? "transition-opacity duration-500 ease-in-out"
+						: ""
 				}`}>
 				<ClassmateButton
 					styles="absolute right-7 top-5 md:hidden"
@@ -128,7 +147,11 @@ export default function Navbar() {
 				</li>
 			</ul>
 
-			<ClassmateButton styles="md:hidden" callback={toggleMobileMenu}>
+			<ClassmateButton
+				styles="md:hidden !p-2"
+				variant="text"
+				size="xs"
+				callback={toggleMobileMenu}>
 				<Image
 					src="./hamburger.svg"
 					width={25}

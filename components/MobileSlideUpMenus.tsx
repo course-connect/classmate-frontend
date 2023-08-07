@@ -46,11 +46,13 @@ const MobileSlideUpMenus = ({
 				)}
 			</div>
 
-			<MobileSlideUp
-				showSlideUp={showGraph}
-				toggleSlideUp={handleShowGraphClick}>
-				<RankGraph styles="w-full" />
-			</MobileSlideUp>
+			{mainSearch.type === "professor" && (
+				<MobileSlideUp
+					showSlideUp={showGraph}
+					toggleSlideUp={handleShowGraphClick}>
+					<RankGraph styles="w-full" />
+				</MobileSlideUp>
+			)}
 
 			<MobileSlideUp
 				showSlideUp={showFilters}

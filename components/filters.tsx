@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FilterButton from "./FilterButton";
-import MobileSlideUp from "../components/MobileSlideUp";
+import MobileSlideUp from "./MobileSlideUp";
 import ClassmateButton from "./ClassmateButton";
 
 import FilterSearch from "./FilterSearch";

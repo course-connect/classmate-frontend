@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainSearchCard from "../components/MainSearchCard";
 import MainSearchResults from "../components/MainSearchResults";
 import MobileSlideUpMenus from "../components/MobileSlideUpMenus";
@@ -18,6 +18,12 @@ export default function Search() {
 	const [showGraph, toggleGraph] = useState(false);
 	const [showFilters, toggleFilters] = useState(false);
 
+	useEffect(() => {
+		return () => {
+			// dispatch(resetMainSearch());
+		};
+	}, []);
+
 	const handleShowGraphClick = () => {
 		toggleGraph((current) => !current);
 	};
@@ -33,11 +39,11 @@ export default function Search() {
 	};
 
 	return (
-		<div className="section-padding bg-classmate-tan-1 py-10">
-			<div>
+		<div className="section-padding flex flex-col items-center bg-classmate-tan-1 py-10">
+			<div className="w-full max-w-3xl">
 				<MainSearchCard handleOpenFilterMenu={handleOpenFilterMenu} />
 			</div>
-			<div className="mt-10 min-h-[500px]">
+			<div className="mt-10 min-h-[500px] max-w-3xl">
 				<MainSearchResults />
 			</div>
 			<MobileSlideUpMenus

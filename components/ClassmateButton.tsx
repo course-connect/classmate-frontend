@@ -55,6 +55,7 @@ const ClassmateButton: FC<ClassmateButtonProps> = ({
 		</Link>
 	) : (
 		<button
+			id="classmate-button"
 			type={type}
 			onClick={callback}
 			className={`${baseStyles} ${variantStyles} ${sizeStyles} ${styles} ${

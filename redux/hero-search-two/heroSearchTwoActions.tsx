@@ -22,11 +22,14 @@ export const resetSearchTwo = (userInput) => async (dispatch, getState) => {
 export const searchTwo = (userInput) => async (dispatch, getState) => {
 	// Flag search as loading
 	dispatch(searchTwoLoading());
-	const { type: searchType } = getState().heroSearchTwo;
+	const { type: searchType, filters } = getState().heroSearchTwo;
+
+	// console.log(userInput, filters);
 
 	try {
 		// Attempt to search with credentials given
-		const res = await attemptSearchTwo(userInput, searchType);
+		const res = await attemptSearchTwo(userInput, searchType, filters);
+		console.log(res);
 		// Search attempt succeeded
 		dispatch(searchTwoSuccess(res.data));
 	} catch (err) {
@@ -65,17 +68,32 @@ export const setSearchTwoFilter = (searchFilter) => (dispatch) => {
 };
 
 // Attempt to search with credentials given
-const attemptSearchTwo = (userInput, searchType) => {
+const attemptSearchTwo = (userInput, searchType, filters) => {
+	const formattedFilters = Object.entries(filters).reduce(
+		(obj, [key, value]) => {
+			const valueIsNotNullAndIsNumber =
+				value.filter_value !== null && !isNaN(value.filter_value);
+
+			obj[key] = valueIsNotNullAndIsNumber
+				? Number(value.filter_value)
+				: value.filter_value;
+			return obj;
+		},
+		{}
+	);
+
+	const data = {
+		query: userInput,
+		filters: formattedFilters,
+	};
+
 	const config = {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		// params: {
-		// 	search,
-		// 	searchType,
-		// },
 	};
-	return axios.get(`${searchType}/search`, config);
+
+	return axios.post(`${searchType}/search`, data, config);
 };
 
 // Flag search as loading

@@ -23,7 +23,7 @@ const MatchText = ({ userInput, result, resultType }) => {
 		const stringEnd = matchedString.slice(matchEndIdx, matchedString.length);
 
 		return (
-			<p className="capitalize">
+			<p className="">
 				<span>{stringStart}</span>
 				<span className="text-classmate-gold-1">{stringMiddle}</span>
 				<span>{stringEnd}</span>

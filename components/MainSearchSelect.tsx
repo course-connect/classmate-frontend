@@ -60,8 +60,9 @@ const MainSearchSelect = ({ setValue }) => {
 	) => {
 		const { id } = e.target as HTMLLIElement; // Destructure the id property from e.target
 		if (id !== mainSearch.type) {
-			dispatch(setMainSearchType(id));
 			setValue("userInput", "");
+			dispatch(clearMainSearch());
+			dispatch(setMainSearchType(id));
 		}
 		handleMenuClick(); // Close the menu
 	};
@@ -114,6 +115,7 @@ const MainSearchSelect = ({ setValue }) => {
 				menuItems={menuItems}
 				callback={handleMenuItemClick}
 				menuOpen={menuOpen}
+				closeMenu={handleMenuClick}
 			/>
 		</div>
 	);

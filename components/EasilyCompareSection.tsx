@@ -4,6 +4,51 @@ import HomepageHeading from "./HomepageHeading";
 import ClassmateButton from "../components/ClassmateButton";
 import useWindowSize from "../hooks/useWindowSize";
 
+const dummyResults = [
+	{
+		data: {
+			first_name: "Benjamin",
+			last_name: " Mitchell",
+			score: "5",
+		},
+	},
+	{
+		data: {
+			first_name: "Olivia",
+			last_name: " Reynolds",
+			score: "4.2",
+		},
+	},
+	{
+		data: {
+			first_name: "Alexander",
+			last_name: "Ramirez",
+			score: "3.1",
+		},
+	},
+	{
+		data: {
+			first_name: "Sophia",
+			last_name: "Morgan",
+			score: "3.3",
+		},
+	},
+	{
+		data: {
+			first_name: "Christopher",
+			last_name: "Anderson",
+			score: "2.1",
+		},
+	},
+	{
+		data: {
+			first_name: "Emily",
+			last_name: "Thompson",
+			score: "1.5",
+		},
+	},
+];
+
 const EasilyCompareSection = () => {
 	const { width } = useWindowSize();
 
@@ -17,7 +62,7 @@ const EasilyCompareSection = () => {
 					</HomepageHeading>
 				)}
 				<div className="h-fit w-full max-w-[600px] lg:w-1/2 lg:max-w-[650px]">
-					<RankGraph styles="!p-4" />
+					<RankGraph styles="!p-4" dummyResults={dummyResults} />
 				</div>
 				<div className="flex w-full max-w-[600px] flex-col items-center justify-center gap-14 lg:max-w-[450px] lg:items-start">
 					{width > 1024 && (

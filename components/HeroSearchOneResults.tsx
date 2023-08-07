@@ -5,27 +5,25 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { setSearchOneFilter } from "../redux/hero-search-one/heroSearchOneActions";
 
-const HeroSchoolAndProfessorResults = ({
-	setValue,
-	setSchoolFilter,
-	setShowFirstSearch,
-}) => {
+const HeroSchoolAndProfessorResults = ({ setValue, setShowFirstSearch }) => {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
 	const heroSearchOne = useSelector((state) => state.heroSearchOne);
 
 	const handleSchoolClick = (school) => {
 		const searchFilter = {
-			school: school.school_id,
+			school: {
+				filter_value: school.firebaseID,
+				filter_text: school.data.school_name,
+			},
 		};
 		dispatch(setSearchOneFilter(searchFilter));
 		setShowFirstSearch(false);
-		setSchoolFilter(school.school_name);
-		setValue("userInput", "");
+		setTimeout(() => setValue("userInput", ""), 1000);
 	};
 
 	const handleProfessorClick = (professor) => {
-		router.push(`/professor/${professor.user_id}`);
+		router.push(`/professor/${professor.data.user_id}`);
 	};
 
 	return (
@@ -54,13 +52,13 @@ const HeroSchoolAndProfessorResults = ({
 					<div className="flex flex-col justify-center gap-1">
 						<p className="font-classmate leading-none text-classmate-green-6">
 							{heroSearchOne.type === "school"
-								? item.school_name
-								: `${item.first_name} ${item.last_name}`}
+								? item.data.school_name
+								: `${item.data.first_name} ${item.data.last_name}`}
 						</p>
 						<p className="font-classmate w-fit text-sm leading-none text-classmate-green-7">
 							{heroSearchOne.type === "school"
-								? item.school_zip
-								: item.school_names?.[0]}
+								? item.data.school_zip
+								: item.data.school_names?.[0]}
 						</p>
 					</div>
 				</button>

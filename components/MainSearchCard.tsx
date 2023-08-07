@@ -21,9 +21,7 @@ const MainSearchCard = ({ handleOpenFilterMenu }) => {
 
 	const handleRemoveClick = (e) => {
 		dispatch(removeMainSearchFilter(e.target.dataset.filtertype));
-		if (mainSearch.userInput) {
-			dispatch(search(mainSearch.userInput));
-		}
+		dispatch(search(mainSearch.userInput));
 	};
 
 	const formatText = (key, value) => {

@@ -13,7 +13,36 @@ const initialState = {
 	loading: false,
 	results: [],
 	type: "course",
-	filters: {},
+	filters: {
+		professor: {
+			filter_value: null,
+			filter_text: null,
+		},
+		department: {
+			filter_value: null,
+			filter_text: null,
+		},
+		school: {
+			filter_value: null,
+			filter_text: null,
+		},
+		score: {
+			filter_value: null,
+			filter_text: null,
+		},
+		difficulty: {
+			filter_value: null,
+			filter_text: null,
+		},
+		reviews: {
+			filter_value: null,
+			filter_text: null,
+		},
+		course: {
+			filter_value: null,
+			filter_text: null,
+		},
+	},
 };
 
 export default (state = initialState, action) => {
@@ -43,7 +72,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				type: payload,
-				filters: {},
+				filters: initialState.filters,
 			};
 		case CLEAR_HERO_SEARCH_TWO:
 			return {
@@ -54,13 +83,14 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				filters: {
+					...state.filters,
 					...payload,
 				},
 			};
 		case CLEAR_HERO_SEARCH_TWO_FILTERS:
 			return {
 				...state,
-				filters: {},
+				filters: initialState.filters,
 			};
 		default:
 			return state;

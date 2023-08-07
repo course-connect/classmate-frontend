@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import useDebounce from "../hooks/useDebounce";
+
 // Project components
 import HeroSearchTwoSelect from "./HeroSearchTwoSelect";
 import HeroSearchTwoResults from "./HeroSearchTwoResults";
@@ -20,19 +22,16 @@ import {
 	setSearchTwoType,
 } from "../redux/hero-search-two/heroSearchTwoActions";
 
-const HeroSearchTwo = ({ setSchoolFilter, setShowFirstSearch }) => {
+const HeroSearchTwo = ({ setShowFirstSearch }) => {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
 	const heroSearchTwo = useSelector((state) => state.heroSearchTwo);
 	const { handleSubmit, watch, register, setValue, getValues } = useForm();
 
 	useEffect(() => {
-		const subscription = watch((value, { name }) => {
-			const hasSearchInput = value.userInput !== "";
-			if (name === "userInput" && hasSearchInput) {
+		const subscription = watch((_, { name }) => {
+			if (name === "userInput") {
 				handleSubmit(onSubmit)();
-			} else if (name === "userInput") {
-				dispatch(clearSearchTwo());
 			}
 		});
 		return () => {
@@ -45,9 +44,13 @@ const HeroSearchTwo = ({ setSchoolFilter, setShowFirstSearch }) => {
 		dispatch(setSearchTwoType("course"));
 	}, []);
 
-	const onSubmit = ({ userInput }) => {
-		dispatch(searchTwo(userInput));
-	};
+	const onSubmit = useDebounce(({ userInput }) => {
+		if (userInput) {
+			dispatch(searchTwo(userInput));
+		} else {
+			dispatch(clearSearchTwo());
+		}
+	}, 300);
 
 	const handleSearchClick = () => {
 		router.push("/search");
@@ -71,11 +74,7 @@ const HeroSearchTwo = ({ setSchoolFilter, setShowFirstSearch }) => {
 				className="absolute right-[4px] z-20 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-classmate-tan-2 outline-none ring-classmate-gold-1 transition-colors hover:bg-classmate-gray-5 focus:ring">
 				<Image src="./search.svg" width={22} height={22} alt="" />
 			</button>
-			<HeroSearchTwoResults
-				setValue={setValue}
-				setSchoolFilter={setSchoolFilter}
-				setShowFirstSearch={setShowFirstSearch}
-			/>
+			<HeroSearchTwoResults />
 		</form>
 	);
 };

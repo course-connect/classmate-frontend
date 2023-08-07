@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import useDebounce from "../hooks/useDebounce";
+
 // Project components
 import MainSearchSelect from "./MainSearchSelect";
 
@@ -13,9 +15,12 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import {
+	resetMainSearch,
 	search,
 	clearMainSearch,
 } from "../redux/main-search/mainSearchActions";
+
+import { resetFilterSearch } from "../redux/filter-search/filterSearchActions";
 
 const MainSearch = () => {
 	const dispatch = useAppDispatch();
@@ -34,22 +39,8 @@ const MainSearch = () => {
 		};
 	}, [watch]);
 
-	const useDebounce = (fn, delay) => {
-		let timeoutId;
-		return (...args) => {
-			clearTimeout(timeoutId);
-			timeoutId = setTimeout(() => {
-				fn(...args);
-			}, delay);
-		};
-	};
-
 	const onSubmit = useDebounce(({ userInput }) => {
-		if (userInput) {
-			dispatch(search(userInput));
-		} else {
-			dispatch(clearMainSearch());
-		}
+		dispatch(search(userInput));
 	}, 300);
 
 	const handleSearchClick = () => {
@@ -58,6 +49,7 @@ const MainSearch = () => {
 
 	return (
 		<>
+			{/* <button onClick={() => dispatch(resetMainSearch())}>reset</button> */}
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className="relative flex w-full items-center rounded-lg border-[1px] border-classmate-gray-3 bg-classmate-tan-2">

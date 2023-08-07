@@ -22,11 +22,11 @@ export const resetSearchOne = (userInput) => async (dispatch, getState) => {
 export const searchOne = (userInput) => async (dispatch, getState) => {
 	// Flag search as loading
 	dispatch(searchOneLoading());
-	const { type: searchType } = getState().heroSearchOne;
+	const { type: searchType, filters } = getState().heroSearchOne;
 
 	try {
 		// Attempt to search with credentials given
-		const res = await attemptSearchOne(userInput, searchType);
+		const res = await attemptSearchOne(userInput, searchType, filters);
 		// Search attempt succeeded
 		dispatch(searchOneSuccess(res.data));
 	} catch (err) {
@@ -65,17 +65,32 @@ export const setSearchOneFilter = (searchFilter) => (dispatch) => {
 };
 
 // Attempt to search with credentials given
-const attemptSearchOne = (userInput, searchType) => {
+const attemptSearchOne = (userInput, searchType, filters) => {
+	const formattedFilters = Object.entries(filters).reduce(
+		(obj, [key, value]) => {
+			const valueIsNotNullAndIsNumber =
+				value.filter_value !== null && !isNaN(value.filter_value);
+
+			obj[key] = valueIsNotNullAndIsNumber
+				? Number(value.filter_value)
+				: value.filter_value;
+			return obj;
+		},
+		{}
+	);
+
+	const data = {
+		query: userInput,
+		filters: formattedFilters,
+	};
+
 	const config = {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		// params: {
-		// 	search,
-		// 	searchType,
-		// },
 	};
-	return axios.get(`${searchType}/search`, config);
+
+	return axios.post(`${searchType}/search`, data, config);
 };
 
 // Flag search as loading

@@ -96,6 +96,7 @@ const HeroSearchTwoSelect = ({ setValue }) => {
 				menuItems={menuItems}
 				callback={handleMenuItemClick}
 				menuOpen={menuOpen}
+				closeMenu={handleMenuClick}
 			/>
 		</div>
 	);

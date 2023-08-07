@@ -81,6 +81,12 @@ export const setMainSearchFilter = (searchFilter) => (dispatch) => {
 	});
 };
 
+export const setMultiMainSearchFilters =
+	(searchFilters) => (dispatch, getState) => {
+		const currentFilters = getState().mainSearch.filters;
+		dispatch(setMainSearchFilter({ ...currentFilters, ...searchFilters }));
+	};
+
 export const removeMainSearchFilter = (searchFilter) => (dispatch) => {
 	console.log(searchFilter);
 	dispatch({
