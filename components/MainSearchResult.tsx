@@ -5,13 +5,85 @@ import Image from "next/image";
 import Tag from "./Tag";
 import MatchText from "./MatchText";
 import ClassmateButton from "./ClassmateButton";
+import SchoolScoreDisplay from "./SchoolScoreDisplay";
 
 const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 	let searchResult;
-
 	switch (resultType) {
 		case "school":
-			searchResult = <p>school</p>;
+			const scores = Object.entries(result.data.score).filter(
+				([key, value]) => key != "overall"
+			);
+
+			const leftScores = scores.slice(0, 5);
+			const rightScores = scores.slice(5, 10);
+			searchResult = (
+				<div
+					tabIndex={0}
+					role="button"
+					id="result"
+					data-resulttype={resultType}
+					data-resultid={result.firebaseID}
+					className="font-classmate flex cursor-pointer flex-col gap-6 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl ring-classmate-gold-1 focus:ring">
+					<div className="flex justify-between gap-4">
+						<div className="flex w-full flex-col gap-4">
+							<div className="flex gap-6">
+								<div>
+									<p className="font-classmate-bold text-2xl capitalize text-classmate-green-1">
+										{result.data.school_name}
+									</p>
+
+									<p className="flex flex-col text-sm">{result.data.zipcode}</p>
+								</div>
+								<ResultQualityTag score={result.data.score.overall} />
+							</div>
+							<div className="flex w-full flex-col gap-2 sm:flex-row">
+								<div className="flex w-full flex-col gap-2">
+									{leftScores.map(([key, value], index) => {
+										return (
+											key !== "overall" && (
+												<SchoolScoreDisplay
+													key={index}
+													textWidth={"xs:min-w-[98px] sm:min-w-[76px]"}
+													text={key}
+													value={value}
+												/>
+											)
+										);
+									})}
+								</div>
+								<div className="flex w-full flex-col gap-2">
+									{rightScores.map(([key, value], index) => {
+										return (
+											key !== "overall" && (
+												<SchoolScoreDisplay
+													key={index}
+													textWidth={"xs:min-w-[98px]"}
+													text={key}
+													value={value}
+												/>
+											)
+										);
+									})}
+								</div>
+							</div>
+						</div>
+						<ClassmateButton
+							callback={() => console.log("save")}
+							variant="text"
+							size="xs"
+							styles="!p-1 h-fit min-w-[30px]">
+							<Image
+								src="./bookmark.svg"
+								height={0}
+								width={22}
+								alt="bookmark"
+								className="pointer-events-none h-fit"
+							/>
+						</ClassmateButton>
+					</div>
+				</div>
+			);
 			break;
 		case "professor":
 			searchResult = (
@@ -43,7 +115,7 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 							callback={() => console.log("save")}
 							variant="text"
 							size="xs"
-							styles="bg-red-500 !p-1 h-fit">
+							styles="!p-1 h-fit">
 							<Image
 								src="./bookmark.svg"
 								height={0}
@@ -88,8 +160,40 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 				</div>
 			);
 			break;
-		default:
-			searchResult = <p>course</p>;
+		case "course":
+			searchResult = (
+				<div
+					tabIndex={0}
+					role="button"
+					id="result"
+					data-resulttype={resultType}
+					data-resultid={result.firebaseID}
+					className="font-classmate flex cursor-pointer flex-col gap-6 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl ring-classmate-gold-1 focus:ring">
+					<div className="flex justify-between gap-12">
+						<div className="flex flex-col gap-1">
+							<div className="font-classmate-bold  h-fit w-fit whitespace-nowrap rounded-md bg-classmate-gold-1 px-4 py-[6px] text-xs text-classmate-tan-2">
+								{result.data.course_code}
+							</div>
+							<p className="font-classmate-bold mt-1 break-all text-2xl capitalize text-classmate-green-1 xs:break-normal">{`${result.data.course_name}`}</p>
+							<p className="text-sm">{result.data.school_name}</p>
+						</div>
+						<ClassmateButton
+							callback={() => console.log("save")}
+							variant="text"
+							size="xs"
+							styles="!p-1 h-fit min-w-[30px]">
+							<Image
+								src="./bookmark.svg"
+								height={0}
+								width={22}
+								alt="bookmark"
+								className="pointer-events-none h-fit"
+							/>
+						</ClassmateButton>
+					</div>
+				</div>
+			);
+			break;
 	}
 
 	return searchResult;

@@ -43,7 +43,7 @@ export default function Search() {
 			<div className="w-full max-w-3xl">
 				<MainSearchCard handleOpenFilterMenu={handleOpenFilterMenu} />
 			</div>
-			<div className="mt-10 min-h-[500px] max-w-3xl">
+			<div className="mt-10 min-h-[500px] w-full max-w-3xl">
 				<MainSearchResults />
 			</div>
 			<MobileSlideUpMenus
