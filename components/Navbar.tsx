@@ -52,10 +52,12 @@ export default function Navbar() {
 	}, [width]);
 
 	const toggleMobileMenu = () => {
-		if (!mobileMenuOpen) {
-			blockScroll();
-		} else {
-			allowScroll();
+		if (OnMobileDevice.current) {
+			if (!mobileMenuOpen) {
+				blockScroll();
+			} else {
+				allowScroll();
+			}
 		}
 		setMobileMenuOpen((currentState) => !currentState);
 	};

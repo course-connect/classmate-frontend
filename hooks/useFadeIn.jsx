@@ -6,7 +6,7 @@ function useFadeIn(ref) {
 	useEffect(() => {
 		const fadeInOptions = {
 			root: null,
-			threshold: 0.1,
+			threshold: 0.5,
 			rootMargin: "0px",
 		};
 		const fadeInObserver = new IntersectionObserver((current) => {

@@ -16,7 +16,7 @@ const MobileSlideUpMenus = ({
 	const mainSearch = useSelector((state) => state.mainSearch);
 	return (
 		<>
-			<div className="flex justify-center">
+			<div className="flex justify-center ">
 				{mainSearch.results.length !== 0 && mainSearch.type === "professor" && (
 					<ClassmateButton
 						callback={handleShowGraphClick}
@@ -50,7 +50,7 @@ const MobileSlideUpMenus = ({
 				<MobileSlideUp
 					showSlideUp={showGraph}
 					toggleSlideUp={handleShowGraphClick}>
-					<RankGraph styles="w-full" />
+					<RankGraph />
 				</MobileSlideUp>
 			)}
 

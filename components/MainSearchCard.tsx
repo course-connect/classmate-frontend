@@ -1,6 +1,7 @@
 import React from "react";
 import MainSearch from "./MainSearch";
 import ClassmateButton from "./ClassmateButton";
+import MainSearchCardFilters from "./MainSearchCardFilters";
 
 import Image from "next/image";
 
@@ -11,7 +12,11 @@ import {
 } from "../redux/main-search/mainSearchActions";
 import { useSelector } from "react-redux";
 
-const MainSearchCard = ({ handleOpenFilterMenu }) => {
+const MainSearchCard = ({
+	handleOpenFilterMenu,
+	handleCloseFilterMenu,
+	showFilters,
+}) => {
 	const dispatch = useAppDispatch();
 	const mainSearch = useSelector((state) => state.mainSearch);
 
@@ -30,9 +35,28 @@ const MainSearchCard = ({ handleOpenFilterMenu }) => {
 		}`;
 	};
 
+	const handleAddFilterClick = () => {
+		if (showFilters) {
+			handleOpenFilterMenu();
+		} else {
+			handleCloseFilterMenu();
+		}
+	};
+
 	return (
 		<div className="rounded-xl bg-classmate-tan-2 p-4 shadow-xl">
-			<MainSearch />
+			<div className="flex flex-col gap-5">
+				<MainSearch />
+				{/* style={{
+						height: "fit-content",
+						maxHeight: showFilters ? "40px" : "0px",
+						transition: "all 0.4s ease",
+					}}
+					className={`relative flex !h-full w-full items-center overflow-hidden bg-red-500 px-1 transition ${
+						showFilters ? "py-1" : ""
+					}`} */}
+				{showFilters && <MainSearchCardFilters />}
+			</div>
 			{mainSearch.type !== "school" && (
 				<div className="mt-4 flex flex-wrap items-center gap-1">
 					<p className="font-classmate mr-1 text-classmate-green-7">Filters:</p>
@@ -63,7 +87,7 @@ const MainSearchCard = ({ handleOpenFilterMenu }) => {
 							variant="filled"
 							size="xs"
 							styles="bg-classmate-green-4 min-w-[20px] min-h-[20px] h-[20px] !p-1 flex justify-center items-center !rounded-full"
-							callback={handleOpenFilterMenu}>
+							callback={handleAddFilterClick}>
 							<Image
 								className="pointer-events-none"
 								src="./plus-light.svg"

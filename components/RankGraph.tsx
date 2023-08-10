@@ -19,7 +19,7 @@ const getColor = (score) => {
 	}
 };
 
-export default function RankGraph({ styles, dummyResults }) {
+export default function RankGraph({ styles, titleStyles, dummyResults }) {
 	const { width } = useWindowSize();
 	const [graphWidth, setGraphWidth] = useState(0);
 	const [transitionEffect, setTransitionEffect] = useState("width 1s ease");
@@ -37,16 +37,30 @@ export default function RankGraph({ styles, dummyResults }) {
 		setTimeout(() => setTransitionEffect(""), 1000);
 	}, []);
 
+	const handleGraphItemClick = (e) => {
+		const itemId = e.target.id;
+		if (itemId) {
+			const targetElement = document.querySelector(
+				`[data-resultid='${itemId}']`
+			);
+			window.scrollTo({
+				top: targetElement.offsetTop - 40,
+				behavior: "smooth",
+			});
+		}
+	};
+
 	return (
 		<div className={`p-8 ${styles}`}>
 			<div className="mb-14">
-				<p className="font-classmate-bold-italic text-2xl sm:text-3xl lg:text-4xl">
+				<p
+					className={`font-classmate-bold-italic text-2xl sm:text-3xl lg:text-4xl ${titleStyles}`}>
 					Professor rank
 				</p>
 			</div>
 			<div className="flex">
 				{width > 550 && (
-					<div className="mr-2 flex w-[75px] -translate-y-[26px] flex-col gap-3">
+					<div className="mr-2 flex max-w-[75px] -translate-y-[26px] flex-col gap-3">
 						{results.map((professor, index) => {
 							return (
 								<div
@@ -74,6 +88,7 @@ export default function RankGraph({ styles, dummyResults }) {
 						}`}>
 						{resultsToDisplay.map((professor, index) => (
 							<div
+								onClick={handleGraphItemClick}
 								key={index}
 								className={`relative h-16 transition-transform duration-1000 ${
 									width > 550 ? "!h-10" : ""
@@ -89,14 +104,15 @@ export default function RankGraph({ styles, dummyResults }) {
 										{`${professor.data.first_name} ${professor.data.last_name}`}
 									</p>
 								)}
-								<div
-									className={`absolute bottom-0 flex h-3/5 w-full items-center rounded-md ${getColor(
+								<button
+									id={professor.firebaseID}
+									className={`absolute bottom-0 flex h-3/5 w-full items-center rounded-md border-none ring-classmate-gold-1 focus:ring ${getColor(
 										professor.data.score
 									)} ${width > 550 ? "h-full" : ""}`}>
 									<span className="font-classmate absolute -right-2 w-0 text-classmate-green-6">
 										{professor.data.score}
 									</span>
-								</div>
+								</button>
 							</div>
 						))}
 					</div>

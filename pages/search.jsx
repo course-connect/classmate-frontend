@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import MainSearchCard from "../components/MainSearchCard";
 import MainSearchResults from "../components/MainSearchResults";
 import MobileSlideUpMenus from "../components/MobileSlideUpMenus";
+import useWindowSize from "../hooks/useWindowSize";
+import RankGraph from "../components/RankGraph";
 
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { useSelector } from "react-redux";
@@ -9,9 +11,10 @@ import {
 	resetFilterSearch,
 	setMultiFilterSearchFilters,
 } from "../redux/filter-search/filterSearchActions";
-import { resetMainSearch } from "../redux/main-search/mainSearchActions";
 
 export default function Search() {
+	const { width } = useWindowSize();
+
 	const dispatch = useAppDispatch();
 	const mainSearchFilters = useSelector((state) => state.mainSearch.filters);
 
@@ -22,7 +25,7 @@ export default function Search() {
 		return () => {
 			// dispatch(resetMainSearch());
 		};
-	}, []);
+	}, [width]);
 
 	const handleShowGraphClick = () => {
 		toggleGraph((current) => !current);
@@ -39,20 +42,36 @@ export default function Search() {
 	};
 
 	return (
-		<div className="section-padding flex flex-col items-center bg-classmate-tan-1 py-10">
+		<div
+			className={`section-padding flex w-full justify-center gap-10 bg-classmate-tan-1 py-10 ${
+				width > 768 ? "" : "flex-col items-center"
+			}`}>
 			<div className="w-full max-w-3xl">
-				<MainSearchCard handleOpenFilterMenu={handleOpenFilterMenu} />
+				<div className="w-full">
+					<MainSearchCard
+						handleOpenFilterMenu={handleOpenFilterMenu}
+						handleCloseFilterMenu={handleCloseFilterMenu}
+						showFilters={showFilters}
+					/>
+				</div>
+				<div className="mt-10 min-h-[500px] w-full">
+					<MainSearchResults />
+				</div>
 			</div>
-			<div className="mt-10 min-h-[500px] w-full max-w-3xl">
-				<MainSearchResults />
-			</div>
-			<MobileSlideUpMenus
-				showGraph={showGraph}
-				showFilters={showFilters}
-				handleShowGraphClick={handleShowGraphClick}
-				handleOpenFilterMenu={handleOpenFilterMenu}
-				handleCloseFilterMenu={handleCloseFilterMenu}
-			/>
+
+			{width < 768 ? (
+				<MobileSlideUpMenus
+					showGraph={showGraph}
+					showFilters={showFilters}
+					handleShowGraphClick={handleShowGraphClick}
+					handleOpenFilterMenu={handleOpenFilterMenu}
+					handleCloseFilterMenu={handleCloseFilterMenu}
+				/>
+			) : (
+				<div className="sticky top-10 h-full w-full max-w-sm rounded-xl bg-classmate-tan-2 shadow-xl">
+					<RankGraph titleStyles={"!text-2xl"} />
+				</div>
+			)}
 		</div>
 	);
 }
