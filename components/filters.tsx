@@ -3,10 +3,13 @@ import FilterButton from "./FilterButton";
 import MobileSlideUp from "./MobileSlideUp";
 import ClassmateButton from "./ClassmateButton";
 
+import MainSearchCardFilter from "./MainSearchCardFilter";
 import FilterSearch from "./FilterSearch";
 import FilterOptions from "./FilterOptions";
 import FilterSearchResults from "./FilterSearchResults";
 import FilterActions from "./FilterActions";
+
+import useWindowSize from "../hooks/useWindowSize";
 
 // Redux components
 import { useSelector } from "react-redux";
@@ -20,6 +23,7 @@ const Filters = () => {
 	const dispatch = useAppDispatch();
 	const filterSearch = useSelector((state) => state.filterSearch);
 	const mainSearchType = useSelector((state) => state.mainSearch.type);
+	const { width: windowWidth } = useWindowSize();
 
 	// Show slide up menu state
 	const [showSchoolFilterSearch, toggleSchoolFilterSearch] = useState(false);
@@ -237,72 +241,83 @@ const Filters = () => {
 		},
 	];
 
-	return (
-		<>
-			<div className="flex w-full flex-col gap-2 p-6">
-				<div className="font-classmate mb-2 flex items-center justify-between text-lg text-classmate-green-6">
-					<p className="font-classmate-bold  w-full text-lg text-classmate-green-6">
-						Filters
-					</p>
-				</div>
-
-				{filterButtons
-					.filter(({ allowedFor }) => allowedFor.includes(mainSearchType))
-					.map((button, index) => (
-						<FilterButton
-							key={index}
-							filter={button.filter}
-							filterType={button.filterType}
-							icon={button.icon}
-							iconAlt={button.iconAlt}
-							callback={button.callback}>
-							<p className="text-classmate-green-6">{button.text}</p>
-						</FilterButton>
-					))}
-				<FilterActions />
-			</div>
-			{searchableFilters.map((category, index) => (
-				<MobileSlideUp
-					key={index}
-					showSlideUp={category.showSlideUp}
-					toggleSlideUp={category.toggleSlideUp}>
-					<div className="flex h-[484px] w-full flex-col gap-3 p-6">
-						<div className="font-classmate flex items-center justify-between text-lg text-classmate-green-6">
-							<p className="font-classmate-bold w-full text-lg text-classmate-green-6">
-								{category.name}
-							</p>
-							<ClassmateButton
-								callback={category.handleCancel}
-								variant="text"
-								size="xs"
-								styles="!px-2 !py-0 !text-base">
-								back
-							</ClassmateButton>
-						</div>
-						<FilterSearch showSlideUp={category.showSlideUp} />
-						<div
-							onClick={handleAddFilterClick}
-							className="flex w-full flex-col gap-3">
-							<FilterSearchResults />
-						</div>
+	return windowWidth >= 768 ? (
+		<div className="flex flex-wrap gap-2">
+			{filterButtons
+				.filter(({ allowedFor }) => allowedFor.includes(mainSearchType))
+				.map((data, index) => (
+					<MainSearchCardFilter key={index} data={data} />
+				))}
+		</div>
+	) : (
+		// "windowWidth < 768" removes a very quick flashing of the mobile filter menu when on desktop
+		windowWidth < 768 && (
+			<>
+				<div className="flex w-full flex-col gap-2 p-6">
+					<div className="font-classmate mb-2 flex items-center justify-between text-lg text-classmate-green-6">
+						<p className="font-classmate-bold  w-full text-lg text-classmate-green-6">
+							Filters
+						</p>
 					</div>
-				</MobileSlideUp>
-			))}
-			{selectableFilters.map((filterData, index) => (
-				<MobileSlideUp
-					key={index}
-					showSlideUp={filterData.showSlideUp}
-					toggleSlideUp={filterData.toggleSlideUp}>
-					<FilterOptions
-						filterOptions={filterData.filterOptions}
-						toggleSlideUp={filterData.toggleSlideUp}
-						callback={handleAddFilterClick}
-						title={filterData.title}
-						filterType={filterData.filterType}
-					/>
-				</MobileSlideUp>
-			))}
-		</>
+
+					{filterButtons
+						.filter(({ allowedFor }) => allowedFor.includes(mainSearchType))
+						.map((button, index) => (
+							<FilterButton
+								key={index}
+								filter={button.filter}
+								filterType={button.filterType}
+								icon={button.icon}
+								iconAlt={button.iconAlt}
+								callback={button.callback}>
+								<p className="text-classmate-green-6">{button.text}</p>
+							</FilterButton>
+						))}
+					<FilterActions />
+				</div>
+				{searchableFilters.map((category, index) => (
+					<MobileSlideUp
+						key={index}
+						showSlideUp={category.showSlideUp}
+						toggleSlideUp={category.toggleSlideUp}>
+						<div className="flex h-[484px] w-full flex-col gap-3 p-6">
+							<div className="font-classmate flex items-center justify-between text-lg text-classmate-green-6">
+								<p className="font-classmate-bold w-full text-lg text-classmate-green-6">
+									{category.name}
+								</p>
+								<ClassmateButton
+									callback={category.handleCancel}
+									variant="text"
+									size="xs"
+									styles="!px-2 !py-0 !text-base">
+									back
+								</ClassmateButton>
+							</div>
+							<FilterSearch showSlideUp={category.showSlideUp} />
+							<div
+								onClick={handleAddFilterClick}
+								className="flex w-full flex-col gap-3">
+								<FilterSearchResults />
+							</div>
+						</div>
+					</MobileSlideUp>
+				))}
+				{selectableFilters.map((filterData, index) => (
+					<MobileSlideUp
+						key={index}
+						showSlideUp={filterData.showSlideUp}
+						toggleSlideUp={filterData.toggleSlideUp}>
+						<FilterOptions
+							filterOptions={filterData.filterOptions}
+							toggleSlideUp={filterData.toggleSlideUp}
+							callback={handleAddFilterClick}
+							title={filterData.title}
+							filterType={filterData.filterType}
+						/>
+					</MobileSlideUp>
+				))}
+			</>
+		)
 	);
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import MainSearch from "./MainSearch";
 import ClassmateButton from "./ClassmateButton";
-import MainSearchCardFilters from "./MainSearchCardFilters";
+import Filters from "./Filters";
 
 import useWindowSize from "../hooks/useWindowSize";
 
@@ -49,16 +49,32 @@ const MainSearchCard = ({
 	return (
 		<div className="rounded-xl bg-classmate-tan-2 p-4 shadow-xl">
 			<div className="flex flex-col gap-5">
-				<MainSearch />
-				{/* style={{
-						height: "fit-content",
-						maxHeight: showFilters ? "40px" : "0px",
-						transition: "all 0.4s ease",
-					}}
-					className={`relative flex !h-full w-full items-center overflow-hidden bg-red-500 px-1 transition ${
-						showFilters ? "py-1" : ""
-					}`} */}
-				{showFilters && windowWidth >= 768 && <MainSearchCardFilters />}
+				<div className="flex gap-2">
+					<MainSearch />
+					{((windowWidth >= 450 && windowWidth < 768) ||
+						windowWidth >= 1024) && (
+						<button
+							onClick={handleAddFilterClick}
+							className="flex w-fit items-center gap-3 rounded-lg border-[1px] border-classmate-gray-3 bg-classmate-tan-2 px-4 outline-none ring-classmate-gold-1 focus:ring">
+							<span className="font-classmate whitespace-nowrap text-classmate-green-7">
+								{showFilters ? "Hide Filters" : "Add Filter"}
+							</span>
+							<div
+								className={`flex h-3 w-3 items-center transition ${
+									showFilters ? "rotate-180" : ""
+								}`}>
+								<Image
+									className="pointer-events-none "
+									src="./caret-down.svg"
+									width={12}
+									height={12}
+									alt=""
+								/>
+							</div>
+						</button>
+					)}
+				</div>
+				{showFilters && windowWidth >= 768 && <Filters />}
 			</div>
 			{mainSearch.type !== "school" && (
 				<div className="mt-4 flex flex-wrap items-center gap-1">
@@ -91,23 +107,13 @@ const MainSearchCard = ({
 							size="xs"
 							styles="bg-classmate-green-4 min-w-[20px] min-h-[20px] h-[20px] !p-1 flex justify-center items-center !rounded-full"
 							callback={handleAddFilterClick}>
-							{windowWidth >= 768 && showFilters ? (
-								<Image
-									className="pointer-events-none"
-									src="./xmark-solid-light.svg"
-									width={8}
-									height={8}
-									alt=""
-								/>
-							) : (
-								<Image
-									className="pointer-events-none"
-									src="./plus-light.svg"
-									width={10}
-									height={10}
-									alt=""
-								/>
-							)}
+							<Image
+								className="pointer-events-none"
+								src="./plus-light.svg"
+								width={10}
+								height={10}
+								alt=""
+							/>
 						</ClassmateButton>
 					)}
 				</div>
