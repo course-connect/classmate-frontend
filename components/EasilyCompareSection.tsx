@@ -12,7 +12,6 @@ const EasilyCompareSection = () => {
 
 	return (
 		<section className="section-padding flex flex-col items-center justify-center  bg-classmate-tan-2 py-20 sm:pt-10  xl:py-44 xl:pt-24">
-			{/* sm:max-w-xl lg:max-w-none */}
 			<div
 				ref={elementRef}
 				className="flex w-full flex-col items-center justify-between gap-14 opacity-0 md:gap-16 lg:flex-row lg:justify-center xl:gap-20 3xl:gap-32">
@@ -22,7 +21,7 @@ const EasilyCompareSection = () => {
 					</HomepageHeading>
 				)}
 				<div className="h-fit w-full max-w-[600px] lg:w-1/2 lg:max-w-[650px]">
-					<RankGraph styles="!p-4" />
+					<RankGraph styles="!p-4" isHomepage={true} />
 				</div>
 				<div className="flex w-full max-w-[600px] flex-col items-center justify-center gap-14 lg:max-w-[450px] lg:items-start">
 					{width > 1024 && (

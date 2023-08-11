@@ -38,14 +38,13 @@ export default function Navbar() {
 		if (mobileMenuOpen && width >= 768) {
 			setMobileMenuOpen((current) => !current);
 		}
-
 		// Handle flash when shrinking screen
-		if (width <= 768 && !OnMobileDevice.current) {
+		if (width < 768 && !OnMobileDevice.current) {
 			OnMobileDevice.current = true;
 			setTimeout(() => {
 				setAddMobileTransitions(true);
 			}, 500);
-		} else if (width > 768 && OnMobileDevice.current) {
+		} else if (width >= 768 && OnMobileDevice.current) {
 			OnMobileDevice.current = false;
 			setAddMobileTransitions(false);
 		}
