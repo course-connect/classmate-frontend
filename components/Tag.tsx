@@ -19,7 +19,7 @@ const Tag = ({ text, score }) => {
 
 	return (
 		<div
-			className={`font-classmate-bold h-fit w-fit rounded-md px-[12px] py-[7px] text-[11px] tracking-wide text-classmate-tan-2 ${getColor(
+			className={`font-classmate-bold h-fit w-fit whitespace-nowrap rounded-md px-[12px] py-[7px] text-[11px] tracking-wide text-classmate-tan-2 ${getColor(
 				score
 			)}`}>
 			{text}

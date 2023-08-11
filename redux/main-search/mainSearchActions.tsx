@@ -88,7 +88,6 @@ export const setMultiMainSearchFilters =
 	};
 
 export const removeMainSearchFilter = (searchFilter) => (dispatch) => {
-	console.log(searchFilter);
 	dispatch({
 		type: REMOVE_MAIN_SEARCH_FILTER,
 		payload: searchFilter,

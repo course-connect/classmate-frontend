@@ -111,7 +111,7 @@ const MainSearchSelect = ({ setValue }) => {
 				</div>
 			</button>
 			<DropMenu
-				styles="right-auto left-0 sm:right-0 sm:left-auto"
+				styles="right-auto left-0"
 				menuItems={menuItems}
 				callback={handleMenuItemClick}
 				menuOpen={menuOpen}

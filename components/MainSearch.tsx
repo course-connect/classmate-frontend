@@ -14,13 +14,7 @@ import Image from "next/image";
 // Redux components
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../hooks/reduxHooks";
-import {
-	resetMainSearch,
-	search,
-	clearMainSearch,
-} from "../redux/main-search/mainSearchActions";
-
-import { resetFilterSearch } from "../redux/filter-search/filterSearchActions";
+import { search } from "../redux/main-search/mainSearchActions";
 
 const MainSearch = () => {
 	const dispatch = useAppDispatch();
@@ -34,10 +28,13 @@ const MainSearch = () => {
 			}
 		});
 		return () => {
-			dispatch(clearMainSearch());
 			subscription.unsubscribe();
 		};
 	}, [watch]);
+
+	useEffect(() => {
+		handleSubmit(onSubmit)();
+	}, []);
 
 	const onSubmit = useDebounce(({ userInput }) => {
 		dispatch(search(userInput));

@@ -7,7 +7,7 @@ import MatchText from "./MatchText";
 import ClassmateButton from "./ClassmateButton";
 import SchoolScoreDisplay from "./SchoolScoreDisplay";
 
-const MainSearchResult = ({ result, filters, userInput, resultType }) => {
+const MainSearchResult = ({ key, result, filters, userInput, resultType }) => {
 	let searchResult;
 	switch (resultType) {
 		case "school":
@@ -98,13 +98,12 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 						<div className="flex flex-wrap gap-4">
 							<div>
 								<p className="font-classmate-bold text-2xl capitalize text-classmate-green-1">{`${result.data.first_name} ${result.data.last_name}`}</p>
-
 								{typeof result.data.school_names !== "string" && (
 									<p className="flex flex-col text-sm">
 										{filters.school.filter_text
 											? filters.school.filter_text
-											: result.data.school_names?.map((school_name) => (
-													<span>{school_name}</span>
+											: result.data.school_names?.map((school_name, index) => (
+													<span key={index}>{school_name}</span>
 											  ))}
 									</p>
 								)}

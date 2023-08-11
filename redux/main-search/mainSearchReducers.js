@@ -14,7 +14,7 @@ import {
 
 const initialState = {
 	userInput: "",
-	loading: false,
+	loading: true,
 	results: [],
 	type: "professor",
 	filters: {
@@ -94,6 +94,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				results: [],
+				loading: true,
 				userInput: "",
 			};
 		case SET_MAIN_SEARCH_FILTER:

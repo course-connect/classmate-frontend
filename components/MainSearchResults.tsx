@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import MainSearchResult from "./MainSearchResult";
 import MainSearchResultsText from "./MainSearchResultsText";
 import { useRouter } from "next/router";
+import MainSearchResultSkeltons from "./MainSearchResultSkeltons";
 
 const MainSearchResults = () => {
 	const mainSearch = useSelector((state) => state.mainSearch);
@@ -22,11 +23,14 @@ const MainSearchResults = () => {
 
 	return (
 		<div className="">
-			{mainSearch.results.length === 0 ? (
-				<p className="font-classmate text-center text-classmate-green-7">
-					No Results...
-				</p>
-			) : (
+			{mainSearch.loading ? (
+				<>
+					<MainSearchResultsText />
+					<div className="flex flex-col gap-10">
+						<MainSearchResultSkeltons resultType={mainSearch.type} />
+					</div>
+				</>
+			) : mainSearch.results.length > 0 ? (
 				<>
 					<MainSearchResultsText />
 					<div className="flex flex-col gap-10" onClick={handlerItemClick}>
@@ -41,6 +45,10 @@ const MainSearchResults = () => {
 						))}
 					</div>
 				</>
+			) : (
+				<p className="font-classmate text-center text-classmate-green-7">
+					No Results...
+				</p>
 			)}
 		</div>
 	);

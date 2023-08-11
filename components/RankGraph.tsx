@@ -1,7 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import useWindowSize from "../hooks/useWindowSize";
 
 import { useSelector } from "react-redux";
+
+const dummyResults = [
+	{
+		data: {
+			first_name: "Benjamin",
+			last_name: " Mitchell",
+			score: "5",
+		},
+	},
+	{
+		data: {
+			first_name: "Olivia",
+			last_name: " Reynolds",
+			score: "4.2",
+		},
+	},
+	{
+		data: {
+			first_name: "Alexander",
+			last_name: "Ramirez",
+			score: "3.1",
+		},
+	},
+	{
+		data: {
+			first_name: "Sophia",
+			last_name: "Morgan",
+			score: "3.3",
+		},
+	},
+	{
+		data: {
+			first_name: "Christopher",
+			last_name: "Anderson",
+			score: "2.1",
+		},
+	},
+	{
+		data: {
+			first_name: "Emily",
+			last_name: "Thompson",
+			score: "1.5",
+		},
+	},
+];
 
 const getColor = (score) => {
 	if (score > 4.5) {
@@ -19,18 +64,36 @@ const getColor = (score) => {
 	}
 };
 
-export default function RankGraph({ styles, titleStyles, dummyResults }) {
+export default function RankGraph({ styles, titleStyles, isHomepage }) {
 	const { width } = useWindowSize();
 	const [graphWidth, setGraphWidth] = useState(0);
 	const [transitionEffect, setTransitionEffect] = useState("width 1s ease");
+	const [showLargeGraph, setShowLargeGraph] = useState(false);
+
 	const results = useSelector((state) => state.mainSearch.results);
+	let resultsToDisplay = [];
+	if (results.length > 0) {
+		resultsToDisplay = results;
+	} else if (isHomepage) {
+		resultsToDisplay = dummyResults;
+	}
 
-	const resultsToDisplay = dummyResults ? dummyResults : results;
+	useLayoutEffect(() => {
+		// Graph Width
+		let textWrapper = document.querySelector("#large-graph-text");
+		let textWidth = textWrapper?.clientWidth;
 
-	useEffect(() => {
+		// Graph Width
 		let graphWrapper = document.querySelector("#graph-wrapper");
 		let graphWidth = graphWrapper.clientWidth;
 		setGraphWidth(graphWidth);
+
+		if (!showLargeGraph && graphWidth > 550) {
+			setShowLargeGraph(true);
+		} else if (showLargeGraph && graphWidth <= 550 - graphWidth) {
+			console.log(graphWidth);
+			setShowLargeGraph(false);
+		}
 	}, [width]);
 
 	useEffect(() => {
@@ -51,17 +114,21 @@ export default function RankGraph({ styles, titleStyles, dummyResults }) {
 	};
 
 	return (
-		<div className={`p-8 ${styles}`}>
-			<div className="mb-14">
+		<div className={`w-full p-8 ${styles}`}>
+			<div className={`${showLargeGraph ? "mb-8" : "mb-12"}`}>
 				<p
-					className={`font-classmate-bold-italic text-2xl sm:text-3xl lg:text-4xl ${titleStyles}`}>
+					className={`font-classmate-bold-italic ${titleStyles} text-2xl sm:text-3xl lg:text-4xl ${titleStyles}`}>
 					Professor rank
 				</p>
 			</div>
 			<div className="flex">
-				{width > 550 && (
-					<div className="mr-2 flex max-w-[75px] -translate-y-[26px] flex-col gap-3">
-						{results.map((professor, index) => {
+				{showLargeGraph && (
+					<div
+						id="large-graph-text"
+						className={`mr-2 flex max-w-[75px] flex-col gap-3${
+							showLargeGraph ? "" : "-translate-y-[26px]"
+						}`}>
+						{resultsToDisplay.map((professor, index) => {
 							return (
 								<div
 									key={index}
@@ -76,22 +143,21 @@ export default function RankGraph({ styles, titleStyles, dummyResults }) {
 				<div
 					id="graph-wrapper"
 					style={{
-						height:
-							width > 550
-								? 50 * resultsToDisplay.length
-								: 64 * resultsToDisplay.length,
+						height: showLargeGraph
+							? 50 * resultsToDisplay.length + 26
+							: 64 * resultsToDisplay.length,
 					}}
 					className="relative flex w-full flex-col">
 					<div
-						className={`absolute z-10 -translate-y-[26px] ${
-							width > 550 ? "flex flex-col gap-3" : ""
+						className={`absolute z-10  ${
+							showLargeGraph ? "flex flex-col gap-3 " : "-translate-y-[26px]"
 						}`}>
 						{resultsToDisplay.map((professor, index) => (
 							<div
 								onClick={handleGraphItemClick}
 								key={index}
 								className={`relative h-16 transition-transform duration-1000 ${
-									width > 550 ? "!h-10" : ""
+									showLargeGraph ? "!h-10" : ""
 								}`}
 								style={{
 									width: graphWidth
@@ -99,7 +165,7 @@ export default function RankGraph({ styles, titleStyles, dummyResults }) {
 										: graphWidth,
 									transition: transitionEffect,
 								}}>
-								{width <= 550 && (
+								{!showLargeGraph && (
 									<p className="font-classmate absolute bottom-[40px] whitespace-nowrap text-xs capitalize text-classmate-green-6">
 										{`${professor.data.first_name} ${professor.data.last_name}`}
 									</p>
@@ -108,7 +174,7 @@ export default function RankGraph({ styles, titleStyles, dummyResults }) {
 									id={professor.firebaseID}
 									className={`absolute bottom-0 flex h-3/5 w-full items-center rounded-md border-none ring-classmate-gold-1 focus:ring ${getColor(
 										professor.data.score
-									)} ${width > 550 ? "h-full" : ""}`}>
+									)} ${showLargeGraph ? "h-full" : ""}`}>
 									<span className="font-classmate absolute -right-2 w-0 text-classmate-green-6">
 										{professor.data.score}
 									</span>

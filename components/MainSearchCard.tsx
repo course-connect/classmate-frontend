@@ -3,6 +3,8 @@ import MainSearch from "./MainSearch";
 import ClassmateButton from "./ClassmateButton";
 import MainSearchCardFilters from "./MainSearchCardFilters";
 
+import useWindowSize from "../hooks/useWindowSize";
+
 import Image from "next/image";
 
 import { useAppDispatch } from "../hooks/reduxHooks";
@@ -19,6 +21,7 @@ const MainSearchCard = ({
 }) => {
 	const dispatch = useAppDispatch();
 	const mainSearch = useSelector((state) => state.mainSearch);
+	const { width: windowWidth } = useWindowSize();
 
 	const filtersApplied =
 		Object.entries(mainSearch.filters).filter(([_, value]) => value.filter_text)
@@ -55,7 +58,7 @@ const MainSearchCard = ({
 					className={`relative flex !h-full w-full items-center overflow-hidden bg-red-500 px-1 transition ${
 						showFilters ? "py-1" : ""
 					}`} */}
-				{showFilters && <MainSearchCardFilters />}
+				{showFilters && windowWidth >= 768 && <MainSearchCardFilters />}
 			</div>
 			{mainSearch.type !== "school" && (
 				<div className="mt-4 flex flex-wrap items-center gap-1">
@@ -88,13 +91,23 @@ const MainSearchCard = ({
 							size="xs"
 							styles="bg-classmate-green-4 min-w-[20px] min-h-[20px] h-[20px] !p-1 flex justify-center items-center !rounded-full"
 							callback={handleAddFilterClick}>
-							<Image
-								className="pointer-events-none"
-								src="./plus-light.svg"
-								width={10}
-								height={10}
-								alt=""
-							/>
+							{windowWidth >= 768 && showFilters ? (
+								<Image
+									className="pointer-events-none"
+									src="./xmark-solid-light.svg"
+									width={8}
+									height={8}
+									alt=""
+								/>
+							) : (
+								<Image
+									className="pointer-events-none"
+									src="./plus-light.svg"
+									width={10}
+									height={10}
+									alt=""
+								/>
+							)}
 						</ClassmateButton>
 					)}
 				</div>
