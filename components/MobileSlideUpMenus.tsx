@@ -1,7 +1,7 @@
 import React from "react";
 import RankGraph from "../components/RankGraph";
 import ClassmateButton from "../components/ClassmateButton";
-import Filters from "../components/Filters";
+import MainMobileFilters from "../components/MainMobileFilters";
 import Image from "next/image";
 import MobileSlideUp from "../components/MobileSlideUp";
 import { useSelector } from "react-redux";
@@ -57,7 +57,7 @@ const MobileSlideUpMenus = ({
 			<MobileSlideUp
 				showSlideUp={showFilters}
 				toggleSlideUp={handleCloseFilterMenu}>
-				<Filters />
+				<MainMobileFilters />
 			</MobileSlideUp>
 		</>
 	);

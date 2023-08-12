@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-const MainSearchCardFilter = ({ data }) => {
+const MainSearchCardFilter = ({ data, handleAddFilterClick }) => {
 	const [dropDownOpen, setDropDownOpen] = useState(false);
 
 	const openFilterMenu = () => {
@@ -30,7 +30,9 @@ const MainSearchCardFilter = ({ data }) => {
 					</div>
 				</button>
 				{dropDownOpen && (
-					<div className="absolute z-30 h-10 w-10 bg-red-500"></div>
+					<div className="top-10 flex flex-col absolute z-30 bg-classmate-tan-2 shadow-xl p-4 gap-2 rounded-lg border-[1px] border-classmate-gray-4">
+						{data.filterOptions.map((option, index) => <button key={index} data-filtertype={data.filterType} data-filtervalue={option.filterValue} data-filtertext={option.filterText} onClick={handleAddFilterClick} className="focus:ring ring-classmate-gold-1 whitespace-nowrap min-w-[180px] bg-classmate-gray-5 font-classmate py-1 px-2 rounded-md text-left text-classmate-green-7" >{option.filterText}</button>)}
+					</div>
 				)}
 			</div>
 		</>
