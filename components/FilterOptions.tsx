@@ -17,9 +17,6 @@ const FilterOptions = ({
 		<div
 			className="font-classmate flex h-[484px] w-full flex-col items-start gap-2 p-6"
 			onClick={callback}>
-			{/* <p className="font-classmate-bold pointer-events-none mb-2 w-full text-lg text-classmate-green-6">
-				{title}
-			</p> */}
 			<div className="font-classmate mb-2 flex w-full items-center justify-between text-lg text-classmate-green-6">
 				<p className="font-classmate-bold w-full text-lg text-classmate-green-6">
 					{title}

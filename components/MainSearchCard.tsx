@@ -12,9 +12,7 @@ import {
 	removeMainSearchFilter,
 	search,
 } from "../redux/main-search/mainSearchActions";
-import {
-	removeFilterSearchFilter,
-} from "../redux/filter-search/filterSearchActions";
+import { removeFilterSearchFilter } from "../redux/filter-search/filterSearchActions";
 import { useSelector } from "react-redux";
 
 const MainSearchCard = ({
@@ -31,16 +29,15 @@ const MainSearchCard = ({
 			.length !== 0;
 
 	const handleRemoveClick = (e) => {
-
 		dispatch(removeMainSearchFilter(e.target.dataset.filtertype));
 		dispatch(removeFilterSearchFilter(e.target.dataset.filtertype));
 		dispatch(search(mainSearch.userInput));
-
 	};
 
 	const formatText = (key, value) => {
-		return `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value.filter_text
-			}`;
+		return `${key.charAt(0).toUpperCase() + key.slice(1)}: ${
+			value.filter_text
+		}`;
 	};
 
 	const handleAddFilterClick = () => {
@@ -58,25 +55,26 @@ const MainSearchCard = ({
 					<MainSearch />
 					{((windowWidth >= 450 && windowWidth < 768) ||
 						windowWidth >= 1024) && (
-							<button
-								onClick={handleAddFilterClick}
-								className="flex w-fit items-center gap-3 rounded-lg border-[1px] border-classmate-gray-3 bg-classmate-tan-2 px-4 outline-none ring-classmate-gold-1 focus:ring">
-								<span className="font-classmate whitespace-nowrap text-classmate-green-7">
-									{showFilters ? "Hide Filters" : "Add Filter"}
-								</span>
-								<div
-									className={`flex h-3 w-3 items-center transition ${showFilters ? "rotate-180" : ""
-										}`}>
-									<Image
-										className="pointer-events-none "
-										src="./caret-down.svg"
-										width={12}
-										height={12}
-										alt=""
-									/>
-								</div>
-							</button>
-						)}
+						<button
+							onClick={handleAddFilterClick}
+							className="flex w-fit items-center gap-3 rounded-lg border-[1px] border-classmate-gray-3 bg-classmate-tan-2 px-4 outline-none ring-classmate-gold-1 focus:ring">
+							<span className="font-classmate whitespace-nowrap text-classmate-green-7">
+								{showFilters ? "Hide Filters" : "Add Filter"}
+							</span>
+							<div
+								className={`flex h-3 w-3 items-center transition ${
+									showFilters ? "rotate-180" : ""
+								}`}>
+								<Image
+									className="pointer-events-none "
+									src="./caret-down.svg"
+									width={12}
+									height={12}
+									alt=""
+								/>
+							</div>
+						</button>
+					)}
 				</div>
 				{showFilters && windowWidth >= 768 && <MainDesktopFilters />}
 			</div>

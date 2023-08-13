@@ -20,7 +20,7 @@ import {
 } from "../redux/filter-search/filterSearchActions";
 import {
 	search,
-	setMainSearchFilter
+	setMainSearchFilter,
 } from "../redux/main-search/mainSearchActions";
 
 const Filters = () => {
@@ -106,7 +106,7 @@ const Filters = () => {
 		};
 
 		dispatch(setFilterSearchFilter([filterType, payload]));
-		filterSearch.filters[filterType] = payload
+		filterSearch.filters[filterType] = payload;
 		dispatch(setMainSearchFilter(filterSearch.filters));
 		dispatch(search(mainSearch.userInput));
 	};
@@ -179,19 +179,19 @@ const Filters = () => {
 	const searchableFilters = [
 		{
 			name: "School",
-			showSlideUp: showSchoolFilterSearch,
+			openMenu: showSchoolFilterSearch,
 			toggleSlideUp: toggleSchoolFilterSearch,
 			handleCancel: handleSchoolCancel,
 		},
 		{
 			name: "Professor",
-			showSlideUp: showProfessorFilterSearch,
+			openMenu: showProfessorFilterSearch,
 			toggleSlideUp: toggleProfessorFilterSearch,
 			handleCancel: handleProfessorCancel,
 		},
 		{
 			name: "Course",
-			showSlideUp: showCourseFilterSearch,
+			openMenu: showCourseFilterSearch,
 			toggleSlideUp: toggleCourseFilterSearch,
 			handleCancel: handleCourseCancel,
 		},
@@ -223,21 +223,21 @@ const Filters = () => {
 
 	const selectableFilters = [
 		{
-			showSlideUp: showScoreFilterSearch,
+			openMenu: showScoreFilterSearch,
 			toggleSlideUp: toggleScoreFilterSearch,
 			filterOptions: scoreFilterButtons,
 			title: "Score",
 			filterType: "score",
 		},
 		{
-			showSlideUp: showDifficultyFilterSearch,
+			openMenu: showDifficultyFilterSearch,
 			toggleSlideUp: toggleDifficultyFilterSearch,
 			filterOptions: difficultyFilterButtons,
 			title: "Difficulty",
 			filterType: "difficulty",
 		},
 		{
-			showSlideUp: showReviewsFilterSearch,
+			openMenu: showReviewsFilterSearch,
 			toggleSlideUp: toggleReviewsFilterSearch,
 			filterOptions: reviewsFilterButtons,
 			title: "Reviews",
@@ -245,71 +245,73 @@ const Filters = () => {
 		},
 	];
 
-	return <>
-		<div className="flex w-full flex-col gap-2 p-6">
-			<div className="font-classmate mb-2 flex items-center justify-between text-lg text-classmate-green-6">
-				<p className="font-classmate-bold  w-full text-lg text-classmate-green-6">
-					Filters
-				</p>
-			</div>
-
-			{filterButtons
-				.filter(({ allowedFor }) => allowedFor.includes(mainSearch.type))
-				.map((button, index) => (
-					<FilterButton
-						key={index}
-						filter={button.filter}
-						filterType={button.filterType}
-						icon={button.icon}
-						iconAlt={button.iconAlt}
-						callback={button.callback}>
-						<p className="text-classmate-green-6">{button.text}</p>
-					</FilterButton>
-				))}
-			<FilterActions />
-		</div>
-		{searchableFilters.map((category, index) => (
-			<MobileSlideUp
-				key={index}
-				showSlideUp={category.showSlideUp}
-				toggleSlideUp={category.toggleSlideUp}>
-				<div className="flex h-[484px] w-full flex-col gap-3 p-6">
-					<div className="font-classmate flex items-center justify-between text-lg text-classmate-green-6">
-						<p className="font-classmate-bold w-full text-lg text-classmate-green-6">
-							{category.name}
-						</p>
-						<ClassmateButton
-							callback={category.handleCancel}
-							variant="text"
-							size="xs"
-							styles="!px-2 !py-0 !text-base">
-							back
-						</ClassmateButton>
-					</div>
-					<FilterSearch showSlideUp={category.showSlideUp} />
-					<div
-						onClick={handleAddFilterClick}
-						className="flex w-full flex-col gap-3">
-						<FilterSearchResults />
-					</div>
+	return (
+		<>
+			<div className="flex w-full flex-col gap-2 p-6">
+				<div className="font-classmate mb-2 flex items-center justify-between text-lg text-classmate-green-6">
+					<p className="font-classmate-bold  w-full text-lg text-classmate-green-6">
+						Filters
+					</p>
 				</div>
-			</MobileSlideUp>
-		))}
-		{selectableFilters.map((filterData, index) => (
-			<MobileSlideUp
-				key={index}
-				showSlideUp={filterData.showSlideUp}
-				toggleSlideUp={filterData.toggleSlideUp}>
-				<FilterOptions
-					filterOptions={filterData.filterOptions}
-					toggleSlideUp={filterData.toggleSlideUp}
-					callback={handleAddFilterClick}
-					title={filterData.title}
-					filterType={filterData.filterType}
-				/>
-			</MobileSlideUp>
-		))}
-	</>
+
+				{filterButtons
+					.filter(({ allowedFor }) => allowedFor.includes(mainSearch.type))
+					.map((button, index) => (
+						<FilterButton
+							key={index}
+							filter={button.filter}
+							filterType={button.filterType}
+							icon={button.icon}
+							iconAlt={button.iconAlt}
+							callback={button.callback}>
+							<p className="text-classmate-green-6">{button.text}</p>
+						</FilterButton>
+					))}
+				<FilterActions />
+			</div>
+			{searchableFilters.map((category, index) => (
+				<MobileSlideUp
+					key={index}
+					openMenu={category.openMenu}
+					toggleSlideUp={category.toggleSlideUp}>
+					<div className="flex h-[484px] w-full flex-col gap-3 p-6">
+						<div className="font-classmate flex items-center justify-between text-lg text-classmate-green-6">
+							<p className="font-classmate-bold w-full text-lg text-classmate-green-6">
+								{category.name}
+							</p>
+							<ClassmateButton
+								callback={category.handleCancel}
+								variant="text"
+								size="xs"
+								styles="!px-2 !py-0 !text-base">
+								back
+							</ClassmateButton>
+						</div>
+						<FilterSearch openMenu={category.openMenu} />
+						<div
+							onClick={handleAddFilterClick}
+							className="flex w-full flex-col gap-3">
+							<FilterSearchResults />
+						</div>
+					</div>
+				</MobileSlideUp>
+			))}
+			{selectableFilters.map((filterData, index) => (
+				<MobileSlideUp
+					key={index}
+					openMenu={filterData.openMenu}
+					toggleSlideUp={filterData.toggleSlideUp}>
+					<FilterOptions
+						filterOptions={filterData.filterOptions}
+						toggleSlideUp={filterData.toggleSlideUp}
+						callback={handleAddFilterClick}
+						title={filterData.title}
+						filterType={filterData.filterType}
+					/>
+				</MobileSlideUp>
+			))}
+		</>
+	);
 };
 
 export default Filters;

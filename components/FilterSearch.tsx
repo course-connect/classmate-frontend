@@ -16,7 +16,7 @@ import {
 	clearFilterSearch,
 } from "../redux/filter-search/filterSearchActions";
 
-const FilterSearch = ({ showSlideUp }) => {
+const FilterSearch = ({ openMenu }) => {
 	const dispatch = useAppDispatch();
 	const filterSearch = useSelector((state) => state.filterSearch);
 	const { handleSubmit, watch, register, setValue } = useForm();
@@ -37,7 +37,7 @@ const FilterSearch = ({ showSlideUp }) => {
 
 	useEffect(() => {
 		setTimeout(() => setValue("userInput", ""), 100);
-	}, [showSlideUp]);
+	}, [openMenu]);
 
 	const onSubmit = useDebounce(({ userInput }) => {
 		dispatch(search(userInput));
@@ -58,7 +58,7 @@ const FilterSearch = ({ showSlideUp }) => {
 					{...register("userInput")}
 					placeholder={`Enter ${filterSearch.type}`}
 					type="text"
-					className="font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-6 placeholder-classmate-green-6 outline-none"
+					className={`font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-6 placeholder-classmate-green-6 outline-none`}
 				/>
 			</div>
 		</form>
