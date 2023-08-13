@@ -5,7 +5,7 @@ const MainSearchResultSkeltons = ({ resultType }) => {
 	switch (resultType) {
 		case "professor":
 			resultSkeletons = [...Array(3)].map((_, index) => (
-				<div className="font-classmate flex cursor-pointer flex-col gap-10 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl">
+				<div key={index} className="font-classmate flex cursor-pointer flex-col gap-10 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl">
 					<div className="flex flex-col gap-2">
 						<div className="flex gap-2">
 							<div className="h-5 w-1/2 rounded-md bg-classmate-gray-4" />
@@ -38,7 +38,7 @@ const MainSearchResultSkeltons = ({ resultType }) => {
 			break;
 		case "school":
 			resultSkeletons = [...Array(3)].map((_, index) => (
-				<div className="font-classmate flex cursor-pointer flex-col gap-10 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl">
+				<div key={index} className="font-classmate flex cursor-pointer flex-col gap-10 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl">
 					<div className="flex flex-col gap-2">
 						<div className="flex gap-2">
 							<div className="h-5 w-1/2 rounded-md bg-classmate-gray-4" />
@@ -71,7 +71,7 @@ const MainSearchResultSkeltons = ({ resultType }) => {
 			break;
 		case "course":
 			resultSkeletons = [...Array(3)].map((_, index) => (
-				<div className="font-classmate flex cursor-pointer flex-col gap-10 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl">
+				<div key={index} className="font-classmate flex cursor-pointer flex-col gap-10 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl">
 					<div className="flex flex-col gap-3">
 						<div className="h-5 w-20 rounded-md bg-classmate-gray-4" />
 						<div className="h-5 w-1/2 rounded-md bg-classmate-gray-4" />

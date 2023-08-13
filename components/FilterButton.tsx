@@ -4,6 +4,7 @@ import Image from "next/image";
 // Redux components
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { removeFilterSearchFilter } from "../redux/filter-search/filterSearchActions";
+import { removeMainSearchFilter } from "../redux/main-search/mainSearchActions";
 
 interface FilterButtonProps {
 	filter?: string;
@@ -43,6 +44,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 		const buttonName = e.target.id;
 		if (buttonName === "remove") {
 			buttonRef.current.blur();
+			dispatch(removeMainSearchFilter(e.target.dataset.filtertype));
 			dispatch(removeFilterSearchFilter(e.target.dataset.filtertype));
 		} else {
 			callback?.();

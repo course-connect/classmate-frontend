@@ -10,13 +10,20 @@ import {
 	RESET_FILTER_SEARCH,
 	SET_MULTI_FILTER_SEARCH_FILTER,
 	REMOVE_FILTER_SEARCH_FILTER,
+	RESET_FILTER_SEARCH_FILTERS,
 } from "./filterSearchTypes";
 
 // Reset to initial state
-export const resetFilterSearch = (userInput) => async (dispatch, getState) => {
+export const resetFilterSearch = () => async (dispatch, getState) => {
 	// Flag search as loading
 	dispatch({
 		type: RESET_FILTER_SEARCH,
+	});
+};
+
+export const resetFilterSearchFilters = () => async (dispatch) => {
+	dispatch({
+		type: RESET_FILTER_SEARCH_FILTERS,
 	});
 };
 

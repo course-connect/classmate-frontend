@@ -12,6 +12,43 @@ import {
 	SAVE_MAIN_SEARCH_INPUT,
 } from "./mainSearchTypes";
 
+const initialStateCopy = {
+	userInput: "",
+	loading: true,
+	results: [],
+	type: "professor",
+	filters: {
+		professor: {
+			filter_value: null,
+			filter_text: null,
+		},
+		department: {
+			filter_value: null,
+			filter_text: null,
+		},
+		school: {
+			filter_value: null,
+			filter_text: null,
+		},
+		score: {
+			filter_value: null,
+			filter_text: null,
+		},
+		difficulty: {
+			filter_value: null,
+			filter_text: null,
+		},
+		reviews: {
+			filter_value: null,
+			filter_text: null,
+		},
+		course: {
+			filter_value: null,
+			filter_text: null,
+		},
+	},
+};
+
 const initialState = {
 	userInput: "",
 	loading: true,
@@ -54,12 +91,15 @@ export default (state = initialState, action) => {
 
 	switch (type) {
 		case RESET_MAIN_SEARCH:
-			return initialState;
+			return {
+				...initialStateCopy,
+				filters: {...initialState.filters}
+			};
 		case RESET_MAIN_SEARCH_FILTERS:
 			return {
 				...state,
 				filters: {
-					...initialState.filters,
+					...initialStateCopy.filters,
 				},
 			};
 		case SAVE_MAIN_SEARCH_INPUT:
@@ -88,7 +128,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				type: payload,
-				filters: initialState.filters,
+				filters: initialStateCopy.filters,
 			};
 		case CLEAR_MAIN_SEARCH:
 			return {
@@ -118,7 +158,7 @@ export default (state = initialState, action) => {
 		case CLEAR_MAIN_SEARCH_FILTERS:
 			return {
 				...state,
-				filters: initialState.filters,
+				filters: initialStateCopy.filters,
 			};
 		default:
 			return state;

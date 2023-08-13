@@ -42,7 +42,7 @@ const FilterOptions = ({
 						filterValue={button.filterValue}
 						filterText={button.filterText}
 						styles="">
-						<div className="bri relative flex w-full items-center justify-between overflow-hidden ">
+						<div className="relative flex w-full items-center justify-between overflow-hidden ">
 							<p className={`text-classmate-green-6`}>{button.filterText}</p>
 
 							{/* Add the check mark when filter is already added */}

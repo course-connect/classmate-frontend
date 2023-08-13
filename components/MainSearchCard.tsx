@@ -12,6 +12,9 @@ import {
 	removeMainSearchFilter,
 	search,
 } from "../redux/main-search/mainSearchActions";
+import {
+	removeFilterSearchFilter,
+} from "../redux/filter-search/filterSearchActions";
 import { useSelector } from "react-redux";
 
 const MainSearchCard = ({
@@ -28,8 +31,11 @@ const MainSearchCard = ({
 			.length !== 0;
 
 	const handleRemoveClick = (e) => {
+
 		dispatch(removeMainSearchFilter(e.target.dataset.filtertype));
+		dispatch(removeFilterSearchFilter(e.target.dataset.filtertype));
 		dispatch(search(mainSearch.userInput));
+
 	};
 
 	const formatText = (key, value) => {

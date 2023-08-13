@@ -9,7 +9,44 @@ import {
 	RESET_FILTER_SEARCH,
 	SET_MULTI_FILTER_SEARCH_FILTER,
 	REMOVE_FILTER_SEARCH_FILTER,
+	RESET_FILTER_SEARCH_FILTERS,
 } from "./filterSearchTypes";
+
+const initialStateCopy = {
+	loading: false,
+	results: [],
+	type: "school",
+	filters: {
+		professor: {
+			filter_value: null,
+			filter_text: null,
+		},
+		department: {
+			filter_value: null,
+			filter_text: null,
+		},
+		school: {
+			filter_value: null,
+			filter_text: null,
+		},
+		score: {
+			filter_value: null,
+			filter_text: null,
+		},
+		difficulty: {
+			filter_value: null,
+			filter_text: null,
+		},
+		reviews: {
+			filter_value: null,
+			filter_text: null,
+		},
+		course: {
+			filter_value: null,
+			filter_text: null,
+		},
+	},
+};
 
 const initialState = {
 	loading: false,
@@ -52,7 +89,17 @@ export default (state = initialState, action) => {
 
 	switch (type) {
 		case RESET_FILTER_SEARCH:
-			return initialState;
+			return {
+				...initialStateCopy,
+				filters: {...initialState.filters}
+			};
+		case RESET_FILTER_SEARCH_FILTERS:
+			return {
+				...state,
+				filters: {
+					...initialStateCopy.filters,
+				},
+			};
 		case FILTER_SEARCH_LOADING:
 			return {
 				...state,
@@ -115,7 +162,7 @@ export default (state = initialState, action) => {
 		case CLEAR_FILTER_SEARCH_FILTERS:
 			return {
 				...state,
-				filters: initialState.filters,
+				filters: initialStateCopy.filters,
 			};
 		default:
 			return state;

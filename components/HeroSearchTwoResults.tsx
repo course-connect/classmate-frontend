@@ -19,8 +19,6 @@ const HeroSearchTwoResults = () => {
 				filter_text: course.data.course_name,
 			},
 		};
-
-		console.log(filters);
 		dispatch(setMultiMainSearchFilters(filters));
 		router.push(`/search`);
 	};

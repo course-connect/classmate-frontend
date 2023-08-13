@@ -7,7 +7,7 @@ import MatchText from "./MatchText";
 import ClassmateButton from "./ClassmateButton";
 import SchoolScoreDisplay from "./SchoolScoreDisplay";
 
-const MainSearchResult = ({ key, result, filters, userInput, resultType }) => {
+const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 	let searchResult;
 	switch (resultType) {
 		case "school":
@@ -103,8 +103,8 @@ const MainSearchResult = ({ key, result, filters, userInput, resultType }) => {
 										{filters.school.filter_text
 											? filters.school.filter_text
 											: result.data.school_names?.map((school_name, index) => (
-													<span key={index}>{school_name}</span>
-											  ))}
+												<span key={index}>{school_name}</span>
+											))}
 									</p>
 								)}
 							</div>
@@ -150,8 +150,8 @@ const MainSearchResult = ({ key, result, filters, userInput, resultType }) => {
 								Top Tags
 							</p>
 							<div className="mt-1 flex flex-wrap gap-1">
-								{result.data.tags.map(({ description }) => (
-									<Tag text={description} score={result.data.score} />
+								{result.data.tags.map(({ description }, index) => (
+									<Tag key={index} text={description} score={result.data.score} />
 								))}
 							</div>
 						</div>

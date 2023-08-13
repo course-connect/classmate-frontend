@@ -15,14 +15,17 @@ import useWindowSize from "../hooks/useWindowSize";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import {
-    setFilterSearchType,
     setFilterSearchFilter,
 } from "../redux/filter-search/filterSearchActions";
+import {
+    search,
+    setMainSearchFilter
+} from "../redux/main-search/mainSearchActions";
 
 const Filters = () => {
     const dispatch = useAppDispatch();
     const filterSearch = useSelector((state) => state.filterSearch);
-    const mainSearchType = useSelector((state) => state.mainSearch.type);
+    const mainSearch = useSelector((state) => state.mainSearch);
     const { width: windowWidth } = useWindowSize();
 
     // Show slide up menu state
@@ -95,14 +98,15 @@ const Filters = () => {
         const filterType = e.target.dataset.filtertype;
         const filterValue = e.target.dataset.filtervalue;
         const filterText = e.target.dataset.filtertext;
-        console.log(filterType, filterValue, filterText)
-
         const payload = {
             filter_value: filterValue,
             filter_text: filterText,
         };
 
         dispatch(setFilterSearchFilter([filterType, payload]));
+        filterSearch.filters[filterType] = payload
+        dispatch(setMainSearchFilter(filterSearch.filters));
+        dispatch(search(mainSearch.userInput));
     };
 
     const scoreFilterButtons = [
@@ -111,7 +115,6 @@ const Filters = () => {
         { filterValue: "3", filterText: "3 or above" },
         { filterValue: "2", filterText: "2 or above" },
         { filterValue: "1", filterText: "1 or above" },
-        { filterValue: "-1", filterText: "none" },
     ];
 
     const difficultyFilterButtons = [
@@ -120,7 +123,6 @@ const Filters = () => {
         { filterValue: "3", filterText: "3 or below" },
         { filterValue: "4", filterText: "4 or below" },
         { filterValue: "4.5", filterText: "4.5 or below" },
-        { filterValue: "-1", filterText: "none" },
     ];
 
     const reviewsFilterButtons = [
@@ -129,7 +131,6 @@ const Filters = () => {
         { filterValue: "25", filterText: "25 or above" },
         { filterValue: "15", filterText: "15 or above" },
         { filterValue: "5", filterText: "5 or above" },
-        { filterValue: "-1", filterText: "none" },
     ];
 
     const filterButtons = [
@@ -258,7 +259,7 @@ const Filters = () => {
 
     return <div className="flex flex-wrap gap-2">
         {filterButtons
-            .filter(({ allowedFor }) => allowedFor.includes(mainSearchType))
+            .filter(({ allowedFor }) => allowedFor.includes(mainSearch.type))
             .map((data, index) => (
                 <MainSearchCardFilter key={index} data={data} handleAddFilterClick={handleAddFilterClick} />
             ))}

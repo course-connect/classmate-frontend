@@ -33,12 +33,12 @@ export default function Search() {
 	};
 
 	const handleOpenFilterMenu = () => {
-		dispatch(setMultiFilterSearchFilters(mainSearch.filters));
+		// dispatch(setMultiFilterSearchFilters(mainSearch.filters));
 		toggleFilters((current) => !current);
 	};
 
 	const handleCloseFilterMenu = () => {
-		setTimeout(() => dispatch(resetFilterSearch()), 100);
+		// setTimeout(() => dispatch(resetFilterSearch()), 100);
 		toggleFilters((current) => !current);
 	};
 
