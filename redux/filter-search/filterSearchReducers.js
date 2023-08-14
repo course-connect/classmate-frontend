@@ -91,7 +91,7 @@ export default (state = initialState, action) => {
 		case RESET_FILTER_SEARCH:
 			return {
 				...initialStateCopy,
-				filters: {...initialState.filters}
+				filters: { ...initialState.filters },
 			};
 		case RESET_FILTER_SEARCH_FILTERS:
 			return {
@@ -131,14 +131,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				filters: {
-					...state.filters,
-					[payload[0]]:
-						payload[1].filter_value === "-1"
-							? {
-									filter_value: null,
-									filter_text: null,
-							  }
-							: payload[1],
+					...payload,
 				},
 			};
 		case REMOVE_FILTER_SEARCH_FILTER:

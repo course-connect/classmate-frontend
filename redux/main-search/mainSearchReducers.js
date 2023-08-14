@@ -93,7 +93,7 @@ export default (state = initialState, action) => {
 		case RESET_MAIN_SEARCH:
 			return {
 				...initialStateCopy,
-				filters: {...initialState.filters}
+				filters: { ...initialState.filters },
 			};
 		case RESET_MAIN_SEARCH_FILTERS:
 			return {

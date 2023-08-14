@@ -1,10 +1,10 @@
-import SignUpOrSignIn from "../components/SignUpOrSignIn";
-import SignInForm from "..//components/SignInForm";
+import SignUpOrSignIn from "../../components/SignUpOrSignIn";
+import SignUpForm from "../../components/SignUpForm";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-export default function signin() {
+export default function SignUp() {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const router = useRouter();
 
@@ -16,10 +16,10 @@ export default function signin() {
 
 	return (
 		<SignUpOrSignIn
-			heading="Welcome"
-			subheading="Sign in to manage your courses and create the prefect semester"
-			form={<SignInForm />}
-			variant="signin"
+			heading="Sign Up"
+			subheading="Sign up to get access to insights and create your prefect semester"
+			form={<SignUpForm />}
+			variant="signup"
 		/>
 	);
 }

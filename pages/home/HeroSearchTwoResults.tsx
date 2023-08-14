@@ -1,17 +1,34 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "../hooks/reduxHooks";
+// Next.js components
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { setMultiMainSearchFilters } from "../redux/main-search/mainSearchActions";
 
-const HeroSearchTwoResults = () => {
+// Redux components
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+
+// Import the interfaces for Redux states
+import heroSearchOneInterface from "../../redux/hero-search-one/heroSearchOneInterface";
+import heroSearchTwoInterface from "../../redux/hero-search-two/heroSearchTwoInterface";
+import { setMultiMainSearchFilters } from "../../redux/main-search/mainSearchActions";
+import { setMultiFilterSearchFilters } from "../../redux/filter-search/filterSearchActions";
+
+// Define the component as a functional component
+const HeroSearchTwoResults: React.FC = () => {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
-	const heroSearchOne = useSelector((state) => state.heroSearchOne);
-	const heroSearchTwo = useSelector((state) => state.heroSearchTwo);
 
-	const handleCourseClick = (course) => {
+	// Get search results and type from Redux store for heroSearchOne and heroSearchTwo
+	const heroSearchOne = useSelector(
+		(state: { heroSearchOne: heroSearchOneInterface }) => state.heroSearchOne
+	);
+	const heroSearchTwo = useSelector(
+		(state: { heroSearchTwo: heroSearchTwoInterface }) => state.heroSearchTwo
+	);
+
+	// Handle clicking on a course result
+	const handleCourseClick = (course: any) => {
+		// Create filters object for main search
 		const filters = {
 			school: heroSearchOne.filters.school,
 			course: {
@@ -19,17 +36,23 @@ const HeroSearchTwoResults = () => {
 				filter_text: course.data.course_name,
 			},
 		};
+		// Dispatch the filters to the main search Redux action
+		dispatch(setMultiFilterSearchFilters(filters));
 		dispatch(setMultiMainSearchFilters(filters));
+		// Redirect to the search page
 		router.push(`/search`);
 	};
 
-	const handleProfessorClick = (professor) => {
+	// Handle clicking on a professor result
+	const handleProfessorClick = (professor: any) => {
+		// Redirect to the professor's page
 		router.push(`/professor/${professor.data.user_id}`);
 	};
 
+	// Render the search results component
 	return (
 		<div className="absolute top-16 z-10 w-full overflow-hidden rounded-xl shadow-lg">
-			{heroSearchTwo.results.map((item, index) => (
+			{heroSearchTwo.results.map((item: any, index: number) => (
 				<button
 					onClick={
 						heroSearchTwo.type === "course"
@@ -52,11 +75,13 @@ const HeroSearchTwoResults = () => {
 					/>
 					<div className="flex flex-col justify-center gap-1">
 						<p className="font-classmate leading-none text-classmate-green-6">
+							{/* Display course name or professor's full name */}
 							{heroSearchTwo.type === "course"
 								? item.data.course_name
 								: `${item.data.first_name} ${item.data.last_name}`}
 						</p>
 						<p className="font-classmate w-fit text-sm leading-none text-classmate-green-7">
+							{/* Display course code or school name */}
 							{heroSearchTwo.type === "course"
 								? item.data.course_code
 								: item.data.school_names?.[0]}

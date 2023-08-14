@@ -1,17 +1,13 @@
-import React, { use, useEffect, useState } from "react";
-import MainSearchCard from "../components/MainSearchCard";
-import MainSearchResults from "../components/MainSearchResults";
-import MobileSlideUpMenus from "../components/MobileSlideUpMenus";
-import useWindowSize from "../hooks/useWindowSize";
-import RankGraph from "../components/RankGraph";
+import React, { useEffect, useState } from "react";
+import MainSearchCard from "../../components/MainSearchCard";
+import MainSearchResults from "../../components/MainSearchResults";
+import MobileSlideUpMenus from "../../components/MobileSlideUpMenus";
+import useWindowSize from "../../hooks/useWindowSize";
+import RankGraph from "../../components/RankGraph";
 
-import { useAppDispatch } from "../hooks/reduxHooks";
+import { useAppDispatch } from "../../hooks/reduxHooks";
 import { useSelector } from "react-redux";
-import {
-	resetFilterSearch,
-	setMultiFilterSearchFilters,
-} from "../redux/filter-search/filterSearchActions";
-import { resetMainSearch } from "../redux/main-search/mainSearchActions";
+import { resetMainSearch } from "../../redux/main-search/mainSearchActions";
 
 export default function Search() {
 	const { width } = useWindowSize();

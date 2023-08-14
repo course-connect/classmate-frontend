@@ -46,7 +46,6 @@ const MainSearch = () => {
 
 	return (
 		<>
-			{/* <button onClick={() => dispatch(resetMainSearch())}>reset</button> */}
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className="relative flex w-full items-center rounded-lg border-[1px] border-classmate-gray-3 bg-classmate-tan-2">

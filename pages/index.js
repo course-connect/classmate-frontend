@@ -1,19 +1,19 @@
 import Hero from "../components/Hero";
-import HowItWorks from "../components/HowItWorks";
-import JoinTodaySection from "../components/JoinTodaySection";
-import WhatWeOffer from "../components/WhatWeOffer";
+import HowItWorksSection from "./home/HowItWorksSection";
+import JoinTodaySection from "./home/JoinTodaySection";
+import WhatWeOfferSection from "./home/WhatWeOfferSection";
 import EasilyCompareSection from "../components/EasilyCompareSection";
-import HeroStatsSection from "../components/HeroStatsSection";
+import StatsSection from "./home/StatsSection";
 
 export default function Home() {
 	return (
 		<div className="overflow-hidden">
 			<Hero />
-			<HowItWorks />
+			<HowItWorksSection />
 			<JoinTodaySection />
-			<WhatWeOffer />
+			<WhatWeOfferSection />
 			<EasilyCompareSection />
-			<HeroStatsSection />
+			<StatsSection />
 		</div>
 	);
 }

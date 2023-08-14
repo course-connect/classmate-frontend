@@ -1,16 +1,34 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "../hooks/reduxHooks";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import { setSearchOneFilter } from "../redux/hero-search-one/heroSearchOneActions";
 
-const HeroSchoolAndProfessorResults = ({ setValue, setShowFirstSearch }) => {
+// Next.js components
+import Image from "next/image";
+import { useRouter } from "next/router";
+
+// Redux components
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import heroSearchOneInterface from "../../redux/hero-search-one/heroSearchOneInterface";
+import { setSearchOneFilter } from "../../redux/hero-search-one/heroSearchOneActions";
+
+// Props interface for HeroSchoolAndProfessorResults component
+interface HeroSchoolAndProfessorResultsProps {
+	setValue: (name: string, value: string) => void;
+	setShowFirstSearch: (value: React.SetStateAction<boolean>) => void;
+}
+
+const HeroSearchOneResults: React.FC<HeroSchoolAndProfessorResultsProps> = ({
+	setValue,
+	setShowFirstSearch,
+}) => {
+	// Initialize necessary hooks and variables
 	const router = useRouter();
 	const dispatch = useAppDispatch();
-	const heroSearchOne = useSelector((state) => state.heroSearchOne);
+	const heroSearchOne = useSelector(
+		(state: { heroSearchOne: heroSearchOneInterface }) => state.heroSearchOne
+	);
 
-	const handleSchoolClick = (school) => {
+	// Handle click event when a school is selected
+	const handleSchoolClick = (school: any) => {
 		const searchFilter = {
 			school: {
 				filter_value: school.firebaseID,
@@ -22,13 +40,15 @@ const HeroSchoolAndProfessorResults = ({ setValue, setShowFirstSearch }) => {
 		setTimeout(() => setValue("userInput", ""), 1000);
 	};
 
-	const handleProfessorClick = (professor) => {
+	// Handle click event when a professor is selected
+	const handleProfessorClick = (professor: any) => {
 		router.push(`/professor/${professor.data.user_id}`);
 	};
 
+	// Render component with search results
 	return (
 		<div className="absolute top-16 z-10 w-full overflow-hidden rounded-xl shadow-lg">
-			{heroSearchOne.results.map((item, index) => (
+			{heroSearchOne.results.map((item: any, index: number) => (
 				<button
 					onClick={
 						heroSearchOne.type === "school"
@@ -37,7 +57,7 @@ const HeroSchoolAndProfessorResults = ({ setValue, setShowFirstSearch }) => {
 					}
 					key={index}
 					type="button"
-					className={`flex w-full items-center border-b-[1px] bg-classmate-tan-2 px-5 py-5 text-left outline-none ring-classmate-gold-1 hover:bg-classmate-gray-5 focus:bg-classmate-gray-5`}>
+					className="flex w-full items-center border-b-[1px] bg-classmate-tan-2 px-5 py-5 text-left outline-none ring-classmate-gold-1 hover:bg-classmate-gray-5 focus:bg-classmate-gray-5">
 					<Image
 						height={25}
 						width={25}
@@ -67,4 +87,4 @@ const HeroSchoolAndProfessorResults = ({ setValue, setShowFirstSearch }) => {
 	);
 };
 
-export default HeroSchoolAndProfessorResults;
+export default HeroSearchOneResults;

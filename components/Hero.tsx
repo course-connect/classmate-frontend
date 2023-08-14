@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import HeroCallToAction from "./HeroCallToAction";
+import HeroCallToAction from "../pages/home/HeroCallToAction";
 
 const icons: Record<string, string> = {
 	logo: "./logo.svg",

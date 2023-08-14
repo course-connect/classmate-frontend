@@ -1,30 +1,41 @@
 import React, { useState } from "react";
+
+// Project components
 import HeroSearchOne from "./HeroSearchOne";
 import HeroSearchTwo from "./HeroSearchTwo";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "../hooks/reduxHooks";
-import Filter from "./Filter";
+import Filter from "../../components/Filter";
+
+// Next.js components
 import Image from "next/image";
+
+// Redux components
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import heroSearchOneInterface from "../../redux/hero-search-one/heroSearchOneInterface";
 import {
 	clearSearchFilters,
 	setSearchType,
-} from "../redux/search/searchActions";
+} from "../../redux/search/searchActions";
 
 const HeroCallToAction = (): JSX.Element | null => {
+	// Redux dispatch and state setup
 	const dispatch = useAppDispatch();
 	const [showFirstSearch, setShowFirstSearch] = useState(true);
 	const schoolFilter = useSelector(
-		(state) => state.heroSearchOne.filters.school
+		(state: { heroSearchOne: heroSearchOneInterface }) =>
+			state.heroSearchOne.filters.school
 	);
 
+	// Handler to remove applied filter
 	const handleRemoveFilter = () => {
 		setShowFirstSearch(true);
-		dispatch(setSearchType("school"));
-		dispatch(clearSearchFilters());
+		dispatch(setSearchType("school")); // Reset search type to default
+		dispatch(clearSearchFilters()); // Clear applied filters
 	};
 
 	return (
 		<div className="relative flex h-[55px] w-full justify-center">
+			{/* First search */}
 			<div
 				className={`absolute flex w-full max-w-sm justify-center opacity-100 transition-[transform,opacity] duration-500 ${
 					showFirstSearch
@@ -33,6 +44,7 @@ const HeroCallToAction = (): JSX.Element | null => {
 				}`}>
 				<HeroSearchOne setShowFirstSearch={setShowFirstSearch} />
 			</div>
+			{/* Second search */}
 			<div
 				className={`pointer-events-none absolute flex w-full max-w-sm translate-x-96 justify-center opacity-0 transition-[transform,opacity] duration-500 ${
 					showFirstSearch
@@ -42,6 +54,7 @@ const HeroCallToAction = (): JSX.Element | null => {
 				<HeroSearchTwo setShowFirstSearch={setShowFirstSearch} />
 			</div>
 
+			{/* Filter */}
 			<Filter
 				className={`font-classmate-bold pointer-events-none absolute -bottom-12 -z-10 flex translate-x-96 gap-5 rounded-md bg-classmate-green-4 px-3 py-[6px] text-xs tracking-wide text-classmate-tan-2 opacity-0 transition-[transform,opacity] duration-500 ${
 					showFirstSearch
