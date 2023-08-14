@@ -14,7 +14,6 @@ function useFadeIn(ref) {
 				current[0].target.classList.contains("section-fade-in");
 			if (current[0].isIntersecting && !alreadyFadedIn) {
 				current[0].target.classList.add("section-fade-in");
-			} else {
 			}
 		}, fadeInOptions);
 
@@ -22,7 +21,11 @@ function useFadeIn(ref) {
 			fadeInObserver.observe(current);
 		}
 		addObserver(ref.current);
-	}, []);
+
+		return () => {
+			fadeInObserver.disconnect(); // Clean up the observer when the component unmounts
+		};
+	}, [hasFadedIn, ref]);
 
 	return hasFadedIn;
 }

@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import HomepageHeading from "./HomepageHeading";
 import ClassmateButton from "./ClassmateButton";
+
 import box from "../public/box.svg";
 import falling from "../public/falling.svg";
 import love from "../public/love.svg";
@@ -10,6 +11,17 @@ import useFadeIn from "../hooks/useFadeIn";
 export default function HowItWorks() {
 	const elementRef = useRef();
 	useFadeIn(elementRef);
+
+	const handleTryFreeClick = () => {
+		const heroSearchOne = document.querySelector("#hero-search-one");
+		window.scrollTo({
+			behavior: "smooth",
+			top: 0, // Adjust the vertical position as needed
+		});
+		setTimeout(() => {
+			heroSearchOne.focus();
+		}, 800);
+	};
 
 	return (
 		<section className="section-padding bg-classmate-tan-2 py-20 xl:py-40">
@@ -73,6 +85,7 @@ export default function HowItWorks() {
 				<ClassmateButton
 					size="lg"
 					variant="outlined"
+					callback={handleTryFreeClick}
 					styles="border-classmate-green-2 text-classmate-green-2 hover:!bg-classmate-hover-tan-2 self-center">
 					Try For Free
 				</ClassmateButton>

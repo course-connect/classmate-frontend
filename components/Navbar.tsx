@@ -63,7 +63,7 @@ export default function Navbar() {
 
 	return (
 		<nav
-			className={`section-padding flex h-16 items-center justify-between space-x-5 ${bgColor} py-4 md:h-20 md:justify-normal`}>
+			className={`section-padding flex h-16 items-center justify-between space-x-5 py-4 md:h-20 md:justify-normal ${bgColor}`}>
 			<ClassmateButton
 				styles="rounded-md p-2 text-2xl font-extrabold text-classmate-green-6 transition hover:!bg-classmate-hover-tan-2"
 				href="/">
@@ -73,7 +73,7 @@ export default function Navbar() {
 						width={0}
 						height={0}
 						alt="large navbar classmate logo"
-						className="h-6 w-auto"
+						className="h-6 w-auto min-w-[143px]"
 					/>
 				) : (
 					<Image
@@ -148,40 +148,43 @@ export default function Navbar() {
 				</li>
 			</ul>
 
-			<ClassmateButton
-				styles="md:hidden !p-2"
-				variant="text"
-				size="xs"
-				callback={toggleMobileMenu}>
-				<Image
-					src="./hamburger.svg"
-					width={25}
-					height={25}
-					alt="An icon depicting three horizontal lines, commonly known as a hamburger icon, representing a menu opener."
-				/>
-			</ClassmateButton>
+			<div className="flex w-full gap-4">
+				{isAuthenticated ? (
+					<AccountMenu />
+				) : (
+					<>
+						<div className="!ml-auto hidden gap-2 md:flex">
+							<ClassmateButton
+								href="/signin"
+								styles="border-classmate-green-2 text-classmate-green-2 hover:!bg-classmate-hover-tan-2"
+								variant="outlined"
+								size="sm">
+								Sign In
+							</ClassmateButton>
 
-			{isAuthenticated ? (
-				<AccountMenu />
-			) : (
-				<div className="!ml-auto hidden gap-2 md:flex">
-					<ClassmateButton
-						href="/signin"
-						styles="border-classmate-green-2 text-classmate-green-2 hover:!bg-classmate-hover-tan-2"
-						variant="outlined"
-						size="sm">
-						Sign In
-					</ClassmateButton>
-
-					<ClassmateButton
-						href="/signup"
-						styles="bg-classmate-green-2 text-classmate-tan-2 hover:!bg-classmate-hover-green-2"
-						variant="filled"
-						size="sm">
-						Sign Up
-					</ClassmateButton>
-				</div>
-			)}
+							<ClassmateButton
+								href="/signup"
+								styles="bg-classmate-green-2 text-classmate-tan-2 hover:!bg-classmate-hover-green-2"
+								variant="filled"
+								size="sm">
+								Sign Up
+							</ClassmateButton>
+						</div>
+						<ClassmateButton
+							styles="md:hidden !p-2 !ml-auto"
+							variant="text"
+							size="xs"
+							callback={toggleMobileMenu}>
+							<Image
+								src="./hamburger.svg"
+								width={25}
+								height={25}
+								alt="An icon depicting three horizontal lines, commonly known as a hamburger icon, representing a menu opener."
+							/>
+						</ClassmateButton>
+					</>
+				)}
+			</div>
 		</nav>
 	);
 }

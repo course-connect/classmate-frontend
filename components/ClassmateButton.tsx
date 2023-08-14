@@ -10,7 +10,7 @@ type ClassmateButtonProps = {
 	children: ReactNode;
 	styles?: string;
 	size: "xs" | "sm" | "md" | "lg";
-	callback: () => void;
+	callback?: () => void;
 	type?: "button" | "submit" | "reset";
 };
 

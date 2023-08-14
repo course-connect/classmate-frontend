@@ -7,10 +7,17 @@ import robot from "../public/robot.svg";
 import handHeart from "../public/hand-heart.svg";
 import ClassmateButton from "./ClassmateButton";
 import useFadeIn from "../hooks/useFadeIn";
+import { useRouter } from "next/router";
 
 export default function WhatWeOffer() {
 	const elementRef = useRef();
 	useFadeIn(elementRef);
+
+	const router = useRouter();
+
+	const handleGetStartedClick = () => {
+		router.push("/search");
+	};
 
 	return (
 		<section className="section-padding flex justify-center bg-classmate-tan-2 py-20 sm:pb-10 xl:py-44 xl:pb-24">
@@ -29,6 +36,7 @@ export default function WhatWeOffer() {
 						dolorem.
 					</p>
 					<ClassmateButton
+						callback={handleGetStartedClick}
 						variant="filled"
 						size="lg"
 						styles="hidden bg-classmate-gold-1 text-classmate-tan-1 lg:block hover:!bg-classmate-hover-gold-1">
@@ -99,9 +107,10 @@ export default function WhatWeOffer() {
 					</div>
 				</div>
 				<ClassmateButton
+					callback={handleGetStartedClick}
 					variant="filled"
 					size="lg"
-					styles="mt-10 bg-classmate-gold-1 text-classmate-tan-1 lg:hidden">
+					styles="mt-10 bg-classmate-gold-1 text-classmate-tan-1 lg:hidden hover:!bg-classmate-hover-gold-1">
 					Get Started
 				</ClassmateButton>
 			</div>

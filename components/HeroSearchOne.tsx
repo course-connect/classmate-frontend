@@ -58,6 +58,7 @@ const HeroSearchOne = ({ setShowFirstSearch }) => {
 				className="relative flex w-full items-center rounded-full bg-classmate-tan-2  shadow-lg">
 				<HeroSearchOneSelect setValue={setValue} />
 				<input
+					id="hero-search-one"
 					defaultValue=""
 					{...register("userInput")}
 					placeholder={`Enter ${heroSearchOne.type}`}

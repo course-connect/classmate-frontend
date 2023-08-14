@@ -10,6 +10,17 @@ const EasilyCompareSection = () => {
 	const elementRef = useRef();
 	useFadeIn(elementRef);
 
+	const handleTryFreeClick = () => {
+		const heroSearchOne = document.querySelector("#hero-search-one");
+		window.scrollTo({
+			behavior: "smooth",
+			top: 0, // Adjust the vertical position as needed
+		});
+		setTimeout(() => {
+			heroSearchOne.focus();
+		}, 800);
+	};
+
 	return (
 		<section className="section-padding flex flex-col items-center justify-center  bg-classmate-tan-2 py-20 sm:pt-10  xl:py-44 xl:pt-24">
 			<div
@@ -37,11 +48,11 @@ const EasilyCompareSection = () => {
 						dolorem.
 					</p>
 					<ClassmateButton
-						callback={() => null}
+						callback={handleTryFreeClick}
 						variant="filled"
 						size="lg"
-						styles="bg-classmate-gold-1 text-classmate-tan-1 lg:block hover:!bg-classmate-hover-gold-1">
-						Get Started
+						styles="bg-classmate-green-4 text-classmate-tan-1 lg:block">
+						Try For Free
 					</ClassmateButton>
 				</div>
 			</div>

@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+// Project hooks
+import useWindowSize from "../hooks/useWindowSize";
 
 // Project components
 import ToolTip from "./ToolTip";
@@ -11,7 +14,7 @@ import { useRouter } from "next/router";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { signOut } from "../redux/auth/authActions";
 
-const menuItems: MenuItem[] = [
+const defaultMenuItems: MenuItem[] = [
 	{
 		icon: "./graduation-cap.svg",
 		label: "Profile",
@@ -50,10 +53,43 @@ const menuItems: MenuItem[] = [
 	},
 ];
 
+const additionalMenuItems: MenuItem[] = [
+	{
+		icon: "./home.svg",
+		label: "Home",
+		id: "home",
+		width: 20,
+		height: 20,
+		href: "/",
+		alt: "Home icon to go to the homepage",
+	},
+	{
+		icon: "./search-green-7.svg",
+		label: "Search",
+		id: "search",
+		width: 20,
+		height: 20,
+		href: "/search",
+		alt: "Search icon to go to the search page",
+	},
+];
+
 const AccountMenu = () => {
 	const dispatch = useAppDispatch();
 	const [menuOpen, toggleMenuOpen] = useState(false);
 	const router = useRouter();
+	const { width: screenWidth } = useWindowSize();
+	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+
+	useEffect(() => {
+		if (screenWidth !== undefined) {
+			if (screenWidth < 768 && menuItems.length < 6) {
+				setMenuItems([...additionalMenuItems, ...defaultMenuItems]);
+			} else if (screenWidth >= 768 && menuItems.length === 6) {
+				setMenuItems([...defaultMenuItems]);
+			}
+		}
+	}, [screenWidth, menuItems.length]);
 
 	const handleMenuClick = () => {
 		toggleMenuOpen((current) => !current); // Toggle the menu open state
@@ -72,7 +108,7 @@ const AccountMenu = () => {
 	};
 
 	return (
-		<div className="relative">
+		<div className="relative !ml-auto">
 			{/* ToolTip component */}
 			<ToolTip hideOn={menuOpen} spacing={10}>
 				<button
