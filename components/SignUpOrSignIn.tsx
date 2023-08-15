@@ -1,4 +1,4 @@
-import HomepageHeading from "./HomepageHeading";
+import HomepageHeading from "../pages/home/HomepageHeading";
 import ClassmateButton from "./ClassmateButton";
 import Image from "next/image";
 import googleLogo from "../public/google.png";

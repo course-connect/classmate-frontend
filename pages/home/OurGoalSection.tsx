@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 // Project components
-import HomepageHeading from "../../components/HomepageHeading";
+import HomepageHeading from "./HomepageHeading";
 import ClassmateButton from "../../components/ClassmateButton";
 
 // Project hooks

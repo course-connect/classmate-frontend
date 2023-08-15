@@ -1,8 +1,12 @@
+import React from "react";
+
+import AccountMenu from "./AccountMenu";
+
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-export default function Account() {
+const Account = () => {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const router = useRouter();
 
@@ -13,8 +17,10 @@ export default function Account() {
 	}, [isAuthenticated]);
 
 	return (
-		<div className="mx-64">
-			<h1>Account</h1>
+		<div className="section-padding relative bg-classmate-tan-1 py-6">
+			<AccountMenu />
 		</div>
 	);
-}
+};
+
+export default Account;

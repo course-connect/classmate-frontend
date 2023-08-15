@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import RankGraph from "../../components/RankGraph";
-import HomepageHeading from "../../components/HomepageHeading";
+import HomepageHeading from "./HomepageHeading";
 import ClassmateButton from "../../components/ClassmateButton";
 import useWindowSize from "../../hooks/useWindowSize";
 import useFadeIn from "../../hooks/useFadeIn";
