@@ -8,6 +8,7 @@ import { signIn } from "../redux/auth/authActions";
 
 import BasicInput from "./BasicInput";
 import PasswordInput from "./PasswordInput";
+import FormSelect from "./ui/FormSelect";
 
 export default function SignInForm() {
 	const dispatch = useDispatch();
@@ -54,6 +55,7 @@ export default function SignInForm() {
 					<BasicInput
 						name="email"
 						label="Email"
+						background="bg-classmate-tan-2"
 						rules={{
 							required: true,
 						}}
@@ -61,7 +63,16 @@ export default function SignInForm() {
 					<PasswordInput
 						name="password"
 						label="Password"
+						background="bg-classmate-tan-2"
 						size={windowWidth >= 640 ? "medium" : "small"}
+						rules={{
+							required: true,
+						}}
+					/>
+					<FormSelect
+						name="email"
+						label="Email"
+						background="bg-classmate-tan-2"
 						rules={{
 							required: true,
 						}}

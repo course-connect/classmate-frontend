@@ -139,7 +139,7 @@ export default function Navbar() {
 				</li>
 				<li className="md:hidden ">
 					<ClassmateButton
-						href="/signin"
+						href="/signup"
 						variant="text"
 						styles="text-lg md:text-sm text-classmate-green-6 px-1"
 						callback={toggleMobileMenu}>

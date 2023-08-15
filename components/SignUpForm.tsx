@@ -102,6 +102,7 @@ export default function SignUpForm() {
 					<BasicInput
 						name="email"
 						label="Email"
+						background="bg-classmate-tan-2"
 						rules={{
 							required: true,
 						}}
@@ -109,6 +110,7 @@ export default function SignUpForm() {
 					<PasswordInput
 						name="password"
 						label="Password"
+						background="bg-classmate-tan-2"
 						rules={{
 							required: true,
 						}}
@@ -116,6 +118,7 @@ export default function SignUpForm() {
 					<PasswordInput
 						name="confirmPassword"
 						label="Confirm Password"
+						background="bg-classmate-tan-2"
 						size={windowWidth >= 640 ? "medium" : "small"}
 						rules={{
 							required: true,
@@ -133,7 +136,7 @@ export default function SignUpForm() {
 				type="submit"
 				variant="filled"
 				fullWidth={true}
-				size={windowWidth >= 640 ? "lg" : "sm"}
+				size={windowWidth >= 640 ? "lg" : "md"}
 				styles="my-6 bg-classmate-gold-1 text-classmate-tan-2 sm:my-12">
 				Sign Up
 			</ClassmateButton>
