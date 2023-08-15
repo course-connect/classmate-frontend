@@ -18,12 +18,12 @@ const HeroStat: React.FC<HeroStatProps> = ({ text, number, plus = false }) => {
 			<div
 				data-number={number}
 				id="number"
-				className="font-classmate-bold flex text-5xl lg:text-6xl">
+				className="font-classmate-bold flex text-5xl lg:text-[56px]">
 				<AnimatedNumber n={number} />
 				{`${plus ? "+" : ""}`}
 			</div>
 			{/* Display the text */}
-			<p className="font-classmate-italic text-xl lg:text-2xl">{text}</p>
+			<p className="font-classmate-italic text-xl lg:text-xl">{text}</p>
 		</div>
 	);
 };

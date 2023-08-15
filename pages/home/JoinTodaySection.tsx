@@ -39,7 +39,7 @@ const JoinTodaySection: React.FC = () => {
 			className="section-padding bg-classmate-tan-1">
 			<div
 				ref={elementToApplyClasses}
-				className="xl:gap-22 flex flex-col items-center justify-center px-10 py-12 !opacity-0 !transition-all !duration-1000 sm:flex-row sm:gap-12 xl:py-16 2xl:px-16 3xl:gap-28">
+				className="flex flex-col items-center justify-center px-10 py-12 !opacity-0 !transition-all !duration-1000 sm:flex-row sm:gap-12 xl:py-16 2xl:px-16 3xl:gap-28">
 				{/* Paragraph describing the section */}
 				<p className="font-classmate flex max-w-[280px] text-center text-classmate-green-1 sm:max-w-none sm:text-left sm:text-lg md:text-xl lg:text-2xl">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

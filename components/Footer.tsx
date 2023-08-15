@@ -7,6 +7,7 @@ import Image from "next/image";
 // Redux components
 import { useSelector } from "react-redux";
 import { AuthState } from "../redux/auth/authInterface";
+import ClassmateButton from "./ClassmateButton";
 
 interface SocialMediaLink {
 	href: string;
@@ -65,12 +66,14 @@ const Footer: React.FC = () => {
 				/>
 				<ul className="font-classmate flex flex-col items-center justify-center gap-5 text-sm sm:flex-row sm:gap-14">
 					{menuItems.map((item) => (
-						<Link
+						<ClassmateButton
+							size="xs"
+							variant="text"
 							key={item.link}
 							href={item.link}
-							className="link text-classmate-green-5">
-							<li>{item.text}</li>
-						</Link>
+							styles="text-classmate-green-5  hover:bg-classmate-green-2 !text-sm">
+							{item.text}
+						</ClassmateButton>
 					))}
 				</ul>
 				<div className="h-[2px] w-full rounded-lg bg-classmate-green-5" />

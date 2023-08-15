@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
-import RankGraph from "../components/RankGraph";
-import HomepageHeading from "./HomepageHeading";
-import ClassmateButton from "../components/ClassmateButton";
-import useWindowSize from "../hooks/useWindowSize";
-import useFadeIn from "../hooks/useFadeIn";
+import RankGraph from "../../components/RankGraph";
+import HomepageHeading from "../../components/HomepageHeading";
+import ClassmateButton from "../../components/ClassmateButton";
+import useWindowSize from "../../hooks/useWindowSize";
+import useFadeIn from "../../hooks/useFadeIn";
 
 const EasilyCompareSection = () => {
 	const { width } = useWindowSize();
@@ -51,7 +51,7 @@ const EasilyCompareSection = () => {
 						callback={handleTryFreeClick}
 						variant="filled"
 						size="lg"
-						styles="bg-classmate-green-4 text-classmate-tan-1 lg:block">
+						styles="bg-classmate-green-4 text-classmate-tan-2 lg:block !transition-all !duration-800 hover:!brightness-105">
 						Try For Free
 					</ClassmateButton>
 				</div>

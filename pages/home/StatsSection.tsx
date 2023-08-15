@@ -25,7 +25,7 @@ const HeroStatsSection: React.FC = () => {
 				{isInWindow ? (
 					// Content displayed when component is in the viewport
 					<div className="flex flex-col items-center justify-center gap-10 lg:flex-row">
-						<div className="flex w-full flex-wrap justify-around gap-8 ">
+						<div className="flex w-full flex-wrap justify-around gap-8 xl:gap-0 xl:px-12">
 							{/* HeroStat components */}
 							<HeroStat text="Schools" number={152} />
 							<HeroStat text="Professors" number={400} plus={true} />
@@ -36,9 +36,9 @@ const HeroStatsSection: React.FC = () => {
 							{/* Join Today Button */}
 							<ClassmateButton
 								href="./signup"
-								size="md"
+								size="lg"
 								variant="filled"
-								styles="h-fit bg-classmate-green-2 text-classmate-tan-2 transition-all duration-800  hover:brightness-125">
+								styles="h-fit bg-classmate-green-2 text-classmate-tan-2 !transition-all !duration-800  hover:brightness-105">
 								Join Today
 							</ClassmateButton>
 						</div>

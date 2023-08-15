@@ -76,7 +76,7 @@ export default function WhatWeOffer() {
 						callback={handleGetStartedClick}
 						variant="filled"
 						size="lg"
-						styles="hidden bg-classmate-gold-1 text-classmate-tan-1 lg:block hover:!bg-classmate-hover-gold-1">
+						styles="hidden bg-classmate-gold-1 text-classmate-tan-2 lg:block !transition-all !duration-800  hover:!brightness-105">
 						Get Started
 					</ClassmateButton>
 				</div>
@@ -110,7 +110,7 @@ export default function WhatWeOffer() {
 					callback={handleGetStartedClick}
 					variant="filled"
 					size="lg"
-					styles="mt-10 bg-classmate-gold-1 text-classmate-tan-1 lg:hidden hover:!bg-classmate-hover-gold-1">
+					styles="mt-10 bg-classmate-gold-1 text-classmate-tan-2 lg:hidden !transition-all !duration-800  hover:!brightness-105">
 					Get Started
 				</ClassmateButton>
 			</div>

@@ -68,7 +68,7 @@ function HowItWorksSection() {
 				<HomepageHeading>How It Works</HomepageHeading>
 
 				{/* Steps */}
-				<div className="my-10 flex flex-wrap justify-center xl:mt-16">
+				<div className="my-10 flex flex-wrap justify-center xl:mt-16 xl:px-20">
 					{stepsData.map((step) => (
 						<div
 							key={step.number}
@@ -84,7 +84,7 @@ function HowItWorksSection() {
 								src={step.imageSrc}
 								width={0}
 								height={0}
-								className="my-10 h-48 w-fit 3xl:h-auto 3xl:w-72"
+								className="my-10 h-48 w-fit 3xl:h-auto 3xl:w-64"
 								alt={step.altText}
 							/>
 
