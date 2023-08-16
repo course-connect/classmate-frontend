@@ -51,7 +51,7 @@ const EasilyCompareSection = () => {
 						callback={handleTryFreeClick}
 						variant="filled"
 						size="lg"
-						styles="bg-classmate-green-4 text-classmate-tan-2 lg:block !transition-all !duration-800 hover:!brightness-105">
+						styles="bg-classmate-green-4 text-classmate-tan-2 lg:block">
 						Try For Free
 					</ClassmateButton>
 				</div>

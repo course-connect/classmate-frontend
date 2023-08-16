@@ -74,7 +74,7 @@ export default function WhatWeOffer() {
 					href="./search"
 					variant="filled"
 					size="lg"
-					styles="mt-10 bg-classmate-pink-1 text-classmate-tan-1 lg:hidden hover:!brightness-105 !transition-all !duration-800">
+					styles="mt-10 bg-classmate-pink-1 text-classmate-tan-1 lg:hidden">
 					Get Started
 				</ClassmateButton>
 			</div>

@@ -156,7 +156,7 @@ export default function Navbar() {
 						<div className="!ml-auto hidden gap-2 md:flex">
 							<ClassmateButton
 								href="/signin"
-								styles="border-classmate-green-2 text-classmate-green-2 hover:!bg-classmate-hover-tan-2"
+								styles="border-classmate-green-2 text-classmate-green-2 bg-classmate-tan-2"
 								variant="outlined"
 								size="sm">
 								Sign In

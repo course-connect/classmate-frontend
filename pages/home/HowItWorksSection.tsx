@@ -101,7 +101,7 @@ function HowItWorksSection() {
 					size="lg"
 					variant="outlined"
 					callback={handleTryFreeClick}
-					styles="border-classmate-green-2 text-classmate-green-2 hover:!bg-classmate-hover-tan-2 self-center">
+					styles="border-classmate-green-2 text-classmate-green-2 self-center bg-classmate-tan-2">
 					Try For Free
 				</ClassmateButton>
 			</div>

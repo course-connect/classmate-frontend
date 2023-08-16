@@ -15,8 +15,8 @@ type ClassmateButtonProps = {
 };
 
 const variantStylesMap = {
-	filled: "",
-	outlined: "border-[1px]",
+	filled: "hover:brightness-105",
+	outlined: "border-[1px] hover:brightness-95",
 	text: "rounded-md",
 };
 
@@ -28,7 +28,7 @@ const sizeStylesMap = {
 };
 
 const baseStyles =
-	"whitespace-nowrap transition-colors ease-in-out duration-200 outline-none ring-classmate-gold-1 focus:ring w-fit";
+	"whitespace-nowrap !transition !duration-800 ease-in-out duration-200 outline-none ring-classmate-gold-1 focus:ring w-fit";
 
 const ClassmateButton: FC<ClassmateButtonProps> = ({
 	type = "button",

@@ -60,7 +60,7 @@ const JoinTodaySection: React.FC = () => {
 						callback={handleGetStartedClick}
 						size="md"
 						variant="outlined"
-						styles="border-classmate-green-2 text-classmate-green-2 hover:!bg-classmate-hover-tan-1">
+						styles="border-classmate-green-2 text-classmate-green-2 bg-classmate-tan-1">
 						Get Started
 					</ClassmateButton>
 				</div>

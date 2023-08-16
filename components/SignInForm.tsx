@@ -9,6 +9,7 @@ import { signIn } from "../redux/auth/authActions";
 import BasicInput from "./BasicInput";
 import PasswordInput from "./PasswordInput";
 import FormSelect from "./ui/FormSelect";
+import FormSelectOptions from "../components/ui/FormSelectOptions";
 
 export default function SignInForm() {
 	const dispatch = useDispatch();
@@ -20,7 +21,7 @@ export default function SignInForm() {
 			password: "",
 		},
 	});
-	const { handleSubmit, setError } = methods;
+	const { handleSubmit, setError, setValue, getValues } = methods;
 
 	function validateEmail(email) {
 		const emailRegex =
@@ -70,13 +71,18 @@ export default function SignInForm() {
 						}}
 					/>
 					<FormSelect
-						name="email"
-						label="Email"
-						background="bg-classmate-tan-2"
+						setValue={setValue}
+						getValues={getValues}
+						name="test"
+						label="Test"
+						backgroundColor="bg-classmate-tan-2"
 						rules={{
 							required: true,
-						}}
-					/>
+						}}>
+						<FormSelectOptions text="Option 1" />
+						<FormSelectOptions text="Option 2" />
+						<FormSelectOptions text="Option 3" />
+					</FormSelect>
 				</FormProvider>
 			</div>
 			<p className="font-classmate mt-4 text-classmate-green-6">

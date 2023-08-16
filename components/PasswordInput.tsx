@@ -41,7 +41,7 @@ export default function PasswordInput({ name, label, rules, background }) {
 						}`}>
 						<p
 							className={`whitespace-nowrap ${
-								changeLabelColor ? "!text-classmate-gold-1" : ""
+								changeLabelColor ? "text-classmate-gold-1" : ""
 							} ${error ? "!text-classmate-error-red" : ""}`}>
 							{label}
 						</p>
@@ -52,7 +52,7 @@ export default function PasswordInput({ name, label, rules, background }) {
 						onBlur={() => hanldeInputBlur(value)}
 						onChange={onChange}
 						value={value}
-						className={`font-classmate w-full rounded-md border-[1px] border-classmate-gray-2 bg-transparent px-4 py-4 text-classmate-green-7 placeholder-classmate-green-7  ${
+						className={`font-classmate w-full rounded-md border-[1px] border-classmate-gray-2 bg-transparent px-4 py-4 text-classmate-green-7 placeholder-classmate-green-7 hover:border-classmate-gray-1  ${
 							!!error
 								? `!border-classmate-error-red !placeholder-classmate-error-red focus:!outline-classmate-error-red`
 								: "focus:!outline-classmate-gold-1"

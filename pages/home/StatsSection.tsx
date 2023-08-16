@@ -38,7 +38,7 @@ const HeroStatsSection: React.FC = () => {
 								href="./signup"
 								size="lg"
 								variant="filled"
-								styles="h-fit bg-classmate-green-2 text-classmate-tan-2 !transition-all !duration-800  hover:brightness-105">
+								styles="h-fit bg-classmate-green-2 text-classmate-tan-2 hover:!bg-classmate-hover-green-2">
 								Join Today
 							</ClassmateButton>
 						</div>
