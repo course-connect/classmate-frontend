@@ -1,15 +1,16 @@
 import {
-	FORM_SEARCH_SUCCESS,
-	FORM_SEARCH_FAILURE,
-	FORM_SEARCH_LOADING,
-	SET_FORM_SEARCH_TYPE,
-	CLEAR_FORM_SEARCH,
-	SET_FORM_SEARCH_FILTER,
-	CLEAR_FORM_SEARCH_FILTERS,
-	RESET_FORM_SEARCH,
-	REMOVE_FORM_SEARCH_FILTER,
-	RESET_FORM_SEARCH_FILTERS,
-} from "./filterSearchTypes";
+	FILTER_SEARCH_SUCCESS,
+	FILTER_SEARCH_FAILURE,
+	FILTER_SEARCH_LOADING,
+	SET_FILTER_SEARCH_TYPE,
+	CLEAR_FILTER_SEARCH,
+	SET_FILTER_SEARCH_FILTER,
+	CLEAR_FILTER_SEARCH_FILTERS,
+	RESET_FILTER_SEARCH,
+	SET_MULTI_FILTER_SEARCH_FILTER,
+	REMOVE_FILTER_SEARCH_FILTER,
+	RESET_FILTER_SEARCH_FILTERS,
+} from "./formSearchTypes";
 
 const initialStateCopy = {
 	loading: false,
@@ -87,53 +88,53 @@ export default (state = initialState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
-		case RESET_FORM_SEARCH:
+		case RESET_FILTER_SEARCH:
 			return {
 				...initialStateCopy,
 				filters: { ...initialState.filters },
 			};
-		case RESET_FORM_SEARCH_FILTERS:
+		case RESET_FILTER_SEARCH_FILTERS:
 			return {
 				...state,
 				filters: {
 					...initialStateCopy.filters,
 				},
 			};
-		case FORM_SEARCH_LOADING:
+		case FILTER_SEARCH_LOADING:
 			return {
 				...state,
 				loading: true,
 			};
-		case FORM_SEARCH_SUCCESS:
+		case FILTER_SEARCH_SUCCESS:
 			return {
 				...state,
 				loading: false,
 				results: payload,
 			};
-		case FORM_SEARCH_FAILURE:
+		case FILTER_SEARCH_FAILURE:
 			return {
 				...state,
 				loading: false,
 				results: [],
 			};
-		case SET_FORM_SEARCH_TYPE:
+		case SET_FILTER_SEARCH_TYPE:
 			return {
 				...state,
 				type: payload,
 			};
-		case CLEAR_FORM_SEARCH:
+		case CLEAR_FILTER_SEARCH:
 			return {
 				...state,
 				results: [],
 			};
-		case SET_FORM_SEARCH_FILTER:
+		case SET_FILTER_SEARCH_FILTER:
 			return {
 				...state,
 				filters: {
 					...payload,
 				},
 			};
-		case REMOVE_FORM_SEARCH_FILTER:
+		case REMOVE_FILTER_SEARCH_FILTER:
 			return {
 				...state,
 				filters: {
@@ -144,7 +145,14 @@ export default (state = initialState, action) => {
 					},
 				},
 			};
-		case CLEAR_FORM_SEARCH_FILTERS:
+		case SET_MULTI_FILTER_SEARCH_FILTER:
+			return {
+				...state,
+				filters: {
+					...payload,
+				},
+			};
+		case CLEAR_FILTER_SEARCH_FILTERS:
 			return {
 				...state,
 				filters: initialStateCopy.filters,

@@ -10,6 +10,7 @@ import Fuse from "fuse.js";
 
 type InputProps = {
 	type?: "select" | "local-search" | "database-search";
+	searchType?: "school" | "course";
 	name: string;
 	label: string;
 	backgroundColor: string;
@@ -31,6 +32,7 @@ const FormSelect: FC<InputProps> = ({
 }) => {
 	const [localSearchValue, setLocalSearchValue] = useState("");
 	const [localSearchResults, setLocalSearchresults] = useState([]);
+
 	const [moveLabel, setMoveLabel] = useState(false);
 	const [inputFocused, setInputFocused] = useState(false);
 	const [changeLabelColor, setChangeLabelColor] = useState(false);
@@ -107,12 +109,14 @@ const FormSelect: FC<InputProps> = ({
 	};
 
 	useEffect(() => {
-		if (!localSearchValue) {
-			const results = getDefaultLocalSearchResults();
-			setLocalSearchresults(results);
-		} else {
-			const results = getLocalSearchResults();
-			setLocalSearchresults(results);
+		if (type === "local-search") {
+			if (!localSearchValue) {
+				const results = getDefaultLocalSearchResults();
+				setLocalSearchresults(results);
+			} else {
+				const results = getLocalSearchResults();
+				setLocalSearchresults(results);
+			}
 		}
 	}, [localSearchValue]);
 
@@ -123,6 +127,20 @@ const FormSelect: FC<InputProps> = ({
 			}, 100);
 		}
 	}, [inputFocused]);
+
+	// Database Search
+	const [databaseSearchValue, setDatabaseSearchValue] = useState("");
+
+	const handleDatabseSearchChange = (e) => {
+		console.log("searching database");
+		setDatabaseSearchValue(e.target.value);
+	};
+
+	useEffect(() => {
+		if (type === "database-search") {
+			console.log("rendering database search");
+		}
+	}, []);
 
 	return (
 		<Controller
@@ -166,6 +184,7 @@ const FormSelect: FC<InputProps> = ({
 								"invert(33%) sepia(8%) saturate(1099%) hue-rotate(65deg) brightness(97%) contrast(20%)",
 						}}
 						src="./caret.svg"
+						alt="caret"
 						height={12}
 						width={12}
 						className={`pointer-events-none absolute right-3 transition-all ${
@@ -179,6 +198,7 @@ const FormSelect: FC<InputProps> = ({
 								? "pointer-events-auto scale-100 opacity-100"
 								: "pointer-events-none scale-75 opacity-0"
 						} }`}>
+						{type === "select" && children}
 						{type === "local-search" && (
 							<>
 								<div
@@ -204,7 +224,30 @@ const FormSelect: FC<InputProps> = ({
 								{localSearchResults.map(({ item }) => item)}
 							</>
 						)}
-						{type === "select" && children}
+						{type === "database-search" && (
+							<>
+								<div
+									id="local-search-input"
+									className="mb-2 flex overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
+									<Image
+										src="./search.svg"
+										width={20}
+										height={20}
+										alt=""
+										className="mx-3"
+									/>
+									<input
+										ref={searchRef}
+										value={databaseSearchValue || ""}
+										onChange={(e) => handleDatabseSearchChange(e)}
+										placeholder="Search"
+										type="text"
+										className={`font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-7 placeholder-classmate-green-7 outline-none`}
+									/>
+								</div>
+								{/* {localSearchResults.map(({ item }) => item)} */}
+							</>
+						)}
 					</div>
 				</div>
 			)}

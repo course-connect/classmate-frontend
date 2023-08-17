@@ -73,17 +73,15 @@ export default function SignInForm() {
 					<FormSelect
 						setValue={setValue}
 						getValues={getValues}
-						type="local-search"
+						type="database-search"
+						searchType="school"
 						name="test"
 						label="Test"
 						backgroundColor="bg-classmate-tan-2"
 						rules={{
 							required: true,
-						}}>
-						<FormSelectOptions text="Option 1" />
-						<FormSelectOptions text="Option 2" />
-						<FormSelectOptions text="Option 3" />
-					</FormSelect>
+						}}
+					/>
 				</FormProvider>
 			</div>
 			<p className="font-classmate mt-4 text-classmate-green-6">
