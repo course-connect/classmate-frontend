@@ -73,6 +73,7 @@ export default function SignInForm() {
 					<FormSelect
 						setValue={setValue}
 						getValues={getValues}
+						type="local-search"
 						name="test"
 						label="Test"
 						backgroundColor="bg-classmate-tan-2"

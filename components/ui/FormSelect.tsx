@@ -1,10 +1,12 @@
-import React, { FC, useState, useRef } from "react";
+import React, { FC, useState, useRef, useEffect } from "react";
 
 import { Controller, useFormContext } from "react-hook-form";
 
 import useOutsideAlerter from "../../hooks/useOutsideAlerter";
 
 import Image from "next/image";
+
+import Fuse from "fuse.js";
 
 type InputProps = {
 	type?: "select" | "local-search" | "database-search";
@@ -27,24 +29,31 @@ const FormSelect: FC<InputProps> = ({
 	children,
 	backgroundColor,
 }) => {
+	const [localSearchValue, setLocalSearchValue] = useState("");
+	const [localSearchResults, setLocalSearchresults] = useState([]);
 	const [moveLabel, setMoveLabel] = useState(false);
 	const [inputFocused, setInputFocused] = useState(false);
 	const [changeLabelColor, setChangeLabelColor] = useState(false);
 	const labelRef = useRef();
 	const { control } = useFormContext();
 	const selectRef = useRef();
+	const searchRef = useRef();
 
 	useOutsideAlerter((e) => {
-		const selectedValue = e.target.dataset.value;
-		const currentValue = getValues(name);
-		if (selectedValue && selectedValue != currentValue) {
-			setValue(name, selectedValue);
-		} else if (!currentValue) {
-			setMoveLabel(false);
-		}
-
 		setChangeLabelColor(false);
-		setInputFocused(false);
+
+		const searchInputClicked = e.target.closest("#local-search-input");
+		if (!searchInputClicked) {
+			const selectedOption = e.target.dataset.value;
+			const currentOption = getValues(name);
+			if (selectedOption && selectedOption != currentOption) {
+				setValue(name, selectedOption);
+			} else if (!currentOption) {
+				setMoveLabel(false);
+			}
+
+			setInputFocused(false);
+		}
 	}, selectRef);
 
 	const hanldeInputClick = (e) => {
@@ -65,6 +74,55 @@ const FormSelect: FC<InputProps> = ({
 			e.target.blur();
 		}
 	};
+
+	const handleSelectBlur = () => {
+		setChangeLabelColor(false);
+	};
+
+	const handleLocalSearchChange = (e) => {
+		setLocalSearchValue(e.target.value);
+	};
+
+	const getDefaultLocalSearchResults = () => {
+		return children.map((child) => {
+			return {
+				item: child,
+			};
+		});
+	};
+
+	const getLocalSearchResults = () => {
+		const options = {
+			includeScore: true,
+			keys: ["props.text"],
+		};
+
+		const fuse = new Fuse(children, options);
+
+		return fuse.search(localSearchValue);
+	};
+
+	const handleKeyDown = () => {
+		searchRef.current.focus();
+	};
+
+	useEffect(() => {
+		if (!localSearchValue) {
+			const results = getDefaultLocalSearchResults();
+			setLocalSearchresults(results);
+		} else {
+			const results = getLocalSearchResults();
+			setLocalSearchresults(results);
+		}
+	}, [localSearchValue]);
+
+	useEffect(() => {
+		if (!inputFocused) {
+			setTimeout(() => {
+				setLocalSearchValue("");
+			}, 100);
+		}
+	}, [inputFocused]);
 
 	return (
 		<Controller
@@ -88,13 +146,17 @@ const FormSelect: FC<InputProps> = ({
 
 					<input
 						ref={selectRef}
-						onClick={(e) => hanldeInputClick(e)}
+						onMouseDown={(e) => hanldeInputClick(e)}
+						onKeyDown={handleKeyDown}
+						onBlur={handleSelectBlur}
 						onChange={onChange}
 						value={value || ""}
 						className={`font-classmate w-full cursor-pointer rounded-md border-[1px] border-classmate-gray-2 bg-transparent px-4 py-4 text-classmate-green-7 placeholder-classmate-green-7 caret-transparent hover:border-classmate-gray-1 ${
 							!!error
 								? `!border-classmate-error-red !placeholder-classmate-error-red focus:!outline-classmate-error-red`
-								: "focus:!outline-classmate-gold-1"
+								: `${
+										inputFocused ? "outline-classmate-gold-1" : "outline-none"
+								  }`
 						}`}
 					/>
 
@@ -117,7 +179,32 @@ const FormSelect: FC<InputProps> = ({
 								? "pointer-events-auto scale-100 opacity-100"
 								: "pointer-events-none scale-75 opacity-0"
 						} }`}>
-						{children}
+						{type === "local-search" && (
+							<>
+								<div
+									id="local-search-input"
+									className="mb-2 flex overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
+									<Image
+										src="./search.svg"
+										width={20}
+										height={20}
+										alt=""
+										className="mx-3"
+									/>
+									<input
+										ref={searchRef}
+										value={localSearchValue}
+										onChange={(e) => handleLocalSearchChange(e)}
+										placeholder="Search"
+										defaultValue=""
+										type="text"
+										className={`font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-7 placeholder-classmate-green-7 outline-none`}
+									/>
+								</div>
+								{localSearchResults.map(({ item }) => item)}
+							</>
+						)}
+						{type === "select" && children}
 					</div>
 				</div>
 			)}
