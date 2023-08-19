@@ -30,7 +30,7 @@ export const resetFormSearchFilters = () => async (dispatch) => {
 export const search = (userInput) => async (dispatch, getState) => {
 	// Flag search as loading
 	dispatch(formSearchLoading());
-	const { type: searchType } = getState().filterSearch;
+	const { type: searchType } = getState().formSearch;
 	const filters = {
 		professor: null,
 		department: null,
@@ -43,6 +43,7 @@ export const search = (userInput) => async (dispatch, getState) => {
 
 	try {
 		// Attempt to search with credentials given
+		console.log(userInput, searchType);
 		const res = await attemptFormSearch(userInput, searchType, filters);
 		// Search attempt succeeded
 		dispatch(formSearchSuccess(res.data));
@@ -53,6 +54,7 @@ export const search = (userInput) => async (dispatch, getState) => {
 };
 
 export const setFormSearchType = (searchType) => (dispatch) => {
+	console.log(searchType);
 	dispatch({
 		type: SET_FORM_SEARCH_TYPE,
 		payload: searchType,
@@ -91,7 +93,6 @@ export const removeFormSearchFilter = (searchFilter) => (dispatch) => {
 export const setMultiFormSearchFilters =
 	(searchFilters) => (dispatch, getState) => {
 		const currentFilters = getState().mainSearch.filters;
-		console.log({ ...currentFilters, ...searchFilters });
 		dispatch(setFormSearchFilter({ ...currentFilters, ...searchFilters }));
 	};
 

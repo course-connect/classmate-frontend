@@ -8,6 +8,15 @@ import Image from "next/image";
 
 import Fuse from "fuse.js";
 
+import {
+	setFormSearchType,
+	search,
+} from "../../redux/form-search/formSearchActions";
+
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useSelector } from "react-redux";
+import FormSelectOptions from "./FormSelectOptions";
+
 type InputProps = {
 	type?: "select" | "local-search" | "database-search";
 	searchType?: "school" | "course";
@@ -25,6 +34,7 @@ const FormSelect: FC<InputProps> = ({
 	label,
 	rules,
 	type = "select",
+	searchType,
 	setValue,
 	getValues,
 	children,
@@ -40,6 +50,8 @@ const FormSelect: FC<InputProps> = ({
 	const { control } = useFormContext();
 	const selectRef = useRef();
 	const searchRef = useRef();
+
+	const dispatch = useAppDispatch();
 
 	useOutsideAlerter((e) => {
 		setChangeLabelColor(false);
@@ -59,6 +71,11 @@ const FormSelect: FC<InputProps> = ({
 	}, selectRef);
 
 	const hanldeInputClick = (e) => {
+		if (type === "database-search" && !inputFocused) {
+			dispatch(setFormSearchType(searchType));
+			dispatch(search(""));
+		}
+
 		if (!moveLabel) {
 			setMoveLabel(true);
 		}
@@ -79,6 +96,7 @@ const FormSelect: FC<InputProps> = ({
 
 	const handleSelectBlur = () => {
 		setChangeLabelColor(false);
+		selectRef.current.blur();
 	};
 
 	const handleLocalSearchChange = (e) => {
@@ -129,18 +147,13 @@ const FormSelect: FC<InputProps> = ({
 	}, [inputFocused]);
 
 	// Database Search
+	const formSearch = useSelector((state) => state.formSearch);
 	const [databaseSearchValue, setDatabaseSearchValue] = useState("");
 
-	const handleDatabseSearchChange = (e) => {
-		console.log("searching database");
+	const handleDatabaseSearchChange = (e) => {
 		setDatabaseSearchValue(e.target.value);
+		dispatch(search(e.target.value));
 	};
-
-	useEffect(() => {
-		if (type === "database-search") {
-			console.log("rendering database search");
-		}
-	}, []);
 
 	return (
 		<Controller
@@ -239,13 +252,27 @@ const FormSelect: FC<InputProps> = ({
 									<input
 										ref={searchRef}
 										value={databaseSearchValue || ""}
-										onChange={(e) => handleDatabseSearchChange(e)}
+										onChange={(e) => handleDatabaseSearchChange(e)}
 										placeholder="Search"
 										type="text"
 										className={`font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-7 placeholder-classmate-green-7 outline-none`}
 									/>
 								</div>
-								{/* {localSearchResults.map(({ item }) => item)} */}
+								{formSearch.results.map(({ data }) => {
+									return searchType === "school" ? (
+										<FormSelectOptions
+											icon="./graduation-cap.svg"
+											text={data.school_name}
+											selected={data.school_name === getValues(name)}
+										/>
+									) : (
+										<FormSelectOptions
+											icon="./book-solid.svg"
+											text={data.school_name}
+											selected={data.school_name === getValues(name)}
+										/>
+									);
+								})}
 							</>
 						)}
 					</div>
