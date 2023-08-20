@@ -66,8 +66,8 @@ const HeroSearchOneResults: React.FC<HeroSchoolAndProfessorResultsProps> = ({
 								? "./graduation-cap.svg"
 								: "./glasses.svg"
 						}
-						className="mr-5"
-						alt=""
+						className="mr-5 h-[25px] w-[25px]"
+						alt="visiual depiction of a graduation cap or glasses that represents what you are searching for"
 					/>
 					<div className="flex flex-col justify-center gap-1">
 						<p className="font-classmate leading-none text-classmate-green-6">
@@ -77,7 +77,7 @@ const HeroSearchOneResults: React.FC<HeroSchoolAndProfessorResultsProps> = ({
 						</p>
 						<p className="font-classmate w-fit text-sm leading-none text-classmate-green-7">
 							{heroSearchOne.type === "school"
-								? item.data.school_zip
+								? item.data.zipcode
 								: item.data.school_names?.[0]}
 						</p>
 					</div>

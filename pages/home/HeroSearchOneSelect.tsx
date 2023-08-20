@@ -86,15 +86,17 @@ const HeroSchoolAndProfessorSelect: React.FC<{ setValue: Function }> = ({
 						src={selectedIcon}
 						height={25}
 						width={25}
-						alt=""
-						className="min-w-[25px]"
+						alt="icon"
+						className="h-[25px] w-[25px] min-w-[25px]"
 					/>
 					<Image
 						src="./caret-down.svg"
-						className={`min-w-[10px] ${menuOpen ? "rotate-180" : ""}`}
+						className={`h-[10px] w-[10px] min-w-[10px] ${
+							menuOpen ? "rotate-180" : ""
+						}`}
 						height={10}
 						width={10}
-						alt=""
+						alt="caret"
 					/>
 				</div>
 			</button>

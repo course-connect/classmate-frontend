@@ -70,8 +70,8 @@ const HeroSearchTwoResults: React.FC = () => {
 								? "./book-solid.svg"
 								: "./glasses.svg"
 						}
-						className="mr-5"
-						alt=""
+						className="mr-5 h-[20px] w-[20px]"
+						alt="visiual depiction of a graduation cap or glasses that represents what you are searching for"
 					/>
 					<div className="flex flex-col justify-center gap-1">
 						<p className="font-classmate leading-none text-classmate-green-6">

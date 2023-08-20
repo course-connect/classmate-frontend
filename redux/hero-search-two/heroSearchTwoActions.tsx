@@ -24,12 +24,9 @@ export const searchTwo = (userInput) => async (dispatch, getState) => {
 	dispatch(searchTwoLoading());
 	const { type: searchType, filters } = getState().heroSearchTwo;
 
-	// console.log(userInput, filters);
-
 	try {
 		// Attempt to search with credentials given
 		const res = await attemptSearchTwo(userInput, searchType, filters);
-		console.log(res);
 		// Search attempt succeeded
 		dispatch(searchTwoSuccess(res.data));
 	} catch (err) {

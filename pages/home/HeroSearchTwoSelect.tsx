@@ -91,19 +91,21 @@ const HeroSearchTwoSelect: React.FC<HeroSearchTwoSelectProps> = ({
 						}
 						height={heroSearchTwo.type === "course" ? 23 : 25}
 						width={25}
-						alt=""
+						alt="visiual depiction of a graduation cap or glasses that represents what you are searching for"
 						className={
 							heroSearchTwo.type === "course"
-								? "max-h-[23px] min-w-[25px]"
-								: "min-w-[25px]"
+								? "h-[23px] max-h-[23px] w-[25px] min-w-[25px]"
+								: "h-[25px] w-[25px] min-w-[25px]"
 						}
 					/>
 					<Image
 						src="./caret-down.svg"
-						className={`min-w-[10px] ${menuOpen ? "rotate-180" : ""}`}
+						className={`h-[10px] w-[10px] min-w-[10px] ${
+							menuOpen ? "rotate-180" : ""
+						}`}
 						height={10}
 						width={10}
-						alt=""
+						alt="small arrow"
 					/>
 				</div>
 			</button>

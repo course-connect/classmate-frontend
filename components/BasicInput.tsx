@@ -6,7 +6,8 @@ type InputProps = {
 	label: string;
 	background: string;
 	size?: "sm" | "lg";
-	rules: Record<string, unknown>;
+	rules?: Record<string, unknown>;
+	disabled?: boolean;
 };
 
 const BasicInput: FC<InputProps> = ({
@@ -15,6 +16,7 @@ const BasicInput: FC<InputProps> = ({
 	rules,
 	background,
 	size = "lg",
+	disabled = false,
 }) => {
 	const [movePlaceHolder, setMovePlaceHolder] = useState(false);
 	const [changeLabelColor, setChangeLabelColor] = useState(false);
@@ -53,12 +55,15 @@ const BasicInput: FC<InputProps> = ({
 						<p
 							className={`whitespace-nowrap ${
 								changeLabelColor ? "text-classmate-gold-1" : ""
-							} ${error ? "!text-classmate-error-red" : ""}`}>
+							} ${error ? "!text-classmate-error-red" : ""} ${
+								disabled ? "text-classmate-gray-4" : ""
+							}`}>
 							{label}
 						</p>
 					</span>
 
 					<input
+						disabled={disabled}
 						onFocus={hanldeInputFocus}
 						onBlur={() => hanldeInputBlur(value)}
 						onChange={onChange}
@@ -69,7 +74,7 @@ const BasicInput: FC<InputProps> = ({
 							!!error
 								? `!border-classmate-error-red !placeholder-classmate-error-red focus:!outline-classmate-error-red`
 								: "focus:!outline-classmate-gold-1"
-						}`}
+						} ${disabled ? "pointer-events-none border-classmate-gray-4" : ""}`}
 					/>
 				</div>
 			)}

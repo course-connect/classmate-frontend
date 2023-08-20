@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import AccountSection from "./AccountSection";
 import { useForm, FormProvider } from "react-hook-form";
 import BasicInput from "../../components/BasicInput";
@@ -23,7 +23,12 @@ const AccountProfileSection = () => {
 
 	const methods = useForm({
 		defaultValues: {
-			email: "",
+			firstName: "",
+			lastName: "",
+			zipcode: "",
+			major: "",
+			school: "",
+			graduationYear: "",
 		},
 	});
 	const { handleSubmit, setError, setValue, getValues } = methods;
@@ -32,43 +37,34 @@ const AccountProfileSection = () => {
 		console.log(values);
 	}
 
-	console.log(generateYearArray());
-
 	return (
 		<AccountSection title="Profile">
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="mt-8 flex w-full flex-col gap-4 sm:mt-12">
+				className="mt-8 flex w-full flex-col gap-4 lg:gap-8">
 				<FormProvider {...methods}>
+					<div className="flex flex-col gap-4 lg:flex-row lg:gap-8">
+						<BasicInput
+							size="lg"
+							name="firstName"
+							label="First Name *"
+							background="bg-classmate-tan-2"
+							rules={{
+								required: true,
+							}}
+						/>
+						<BasicInput
+							size="lg"
+							name="lastName"
+							label="Last Name *"
+							background="bg-classmate-tan-2"
+							rules={{
+								required: true,
+							}}
+						/>
+					</div>
 					<BasicInput
-						size="sm"
-						name="email"
-						label="Email *"
-						background="bg-classmate-tan-2"
-						rules={{
-							required: true,
-						}}
-					/>
-					<BasicInput
-						size="sm"
-						name="firstName"
-						label="First Name *"
-						background="bg-classmate-tan-2"
-						rules={{
-							required: true,
-						}}
-					/>
-					<BasicInput
-						size="sm"
-						name="lastName"
-						label="Last Name *"
-						background="bg-classmate-tan-2"
-						rules={{
-							required: true,
-						}}
-					/>
-					<BasicInput
-						size="sm"
+						size="lg"
 						name="zipcode"
 						label="Zipcode *"
 						background="bg-classmate-tan-2"
@@ -77,7 +73,7 @@ const AccountProfileSection = () => {
 						}}
 					/>
 					<BasicInput
-						size="sm"
+						size="lg"
 						name="major"
 						label="Major *"
 						background="bg-classmate-tan-2"
@@ -87,7 +83,7 @@ const AccountProfileSection = () => {
 					/>
 					<FormSelect
 						name="school"
-						size="sm"
+						size="lg"
 						label="School *"
 						type="database-search"
 						backgroundColor="bg-classmate-tan-2"
@@ -99,8 +95,8 @@ const AccountProfileSection = () => {
 						}}
 					/>
 					<FormSelect
-						name="graduation-year"
-						size="sm"
+						name="graduationYear"
+						size="lg"
 						label="Graduation Year *"
 						type="select"
 						backgroundColor="bg-classmate-tan-2"
@@ -117,7 +113,7 @@ const AccountProfileSection = () => {
 				<ClassmateButton
 					type="submit"
 					variant="filled"
-					fullWidth="true"
+					fullWidth={true}
 					size="lg"
 					styles="bg-classmate-green-2 text-classmate-tan-2 mt-5">
 					Save

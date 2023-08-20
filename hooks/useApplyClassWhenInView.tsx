@@ -16,7 +16,6 @@ function useApplyClassWhenInView(
 
 		const observer = new IntersectionObserver((current) => {
 			if (current[0].isIntersecting && !isInWindow) {
-				console.log("adding classes: ", classes);
 				setIsInWindow(true);
 				elementToApplyClassRef.current.classList.add(classes);
 			}

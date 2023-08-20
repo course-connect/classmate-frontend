@@ -1,11 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-const AccountMenuButton = ({ text, icon, iconAlt, callback }) => {
+const AccountMenuButton = ({ text, icon, iconAlt, selected, callback }) => {
 	return (
 		<button
 			onClick={callback}
-			className="flex w-full items-center gap-4 rounded-md bg-classmate-gray-5 px-4 py-[10px] outline-none ring-classmate-gold-1 focus:ring">
+			className={`flex w-full items-center gap-4 rounded-md bg-classmate-gray-5 px-4 py-[10px] outline-none ring-classmate-gold-1 focus:ring md:bg-transparent ${
+				selected ? "md:bg-classmate-gray-5" : ""
+			}`}>
 			<Image
 				src={icon}
 				width={20}
@@ -19,7 +21,7 @@ const AccountMenuButton = ({ text, icon, iconAlt, callback }) => {
 				width={12}
 				height={12}
 				alt={iconAlt}
-				className="!ml-auto -rotate-90"
+				className="!ml-auto -rotate-90 md:hidden"
 			/>
 		</button>
 	);

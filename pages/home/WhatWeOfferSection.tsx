@@ -91,7 +91,7 @@ export default function WhatWeOffer() {
 								src={offering.icon}
 								width={0}
 								height={0}
-								className="w-10"
+								className="h-10 w-10"
 								alt={`An icon of ${offering.title}`}
 							/>
 							{/* Offering title */}

@@ -179,6 +179,7 @@ export default function Navbar() {
 								src="./hamburger.svg"
 								width={25}
 								height={25}
+								className="h-[25px] w-[25px]"
 								alt="An icon depicting three horizontal lines, commonly known as a hamburger icon, representing a menu opener."
 							/>
 						</ClassmateButton>

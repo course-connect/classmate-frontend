@@ -69,11 +69,12 @@ const FormSelect: FC<InputProps> = ({
 	const [selectOptionsWithProps, setSelectOptionsWithProps] = useState([]);
 
 	const addProps = (children) => {
-		return children.map((child) =>
-			React.cloneElement(child, {
-				selected: child.props.text === getValues(name),
-			})
-		);
+		return children.map((child) => {
+			return React.cloneElement(child, {
+				selected: child.props.text.toString() === getValues(name),
+				selectName: name,
+			});
+		});
 	};
 
 	useEffect(() => {
@@ -110,8 +111,12 @@ const FormSelect: FC<InputProps> = ({
 		return fuse.search(localSearchValue);
 	};
 
-	const handleKeyDown = () => {
-		searchRef.current.focus();
+	const handleKeyDown = (e) => {
+		if (type !== "select") {
+			searchRef.current.focus();
+		} else {
+			e.preventDefault();
+		}
 	};
 
 	useEffect(() => {
@@ -138,11 +143,16 @@ const FormSelect: FC<InputProps> = ({
 	useOutsideAlerter((e) => {
 		setChangeLabelColor(false);
 		const searchInputClicked = e.target.closest("#local-search-input");
+		const selectName = e.target.dataset.selectname;
+		const selectedOption = e.target.dataset.value;
 		if (!searchInputClicked) {
-			const selectedOption = e.target.dataset.value;
 			const currentOption = getValues(name);
-			if (selectedOption && selectedOption != currentOption) {
-				setValue(name, selectedOption);
+			if (
+				selectedOption &&
+				name === selectName &&
+				selectedOption != currentOption
+			) {
+				setValue(selectName, selectedOption);
 			} else if (!currentOption) {
 				setMoveLabel(false);
 			}
@@ -211,11 +221,12 @@ const FormSelect: FC<InputProps> = ({
 							{label}
 						</p>
 					</span>
-
 					<input
+						id={name}
+						data-selectname={name}
 						ref={selectRef}
 						onMouseDown={(e) => hanldeInputClick(e)}
-						onKeyDown={handleKeyDown}
+						onKeyDown={(e) => handleKeyDown(e)}
 						onBlur={handleSelectBlur}
 						onChange={onChange}
 						value={value || ""}
@@ -229,33 +240,37 @@ const FormSelect: FC<InputProps> = ({
 								  }`
 						}`}
 					/>
-
-					<Image
-						style={{
-							filter:
-								"invert(33%) sepia(8%) saturate(1099%) hue-rotate(65deg) brightness(97%) contrast(20%)",
-						}}
-						src="./caret.svg"
-						alt="caret"
-						height={12}
-						width={12}
-						className={`pointer-events-none absolute right-5 transition-all ${
-							inputFocused ? "rotate-180" : ""
-						}`}
-					/>
+					<div
+						className={`pointer-events-none absolute right-1 flex h-8 w-8 items-center justify-center bg-classmate-tan-2 `}>
+						<Image
+							style={{
+								filter:
+									"invert(33%) sepia(8%) saturate(1099%) hue-rotate(65deg) brightness(97%) contrast(20%)",
+							}}
+							src="./caret.svg"
+							alt="caret"
+							height={12}
+							width={12}
+							className={`transition-all ${inputFocused ? "rotate-180" : ""}`}
+						/>
+					</div>
 
 					<div
-						className={`absolute z-10 flex w-full origin-top cursor-pointer flex-col gap-2 rounded-lg bg-classmate-tan-2 p-4 shadow-xl transition-all ${dropDownOffset} ${
+						className={`absolute z-10 flex max-h-[300px] w-full origin-top cursor-pointer flex-col gap-2 overflow-y-auto rounded-lg bg-classmate-tan-2 p-4 shadow-xl transition-all ${dropDownOffset} ${
 							inputFocused
 								? "pointer-events-auto scale-100 opacity-100"
 								: "pointer-events-none scale-75 opacity-0"
 						} }`}>
-						{type === "select" && selectOptionsWithProps}
+						{type === "select" && (
+							<div className="flex flex-col gap-2">
+								{selectOptionsWithProps}
+							</div>
+						)}
 						{type === "local-search" && (
 							<>
 								<div
 									id="local-search-input"
-									className="mb-2 flex overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
+									className="mb-2 flex min-h-[40px] overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
 									<Image
 										src="./search.svg"
 										width={20}
@@ -273,14 +288,14 @@ const FormSelect: FC<InputProps> = ({
 										className={`font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-7 placeholder-classmate-green-7 outline-none`}
 									/>
 								</div>
-								{localSearchResults}
+								<div className="flex flex-col gap-2">{localSearchResults}</div>
 							</>
 						)}
 						{type === "database-search" && (
 							<>
 								<div
 									id="local-search-input"
-									className="mb-2 flex overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
+									className="mb-2 flex min-h-[40px] overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
 									<Image
 										src="./search.svg"
 										width={20}
@@ -297,21 +312,27 @@ const FormSelect: FC<InputProps> = ({
 										className={`font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-7 placeholder-classmate-green-7 outline-none`}
 									/>
 								</div>
-								{formSearch.results.map(({ data }) => {
-									return searchType === "school" ? (
-										<FormSelectOptions
-											icon="./graduation-cap.svg"
-											text={data.school_name}
-											selected={data.school_name === getValues(name)}
-										/>
-									) : (
-										<FormSelectOptions
-											icon="./book-solid.svg"
-											text={data.school_name}
-											selected={data.school_name === getValues(name)}
-										/>
-									);
-								})}
+								<div className="flex flex-col gap-2">
+									{formSearch.results.map(({ data }, index) => {
+										return searchType === "school" ? (
+											<FormSelectOptions
+												key={index}
+												icon="./graduation-cap.svg"
+												text={data.school_name}
+												selected={data.school_name === getValues(name)}
+												selectName={name}
+											/>
+										) : (
+											<FormSelectOptions
+												key={index}
+												icon="./book-solid.svg"
+												text={data.school_name}
+												selected={data.school_name === getValues(name)}
+												selectName={name}
+											/>
+										);
+									})}
+								</div>
 							</>
 						)}
 					</div>

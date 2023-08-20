@@ -54,7 +54,16 @@ const DropMenu: React.FC<DropMenuProps> = ({
 							id={id}
 							className="flex cursor-pointer whitespace-nowrap border-b-[1px] border-classmate-gray-5 px-5 py-4 transition delay-0 duration-75 hover:bg-classmate-gray-5">
 							<div className="pointer-events-none mr-4 flex w-5 select-none items-center justify-center">
-								<Image src={icon} width={width} height={height} alt={alt} />
+								<Image
+									src={icon}
+									width={width}
+									height={height}
+									alt={alt}
+									style={{
+										width,
+										height,
+									}}
+								/>
 							</div>
 							<p className="font-classmate pointer-events-none text-classmate-green-6">
 								{label}

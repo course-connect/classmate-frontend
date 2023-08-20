@@ -66,6 +66,7 @@ export default function WhatWeOffer() {
 						height={700}
 						src="./our-goal.svg"
 						alt="a group of helpful people"
+						className="h-[700px] w-[700px]"
 					/>
 				</div>
 				{/* "Get Started" button (hidden on larger screens) */}

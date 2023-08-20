@@ -1,7 +1,13 @@
 import React from "react";
 import AccountMenuButton from "./AccountMenuButton";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { setAccountTab } from "../../redux/account-tab/accountActions";
+import { useSelector } from "react-redux";
 
-const AccountMenu = ({ setAccountTab }) => {
+const AccountMenu = () => {
+	const dispatch = useAppDispatch();
+	const selectedAccountTab = useSelector((state) => state.account.currentTab);
+
 	return (
 		<div className="flex min-h-[550px] w-full max-w-sm flex-col gap-3 rounded-lg bg-classmate-tan-2 p-6 shadow-xl sm:rounded-xl sm:p-8 md:min-w-[250px]  md:max-w-[250px] md:rounded-none md:p-6">
 			<div className="mb-2">
@@ -12,19 +18,22 @@ const AccountMenu = ({ setAccountTab }) => {
 				text="Profile"
 				icon="./graduation-cap.svg"
 				iconAlt="a graduation cap"
-				callback={() => setAccountTab("profile")}
+				selected={selectedAccountTab === "profile"}
+				callback={() => dispatch(setAccountTab("profile"))}
 			/>
 			<AccountMenuButton
 				text="Account"
 				icon="./user-solid.svg"
 				iconAlt="a persons siloutte"
-				callback={() => setAccountTab("account")}
+				selected={selectedAccountTab === "account"}
+				callback={() => dispatch(setAccountTab("account"))}
 			/>
 			<AccountMenuButton
 				text="My Reviews"
 				icon="./star-solid.svg"
 				iconAlt="a star"
-				callback={() => setAccountTab("reviews")}
+				selected={selectedAccountTab === "reviews"}
+				callback={() => dispatch(setAccountTab("reviews"))}
 			/>
 		</div>
 	);

@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 // Redux components
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { signOut } from "../redux/auth/authActions";
+import { setAccountTab } from "../redux/account-tab/accountActions";
 
 const defaultMenuItems: MenuItem[] = [
 	{
@@ -85,7 +86,10 @@ const AccountMenu = () => {
 		if (screenWidth !== undefined) {
 			if (screenWidth < 768 && menuItems.length < 6) {
 				setMenuItems([...additionalMenuItems, ...defaultMenuItems]);
-			} else if (screenWidth >= 768 && menuItems.length === 6) {
+			} else if (
+				screenWidth >= 768 &&
+				(menuItems.length === 6 || menuItems.length === 0)
+			) {
 				setMenuItems([...defaultMenuItems]);
 			}
 		}
@@ -100,8 +104,11 @@ const AccountMenu = () => {
 		href: string
 	) => {
 		const { id } = e.target as HTMLLIElement; // Destructure the id property from e.target
+		console.log(e.target);
 		if (id === "sign-out") {
 			dispatch(signOut()); // Dispatch sign out action if the "Sign Out" item is clicked
+		} else if (id === "profile" || id === "account" || id === "reviews") {
+			dispatch(setAccountTab(id));
 		}
 		router.push(href); // Navigate to the specified href
 		handleMenuClick(); // Close the menu

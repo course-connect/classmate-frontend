@@ -43,7 +43,6 @@ export const search = (userInput) => async (dispatch, getState) => {
 
 	try {
 		// Attempt to search with credentials given
-		console.log(userInput, searchType);
 		const res = await attemptFormSearch(userInput, searchType, filters);
 		// Search attempt succeeded
 		dispatch(formSearchSuccess(res.data));
@@ -54,7 +53,6 @@ export const search = (userInput) => async (dispatch, getState) => {
 };
 
 export const setFormSearchType = (searchType) => (dispatch) => {
-	console.log(searchType);
 	dispatch({
 		type: SET_FORM_SEARCH_TYPE,
 		payload: searchType,

@@ -65,7 +65,13 @@ const HeroCallToAction = (): JSX.Element | null => {
 				<button
 					onClick={handleRemoveFilter}
 					className="pointer flex h-4 w-4 items-center justify-center rounded-full bg-classmate-tan-2">
-					<Image src="./xmark-solid-green.svg" width={8} height={8} alt="" />
+					<Image
+						src="./xmark-solid-green.svg"
+						width={8}
+						height={8}
+						alt="xmark"
+						className="h-[8px] w-[8px]"
+					/>
 				</button>
 			</Filter>
 		</div>
