@@ -8,8 +8,6 @@ import { signIn } from "../redux/auth/authActions";
 
 import BasicInput from "./BasicInput";
 import PasswordInput from "./PasswordInput";
-import FormSelect from "./ui/FormSelect";
-import FormSelectOptions from "../components/ui/FormSelectOptions";
 
 export default function SignInForm() {
 	const dispatch = useDispatch();
@@ -66,18 +64,6 @@ export default function SignInForm() {
 						label="Password"
 						background="bg-classmate-tan-2"
 						size={windowWidth >= 640 ? "medium" : "small"}
-						rules={{
-							required: true,
-						}}
-					/>
-					<FormSelect
-						setValue={setValue}
-						getValues={getValues}
-						type="database-search"
-						searchType="school"
-						name="test"
-						label="Test"
-						backgroundColor="bg-classmate-tan-2"
 						rules={{
 							required: true,
 						}}

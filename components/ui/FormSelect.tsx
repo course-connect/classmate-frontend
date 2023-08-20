@@ -1,24 +1,31 @@
 import React, { FC, useState, useRef, useEffect } from "react";
 
-import { Controller, useFormContext } from "react-hook-form";
+// Project components
+import FormSelectOptions from "./FormSelectOptions";
 
+// Project hooks
 import useOutsideAlerter from "../../hooks/useOutsideAlerter";
 
+// Next.js components
 import Image from "next/image";
 
+// Fuzzy search
 import Fuse from "fuse.js";
 
+// React hook form
+import { Controller, useFormContext } from "react-hook-form";
+
+// Redux
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useSelector } from "react-redux";
 import {
 	setFormSearchType,
 	search,
 } from "../../redux/form-search/formSearchActions";
 
-import { useAppDispatch } from "../../hooks/reduxHooks";
-import { useSelector } from "react-redux";
-import FormSelectOptions from "./FormSelectOptions";
-
 type InputProps = {
 	type?: "select" | "local-search" | "database-search";
+	size: "sm" | "lg";
 	searchType?: "school" | "course";
 	name: string;
 	label: string;
@@ -31,6 +38,7 @@ type InputProps = {
 
 const FormSelect: FC<InputProps> = ({
 	name,
+	size = "lg",
 	label,
 	rules,
 	type = "select",
@@ -40,64 +48,44 @@ const FormSelect: FC<InputProps> = ({
 	children,
 	backgroundColor,
 }) => {
-	const [localSearchValue, setLocalSearchValue] = useState("");
-	const [localSearchResults, setLocalSearchresults] = useState([]);
+	const { control } = useFormContext();
 
 	const [moveLabel, setMoveLabel] = useState(false);
 	const [inputFocused, setInputFocused] = useState(false);
 	const [changeLabelColor, setChangeLabelColor] = useState(false);
+
 	const labelRef = useRef();
-	const { control } = useFormContext();
 	const selectRef = useRef();
 	const searchRef = useRef();
 
 	const dispatch = useAppDispatch();
 
-	useOutsideAlerter((e) => {
-		setChangeLabelColor(false);
-
-		const searchInputClicked = e.target.closest("#local-search-input");
-		if (!searchInputClicked) {
-			const selectedOption = e.target.dataset.value;
-			const currentOption = getValues(name);
-			if (selectedOption && selectedOption != currentOption) {
-				setValue(name, selectedOption);
-			} else if (!currentOption) {
-				setMoveLabel(false);
-			}
-
-			setInputFocused(false);
-		}
-	}, selectRef);
-
-	const hanldeInputClick = (e) => {
-		if (type === "database-search" && !inputFocused) {
-			dispatch(setFormSearchType(searchType));
-			dispatch(search(""));
-		}
-
-		if (!moveLabel) {
-			setMoveLabel(true);
-		}
-
-		if (!inputFocused) {
-			setChangeLabelColor(true);
-			setInputFocused(true);
-		} else {
-			const currentValue = getValues(name);
-			if (!currentValue) {
-				setMoveLabel(false);
-			}
-			setChangeLabelColor(false);
-			setInputFocused(false);
-			e.target.blur();
-		}
-	};
-
 	const handleSelectBlur = () => {
 		setChangeLabelColor(false);
 		selectRef.current.blur();
 	};
+
+	// Select
+	const [selectOptionsWithProps, setSelectOptionsWithProps] = useState([]);
+
+	const addProps = (children) => {
+		return children.map((child) =>
+			React.cloneElement(child, {
+				selected: child.props.text === getValues(name),
+			})
+		);
+	};
+
+	useEffect(() => {
+		if (type === "select") {
+			const optionsWithProps = addProps(children);
+			setSelectOptionsWithProps(optionsWithProps);
+		}
+	}, [getValues(name)]);
+
+	// Local search
+	const [localSearchValue, setLocalSearchValue] = useState("");
+	const [localSearchResults, setLocalSearchResults] = useState([]);
 
 	const handleLocalSearchChange = (e) => {
 		setLocalSearchValue(e.target.value);
@@ -129,22 +117,14 @@ const FormSelect: FC<InputProps> = ({
 	useEffect(() => {
 		if (type === "local-search") {
 			if (!localSearchValue) {
-				const results = getDefaultLocalSearchResults();
-				setLocalSearchresults(results);
+				const results = getDefaultLocalSearchResults().map(({ item }) => item);
+				setLocalSearchResults(addProps(results));
 			} else {
-				const results = getLocalSearchResults();
-				setLocalSearchresults(results);
+				const results = getLocalSearchResults().map(({ item }) => item);
+				setLocalSearchResults(addProps(results));
 			}
 		}
-	}, [localSearchValue]);
-
-	useEffect(() => {
-		if (!inputFocused) {
-			setTimeout(() => {
-				setLocalSearchValue("");
-			}, 100);
-		}
-	}, [inputFocused]);
+	}, [localSearchValue, getValues(name)]);
 
 	// Database Search
 	const formSearch = useSelector((state) => state.formSearch);
@@ -154,6 +134,63 @@ const FormSelect: FC<InputProps> = ({
 		setDatabaseSearchValue(e.target.value);
 		dispatch(search(e.target.value));
 	};
+
+	useOutsideAlerter((e) => {
+		setChangeLabelColor(false);
+		const searchInputClicked = e.target.closest("#local-search-input");
+		if (!searchInputClicked) {
+			const selectedOption = e.target.dataset.value;
+			const currentOption = getValues(name);
+			if (selectedOption && selectedOption != currentOption) {
+				setValue(name, selectedOption);
+			} else if (!currentOption) {
+				setMoveLabel(false);
+			}
+
+			setInputFocused(false);
+		}
+	}, selectRef);
+
+	const hanldeInputClick = (e) => {
+		if (type === "database-search" && !inputFocused && !databaseSearchValue) {
+			dispatch(setFormSearchType(searchType));
+			dispatch(search(""));
+		}
+
+		if (!moveLabel) {
+			setMoveLabel(true);
+		}
+
+		if (!inputFocused) {
+			setChangeLabelColor(true);
+			setInputFocused(true);
+		} else {
+			const currentValue = getValues(name);
+			if (!currentValue) {
+				setMoveLabel(false);
+			}
+			setChangeLabelColor(false);
+			setInputFocused(false);
+			e.target.blur();
+		}
+	};
+
+	useEffect(() => {
+		if (!inputFocused) {
+			setTimeout(() => {
+				if (type === "local-search") {
+					setLocalSearchValue("");
+				} else if (type === "database-search") {
+					setDatabaseSearchValue("");
+				}
+			}, 100);
+		}
+	}, [inputFocused]);
+
+	const labelTranslate =
+		size === "lg" ? "-translate-y-[29px]" : "-translate-y-[25px]";
+
+	const dropDownOffset = size === "lg" ? "top-[58px]" : "top-[50px]";
 
 	return (
 		<Controller
@@ -165,7 +202,7 @@ const FormSelect: FC<InputProps> = ({
 					<span
 						ref={labelRef}
 						className={`font-classmate pointer-events-none absolute left-[18px] px-1 text-base text-classmate-green-7 transition-all duration-200 ${backgroundColor} ${
-							moveLabel ? "-translate-y-[29px] text-sm" : ""
+							moveLabel ? `${labelTranslate} text-sm` : ""
 						}`}>
 						<p
 							className={`whitespace-nowrap ${
@@ -182,7 +219,9 @@ const FormSelect: FC<InputProps> = ({
 						onBlur={handleSelectBlur}
 						onChange={onChange}
 						value={value || ""}
-						className={`font-classmate w-full cursor-pointer rounded-md border-[1px] border-classmate-gray-2 bg-transparent px-4 py-4 text-classmate-green-7 placeholder-classmate-green-7 caret-transparent hover:border-classmate-gray-1 ${
+						className={`font-classmate w-full cursor-pointer rounded-md border-[1px] border-classmate-gray-2 bg-transparent px-4  text-classmate-green-7 placeholder-classmate-green-7 caret-transparent hover:border-classmate-gray-1 ${
+							size === "sm" ? "py-3" : "py-4"
+						} ${
 							!!error
 								? `!border-classmate-error-red !placeholder-classmate-error-red focus:!outline-classmate-error-red`
 								: `${
@@ -200,18 +239,18 @@ const FormSelect: FC<InputProps> = ({
 						alt="caret"
 						height={12}
 						width={12}
-						className={`pointer-events-none absolute right-3 transition-all ${
+						className={`pointer-events-none absolute right-5 transition-all ${
 							inputFocused ? "rotate-180" : ""
 						}`}
 					/>
 
 					<div
-						className={`absolute top-[58px] flex w-full origin-top cursor-pointer flex-col gap-2 rounded-lg bg-classmate-tan-2 p-4 shadow-xl transition-all  ${
+						className={`absolute z-10 flex w-full origin-top cursor-pointer flex-col gap-2 rounded-lg bg-classmate-tan-2 p-4 shadow-xl transition-all ${dropDownOffset} ${
 							inputFocused
 								? "pointer-events-auto scale-100 opacity-100"
 								: "pointer-events-none scale-75 opacity-0"
 						} }`}>
-						{type === "select" && children}
+						{type === "select" && selectOptionsWithProps}
 						{type === "local-search" && (
 							<>
 								<div
@@ -234,7 +273,7 @@ const FormSelect: FC<InputProps> = ({
 										className={`font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-7 placeholder-classmate-green-7 outline-none`}
 									/>
 								</div>
-								{localSearchResults.map(({ item }) => item)}
+								{localSearchResults}
 							</>
 						)}
 						{type === "database-search" && (

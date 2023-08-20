@@ -5,10 +5,17 @@ type InputProps = {
 	name: string;
 	label: string;
 	background: string;
+	size?: "sm" | "lg";
 	rules: Record<string, unknown>;
 };
 
-const BasicInput: FC<InputProps> = ({ name, label, rules, background }) => {
+const BasicInput: FC<InputProps> = ({
+	name,
+	label,
+	rules,
+	background,
+	size = "lg",
+}) => {
 	const [movePlaceHolder, setMovePlaceHolder] = useState(false);
 	const [changeLabelColor, setChangeLabelColor] = useState(false);
 	const labelRef = useRef();
@@ -28,6 +35,9 @@ const BasicInput: FC<InputProps> = ({ name, label, rules, background }) => {
 		}
 	};
 
+	const labelTranslate =
+		size === "lg" ? "-translate-y-[29px]" : "-translate-y-[25px]";
+
 	return (
 		<Controller
 			control={control}
@@ -38,7 +48,7 @@ const BasicInput: FC<InputProps> = ({ name, label, rules, background }) => {
 					<span
 						ref={labelRef}
 						className={`font-classmate pointer-events-none absolute left-[18px] px-1 text-base text-classmate-green-7 transition-all duration-200 ${background} ${
-							movePlaceHolder ? "-translate-y-[29px] text-sm" : ""
+							movePlaceHolder ? `${labelTranslate} text-sm` : ""
 						}`}>
 						<p
 							className={`whitespace-nowrap ${
@@ -53,7 +63,9 @@ const BasicInput: FC<InputProps> = ({ name, label, rules, background }) => {
 						onBlur={() => hanldeInputBlur(value)}
 						onChange={onChange}
 						value={value}
-						className={`font-classmate w-full rounded-md border-[1px] border-classmate-gray-2 bg-transparent px-4 py-4 text-classmate-green-7 placeholder-classmate-green-7 hover:border-classmate-gray-1  ${
+						className={`font-classmate w-full rounded-md border-[1px] border-classmate-gray-2 bg-transparent px-3 text-classmate-green-7 placeholder-classmate-green-7 hover:border-classmate-gray-1 ${
+							size === "sm" ? "py-3" : "py-4"
+						} ${
 							!!error
 								? `!border-classmate-error-red !placeholder-classmate-error-red focus:!outline-classmate-error-red`
 								: "focus:!outline-classmate-gold-1"

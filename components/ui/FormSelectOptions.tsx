@@ -5,11 +5,10 @@ import Image from "next/image";
 type InputProps = {
 	icon?: string;
 	text: string;
-	selected: boolean;
+	selected?: boolean;
 };
 
 const FormSelectOptions = ({ icon, text, selected }: InputProps) => {
-	console.log(selected);
 	return (
 		<button
 			data-value={text}
