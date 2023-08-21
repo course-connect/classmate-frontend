@@ -76,6 +76,15 @@
 	animation: fade-in 1.2s forwards, slide-in 1.2s ease-out forwards;
 }
 
+// SVG color transformations
+.filter-classmate-green-4{
+	filter: invert(91%) sepia(10%) saturate(713%) hue-rotate(55deg) brightness(81%) contrast(88%),
+}
+
+.filter-classmate-green-7{
+	filter: invert(33%) sepia(12%) saturate(711%) hue-rotate(65deg) brightness(98%) contrast(91%)
+}
+
 @keyframes fade-in {
 	from {
 		opacity: 0;
@@ -120,9 +129,4 @@
 	--classmate-red-1: #B43E3D;
 	--classmate-error-red: #d32f2f;
 	--classmate-hover-green-2: #2b662b;
-	--classmate-hover-green-4: #afcaa4;
-	--classmate-hover-tan-1: #e6e1d2;
-	--classmate-hover-tan-2: #e9e6dd;
-	--classmate-hover-gold-1: #dcad46;
-
 }

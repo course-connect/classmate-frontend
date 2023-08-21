@@ -17,7 +17,7 @@ import {
 
 const menuItems = [
 	{
-		icon: "./graduation-cap.svg",
+		icon: "./graduation-cap-solid.svg",
 		label: "School",
 		id: "school",
 		width: 20,
@@ -25,7 +25,7 @@ const menuItems = [
 		alt: "",
 	},
 	{
-		icon: "./glasses.svg",
+		icon: "./glasses-solid.svg",
 		label: "Professor",
 		id: "professor",
 		width: 20,
@@ -70,12 +70,12 @@ const MainSearchSelect = ({ setValue }) => {
 	let iconSrc, iconAlt, iconClassName;
 	switch (mainSearch.type) {
 		case "school":
-			iconSrc = "./graduation-cap.svg";
+			iconSrc = "./graduation-cap-solid.svg";
 			iconAlt = "Graduation Cap";
 			iconClassName = "min-w-[25px]";
 			break;
 		case "professor":
-			iconSrc = "./glasses.svg";
+			iconSrc = "./glasses-solid.svg";
 			iconAlt = "Glasses";
 			iconClassName = "min-w-[25px]";
 			break;
@@ -100,13 +100,19 @@ const MainSearchSelect = ({ setValue }) => {
 						width={25}
 						alt={iconAlt}
 						className={iconClassName}
+						style={{
+							filter:
+								"invert(33%) sepia(12%) saturate(711%) hue-rotate(65deg) brightness(98%) contrast(91%)",
+						}}
 					/>
 					<Image
-						src="./caret-down.svg"
-						className={`min-w-[10px] ${menuOpen ? "rotate-180" : ""}`}
+						src="./caret-solid.svg"
+						className={`filter-classmate-green-4 h-[10px] w-[10px] min-w-[10px] ${
+							menuOpen ? "rotate-180" : ""
+						}`}
 						height={10}
 						width={10}
-						alt=""
+						alt="small arrow"
 					/>
 				</div>
 			</button>

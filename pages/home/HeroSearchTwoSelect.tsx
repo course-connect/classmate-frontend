@@ -33,7 +33,7 @@ const menuItems: MenuItem[] = [
 		alt: "",
 	},
 	{
-		icon: "./glasses.svg",
+		icon: "./glasses-solid.svg",
 		label: "Professor",
 		id: "professor",
 		width: 20,
@@ -87,20 +87,20 @@ const HeroSearchTwoSelect: React.FC<HeroSearchTwoSelectProps> = ({
 						src={
 							heroSearchTwo.type === "course"
 								? "./book-solid.svg"
-								: "./glasses.svg"
+								: "./glasses-solid.svg"
 						}
 						height={heroSearchTwo.type === "course" ? 23 : 25}
 						width={25}
 						alt="visiual depiction of a graduation cap or glasses that represents what you are searching for"
-						className={
+						className={`filter-classmate-green-7 w-[25px] min-w-[25px] ${
 							heroSearchTwo.type === "course"
-								? "h-[23px] max-h-[23px] w-[25px] min-w-[25px]"
-								: "h-[25px] w-[25px] min-w-[25px]"
-						}
+								? "h-[23px] max-h-[23px] "
+								: "h-[25px]"
+						}`}
 					/>
 					<Image
-						src="./caret-down.svg"
-						className={`h-[10px] w-[10px] min-w-[10px] ${
+						src="./caret-solid.svg"
+						className={`filter-classmate-green-4 h-[10px] w-[10px] min-w-[10px] ${
 							menuOpen ? "rotate-180" : ""
 						}`}
 						height={10}

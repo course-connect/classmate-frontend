@@ -92,8 +92,10 @@ export const removeFilterSearchFilter = (searchFilter) => (dispatch) => {
 export const setMultiFilterSearchFilters =
 	(searchFilters) => (dispatch, getState) => {
 		const currentFilters = getState().mainSearch.filters;
-		console.log({ ...currentFilters, ...searchFilters });
-		dispatch(setFilterSearchFilter({ ...currentFilters, ...searchFilters }));
+		dispatch({
+			type: SET_MULTI_FILTER_SEARCH_FILTER,
+			payload: { ...currentFilters, ...searchFilters },
+		});
 	};
 
 // Attempt to search with credentials given

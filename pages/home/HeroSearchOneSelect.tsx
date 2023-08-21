@@ -24,7 +24,7 @@ interface MenuItem {
 // Menu items for selecting search type (school or professor)
 const menuItems: MenuItem[] = [
 	{
-		icon: "./graduation-cap.svg",
+		icon: "./graduation-cap-solid.svg",
 		label: "School",
 		id: "school",
 		width: 20,
@@ -32,7 +32,7 @@ const menuItems: MenuItem[] = [
 		alt: "",
 	},
 	{
-		icon: "./glasses.svg",
+		icon: "./glasses-solid.svg",
 		label: "Professor",
 		id: "professor",
 		width: 20,
@@ -71,7 +71,9 @@ const HeroSchoolAndProfessorSelect: React.FC<{ setValue: Function }> = ({
 
 	// Determine which icon to display based on selected search type
 	const selectedIcon =
-		heroSearchOne.type === "school" ? "./graduation-cap.svg" : "./glasses.svg";
+		heroSearchOne.type === "school"
+			? "./graduation-cap-solid.svg"
+			: "./glasses-solid.svg";
 
 	return (
 		<div className="relative h-[55px] ">
@@ -87,11 +89,11 @@ const HeroSchoolAndProfessorSelect: React.FC<{ setValue: Function }> = ({
 						height={25}
 						width={25}
 						alt="icon"
-						className="h-[25px] w-[25px] min-w-[25px]"
+						className="filter-classmate-green-7 h-[25px] w-[25px] min-w-[25px]"
 					/>
 					<Image
-						src="./caret-down.svg"
-						className={`h-[10px] w-[10px] min-w-[10px] ${
+						src="./caret-solid.svg"
+						className={`filter-classmate-green-4 h-[10px] w-[10px] min-w-[10px] ${
 							menuOpen ? "rotate-180" : ""
 						}`}
 						height={10}

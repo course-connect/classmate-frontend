@@ -59,12 +59,8 @@ const DropMenu: React.FC<DropMenuProps> = ({
 									width={width}
 									height={height}
 									alt={alt}
-									style={{
-										width,
-										height,
-										filter:
-											"invert(33%) sepia(12%) saturate(711%) hue-rotate(65deg) brightness(98%) contrast(91%)",
-									}}
+									style={{ height, width }}
+									className="filter-classmate-green-7"
 								/>
 							</div>
 							<p className="font-classmate pointer-events-none text-classmate-green-6">

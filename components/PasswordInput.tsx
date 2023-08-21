@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import openEye from "../public/eye-open.svg";
-import closedEye from "../public/eye-closed.svg";
+import openEye from "../public/eye-open-solid.svg";
+import closedEye from "../public/eye-closed-solid.svg";
 import Image from "next/image";
 
 export default function PasswordInput({ name, label, rules, background }) {
@@ -63,8 +63,9 @@ export default function PasswordInput({ name, label, rules, background }) {
 						type="button"
 						className="absolute right-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-classmate-tan-2 transition-colors duration-300 ease-in-out hover:bg-classmate-gray-4">
 						<Image
-							height={20}
-							width={20}
+							height={0}
+							width={0}
+							className="filter-classmate-green-7 h-[20px] w-[20px]"
 							src={showPassword ? closedEye : openEye}
 							alt="Icon of an eye used to toggle password visibility."
 						/>
