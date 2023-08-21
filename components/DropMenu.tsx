@@ -62,6 +62,8 @@ const DropMenu: React.FC<DropMenuProps> = ({
 									style={{
 										width,
 										height,
+										filter:
+											"invert(33%) sepia(12%) saturate(711%) hue-rotate(65deg) brightness(98%) contrast(91%)",
 									}}
 								/>
 							</div>

@@ -6,6 +6,7 @@ import Tag from "./Tag";
 import MatchText from "./MatchText";
 import ClassmateButton from "./ClassmateButton";
 import SchoolScoreDisplay from "./SchoolScoreDisplay";
+import MainSearchResultBookmark from "./MainSearchResultBookmark";
 
 const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 	let searchResult;
@@ -68,19 +69,10 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 								</div>
 							</div>
 						</div>
-						<ClassmateButton
-							callback={() => console.log("save")}
-							variant="text"
-							size="xs"
-							styles="!p-1 h-fit min-w-[30px]">
-							<Image
-								src="./bookmark.svg"
-								height={0}
-								width={22}
-								alt="bookmark"
-								className="pointer-events-none h-fit"
-							/>
-						</ClassmateButton>
+						<MainSearchResultBookmark
+							bookmarkType="school"
+							itemID={result.firebaseID}
+						/>
 					</div>
 				</div>
 			);
@@ -103,26 +95,17 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 										{filters.school.filter_text
 											? filters.school.filter_text
 											: result.data.school_names?.map((school_name, index) => (
-												<span key={index}>{school_name}</span>
-											))}
+													<span key={index}>{school_name}</span>
+											  ))}
 									</p>
 								)}
 							</div>
 							<ResultQualityTag score={result.data.score} />
 						</div>
-						<ClassmateButton
-							callback={() => console.log("save")}
-							variant="text"
-							size="xs"
-							styles="!p-1 h-fit">
-							<Image
-								src="./bookmark.svg"
-								height={0}
-								width={22}
-								alt="bookmark"
-								className="pointer-events-none h-fit"
-							/>
-						</ClassmateButton>
+						<MainSearchResultBookmark
+							bookmarkType="professor"
+							itemID={result.firebaseID}
+						/>
 					</div>
 					<div className="flex gap-2">
 						<p className="font-classmate-bold text-classmate-green-1">Match:</p>
@@ -151,7 +134,11 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 							</p>
 							<div className="mt-1 flex flex-wrap gap-1">
 								{result.data.tags.map(({ description }, index) => (
-									<Tag key={index} text={description} score={result.data.score} />
+									<Tag
+										key={index}
+										text={description}
+										score={result.data.score}
+									/>
 								))}
 							</div>
 						</div>
@@ -176,19 +163,10 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 							<p className="font-classmate-bold mt-1 break-all text-2xl capitalize text-classmate-green-1 xs:break-normal">{`${result.data.course_name}`}</p>
 							<p className="text-sm">{result.data.school_name}</p>
 						</div>
-						<ClassmateButton
-							callback={() => console.log("save")}
-							variant="text"
-							size="xs"
-							styles="!p-1 h-fit min-w-[30px]">
-							<Image
-								src="./bookmark.svg"
-								height={0}
-								width={22}
-								alt="bookmark"
-								className="pointer-events-none h-fit"
-							/>
-						</ClassmateButton>
+						<MainSearchResultBookmark
+							bookmarkType="course"
+							itemID={result.firebaseID}
+						/>
 					</div>
 				</div>
 			);

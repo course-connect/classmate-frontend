@@ -41,9 +41,9 @@ const AccountProfileSection = () => {
 		<AccountSection title="Profile">
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="mt-8 flex w-full flex-col gap-4 lg:gap-8">
+				className="mt-8 flex w-full flex-col gap-4 lg:gap-6">
 				<FormProvider {...methods}>
-					<div className="flex flex-col gap-4 lg:flex-row lg:gap-8">
+					<div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
 						<BasicInput
 							size="lg"
 							name="firstName"

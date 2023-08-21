@@ -131,7 +131,8 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				filters: {
-					...payload,
+					...state.filters,
+					[payload[0]]: payload[1],
 				},
 			};
 		case REMOVE_FILTER_SEARCH_FILTER:

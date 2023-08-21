@@ -26,7 +26,7 @@ const AccountTab = () => {
 		<AccountSection title="Account">
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="mt-8 flex w-full flex-col gap-4 lg:gap-8">
+				className="mt-8 flex w-full flex-col gap-4 lg:gap-6">
 				<FormProvider {...methods}>
 					<FormSelect
 						name="accountType"

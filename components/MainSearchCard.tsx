@@ -11,8 +11,12 @@ import { useAppDispatch } from "../hooks/reduxHooks";
 import {
 	removeMainSearchFilter,
 	search,
+	resetMainSearch,
 } from "../redux/main-search/mainSearchActions";
-import { removeFilterSearchFilter } from "../redux/filter-search/filterSearchActions";
+import {
+	removeFilterSearchFilter,
+	resetFilterSearch,
+} from "../redux/filter-search/filterSearchActions";
 import { useSelector } from "react-redux";
 
 const MainSearchCard = ({
@@ -50,6 +54,8 @@ const MainSearchCard = ({
 
 	return (
 		<div className="rounded-xl bg-classmate-tan-2 p-4 shadow-xl">
+			<button onClick={() => dispatch(resetFilterSearch())}>test</button>
+			<button onClick={() => dispatch(resetMainSearch())}>test</button>
 			<div className="flex flex-col gap-5">
 				<div className="flex gap-2">
 					<MainSearch />
@@ -87,7 +93,7 @@ const MainSearchCard = ({
 							.map(([key, value], index) => (
 								<div
 									key={index}
-									className="text-classmate-green font-classmate-bold flex h-fit w-fit items-center gap-2 rounded-md bg-classmate-green-4 px-[9px] py-[5px] text-xs text-classmate-tan-2">
+									className="font-classmate-bold bg-classmate-green-40 flex h-fit w-fit items-center gap-2 rounded-md bg-classmate-green-4 px-[9px] py-[5px] text-xs text-classmate-tan-2">
 									{formatText(key, value)}
 									<button
 										data-filtertype={key}

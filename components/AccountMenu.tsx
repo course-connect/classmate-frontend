@@ -17,7 +17,7 @@ import { setAccountTab } from "../redux/account-tab/accountActions";
 
 const defaultMenuItems: MenuItem[] = [
 	{
-		icon: "./graduation-cap.svg",
+		icon: "./graduation-cap-solid.svg",
 		label: "Profile",
 		id: "profile",
 		width: 20,
@@ -44,7 +44,16 @@ const defaultMenuItems: MenuItem[] = [
 		alt: "Star icon linking to my reviews",
 	},
 	{
-		icon: "./logout.svg",
+		icon: "./bookmark-solid.svg",
+		label: "My Bookmarks",
+		id: "bookmarks",
+		width: 20,
+		height: 20,
+		href: "/account",
+		alt: "Bookmark",
+	},
+	{
+		icon: "./signout-solid.svg",
 		label: "Sign Out",
 		id: "sign-out",
 		width: 20,
@@ -56,7 +65,7 @@ const defaultMenuItems: MenuItem[] = [
 
 const additionalMenuItems: MenuItem[] = [
 	{
-		icon: "./home.svg",
+		icon: "./home-solid.svg",
 		label: "Home",
 		id: "home",
 		width: 20,
@@ -65,7 +74,7 @@ const additionalMenuItems: MenuItem[] = [
 		alt: "Home icon to go to the homepage",
 	},
 	{
-		icon: "./search-green-7.svg",
+		icon: "./search-solid.svg",
 		label: "Search",
 		id: "search",
 		width: 20,
@@ -107,7 +116,12 @@ const AccountMenu = () => {
 		console.log(e.target);
 		if (id === "sign-out") {
 			dispatch(signOut()); // Dispatch sign out action if the "Sign Out" item is clicked
-		} else if (id === "profile" || id === "account" || id === "reviews") {
+		} else if (
+			id === "profile" ||
+			id === "account" ||
+			id === "reviews" ||
+			id === "bookmarks"
+		) {
 			dispatch(setAccountTab(id));
 		}
 		router.push(href); // Navigate to the specified href

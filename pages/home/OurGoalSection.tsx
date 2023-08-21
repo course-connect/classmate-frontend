@@ -32,7 +32,7 @@ export default function WhatWeOffer() {
 	};
 
 	return (
-		<section className="section-padding flex justify-center bg-classmate-tan-2 py-20 sm:pb-10 xl:py-36">
+		<section className="section-padding flex justify-center bg-classmate-tan-2 py-20 xl:py-36">
 			<div
 				ref={elementRef}
 				className="xl:gap-18 3xl:gap-26 flex flex-col items-center opacity-0 lg:flex-row lg:gap-20">
@@ -66,7 +66,7 @@ export default function WhatWeOffer() {
 						height={700}
 						src="./our-goal.svg"
 						alt="a group of helpful people"
-						className="h-[700px] w-[700px]"
+						className="h-auto w-[700px]"
 					/>
 				</div>
 				{/* "Get Started" button (hidden on larger screens) */}

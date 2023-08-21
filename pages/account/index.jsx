@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
-import AccountMenu from "./AccountMenu";
-
-import ProfileTab from "./ProfileTab";
 import AccountTab from "./AccountTab";
+import AccountMenu from "./AccountMenu";
+import ProfileTab from "./ProfileTab";
+import ReviewsTab from "./ReviewsTab";
+import BookmarksTab from "./BookmarksTab";
+
 import ClassmateButton from "../../components/ClassmateButton";
 import Image from "next/image";
 
@@ -46,9 +48,9 @@ const Account = () => {
 	};
 
 	return (
-		<div className="section-padding relative flex justify-center bg-classmate-tan-1 py-6 md:min-h-[742px] md:justify-normal md:p-0 lg:min-h-[912px]">
+		<div className="section-padding relative flex justify-center bg-classmate-tan-1 py-10 md:min-h-[742px] md:justify-normal md:p-0 lg:min-h-[912px]">
 			<div className="absolute top-0 hidden h-[1px] w-full bg-classmate-gray-4 md:block" />
-			{(selectedAccountTab === "" || windowWidth >= 768) && <AccountMenu />}
+			<AccountMenu />
 			{selectedAccountTab !== "" && (
 				<div className=" md:section-padding flex w-full flex-col items-center gap-4  md:py-10  lg:py-20 lg:pb-28">
 					{windowWidth < 768 && (
@@ -70,6 +72,8 @@ const Account = () => {
 
 					{selectedAccountTab === "profile" && <ProfileTab />}
 					{selectedAccountTab === "account" && <AccountTab />}
+					{selectedAccountTab === "reviews" && <ReviewsTab />}
+					{selectedAccountTab === "bookmarks" && <BookmarksTab />}
 					{/* {selectedAccountTab === "profile" && <AccountProfileSection />} */}
 				</div>
 			)}
