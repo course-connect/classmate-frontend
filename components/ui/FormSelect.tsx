@@ -60,11 +60,6 @@ const FormSelect: FC<InputProps> = ({
 
 	const dispatch = useAppDispatch();
 
-	const handleSelectBlur = () => {
-		setChangeLabelColor(false);
-		selectRef.current.blur();
-	};
-
 	// Select
 	const [selectOptionsWithProps, setSelectOptionsWithProps] = useState([]);
 
@@ -111,14 +106,6 @@ const FormSelect: FC<InputProps> = ({
 		return fuse.search(localSearchValue);
 	};
 
-	const handleKeyDown = (e) => {
-		if (type !== "select") {
-			searchRef.current.focus();
-		} else {
-			e.preventDefault();
-		}
-	};
-
 	useEffect(() => {
 		if (type === "local-search") {
 			if (!localSearchValue) {
@@ -134,6 +121,7 @@ const FormSelect: FC<InputProps> = ({
 	// Database Search
 	const formSearch = useSelector((state) => state.formSearch);
 	const [databaseSearchValue, setDatabaseSearchValue] = useState("");
+	const inputBlurred = useRef(false);
 
 	const handleDatabaseSearchChange = (e) => {
 		setDatabaseSearchValue(e.target.value);
@@ -161,12 +149,7 @@ const FormSelect: FC<InputProps> = ({
 		}
 	}, selectRef);
 
-	const hanldeInputClick = (e) => {
-		if (type === "database-search" && !inputFocused && !databaseSearchValue) {
-			dispatch(setFormSearchType(searchType));
-			dispatch(search(""));
-		}
-
+	const activateInput = () => {
 		if (!moveLabel) {
 			setMoveLabel(true);
 		}
@@ -174,14 +157,59 @@ const FormSelect: FC<InputProps> = ({
 		if (!inputFocused) {
 			setChangeLabelColor(true);
 			setInputFocused(true);
-		} else {
-			const currentValue = getValues(name);
-			if (!currentValue) {
-				setMoveLabel(false);
+		}
+	};
+
+	const deactivateInput = () => {
+		const currentValue = getValues(name);
+		if (!currentValue) {
+			setMoveLabel(false);
+		}
+		setChangeLabelColor(false);
+		setInputFocused(false);
+
+		selectRef.current.blur();
+		inputBlurred.current = true;
+	};
+
+	const handleKeyDown = (e) => {
+		if (type !== "select") {
+			e.preventDefault();
+			searchRef.current.focus();
+			if (e.key !== "Tab") {
+				setDatabaseSearchValue(e.key);
+				dispatch(search(e.key));
 			}
-			setChangeLabelColor(false);
-			setInputFocused(false);
-			e.target.blur();
+		} else {
+			if (e.key === "Tab") {
+				deactivateInput();
+			}
+		}
+	};
+
+	const handleSelectBlur = () => {
+		setChangeLabelColor(false);
+		selectRef.current.blur();
+	};
+
+	const hanldeInputClick = (e) => {
+		if (type === "database-search" && !inputFocused && !databaseSearchValue) {
+			dispatch(setFormSearchType(searchType));
+			dispatch(search(""));
+		}
+
+		if (inputFocused) {
+			deactivateInput();
+		} else {
+			activateInput();
+		}
+	};
+
+	const handleInputFocus = () => {
+		if (!inputBlurred.current) {
+			activateInput();
+		} else {
+			inputBlurred.current = false;
 		}
 	};
 
@@ -227,6 +255,7 @@ const FormSelect: FC<InputProps> = ({
 						ref={selectRef}
 						onMouseDown={(e) => hanldeInputClick(e)}
 						onKeyDown={(e) => handleKeyDown(e)}
+						onFocus={handleInputFocus}
 						onBlur={handleSelectBlur}
 						onChange={onChange}
 						value={value || ""}
@@ -305,6 +334,11 @@ const FormSelect: FC<InputProps> = ({
 										ref={searchRef}
 										value={databaseSearchValue || ""}
 										onChange={(e) => handleDatabaseSearchChange(e)}
+										onKeyDown={(e) => {
+											if (e.key === "Tab") {
+												deactivateInput();
+											}
+										}}
 										placeholder="Search"
 										type="text"
 										className={`font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-7 placeholder-classmate-green-7 outline-none`}

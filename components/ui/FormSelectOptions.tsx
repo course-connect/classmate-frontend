@@ -17,6 +17,7 @@ const FormSelectOptions = ({
 }: InputProps) => {
 	return (
 		<button
+			tabIndex={-1}
 			data-selectname={selectName}
 			data-value={text}
 			className="font-classmate relative flex min-h-[40px] w-full items-center overflow-hidden rounded-md bg-classmate-gray-6 px-3 py-2 text-left leading-5 text-classmate-green-7 outline-none ring-classmate-gold-1 transition-all hover:bg-classmate-gray-6 focus:ring">
