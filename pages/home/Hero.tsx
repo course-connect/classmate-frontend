@@ -3,7 +3,7 @@ import Image from "next/image";
 import HeroCallToAction from "./HeroCallToAction";
 
 const icons: Record<string, string> = {
-	logo: "./logo.svg",
+	logo: "./classmate-logo-solid.svg",
 	swinging: "./swinging.svg",
 	reading: "./reading.svg",
 	globe: "./globe.svg",
@@ -63,10 +63,10 @@ const Hero = (): JSX.Element => {
 					src={icons.logo}
 					width={0}
 					height={0}
-					className="pointer-events-none h-12 w-auto sm:h-16 lg:h-20 xl:h-24"
+					className="filter-classmate-green-1 pointer-events-none h-12 w-auto sm:h-16 lg:h-20 xl:h-24"
 					alt="The Classmate company logo, featuring the word 'Classmate' in a distinct design."
 				/>
-				<h2 className="font-classmate my-4 text-center text-2xl sm:my-6 sm:text-3xl">
+				<h2 className="font-classmate my-4 text-center text-2xl text-classmate-green-1 sm:my-6 sm:text-3xl">
 					The easiest way to find a professor
 				</h2>
 				<HeroCallToAction />
