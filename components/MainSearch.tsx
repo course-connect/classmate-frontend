@@ -41,7 +41,7 @@ const MainSearch = () => {
 	}, 300);
 
 	const handleSearchClick = () => {
-		alert("does nothing");
+		handleSubmit(onSubmit)();
 	};
 
 	return (
@@ -66,7 +66,7 @@ const MainSearch = () => {
 						width={0}
 						height={0}
 						alt="check mark"
-						className="fitler-classmate-green-4 h-[22px] w-[22px]"
+						className="filter-classmate-green-4 h-[22px] w-[22px]"
 					/>
 				</button>
 			</form>

@@ -91,7 +91,6 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 		if (!showLargeGraph && graphWidth > 550) {
 			setShowLargeGraph(true);
 		} else if (showLargeGraph && graphWidth <= 550 - graphWidth) {
-			console.log(graphWidth);
 			setShowLargeGraph(false);
 		}
 	}, [width]);
@@ -171,10 +170,13 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 									</p>
 								)}
 								<button
+									tabIndex={isHomepage ? -1 : 0}
 									id={professor.firebaseID}
-									className={`absolute bottom-0 flex h-3/5 w-full items-center rounded-md border-none ring-classmate-gold-1 focus:ring ${getColor(
+									className={`absolute bottom-0 flex h-3/5 w-full items-center rounded-md border-none outline-none ring-classmate-gold-1 focus:ring ${getColor(
 										professor.data.score
-									)} ${showLargeGraph ? "h-full" : ""}`}>
+									)} ${showLargeGraph ? "h-full" : ""} ${
+										isHomepage ? "pointer-events-none" : ""
+									}`}>
 									<span className="font-classmate absolute -right-2 w-0 text-classmate-green-6">
 										{professor.data.score}
 									</span>

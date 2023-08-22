@@ -79,7 +79,12 @@ const Footer: React.FC = () => {
 				<div className="h-[2px] w-full rounded-lg bg-classmate-green-5" />
 				<div className="flex items-center justify-center gap-4">
 					{socialMediaLinks.map((link, index) => (
-						<Link key={index} href={link.href} target="_blank" passHref={true}>
+						<Link
+							key={index}
+							href={link.href}
+							target="_blank"
+							passHref={true}
+							className="rounded-full outline-none ring-classmate-gold-1 focus:ring">
 							<Image
 								src={link.imgSrc}
 								width={0}

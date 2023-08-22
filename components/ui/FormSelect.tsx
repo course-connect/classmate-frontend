@@ -355,7 +355,7 @@ const FormSelect: FC<InputProps> = ({
 										return searchType === "school" ? (
 											<FormSelectOptions
 												key={index}
-												icon="./graduation-cap.svg"
+												icon="./graduation-cap-solid.svg"
 												text={data.school_name}
 												selected={data.school_name === getValues(name)}
 												selectName={name}
