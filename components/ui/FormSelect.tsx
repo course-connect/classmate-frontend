@@ -169,7 +169,6 @@ const FormSelect: FC<InputProps> = ({
 		setInputFocused(false);
 
 		selectRef.current.blur();
-		inputBlurred.current = true;
 	};
 
 	const handleKeyDown = (e) => {
@@ -177,13 +176,15 @@ const FormSelect: FC<InputProps> = ({
 			e.preventDefault();
 			searchRef.current.focus();
 			if (e.key !== "Tab") {
-				setDatabaseSearchValue(e.key);
-				dispatch(search(e.key));
+				if (type === "database-search") {
+					setDatabaseSearchValue(e.key);
+					dispatch(search(e.key));
+				} else {
+					setLocalSearchValue(e.key);
+				}
 			}
-		} else {
-			if (e.key === "Tab") {
-				deactivateInput();
-			}
+		} else if (e.key === "Tab") {
+			deactivateInput();
 		}
 	};
 
@@ -200,6 +201,7 @@ const FormSelect: FC<InputProps> = ({
 
 		if (inputFocused) {
 			deactivateInput();
+			inputBlurred.current = true;
 		} else {
 			activateInput();
 		}
@@ -229,6 +231,13 @@ const FormSelect: FC<InputProps> = ({
 		size === "lg" ? "-translate-y-[29px]" : "-translate-y-[25px]";
 
 	const dropDownOffset = size === "lg" ? "top-[58px]" : "top-[50px]";
+
+	// Results search inputs
+	const handleResultsSearchKeyDown = (e) => {
+		if (e.key === "Tab") {
+			deactivateInput();
+		}
+	};
 
 	return (
 		<Controller
@@ -309,6 +318,7 @@ const FormSelect: FC<InputProps> = ({
 										ref={searchRef}
 										value={localSearchValue}
 										onChange={(e) => handleLocalSearchChange(e)}
+										onKeyDown={(e) => handleResultsSearchKeyDown(e)}
 										placeholder="Search"
 										defaultValue=""
 										type="text"
@@ -334,11 +344,7 @@ const FormSelect: FC<InputProps> = ({
 										ref={searchRef}
 										value={databaseSearchValue || ""}
 										onChange={(e) => handleDatabaseSearchChange(e)}
-										onKeyDown={(e) => {
-											if (e.key === "Tab") {
-												deactivateInput();
-											}
-										}}
+										onKeyDown={(e) => handleResultsSearchKeyDown(e)}
 										placeholder="Search"
 										type="text"
 										className={`font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-7 placeholder-classmate-green-7 outline-none`}

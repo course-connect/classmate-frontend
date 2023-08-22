@@ -98,7 +98,7 @@ const AccountProfileSection = () => {
 						name="graduationYear"
 						size="lg"
 						label="Graduation Year *"
-						type="select"
+						type="local-search"
 						backgroundColor="bg-classmate-tan-2"
 						setValue={setValue}
 						getValues={getValues}
