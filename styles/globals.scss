@@ -105,6 +105,14 @@
 	filter: invert(92%) sepia(14%) saturate(348%) hue-rotate(318deg) brightness(108%) contrast(94%);
 }
 
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+} 
 
 @keyframes fade-in {
 	from {

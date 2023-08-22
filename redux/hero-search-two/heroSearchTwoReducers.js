@@ -7,12 +7,14 @@ import {
 	SET_HERO_SEARCH_TWO_FILTER,
 	CLEAR_HERO_SEARCH_TWO_FILTERS,
 	RESET_SEARCH_TWO,
+	SAVE_SEARCH_TWO_INPUT,
 } from "./heroSearchTwoTypes";
 
 const initialState = {
 	loading: false,
 	results: [],
 	type: "course",
+	userInput: "",
 	filters: {
 		professor: {
 			filter_value: null,
@@ -60,13 +62,18 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				loading: false,
-				results: payload || [],
+				results: payload,
 			};
 		case HERO_SEARCH_TWO_FAILURE:
 			return {
 				...state,
 				loading: false,
 				results: [],
+			};
+		case SAVE_SEARCH_TWO_INPUT:
+			return {
+				...state,
+				userInput: payload,
 			};
 		case SET_HERO_SEARCH_TWO_TYPE:
 			return {

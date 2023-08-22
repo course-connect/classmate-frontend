@@ -8,6 +8,7 @@ import {
 	SET_HERO_SEARCH_ONE_FILTER,
 	CLEAR_HERO_SEARCH_ONE_FILTERS,
 	RESET_SEARCH_ONE,
+	SAVE_SEARCH_ONE_INPUT,
 } from "./heroSearchOneTypes";
 
 // Reset to initial state
@@ -33,6 +34,13 @@ export const searchOne = (userInput) => async (dispatch, getState) => {
 		// Search attempt failed
 		dispatch(searchOneFailure(err));
 	}
+};
+
+export const saveSearchOneInput = (userInput) => async (dispatch) => {
+	dispatch({
+		type: SAVE_SEARCH_ONE_INPUT,
+		payload: userInput,
+	});
 };
 
 export const setSearchOneType = (searchType) => (dispatch) => {

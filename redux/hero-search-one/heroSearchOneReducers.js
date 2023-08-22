@@ -7,12 +7,14 @@ import {
 	SET_HERO_SEARCH_ONE_FILTER,
 	CLEAR_HERO_SEARCH_ONE_FILTERS,
 	RESET_SEARCH_ONE,
+	SAVE_SEARCH_ONE_INPUT,
 } from "./heroSearchOneTypes";
 
 const initialState = {
 	loading: false,
 	results: [],
 	type: "school",
+	userInput: "",
 	filters: {
 		professor: {
 			filter_value: null,
@@ -67,6 +69,11 @@ export default (state = initialState, action) => {
 				...state,
 				loading: false,
 				results: [],
+			};
+		case SAVE_SEARCH_ONE_INPUT:
+			return {
+				...state,
+				userInput: payload,
 			};
 		case SET_HERO_SEARCH_ONE_TYPE:
 			return {

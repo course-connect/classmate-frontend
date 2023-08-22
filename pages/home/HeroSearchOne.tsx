@@ -19,6 +19,7 @@ import heroSearchOneInterface from "../../redux/hero-search-one/heroSearchOneInt
 import {
 	searchOne,
 	clearSearchOne,
+	saveSearchOneInput,
 } from "../../redux/hero-search-one/heroSearchOneActions";
 
 interface HeroSearchOneProps {
@@ -57,6 +58,7 @@ const HeroSearchOne: React.FC<HeroSearchOneProps> = ({
 
 	// Debounced search function
 	const onSubmit = useDebounce(({ userInput }: { userInput: string }) => {
+		dispatch(saveSearchOneInput(userInput));
 		if (userInput) {
 			dispatch(searchOne(userInput));
 		} else {

@@ -8,6 +8,7 @@ import {
 	SET_HERO_SEARCH_TWO_FILTER,
 	CLEAR_HERO_SEARCH_TWO_FILTERS,
 	RESET_SEARCH_TWO,
+	SAVE_SEARCH_TWO_INPUT,
 } from "./heroSearchTwoTypes";
 
 // Reset to initial state
@@ -33,6 +34,13 @@ export const searchTwo = (userInput) => async (dispatch, getState) => {
 		// Search attempt failed
 		dispatch(searchTwoFailure(err));
 	}
+};
+
+export const saveSearchTwoInput = (userInput) => async (dispatch) => {
+	dispatch({
+		type: SAVE_SEARCH_TWO_INPUT,
+		payload: userInput,
+	});
 };
 
 export const setSearchTwoType = (searchType) => (dispatch) => {

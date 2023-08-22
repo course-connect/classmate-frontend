@@ -22,6 +22,7 @@ import {
 	searchTwo,
 	clearSearchTwo,
 	setSearchTwoType,
+	saveSearchTwoInput,
 } from "../../redux/hero-search-two/heroSearchTwoActions";
 
 const HeroSearchTwo: React.FC<{
@@ -63,6 +64,7 @@ const HeroSearchTwo: React.FC<{
 	}, []);
 
 	const onSubmit = useDebounce(({ userInput }: { userInput: string }) => {
+		dispatch(saveSearchTwoInput(userInput));
 		if (userInput) {
 			// Dispatch search action if userInput is not empty
 			dispatch(searchTwo(userInput));

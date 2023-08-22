@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import HeroCallToAction from "./HeroCallToAction";
+import Spinner from "../../components/ui/Spinner";
 
 const icons: Record<string, string> = {
 	logo: "./classmate-logo-solid.svg",
