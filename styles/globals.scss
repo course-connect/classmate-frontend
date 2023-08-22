@@ -77,13 +77,34 @@
 }
 
 // SVG color transformations
+.filter-classmate-green-1{
+	filter: invert(7%) sepia(20%) saturate(5146%) hue-rotate(91deg) brightness(95%) contrast(98%);
+}
+
 .filter-classmate-green-4{
 	filter: invert(91%) sepia(10%) saturate(713%) hue-rotate(55deg) brightness(81%) contrast(88%),
+}
+
+.filter-classmate-green-5{
+	filter: invert(89%) sepia(20%) saturate(503%) hue-rotate(50deg) brightness(99%) contrast(102%);
 }
 
 .filter-classmate-green-7{
 	filter: invert(33%) sepia(12%) saturate(711%) hue-rotate(65deg) brightness(98%) contrast(91%)
 }
+
+.filter-classmate-gray-6{
+	filter: invert(99%) sepia(83%) saturate(586%) hue-rotate(296deg) brightness(109%) contrast(86%);
+}
+
+.filter-classmate-tan-1{
+	filter: invert(94%) sepia(15%) saturate(280%) hue-rotate(330deg) brightness(103%) contrast(87%);
+}
+
+.filter-classmate-tan-2{
+	filter: invert(92%) sepia(14%) saturate(348%) hue-rotate(318deg) brightness(108%) contrast(94%);
+}
+
 
 @keyframes fade-in {
 	from {

@@ -6,16 +6,18 @@ export default function Professor({ professor }) {
 }
 
 export async function getStaticPaths() {
-	return {
-		paths: [
-			{
-				params: {
-					professorID: "KekqveeJ9PhwOBzhDx31",
-				},
-			},
-		],
-		fallback: true,
-	};
+	let staticPaths = { paths: [], fallback: true };
+
+	try {
+		const res = await axios.get("/professor/");
+		res.data.professors.forEach((professorID) =>
+			staticPaths.paths.push({ params: { professorID } })
+		);
+	} catch (err) {
+		throw new Error(err);
+	}
+
+	return staticPaths;
 }
 
 export async function getStaticProps(context) {
@@ -30,7 +32,7 @@ export async function getStaticProps(context) {
 	try {
 		res = await axios.get(`/professor/${profesorID}`, headers);
 	} catch (err) {
-		console.log(err);
+		throw new Error(err);
 	}
 
 	return {

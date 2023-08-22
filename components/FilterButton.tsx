@@ -61,7 +61,15 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 			onClick={(e) => handleButtonClick(e)}
 			className={`font-classmate flex w-full items-center justify-between rounded-md bg-classmate-gray-6 px-3 py-2 text-left text-classmate-green-7 outline-none ring-classmate-gold-1 focus:ring ${styles}`}>
 			<div className="pointer-events-none flex w-full gap-4 ">
-				{icon && <Image width={19} height={19} src={icon} alt={iconAlt} />}
+				{icon && (
+					<Image
+						width={19}
+						height={19}
+						src={icon}
+						alt={iconAlt}
+						className="filter-classmate-green-7"
+					/>
+				)}
 				{children}
 			</div>
 
@@ -76,11 +84,11 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 							id="remove"
 							className="flex h-[14px] w-[14px] items-center justify-center rounded-full bg-classmate-green-7">
 							<Image
-								width={6}
-								height={6}
-								src="./xmark-solid-light.svg"
+								width={0}
+								height={0}
+								src="./xmark-solid.svg"
 								alt="x mark"
-								className="pointer-events-none"
+								className="filter-classmate-gray-6 pointer-events-none h-[6px] w-[6px]"
 							/>
 						</div>
 					)}

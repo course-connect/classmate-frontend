@@ -23,17 +23,17 @@ interface MenuItem {
 const socialMediaLinks: SocialMediaLink[] = [
 	{
 		href: "https://webdevlex.com/",
-		imgSrc: "./footer-instagram-logo.svg",
+		imgSrc: "./instagram-solid.svg",
 		alt: "Instagram",
 	},
 	{
 		href: "https://webdevlex.com/",
-		imgSrc: "./footer-linkedin-logo.svg",
+		imgSrc: "./linkedin-solid.svg",
 		alt: "LinkedIn",
 	},
 	{
 		href: "https://webdevlex.com/",
-		imgSrc: "./footer-twitter-logo.svg",
+		imgSrc: "./twitter-solid.svg",
 		alt: "Twitter",
 	},
 ];
@@ -58,11 +58,11 @@ const Footer: React.FC = () => {
 		<footer className="section-padding bg-classmate-green-1 py-14">
 			<div className="flex flex-col gap-12">
 				<Image
-					src="./footer-logo.svg"
+					src="./classmate-logo-solid.svg"
 					width={0}
 					height={0}
 					alt="large navbar classmate logo"
-					className="h-6 w-auto"
+					className="filter-classmate-green-5 h-6 w-auto"
 				/>
 				<ul className="font-classmate flex flex-col items-center justify-center gap-5 text-sm sm:flex-row sm:gap-14">
 					{menuItems.map((item) => (
@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
 								width={0}
 								height={0}
 								alt={link.alt}
-								className="h-11 w-auto"
+								className="filter-classmate-green-5 h-11 w-auto"
 							/>
 						</Link>
 					))}

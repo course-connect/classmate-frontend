@@ -37,13 +37,13 @@ const BookmarksTab = () => {
 					My Bookmarks
 				</p>
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<div className="flex overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
+					<div className="flex items-center overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
 						<Image
-							src="./search.svg"
+							src="./search-solid.svg"
 							width={20}
 							height={20}
 							alt=""
-							className="mx-4"
+							className="filter-classmate-green-4 mx-4 h-[20px] w-[20px]"
 						/>
 						<input
 							defaultValue=""

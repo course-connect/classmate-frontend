@@ -89,8 +89,8 @@ const HeroSearchTwoSelect: React.FC<HeroSearchTwoSelectProps> = ({
 								? "./book-solid.svg"
 								: "./glasses-solid.svg"
 						}
-						height={heroSearchTwo.type === "course" ? 23 : 25}
-						width={25}
+						height={0}
+						width={0}
 						alt="visiual depiction of a graduation cap or glasses that represents what you are searching for"
 						className={`filter-classmate-green-7 w-[25px] min-w-[25px] ${
 							heroSearchTwo.type === "course"
@@ -103,8 +103,8 @@ const HeroSearchTwoSelect: React.FC<HeroSearchTwoSelectProps> = ({
 						className={`filter-classmate-green-4 h-[10px] w-[10px] min-w-[10px] ${
 							menuOpen ? "rotate-180" : ""
 						}`}
-						height={10}
-						width={10}
+						height={0}
+						width={0}
 						alt="small arrow"
 					/>
 				</div>

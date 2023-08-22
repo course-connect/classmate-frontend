@@ -14,11 +14,11 @@ const MainSearchResultBookmark = ({ bookmarkType, itemID }) => {
 			size="xs"
 			styles="!p-1 h-fit min-w-[30px]">
 			<Image
-				src="./bookmark.svg"
+				src="./bookmark-outline.svg"
 				height={0}
-				width={22}
+				width={0}
 				alt="bookmark"
-				className="pointer-events-none h-fit"
+				className="filter-classmate-green-1 pointer-events-none h-fit w-[22px]"
 			/>
 		</ClassmateButton>
 	);

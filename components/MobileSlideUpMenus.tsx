@@ -22,14 +22,14 @@ const MobileSlideUpMenus = ({
 						callback={handleShowGraphClick}
 						variant="filled"
 						size="md"
-						styles="fixed bottom-6 bg-classmate-gold-1 text-classmate-tan-2 shadow-md !px-5  flex justify-center items-center ">
+						styles="fixed bottom-6 bg-classmate-gold-1 text-classmate-tan-2 shadow-md !px-5 flex justify-center items-center ">
 						Graph
 						<Image
-							className="ml-2"
-							height={10}
-							width={10}
-							alt=""
-							src="./caret-up-light-tan.svg"
+							className="filter-classmate-tan-2 ml-2 h-[10px] w-[10px] rotate-180"
+							height={0}
+							width={0}
+							alt="small arrow"
+							src="./caret-solid.svg"
 						/>
 					</ClassmateButton>
 				)}
@@ -41,7 +41,13 @@ const MobileSlideUpMenus = ({
 						callback={handleOpenFilterMenu}
 						type="button"
 						styles="fixed bottom-6 !rounded-full right-4 flex !h-[44px] !w-[44px] items-center justify-center rounded-full bg-classmate-tan-2 shadow-md xs:right-20">
-						<Image height={20} width={20} alt="" src="./settings.svg" />
+						<Image
+							height={0}
+							width={0}
+							alt="settings"
+							className="filter-classmate-green-7 h-[20px] w-[20px]"
+							src="./settings-solid.svg"
+						/>
 					</ClassmateButton>
 				)}
 			</div>

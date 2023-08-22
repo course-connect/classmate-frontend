@@ -96,22 +96,18 @@ const MainSearchSelect = ({ setValue }) => {
 				<div className="pointer-events-none flex select-none items-center justify-center gap-2">
 					<Image
 						src={iconSrc}
-						height={25}
-						width={25}
+						height={0}
+						width={0}
 						alt={iconAlt}
-						className={iconClassName}
-						style={{
-							filter:
-								"invert(33%) sepia(12%) saturate(711%) hue-rotate(65deg) brightness(98%) contrast(91%)",
-						}}
+						className={`filter-classmate-green-7 h-[25px] w-[25px] ${iconClassName}`}
 					/>
 					<Image
 						src="./caret-solid.svg"
 						className={`filter-classmate-green-4 h-[10px] w-[10px] min-w-[10px] ${
 							menuOpen ? "rotate-180" : ""
 						}`}
-						height={10}
-						width={10}
+						height={0}
+						width={0}
 						alt="small arrow"
 					/>
 				</div>

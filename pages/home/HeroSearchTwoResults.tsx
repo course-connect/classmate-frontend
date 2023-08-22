@@ -46,7 +46,7 @@ const HeroSearchTwoResults: React.FC = () => {
 	// Handle clicking on a professor result
 	const handleProfessorClick = (professor: any) => {
 		// Redirect to the professor's page
-		router.push(`/professor/${professor.data.user_id}`);
+		router.push(`/professor/${professor.firebaseID}`);
 	};
 
 	// Render the search results component
@@ -63,8 +63,8 @@ const HeroSearchTwoResults: React.FC = () => {
 					type="button"
 					className={`flex w-full items-center border-b-[1px] bg-classmate-tan-2 px-5 py-5 text-left outline-none ring-classmate-gold-1 hover:bg-classmate-gray-5 focus:bg-classmate-gray-5`}>
 					<Image
-						height={20}
-						width={20}
+						height={0}
+						width={0}
 						src={
 							heroSearchTwo.type === "course"
 								? "./book-solid.svg"

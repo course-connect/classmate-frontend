@@ -17,7 +17,7 @@ const FilterSearchResults = () => {
 					return (
 						<FilterButton
 							key={index}
-							icon="./graduation-cap.svg"
+							icon="./graduation-cap-solid.svg"
 							iconAlt="Graduation Cap"
 							filterText={school.school_name}
 							filterValue={firebaseID}
@@ -28,10 +28,11 @@ const FilterSearchResults = () => {
 								{filterAlreadyAdded && (
 									<div className="absolute right-0 flex h-full w-8 items-center justify-center bg-classmate-gray-6">
 										<Image
-											width={16}
-											height={10}
-											src="./check-green.svg"
+											width={0}
+											height={0}
+											src="./check-solid.svg"
 											alt="check mark"
+											className="filter-classmate-green-4 h-[10px] w-[16px]"
 										/>
 									</div>
 								)}
@@ -54,7 +55,7 @@ const FilterSearchResults = () => {
 						<FilterButton
 							key={index}
 							text={`${professor.first_name} ${professor.last_name}`}
-							icon="./glasses.svg"
+							icon="./glasses-solid.svg"
 							iconAlt="Glasses"
 							filterText={`${professor.first_name} ${professor.last_name}`}
 							filterValue={firebaseID}
@@ -66,10 +67,11 @@ const FilterSearchResults = () => {
 								{filterAlreadyAdded && (
 									<div className="absolute right-0 flex h-full w-8 items-center justify-center bg-classmate-gray-6">
 										<Image
-											width={16}
-											height={10}
-											src="./check-green.svg"
+											width={0}
+											height={0}
+											src="./check-solid.svg"
 											alt="check mark"
+											className="filter-classmate-green-4 h-[10px] w-[16px]"
 										/>
 									</div>
 								)}
@@ -103,10 +105,11 @@ const FilterSearchResults = () => {
 								{filterAlreadyAdded && (
 									<div className="absolute right-0 flex h-full w-8 items-center justify-center bg-classmate-gray-6">
 										<Image
-											width={16}
-											height={10}
-											src="./check-green.svg"
+											width={0}
+											height={0}
+											src="./check-solid.svg"
 											alt="check mark"
+											className="filter-classmate-green-4 h-[10px] w-[16px]"
 										/>
 									</div>
 								)}

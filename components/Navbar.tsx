@@ -69,19 +69,19 @@ export default function Navbar() {
 				href="/">
 				{width >= 640 ? (
 					<Image
-						src="./logo.svg"
+						src="./classmate-logo-solid.svg"
 						width={0}
 						height={0}
 						alt="large navbar classmate logo"
-						className="h-6 w-auto min-w-[143px]"
+						className="filter-classmate-green-1 h-6 w-auto min-w-[143px]"
 					/>
 				) : (
 					<Image
-						src="./logo-small.svg"
+						src="./classmate-logo-small-solid.svg"
 						width={0}
 						height={0}
 						alt="small navbar classmate logo"
-						className="h-6 w-auto"
+						className="filter-classmate-green-1 h-6 w-auto"
 					/>
 				)}
 			</ClassmateButton>
@@ -94,16 +94,19 @@ export default function Navbar() {
 						: "pointer-events-none opacity-0"
 				} ${
 					addMobileTransitions
-						? "transition-opacity duration-500 ease-in-out"
+						? "transition-opacity duration-200 ease-in-out"
 						: ""
 				}`}>
 				<ClassmateButton
-					styles="absolute right-7 top-5 md:hidden"
+					size="xs"
+					variant="text"
+					styles="absolute right-7 top-5 md:hidden !p-1"
 					callback={toggleMobileMenu}>
 					<Image
 						src="./xmark-solid.svg"
-						width={25}
-						height={25}
+						width={0}
+						height={0}
+						className="filter-classmate-green-1 h-[25px] w-[25px]"
 						alt="An X icon representing a close button for a menu or window."
 					/>
 				</ClassmateButton>
@@ -130,18 +133,20 @@ export default function Navbar() {
 				</li>
 				<li className="md:hidden ">
 					<ClassmateButton
-						href="/signin"
 						variant="text"
-						styles="text-lg md:text-sm text-classmate-green-6 px-1"
+						size="xs"
+						href="/signin"
+						styles="!text-lg md:text-sm text-classmate-green-6 px-1"
 						callback={toggleMobileMenu}>
 						Sign In
 					</ClassmateButton>
 				</li>
 				<li className="md:hidden ">
 					<ClassmateButton
-						href="/signup"
 						variant="text"
-						styles="text-lg md:text-sm text-classmate-green-6 px-1"
+						size="xs"
+						href="/signup"
+						styles="!text-lg md:text-sm text-classmate-green-6 px-1"
 						callback={toggleMobileMenu}>
 						Sign Up
 					</ClassmateButton>
@@ -176,10 +181,10 @@ export default function Navbar() {
 							size="xs"
 							callback={toggleMobileMenu}>
 							<Image
-								src="./hamburger.svg"
-								width={25}
-								height={25}
-								className="h-[25px] w-[25px]"
+								src="./hamburger-solid.svg"
+								width={0}
+								height={0}
+								className="filter-classmate-green-1 h-[25px] w-[25px]"
 								alt="An icon depicting three horizontal lines, commonly known as a hamburger icon, representing a menu opener."
 							/>
 						</ClassmateButton>

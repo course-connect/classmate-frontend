@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import heroSearchOneInterface from "../../redux/hero-search-one/heroSearchOneInterface";
 import { setSearchOneFilter } from "../../redux/hero-search-one/heroSearchOneActions";
+import { setSearchTwoFilter } from "../../redux/hero-search-two/heroSearchTwoActions";
 
 // Props interface for HeroSchoolAndProfessorResults component
 interface HeroSchoolAndProfessorResultsProps {
@@ -36,13 +37,14 @@ const HeroSearchOneResults: React.FC<HeroSchoolAndProfessorResultsProps> = ({
 			},
 		};
 		dispatch(setSearchOneFilter(searchFilter));
+		dispatch(setSearchTwoFilter(searchFilter));
 		setShowFirstSearch(false);
-		setTimeout(() => setValue("userInput", ""), 1000);
+		setTimeout(() => setValue("userInput", ""), 500);
 	};
 
 	// Handle click event when a professor is selected
 	const handleProfessorClick = (professor: any) => {
-		router.push(`/professor/${professor.data.user_id}`);
+		router.push(`/professor/${professor.firebaseID}`);
 	};
 
 	// Render component with search results
@@ -59,8 +61,8 @@ const HeroSearchOneResults: React.FC<HeroSchoolAndProfessorResultsProps> = ({
 					type="button"
 					className="flex w-full items-center border-b-[1px] bg-classmate-tan-2 px-5 py-5 text-left outline-none ring-classmate-gold-1 hover:bg-classmate-gray-5 focus:bg-classmate-gray-5">
 					<Image
-						height={25}
-						width={25}
+						height={0}
+						width={0}
 						src={
 							heroSearchOne.type === "school"
 								? "./graduation-cap-solid.svg"

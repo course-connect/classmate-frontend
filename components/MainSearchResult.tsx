@@ -1,10 +1,8 @@
 import React from "react";
 import ResultQualityTag from "./ResultQualityTag";
 import ResultScore from "./ResultScore";
-import Image from "next/image";
 import Tag from "./Tag";
 import MatchText from "./MatchText";
-import ClassmateButton from "./ClassmateButton";
 import SchoolScoreDisplay from "./SchoolScoreDisplay";
 import MainSearchResultBookmark from "./MainSearchResultBookmark";
 

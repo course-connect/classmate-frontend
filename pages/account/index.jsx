@@ -60,11 +60,11 @@ const Account = () => {
 							size="sm"
 							styles="bg-classmate-tan-2 flex justify-center items-center gap-2 !px-3 text-classmate-green-1 !mr-auto">
 							<Image
-								src="./caret-down-green-7.svg"
-								width={12}
-								height={12}
-								alt={""}
-								className="!ml-auto rotate-90"
+								src="./caret-solid.svg"
+								width={0}
+								height={0}
+								alt="small arrow"
+								className="filter-classmate-green-7 !ml-auto h-[12px] w-[12px] rotate-90"
 							/>
 							Back
 						</ClassmateButton>

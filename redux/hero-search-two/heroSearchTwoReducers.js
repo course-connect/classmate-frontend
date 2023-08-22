@@ -60,7 +60,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				loading: false,
-				results: payload,
+				results: payload || [],
 			};
 		case HERO_SEARCH_TWO_FAILURE:
 			return {
@@ -72,7 +72,6 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				type: payload,
-				filters: initialState.filters,
 			};
 		case CLEAR_HERO_SEARCH_TWO:
 			return {

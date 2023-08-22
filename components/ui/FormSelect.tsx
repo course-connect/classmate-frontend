@@ -243,15 +243,13 @@ const FormSelect: FC<InputProps> = ({
 					<div
 						className={`pointer-events-none absolute right-1 flex h-8 w-8 items-center justify-center bg-classmate-tan-2 `}>
 						<Image
-							style={{
-								filter:
-									"invert(33%) sepia(8%) saturate(1099%) hue-rotate(65deg) brightness(97%) contrast(20%)",
-							}}
-							src="./caret.svg"
+							src="./caret-solid.svg"
 							alt="caret"
-							height={12}
-							width={12}
-							className={`transition-all ${inputFocused ? "rotate-180" : ""}`}
+							height={0}
+							width={0}
+							className={`filter-classmate-green-7 h-[12px] w-[12px] transition-all ${
+								inputFocused ? "rotate-180" : ""
+							}`}
 						/>
 					</div>
 
@@ -270,13 +268,13 @@ const FormSelect: FC<InputProps> = ({
 							<>
 								<div
 									id="local-search-input"
-									className="mb-2 flex min-h-[40px] overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
+									className="mb-2 flex min-h-[40px] items-center overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
 									<Image
-										src="./search.svg"
-										width={20}
-										height={20}
+										src="./search-solid.svg"
+										width={0}
+										height={0}
 										alt=""
-										className="mx-3"
+										className="filter-classmate-green-4 mx-3 h-[20px] w-[20px]"
 									/>
 									<input
 										ref={searchRef}
@@ -295,13 +293,13 @@ const FormSelect: FC<InputProps> = ({
 							<>
 								<div
 									id="local-search-input"
-									className="mb-2 flex min-h-[40px] overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
+									className="mb-2 flex min-h-[40px] items-center overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
 									<Image
-										src="./search.svg"
-										width={20}
-										height={20}
+										src="./search-solid.svg"
+										width={0}
+										height={0}
 										alt=""
-										className="mx-3"
+										className="filter-classmate-green-4 mx-3 h-[20px] w-[20px]"
 									/>
 									<input
 										ref={searchRef}

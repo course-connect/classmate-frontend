@@ -10,22 +10,18 @@ const AccountMenuButton = ({ text, icon, iconAlt, selected, callback }) => {
 			}`}>
 			<Image
 				src={icon}
-				width={20}
-				height={20}
-				alt="a graduation cap"
-				className="h-[20px] w-[20px]"
-				style={{
-					filter:
-						"invert(33%) sepia(12%) saturate(711%) hue-rotate(65deg) brightness(98%) contrast(91%)",
-				}}
+				width={0}
+				height={0}
+				alt={iconAlt}
+				className="filter-classmate-green-7 h-[20px] w-[20px]"
 			/>
 			<p className="font-classmate text-classmate-green-6">{text}</p>
 			<Image
-				src="./caret-down-green-7.svg"
-				width={12}
-				height={12}
+				src="./caret-solid.svg"
+				width={0}
+				height={0}
 				alt={iconAlt}
-				className="!ml-auto -rotate-90 md:hidden"
+				className="filter-classmate-green-7 !ml-auto h-[12px] w-[12px] -rotate-90 md:hidden"
 			/>
 		</button>
 	);

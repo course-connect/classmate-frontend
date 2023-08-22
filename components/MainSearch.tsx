@@ -61,7 +61,13 @@ const MainSearch = () => {
 					type="submit"
 					onClick={handleSearchClick}
 					className="absolute right-[4px] z-20 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-classmate-tan-2 outline-none ring-classmate-gold-1 transition-colors hover:bg-classmate-gray-5 focus:ring">
-					<Image src="./search.svg" width={22} height={22} alt="" />
+					<Image
+						src="./search-solid.svg"
+						width={0}
+						height={0}
+						alt="check mark"
+						className="fitler-classmate-green-4 h-[22px] w-[22px]"
+					/>
 				</button>
 			</form>
 		</>

@@ -86,8 +86,8 @@ const HeroSchoolAndProfessorSelect: React.FC<{ setValue: Function }> = ({
 					{/* Display selected icon and dropdown caret */}
 					<Image
 						src={selectedIcon}
-						height={25}
-						width={25}
+						height={0}
+						width={0}
 						alt="icon"
 						className="filter-classmate-green-7 h-[25px] w-[25px] min-w-[25px]"
 					/>
@@ -96,8 +96,8 @@ const HeroSchoolAndProfessorSelect: React.FC<{ setValue: Function }> = ({
 						className={`filter-classmate-green-4 h-[10px] w-[10px] min-w-[10px] ${
 							menuOpen ? "rotate-180" : ""
 						}`}
-						height={10}
-						width={10}
+						height={0}
+						width={0}
 						alt="caret"
 					/>
 				</div>

@@ -54,8 +54,6 @@ const MainSearchCard = ({
 
 	return (
 		<div className="rounded-xl bg-classmate-tan-2 p-4 shadow-xl">
-			<button onClick={() => dispatch(resetFilterSearch())}>test</button>
-			<button onClick={() => dispatch(resetMainSearch())}>test</button>
 			<div className="flex flex-col gap-5">
 				<div className="flex gap-2">
 					<MainSearch />
@@ -72,11 +70,11 @@ const MainSearchCard = ({
 									showFilters ? "rotate-180" : ""
 								}`}>
 								<Image
-									className="pointer-events-none "
-									src="./caret-down.svg"
-									width={12}
-									height={12}
-									alt=""
+									className="filter-classmate-green-4 pointer-events-none h-[12px] w-[12px] "
+									src="./caret-solid.svg"
+									width={0}
+									height={0}
+									alt="small arrow"
 								/>
 							</div>
 						</button>
@@ -100,11 +98,11 @@ const MainSearchCard = ({
 										onClick={(e) => handleRemoveClick(e)}
 										className="pointer flex h-3 w-3 items-center justify-center rounded-full bg-classmate-tan-2">
 										<Image
-											className="pointer-events-none"
-											src="./xmark-solid-green.svg"
-											width={6}
-											height={6}
-											alt=""
+											className="filter-classmate-green-4 pointer-events-none h-[6px] w-[6px]"
+											src="./xmark-solid.svg"
+											width={0}
+											height={0}
+											alt="x mark"
 										/>
 									</button>
 								</div>
@@ -116,11 +114,11 @@ const MainSearchCard = ({
 							styles="bg-classmate-green-4 min-w-[20px] min-h-[20px] h-[20px] !p-1 flex justify-center items-center !rounded-full"
 							callback={handleAddFilterClick}>
 							<Image
-								className="pointer-events-none"
-								src="./plus-light.svg"
-								width={10}
-								height={10}
-								alt=""
+								className="filter-classmate-tan-2 classmate- pointer-events-none h-[10px] w-[10px]"
+								src="./plus-solid.svg"
+								width={0}
+								height={0}
+								alt="plus"
 							/>
 						</ClassmateButton>
 					)}
