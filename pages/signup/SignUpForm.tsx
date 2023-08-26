@@ -1,13 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import useWindowSize from "../hooks/useWindowSize";
+import useWindowSize from "../../hooks/useWindowSize";
 import { useForm, FormProvider } from "react-hook-form";
-import ClassmateButton from "./ClassmateButton";
-import { signUp } from "../redux/auth/authActions";
+import ClassmateButton from "../../components/ClassmateButton";
+import { signUp } from "../../redux/auth/authActions";
 import { useDispatch } from "react-redux";
 
-import BasicInput from "./BasicInput";
-import PasswordInput from "./PasswordInput";
+import BasicInput from "../../components/BasicInput";
+import PasswordInput from "../../components/PasswordInput";
 
 export default function SignUpForm() {
 	const dispatch = useDispatch();
@@ -91,7 +91,7 @@ export default function SignUpForm() {
 		);
 
 		if (!emailError && !passwordError && !confirmPasswordError) {
-			dispatch(signUp({ email, password }));
+			// dispatch(signUp({ email, password }));
 		}
 	}
 
