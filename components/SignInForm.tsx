@@ -106,7 +106,7 @@ export default function SignInForm() {
 					/>
 				</FormProvider>
 			</div>
-			{Object.keys(errors).length !== 0 && (
+			{auth.error && (
 				<div className="mt-2 flex items-center gap-2">
 					<Image
 						src="./circle-exclamation-solid.svg"

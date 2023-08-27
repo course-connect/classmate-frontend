@@ -9,23 +9,32 @@ export default function SignUp() {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const router = useRouter();
 
-	useEffect(() => {
-		if (isAuthenticated) {
-			router.push("/account");
-		}
-	}, [isAuthenticated]);
+	// useEffect(() => {
+	// 	if (isAuthenticated) {
+	// 		router.push("/account");
+	// 	}
+	// }, [isAuthenticated]);
 
 	return (
-		<SignUpOrSignIn
-			heading="Sign Up"
-			subheading="Sign up to get access to insights and create your prefect semester"
-			form={<SignUpForm />}
-			variant="signup"
-		/>
-		// <SignUpStepper>
-
-		// 	<h1>Step 2</h1>
-		// 	<h1>Step 3</h1>
-		// </SignUpStepper>
+		<SignUpStepper>
+			<SignUpOrSignIn
+				heading="Sign Up"
+				subheading="Sign up to get access to insights and create your prefect semester"
+				form={<SignUpForm />}
+				variant="signup"
+			/>
+			<SignUpOrSignIn
+				heading="Sign Up"
+				subheading="Sign up to get access to insights and create your prefect semester"
+				form={<SignUpForm />}
+				variant="signup"
+			/>
+			<SignUpOrSignIn
+				heading="Sign Up"
+				subheading="Sign up to get access to insights and create your prefect semester"
+				form={<SignUpForm />}
+				variant="signup"
+			/>
+		</SignUpStepper>
 	);
 }
