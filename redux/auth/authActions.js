@@ -9,18 +9,20 @@ import {
 	AUTH_SUCCESS,
 	AUTH_LOADING,
 	UN_AUTH_USER,
+	SET_AUTH_ERROR,
+	REMOVE_AUTH_ERROR,
 } from "./authTypes";
 
 // Authenticate User
 export const signUp =
-	({ email, password }) =>
+	({ email, password, confirmPassword }) =>
 	async (dispatch) => {
 		// Flag autherization as loading
 		dispatch(authLoading());
 
 		try {
 			// Attempt to sign in with creditials given
-			const res = await attemptSignUp({ email, password });
+			const res = await attemptSignUp({ email, password, confirmPassword });
 
 			// Autherization attempt succeeded
 			dispatch(authSuccess(res.data));
@@ -31,9 +33,10 @@ export const signUp =
 	};
 
 // Attempt to sign up with creditials given
-const attemptSignUp = ({ email, password }) => {
+const attemptSignUp = ({ email, password, confirmPassword }) => {
 	const body = {
-		account_info: { email, password },
+		account_info: { email, password, confirmPassword },
+		student_info: {},
 	};
 	const header = {
 		headers: {
@@ -66,11 +69,15 @@ export const signIn =
 		try {
 			// Attempt to sign in with creditials given
 			const res = await attemptSignIn({ email, password });
-
-			// Autherization attempt succeeded
-			dispatch(authSuccess(res.data));
+			if (res.data.error) {
+				dispatch(setAuthError());
+				throw new Error("Error loging in");
+			} else {
+				// Autherization attempt succeeded
+				dispatch(removeAuthError());
+				dispatch(authSuccess(res.data));
+			}
 		} catch (err) {
-			console.log(err);
 			// Autherization attempt failed
 			dispatch(authFailure(err));
 		}
@@ -115,5 +122,19 @@ const authSuccess = (payload) => (dispatch) => {
 const authFailure = (err) => (dispatch) => {
 	dispatch({
 		type: AUTH_FAILURE,
+	});
+};
+
+// Set auth Error
+export const setAuthError = () => (dispatch) => {
+	dispatch({
+		type: SET_AUTH_ERROR,
+	});
+};
+
+// Remove auth Error
+export const removeAuthError = () => (dispatch) => {
+	dispatch({
+		type: REMOVE_AUTH_ERROR,
 	});
 };

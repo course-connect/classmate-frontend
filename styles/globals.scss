@@ -105,6 +105,11 @@
 	filter: invert(92%) sepia(14%) saturate(348%) hue-rotate(318deg) brightness(108%) contrast(94%);
 }
 
+.filter-classmate-red-error{
+	filter: invert(49%) sepia(38%) saturate(750%) hue-rotate(313deg) brightness(85%)
+}
+
+
 @keyframes rotation {
 	0% {
 		transform: rotate(0deg);

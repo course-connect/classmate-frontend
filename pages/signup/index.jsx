@@ -16,15 +16,16 @@ export default function SignUp() {
 	}, [isAuthenticated]);
 
 	return (
-		<SignUpStepper>
-			<SignUpOrSignIn
-				heading="Sign Up"
-				subheading="Sign up to get access to insights and create your prefect semester"
-				form={<SignUpForm />}
-				variant="signup"
-			/>
-			<h1>Step 2</h1>
-			<h1>Step 3</h1>
-		</SignUpStepper>
+		<SignUpOrSignIn
+			heading="Sign Up"
+			subheading="Sign up to get access to insights and create your prefect semester"
+			form={<SignUpForm />}
+			variant="signup"
+		/>
+		// <SignUpStepper>
+
+		// 	<h1>Step 2</h1>
+		// 	<h1>Step 3</h1>
+		// </SignUpStepper>
 	);
 }

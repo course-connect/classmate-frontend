@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+
 import useWindowSize from "../../hooks/useWindowSize";
 import { useForm, FormProvider } from "react-hook-form";
 import ClassmateButton from "../../components/ClassmateButton";
-import { signUp } from "../../redux/auth/authActions";
+import {
+	signUp,
+	removeAuthError,
+	setAuthError,
+} from "../../redux/auth/authActions";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import BasicInput from "../../components/BasicInput";
 import PasswordInput from "../../components/PasswordInput";
 
 export default function SignUpForm() {
 	const dispatch = useDispatch();
+	const auth = useSelector((state) => state.auth);
 	const { width: windowWidth } = useWindowSize();
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const methods = useForm({
 		defaultValues: {
@@ -20,16 +29,18 @@ export default function SignUpForm() {
 			confirmPassword: "",
 		},
 	});
-	const { handleSubmit, setError } = methods;
+	const {
+		handleSubmit,
+		setError,
+		formState: { errors },
+	} = methods;
 
 	function validateEmail(email) {
 		const emailRegex =
 			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 		if (!email.match(emailRegex)) {
-			setError("email", {
-				type: "custom",
-				message: "invalid email address",
-			});
+			setError("email");
+			setErrorMessage("invalid email address");
 			return true;
 		}
 		return false;
@@ -44,27 +55,24 @@ export default function SignUpForm() {
 		const maxChar = ".{8,64}";
 
 		let errorMessage = "";
-		if (!password.match(oneUpper)) {
-			errorMessage = "must contain one uppercase character";
-		} else if (!password.match(oneLower)) {
-			errorMessage = "must contain one lowercase character";
-		} else if (!password.match(oneDigit)) {
-			errorMessage = "must contain one digit";
-		} else if (!password.match(oneSpecial)) {
-			errorMessage = "must contain one special character";
-		} else if (!password.match(minChar)) {
-			errorMessage = "must contain more than 8 characters";
+		if (!password.match(minChar)) {
+			errorMessage = "password must contain at least 8 characters";
 		} else if (!password.match(maxChar)) {
-			errorMessage = "must contain less than 64 characters";
+			errorMessage = "password must contain at most 64 characters";
+		} else if (!password.match(oneUpper)) {
+			errorMessage = "password must contain one uppercase character";
+		} else if (!password.match(oneLower)) {
+			errorMessage = "password must contain one lowercase character";
+		} else if (!password.match(oneDigit)) {
+			errorMessage = "password must contain one digit";
+		} else if (!password.match(oneSpecial)) {
+			errorMessage = "password must contain one special character";
 		}
 
 		if (errorMessage) {
-			console.log("errorMessage");
 			setError("password");
-			setError("confirmPassword", {
-				type: "custom",
-				message: errorMessage,
-			});
+			setError("confirmPassword");
+			setErrorMessage(errorMessage);
 			return true;
 		}
 		return false;
@@ -72,28 +80,41 @@ export default function SignUpForm() {
 
 	function validateConfirmPassword(password, confirmPassword) {
 		if (password !== confirmPassword) {
-			setError("confirmPassword", {
-				type: "custom",
-				message: "does not match",
-			});
 			setError("password");
+			setError("confirmPassword");
+			setErrorMessage("passwords do not match");
 			return true;
 		}
 		return false;
 	}
 
 	function onSubmit({ email, password, confirmPassword }) {
-		const emailError = validateEmail(email);
 		const passwordError = validatePassword(password);
 		const confirmPasswordError = validateConfirmPassword(
 			password,
 			confirmPassword
 		);
+		const emailError = validateEmail(email);
 
 		if (!emailError && !passwordError && !confirmPasswordError) {
-			// dispatch(signUp({ email, password }));
+			dispatch(signUp({ email, password, confirmPassword }));
+		} else {
+			dispatch(setAuthError());
 		}
 	}
+
+	useEffect(() => {
+		const handleBeforeUnload = (e) => {
+			e.preventDefault();
+			dispatch(removeAuthError());
+		};
+
+		window.addEventListener("beforeunload", handleBeforeUnload);
+
+		return () => {
+			window.removeEventListener("beforeunload", handleBeforeUnload);
+		};
+	}, []);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="mt-8 w-full sm:mt-12">
@@ -119,13 +140,26 @@ export default function SignUpForm() {
 						name="confirmPassword"
 						label="Confirm Password"
 						background="bg-classmate-tan-2"
-						size={windowWidth >= 640 ? "medium" : "small"}
 						rules={{
 							required: true,
 						}}
 					/>
 				</FormProvider>
 			</div>
+			{auth.error && (
+				<div className="mt-2 flex items-center gap-2">
+					<Image
+						src="./circle-exclamation-solid.svg"
+						width={0}
+						height={0}
+						alt="exclamation mark"
+						className="filter-classmate-red-error h-[12px] w-[12px]"
+					/>
+					<span className="font-classmate text-sm text-classmate-error-red">
+						{errorMessage}
+					</span>
+				</div>
+			)}
 			<p className="font-classmate mt-4 text-classmate-green-6">
 				Have an account?&nbsp;
 				<Link href="/signin" className="text-classmate-green-1 underline">

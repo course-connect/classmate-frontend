@@ -3,12 +3,15 @@ import {
 	AUTH_FAILURE,
 	AUTH_LOADING,
 	UN_AUTH_USER,
+	SET_AUTH_ERROR,
+	REMOVE_AUTH_ERROR,
 } from "./authTypes";
 
 const initialState = {
 	authLoading: false,
 	isAuthenticated: false,
 	accessToken: null,
+	error: false,
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +44,16 @@ export default (state = initialState, action) => {
 				...state,
 				isAuthenticated: false,
 				accessToken: null,
+			};
+		case SET_AUTH_ERROR:
+			return {
+				...state,
+				error: true,
+			};
+		case REMOVE_AUTH_ERROR:
+			return {
+				...state,
+				error: false,
 			};
 		default:
 			return state;

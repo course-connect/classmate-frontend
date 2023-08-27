@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+
 import useWindowSize from "../hooks/useWindowSize";
 import { useForm, FormProvider } from "react-hook-form";
 import ClassmateButton from "./ClassmateButton";
 import { useDispatch } from "react-redux";
-import { signIn } from "../redux/auth/authActions";
+import { useSelector } from "react-redux";
+import {
+	removeAuthError,
+	setAuthError,
+	signIn,
+} from "../redux/auth/authActions";
 
 import BasicInput from "./BasicInput";
 import PasswordInput from "./PasswordInput";
 
 export default function SignInForm() {
 	const dispatch = useDispatch();
+	const auth = useSelector((state) => state.auth);
 	const { width: windowWidth } = useWindowSize();
 
 	const methods = useForm({
@@ -19,7 +27,13 @@ export default function SignInForm() {
 			password: "",
 		},
 	});
-	const { handleSubmit, setError, setValue, getValues } = methods;
+	const {
+		handleSubmit,
+		setError,
+		setValue,
+		getValues,
+		formState: { errors },
+	} = methods;
 
 	function validateEmail(email) {
 		const emailRegex =
@@ -32,6 +46,14 @@ export default function SignInForm() {
 		return !password.match(passwordRegex);
 	}
 
+	function setLoginError() {
+		setError("email");
+		setError("password", {
+			type: "custom",
+			message: "Your login or password is incorrect",
+		});
+	}
+
 	function onSubmit({ email, password }) {
 		const emailError = validateEmail(email);
 		const passwordError = validatePassword(password);
@@ -39,13 +61,28 @@ export default function SignInForm() {
 		if (!emailError && !passwordError) {
 			dispatch(signIn({ email, password }));
 		} else {
-			setError("email");
-			setError("password", {
-				type: "custom",
-				message: "Your login or password is incorrect",
-			});
+			dispatch(setAuthError());
 		}
 	}
+
+	useEffect(() => {
+		if (auth.error) {
+			setLoginError();
+		}
+	}, [auth.error]);
+
+	useEffect(() => {
+		const handleBeforeUnload = (e) => {
+			e.preventDefault();
+			dispatch(removeAuthError());
+		};
+
+		window.addEventListener("beforeunload", handleBeforeUnload);
+
+		return () => {
+			window.removeEventListener("beforeunload", handleBeforeUnload);
+		};
+	}, []);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="mt-8 w-full sm:mt-12">
@@ -63,13 +100,26 @@ export default function SignInForm() {
 						name="password"
 						label="Password"
 						background="bg-classmate-tan-2"
-						size={windowWidth >= 640 ? "medium" : "small"}
 						rules={{
 							required: true,
 						}}
 					/>
 				</FormProvider>
 			</div>
+			{Object.keys(errors).length !== 0 && (
+				<div className="mt-2 flex items-center gap-2">
+					<Image
+						src="./circle-exclamation-solid.svg"
+						width={0}
+						height={0}
+						alt="exclamation mark"
+						className="filter-classmate-red-error h-[12px] w-[12px]"
+					/>
+					<span className="font-classmate text-sm text-classmate-error-red">
+						incorrect credentials
+					</span>
+				</div>
+			)}
 			<p className="font-classmate mt-4 text-classmate-green-6">
 				<Link href="/signin" className="text-classmate-green-1 underline">
 					Forgot Password?
@@ -78,7 +128,7 @@ export default function SignInForm() {
 			<ClassmateButton
 				type="submit"
 				variant="filled"
-				fullWidth="true"
+				fullWidth={true}
 				size={windowWidth >= 640 ? "lg" : "sm"}
 				styles="my-6 bg-classmate-gold-1 text-classmate-tan-2 sm:my-12">
 				Sign In

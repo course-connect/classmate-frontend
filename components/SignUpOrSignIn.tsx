@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import HomepageHeading from "../pages/home/HomepageHeading";
 import ClassmateButton from "./ClassmateButton";
 import Image from "next/image";

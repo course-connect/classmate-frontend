@@ -7,7 +7,7 @@ const SignUpStepper = ({ children }) => {
 		stepToDisplay = children[0];
 	}
 
-	return stepToDisplay;
+	return children[0];
 };
 
 export default SignUpStepper;
