@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 
 // Redux components
 import { useAppDispatch } from "../hooks/reduxHooks";
+import { useSelector } from "react-redux";
 import { signOut } from "../redux/auth/authActions";
 import { setAccountTab } from "../redux/account-tab/accountActions";
 
@@ -84,22 +85,69 @@ const additionalMenuItems: MenuItem[] = [
 	},
 ];
 
+const registrationNotCompletedMenuItems: MenuItem[] = [
+	{
+		icon: "./graduation-cap-solid.svg",
+		label: "Profile",
+		id: "profile",
+		width: 20,
+		height: 20,
+		href: "/account",
+		alt: "Graduation cap icon linking to my profile",
+	},
+	{
+		icon: "./signout-solid.svg",
+		label: "Sign Out",
+		id: "sign-out",
+		width: 20,
+		height: 20,
+		href: "/signin",
+		alt: "Sign out icon to sign out of your account",
+	},
+];
+
 const AccountMenu = () => {
 	const dispatch = useAppDispatch();
+	const auth = useSelector((state) => state.auth);
+
 	const [menuOpen, toggleMenuOpen] = useState(false);
 	const router = useRouter();
 	const { width: screenWidth } = useWindowSize();
 	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
 	useEffect(() => {
+		const completedFirstStep =
+			auth.userData.hasOwnProperty("first_name") &&
+			auth.userData.hasOwnProperty("last_name") &&
+			auth.userData.hasOwnProperty("zipcode");
+
+		const completedSecondStep =
+			auth.userData.school && auth.userData.school.length !== 0;
+		auth.userData.hasOwnProperty("major") &&
+			auth.userData.hasOwnProperty("graduation_year");
+
 		if (screenWidth !== undefined) {
-			if (screenWidth < 768 && menuItems.length < 6) {
-				setMenuItems([...additionalMenuItems, ...defaultMenuItems]);
-			} else if (
-				screenWidth >= 768 &&
-				(menuItems.length === 6 || menuItems.length === 0)
-			) {
-				setMenuItems([...defaultMenuItems]);
+			if (!completedFirstStep || !completedSecondStep) {
+				if (screenWidth < 768 && menuItems.length < 4) {
+					setMenuItems([
+						...additionalMenuItems,
+						...registrationNotCompletedMenuItems,
+					]);
+				} else if (
+					screenWidth >= 768 &&
+					(menuItems.length === 4 || menuItems.length === 0)
+				) {
+					setMenuItems([...registrationNotCompletedMenuItems]);
+				}
+			} else {
+				if (screenWidth < 768 && menuItems.length < 6) {
+					setMenuItems([...additionalMenuItems, ...defaultMenuItems]);
+				} else if (
+					screenWidth >= 768 &&
+					(menuItems.length === 6 || menuItems.length === 0)
+				) {
+					setMenuItems([...defaultMenuItems]);
+				}
 			}
 		}
 	}, [screenWidth, menuItems.length]);

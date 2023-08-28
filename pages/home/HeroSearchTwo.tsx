@@ -79,6 +79,12 @@ const HeroSearchTwo: React.FC<{
 		router.push("/search");
 	};
 
+	useEffect(() => {
+		return () => {
+			dispatch(saveSearchTwoInput(""));
+		};
+	}, []);
+
 	// Render the component
 	return (
 		<form

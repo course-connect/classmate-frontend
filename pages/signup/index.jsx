@@ -1,20 +1,8 @@
 import SignUpOrSignIn from "../../components/SignUpOrSignIn";
 import SignUpForm from "./SignUpForm";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import SignUpStepper from "./SignUpStepper";
 
 export default function SignUp() {
-	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-	const router = useRouter();
-
-	// useEffect(() => {
-	// 	if (isAuthenticated) {
-	// 		router.push("/account");
-	// 	}
-	// }, [isAuthenticated]);
-
 	return (
 		<SignUpStepper>
 			<SignUpOrSignIn

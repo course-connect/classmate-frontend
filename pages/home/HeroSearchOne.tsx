@@ -71,6 +71,12 @@ const HeroSearchOne: React.FC<HeroSearchOneProps> = ({
 		router.push("/search");
 	};
 
+	useEffect(() => {
+		return () => {
+			dispatch(saveSearchOneInput(""));
+		};
+	}, []);
+
 	return (
 		// Hero Search Form
 		<form
