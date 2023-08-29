@@ -24,7 +24,6 @@ export default function middleware(req) {
 	}
 
 	if (requestingAccountPage && isAuthenticated && !completedRegistration) {
-		console.log("going to signup");
 		return NextResponse.redirect(frontEndUrl + "/signup");
 	}
 

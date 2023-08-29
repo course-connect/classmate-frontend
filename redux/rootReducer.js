@@ -7,6 +7,7 @@ import mainSearch from "./main-search/mainSearchReducers";
 import filterSearch from "./filter-search/filterSearchReducers";
 import formSearch from "./form-search/formSearchReducers";
 import account from "./account-tab/accountReducers";
+import userProfile from "./user-profile/userProfileReducers";
 
 export default combineReducers({
 	auth,
@@ -17,4 +18,5 @@ export default combineReducers({
 	filterSearch,
 	formSearch,
 	account,
+	userProfile,
 });

@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import BookmarkResults from "./BookmarkResults";
+
 import useDebounce from "../../hooks/useDebounce";
 
 // React Hook Form components
@@ -55,6 +57,7 @@ const BookmarksTab = () => {
 					</div>
 				</form>
 			</div>
+			<BookmarkResults />
 		</div>
 	);
 };

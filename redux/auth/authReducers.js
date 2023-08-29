@@ -12,7 +12,6 @@ const initialState = {
 	isAuthenticated: false,
 	accessToken: null,
 	error: false,
-	userData: null,
 };
 
 export default (state = initialState, action) => {
@@ -32,7 +31,6 @@ export default (state = initialState, action) => {
 				authLoading: false,
 				isAuthenticated: true,
 				accessToken: payload.accessToken,
-				userData: payload.account,
 			};
 		case AUTH_FAILURE:
 			return {
