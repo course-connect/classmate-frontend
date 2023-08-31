@@ -7,6 +7,7 @@ import mainSearch from "./main-search/mainSearchReducers";
 import filterSearch from "./filter-search/filterSearchReducers";
 import formSearch from "./form-search/formSearchReducers";
 import account from "./account-tab/accountReducers";
+import bookmarksSearch from "./bookmarks-search/bookmarksSearchReducers";
 import userProfile from "./user-profile/userProfileReducers";
 
 export default combineReducers({
@@ -19,4 +20,5 @@ export default combineReducers({
 	formSearch,
 	account,
 	userProfile,
+	bookmarksSearch,
 });
