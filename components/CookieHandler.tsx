@@ -6,6 +6,7 @@ import { AuthState } from "../redux/auth/authInterface";
 const CookieHandler = () => {
 	// Retrieve the authentication state from the Redux store
 	const auth = useSelector((state: { auth: AuthState }) => state.auth);
+	const userProfile = useSelector((state) => state.userProfile);
 
 	useEffect(() => {
 		Cookie.set("isAuthenticated", auth.isAuthenticated.toString());
@@ -32,7 +33,7 @@ const CookieHandler = () => {
 		} else {
 			Cookie.set("completedRegistration", false);
 		}
-	}, [auth.userData]);
+	}, [userProfile.userData]);
 };
 
 export default CookieHandler;

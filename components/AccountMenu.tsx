@@ -161,7 +161,6 @@ const AccountMenu = () => {
 		href: string
 	) => {
 		const { id } = e.target as HTMLLIElement; // Destructure the id property from e.target
-		console.log(e.target);
 		if (id === "sign-out") {
 			dispatch(signOut()); // Dispatch sign out action if the "Sign Out" item is clicked
 		} else if (

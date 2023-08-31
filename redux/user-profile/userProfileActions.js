@@ -20,6 +20,34 @@ export const profileRetrieved = (userData) => async (dispatch) => {
 	});
 };
 
+export const saveBookmark =
+	({ bookmarkType, itemID }) =>
+	async (dispatch) => {
+		dispatch(bookmarksLoading());
+
+		try {
+			const res = await dispatch(attemptSaveBookmark({ bookmarkType, itemID }));
+			dispatch(bookmarksSuccess(results));
+		} catch (err) {
+			dispatch(bookmarksFailure());
+		}
+	};
+
+export const removeBookmark =
+	({ bookmarkType, itemID }) =>
+	async (dispatch) => {
+		dispatch(bookmarksLoading());
+
+		try {
+			const res = await dispatch(
+				attemptRemoveBookmark({ bookmarkType, itemID })
+			);
+			dispatch(bookmarksSuccess(results));
+		} catch (err) {
+			dispatch(bookmarksFailure());
+		}
+	};
+
 export const getBookmarks = () => async (dispatch) => {
 	dispatch(bookmarksLoading());
 
@@ -48,6 +76,34 @@ const attemptBookmarkRetrieval = () => (dispatch, getState) => {
 	const professors = axios.get("/student/bookmarks/professors", header);
 	return Promise.all([courses, professors]);
 };
+
+const attemptSaveBookmark =
+	({ bookmarkType, itemID }) =>
+	(dispatch, getState) => {
+		const { accessToken } = getState().auth;
+
+		const header = {
+			headers: {
+				"content-type": "application/json",
+				authorization: `Bearer ${accessToken}`,
+			},
+		};
+		console.log("sending save book mark request", bookmarkType, itemID);
+	};
+
+const attemptRemoveBookmark =
+	({ bookmarkType, itemID }) =>
+	(dispatch, getState) => {
+		const { accessToken } = getState().auth;
+
+		const header = {
+			headers: {
+				"content-type": "application/json",
+				authorization: `Bearer ${accessToken}`,
+			},
+		};
+		console.log("sending remove book mark request", bookmarkType, itemID);
+	};
 
 const bookmarksLoading = () => (dispatch) => {
 	dispatch({

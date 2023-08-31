@@ -88,13 +88,20 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 						<div className="flex flex-wrap gap-4">
 							<div>
 								<p className="font-classmate-bold text-2xl capitalize text-classmate-green-1">{`${result.data.first_name} ${result.data.last_name}`}</p>
-								{typeof result.data.school_names !== "string" && (
+
+								{filters ? (
 									<p className="flex flex-col text-sm">
 										{filters.school.filter_text
 											? filters.school.filter_text
 											: result.data.school_names?.map((school_name, index) => (
 													<span key={index}>{school_name}</span>
 											  ))}
+									</p>
+								) : (
+									<p className="flex flex-col text-sm">
+										{result.data.school_names?.map((school_name, index) => (
+											<span key={index}>{school_name}</span>
+										))}
 									</p>
 								)}
 							</div>

@@ -47,8 +47,8 @@ const BookmarksSearch = () => {
 	return (
 		<div className="w-full max-w-md rounded-2xl bg-classmate-tan-2 p-7 shadow-lg lg:max-w-2xl">
 			<div>
-				<p className="font-classmate-bold mb-5 text-2xl leading-5 text-classmate-green-1">
-					My Bookmarks
+				<p className="font-classmate-bold mb-5 text-2xl capitalize leading-5 text-classmate-green-1">
+					{`${bookmarksSearch.type} Bookmarks`}
 				</p>
 				<form
 					onSubmit={handleSubmit(onSubmit)}
@@ -57,7 +57,7 @@ const BookmarksSearch = () => {
 					<input
 						defaultValue=""
 						{...register("userInput")}
-						placeholder={`Enter ${bookmarksSearch.type}`}
+						placeholder={`Search bookmarks`}
 						type="text"
 						className="font-classmate z-10 h-[55px] w-full rounded-br-lg rounded-tr-lg bg-transparent pl-3 text-lg text-classmate-green-6 placeholder-classmate-green-6 outline-none ring-classmate-gold-1 focus:ring"
 					/>

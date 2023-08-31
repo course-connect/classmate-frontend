@@ -16,7 +16,7 @@ const BookmarksTab = () => {
 	}, []);
 
 	return (
-		<div className="w-full max-w-md lg:max-w-2xl">
+		<div className="flex w-full max-w-md flex-col gap-8 lg:max-w-2xl">
 			<BookmarksSearch />
 			<BookmarkResults />
 		</div>
