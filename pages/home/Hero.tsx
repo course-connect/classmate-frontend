@@ -4,13 +4,13 @@ import HeroCallToAction from "./HeroCallToAction";
 import Spinner from "../../components/ui/Spinner";
 
 const icons: Record<string, string> = {
-	logo: "./classmate-logo-solid.svg",
-	swinging: "./swinging.svg",
-	reading: "./reading.svg",
-	globe: "./globe.svg",
-	book: "./book.svg",
-	atom: "./atom.svg",
-	plane: "./plane.svg",
+	logo: "/classmate-logo-solid.svg",
+	swinging: "/swinging.svg",
+	reading: "/reading.svg",
+	globe: "/globe.svg",
+	book: "/book.svg",
+	atom: "/atom.svg",
+	plane: "/plane.svg",
 };
 
 const Hero = (): JSX.Element => {

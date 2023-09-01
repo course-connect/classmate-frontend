@@ -48,7 +48,7 @@ const FilterOptions = ({
 									<Image
 										width={16}
 										height={10}
-										src="./check-solid.svg"
+										src="/check-solid.svg"
 										alt="check mark"
 										className="filter-classmate-green-4 h-[10px] w-[16px]"
 									/>

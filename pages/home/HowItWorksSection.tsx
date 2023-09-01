@@ -15,7 +15,7 @@ const stepsData = [
 	{
 		number: 1,
 		title: "Find Your School",
-		imageSrc: "./box.svg",
+		imageSrc: "/box.svg",
 		altText:
 			"An illustration of a person searching for their school in a book, flipping through the pages with curiosity.",
 		description:
@@ -24,7 +24,7 @@ const stepsData = [
 	{
 		number: 2,
 		title: "Select Your Course",
-		imageSrc: "./falling.svg",
+		imageSrc: "/falling.svg",
 		altText:
 			"An illustration of a person clumsily fumbling and dropping paper, displaying a moment of mishap or clumsiness.",
 		description:
@@ -33,7 +33,7 @@ const stepsData = [
 	{
 		number: 3,
 		title: "Compare Professors",
-		imageSrc: "./love.svg",
+		imageSrc: "/love.svg",
 		altText:
 			"An illustration of a person with a joyful expression, content and satisfied with their choice.",
 		description:

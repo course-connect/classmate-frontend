@@ -47,7 +47,7 @@ const FilterSearch = ({ openMenu }) => {
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="flex items-center overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
 				<Image
-					src="./search-solid.svg"
+					src="/search-solid.svg"
 					width={0}
 					height={0}
 					alt=""

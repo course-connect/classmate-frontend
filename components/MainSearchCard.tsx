@@ -71,7 +71,7 @@ const MainSearchCard = ({
 								}`}>
 								<Image
 									className="filter-classmate-green-4 pointer-events-none h-[12px] w-[12px] "
-									src="./caret-solid.svg"
+									src="/caret-solid.svg"
 									width={0}
 									height={0}
 									alt="small arrow"
@@ -99,7 +99,7 @@ const MainSearchCard = ({
 										className="pointer flex h-3 w-3 items-center justify-center rounded-full bg-classmate-tan-2">
 										<Image
 											className="filter-classmate-green-4 pointer-events-none h-[6px] w-[6px]"
-											src="./xmark-solid.svg"
+											src="/xmark-solid.svg"
 											width={0}
 											height={0}
 											alt="x mark"
@@ -115,7 +115,7 @@ const MainSearchCard = ({
 							callback={handleAddFilterClick}>
 							<Image
 								className="filter-classmate-tan-2 classmate- pointer-events-none h-[10px] w-[10px]"
-								src="./plus-solid.svg"
+								src="/plus-solid.svg"
 								width={0}
 								height={0}
 								alt="plus"

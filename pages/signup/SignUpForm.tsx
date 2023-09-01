@@ -149,7 +149,7 @@ export default function SignUpForm() {
 			{auth.error && (
 				<div className="mt-2 flex items-center gap-2">
 					<Image
-						src="./circle-exclamation-solid.svg"
+						src="/circle-exclamation-solid.svg"
 						width={0}
 						height={0}
 						alt="exclamation mark"

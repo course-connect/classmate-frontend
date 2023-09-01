@@ -60,7 +60,7 @@ const Account = () => {
 							size="sm"
 							styles="bg-classmate-tan-2 flex justify-center items-center gap-2 !px-3 text-classmate-green-1 !mr-auto">
 							<Image
-								src="./caret-solid.svg"
+								src="/caret-solid.svg"
 								width={0}
 								height={0}
 								alt="small arrow"

@@ -23,17 +23,17 @@ interface MenuItem {
 const socialMediaLinks: SocialMediaLink[] = [
 	{
 		href: "https://webdevlex.com/",
-		imgSrc: "./instagram-solid.svg",
+		imgSrc: "/instagram-solid.svg",
 		alt: "Instagram",
 	},
 	{
 		href: "https://webdevlex.com/",
-		imgSrc: "./linkedin-solid.svg",
+		imgSrc: "/linkedin-solid.svg",
 		alt: "LinkedIn",
 	},
 	{
 		href: "https://webdevlex.com/",
-		imgSrc: "./twitter-solid.svg",
+		imgSrc: "/twitter-solid.svg",
 		alt: "Twitter",
 	},
 ];
@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
 		<footer className="section-padding bg-classmate-green-1 py-14">
 			<div className="flex flex-col gap-12">
 				<Image
-					src="./classmate-logo-solid.svg"
+					src="/classmate-logo-solid.svg"
 					width={0}
 					height={0}
 					alt="large navbar classmate logo"

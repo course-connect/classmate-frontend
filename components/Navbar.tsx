@@ -69,7 +69,7 @@ export default function Navbar() {
 				href="/">
 				{width >= 640 ? (
 					<Image
-						src="./classmate-logo-solid.svg"
+						src="/classmate-logo-solid.svg"
 						width={0}
 						height={0}
 						alt="large navbar classmate logo"
@@ -77,7 +77,7 @@ export default function Navbar() {
 					/>
 				) : (
 					<Image
-						src="./classmate-logo-small-solid.svg"
+						src="/classmate-logo-small-solid.svg"
 						width={0}
 						height={0}
 						alt="small navbar classmate logo"
@@ -103,7 +103,7 @@ export default function Navbar() {
 					styles="absolute right-7 top-5 md:hidden !p-1"
 					callback={toggleMobileMenu}>
 					<Image
-						src="./xmark-solid.svg"
+						src="/xmark-solid.svg"
 						width={0}
 						height={0}
 						className="filter-classmate-green-1 h-[25px] w-[25px]"
@@ -181,7 +181,7 @@ export default function Navbar() {
 							size="xs"
 							callback={toggleMobileMenu}>
 							<Image
-								src="./hamburger-solid.svg"
+								src="/hamburger-solid.svg"
 								width={0}
 								height={0}
 								className="filter-classmate-green-1 h-[25px] w-[25px]"

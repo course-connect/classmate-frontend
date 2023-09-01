@@ -1,6 +1,8 @@
 import React from "react";
 
-const ResultScore = ({ title, score }) => {
+const ResultScore = ({ title, score, variant = "default" }) => {
+	const defaultDisplay = variant === "default";
+
 	const getColor = (score) => {
 		if (score >= 4.5) {
 			return "bg-classmate-green-2";
@@ -49,6 +51,22 @@ const ResultScore = ({ title, score }) => {
 		}
 	};
 
+	const getTakeAgainColor = (score) => {
+		if (score >= 90) {
+			return "bg-classmate-green-2";
+		} else if (score >= 80) {
+			return "bg-classmate-green-3";
+		} else if (score >= 70) {
+			return "bg-classmate-green-4";
+		} else if (score >= 60) {
+			return "bg-classmate-gray-1";
+		} else if (score >= 50) {
+			return "bg-classmate-pink-1";
+		} else {
+			return "bg-classmate-red-1";
+		}
+	};
+
 	let color;
 	switch (title) {
 		case "Score":
@@ -60,16 +78,48 @@ const ResultScore = ({ title, score }) => {
 		case "Reviews":
 			color = getReviewsColor(score);
 			break;
+		case "Take Again":
+			color = getTakeAgainColor(score);
+			break;
+	}
+
+	let scoreDisplay;
+	switch (title) {
+		case "Take Again":
+			scoreDisplay = `${score}%`;
+			break;
+		case "Score":
+			scoreDisplay = score.toFixed(1);
+			break;
+		case "Difficulty":
+			scoreDisplay = score.toFixed(1);
+			break;
+		default:
+			scoreDisplay = score;
 	}
 
 	return (
 		<div>
-			<p className="font-classmate-italic text-classmate-green-1 ">{title}</p>
-			<div
-				className={`font-classmate-bold-italic flex h-[50px] w-[70px] items-center justify-center rounded-lg text-xl  text-classmate-tan-2 xs:h-[60px] xs:w-[80px] xs:text-2xl  ${color}`}>
-				<p className="-translate-y-[2px] leading-5">
-					{title !== "Reviews" ? score.toFixed(1) : score}
+			{defaultDisplay && (
+				<p className="font-classmate-italic whitespace-nowrap text-classmate-green-1">
+					{title}
 				</p>
+			)}
+			<div
+				className={`font-classmate-bold-italic flex h-[50px] w-[70px]  items-center justify-center rounded-lg text-xl  text-classmate-tan-2 xs:h-[60px] xs:w-[80px] xs:text-2xl  ${color} ${
+					!defaultDisplay ? "!h-auto !w-[90px] !flex-col !gap-2 !py-[10px]" : ""
+				}`}>
+				<p
+					className={`-translate-y-[2px] leading-6 ${
+						!defaultDisplay ? "text-[26px]" : ""
+					}`}>
+					{scoreDisplay}
+				</p>
+				{!defaultDisplay && (
+					<p className="font-classmate-italic-bold whitespace-nowrap text-xs text-classmate-tan-2">
+						{title}
+					</p>
+				)}
 			</div>
 		</div>
 	);

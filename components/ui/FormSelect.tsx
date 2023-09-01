@@ -281,7 +281,7 @@ const FormSelect: FC<InputProps> = ({
 					<div
 						className={`pointer-events-none absolute right-1 flex h-8 w-8 items-center justify-center bg-classmate-tan-2 `}>
 						<Image
-							src="./caret-solid.svg"
+							src="/caret-solid.svg"
 							alt="caret"
 							height={0}
 							width={0}
@@ -308,7 +308,7 @@ const FormSelect: FC<InputProps> = ({
 									id="local-search-input"
 									className="mb-2 flex min-h-[40px] items-center overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
 									<Image
-										src="./search-solid.svg"
+										src="/search-solid.svg"
 										width={0}
 										height={0}
 										alt=""
@@ -334,7 +334,7 @@ const FormSelect: FC<InputProps> = ({
 									id="local-search-input"
 									className="mb-2 flex min-h-[40px] items-center overflow-hidden rounded-md border-[1px] border-classmate-gray-3">
 									<Image
-										src="./search-solid.svg"
+										src="/search-solid.svg"
 										width={0}
 										height={0}
 										alt=""

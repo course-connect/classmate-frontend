@@ -19,28 +19,28 @@ const AccountMenu = () => {
 			</div>
 			<AccountMenuButton
 				text="Profile"
-				icon="./graduation-cap-solid.svg"
+				icon="/graduation-cap-solid.svg"
 				iconAlt="a graduation cap"
 				selected={selectedAccountTab === "profile"}
 				callback={() => dispatch(setAccountTab("profile"))}
 			/>
 			<AccountMenuButton
 				text="Account"
-				icon="./user-solid.svg"
+				icon="/user-solid.svg"
 				iconAlt="a persons siloutte"
 				selected={selectedAccountTab === "account"}
 				callback={() => dispatch(setAccountTab("account"))}
 			/>
 			<AccountMenuButton
 				text="My Reviews"
-				icon="./star-solid.svg"
+				icon="/star-solid.svg"
 				iconAlt="a star"
 				selected={selectedAccountTab === "reviews"}
 				callback={() => dispatch(setAccountTab("reviews"))}
 			/>
 			<AccountMenuButton
 				text="My Bookmarks"
-				icon="./bookmark-solid.svg"
+				icon="/bookmark-solid.svg"
 				iconAlt="bookmark"
 				selected={selectedAccountTab === "bookmarks"}
 				callback={() => dispatch(setAccountTab("bookmarks"))}

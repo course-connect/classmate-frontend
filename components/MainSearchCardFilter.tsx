@@ -77,7 +77,7 @@ const MainSearchCardFilter = ({ data, handleAddFilterClick }) => {
 											<Image
 												width={0}
 												height={0}
-												src="./check-solid.svg"
+												src="/check-solid.svg"
 												alt="check mark"
 												className="filter-classmate-green-4 h-[14px] w-[14px]"
 											/>

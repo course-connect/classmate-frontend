@@ -17,7 +17,7 @@ const FilterSearchResults = () => {
 					return (
 						<FilterButton
 							key={index}
-							icon="./graduation-cap-solid.svg"
+							icon="/graduation-cap-solid.svg"
 							iconAlt="Graduation Cap"
 							filterText={school.school_name}
 							filterValue={firebaseID}
@@ -30,7 +30,7 @@ const FilterSearchResults = () => {
 										<Image
 											width={0}
 											height={0}
-											src="./check-solid.svg"
+											src="/check-solid.svg"
 											alt="check mark"
 											className="filter-classmate-green-4 h-[10px] w-[16px]"
 										/>
@@ -55,7 +55,7 @@ const FilterSearchResults = () => {
 						<FilterButton
 							key={index}
 							text={`${professor.first_name} ${professor.last_name}`}
-							icon="./glasses-solid.svg"
+							icon="/glasses-solid.svg"
 							iconAlt="Glasses"
 							filterText={`${professor.first_name} ${professor.last_name}`}
 							filterValue={firebaseID}
@@ -69,7 +69,7 @@ const FilterSearchResults = () => {
 										<Image
 											width={0}
 											height={0}
-											src="./check-solid.svg"
+											src="/check-solid.svg"
 											alt="check mark"
 											className="filter-classmate-green-4 h-[10px] w-[16px]"
 										/>
@@ -93,7 +93,7 @@ const FilterSearchResults = () => {
 					return (
 						<FilterButton
 							key={index}
-							icon="./book-solid.svg"
+							icon="/book-solid.svg"
 							iconAlt="Book"
 							filterText={course.course_name}
 							filterValue={firebaseID}
@@ -107,7 +107,7 @@ const FilterSearchResults = () => {
 										<Image
 											width={0}
 											height={0}
-											src="./check-solid.svg"
+											src="/check-solid.svg"
 											alt="check mark"
 											className="filter-classmate-green-4 h-[10px] w-[16px]"
 										/>

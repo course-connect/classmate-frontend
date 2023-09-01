@@ -29,7 +29,7 @@ const MobileSlideUpMenus = ({
 							height={0}
 							width={0}
 							alt="small arrow"
-							src="./caret-solid.svg"
+							src="/caret-solid.svg"
 						/>
 					</ClassmateButton>
 				)}
@@ -46,7 +46,7 @@ const MobileSlideUpMenus = ({
 							width={0}
 							alt="settings"
 							className="filter-classmate-green-7 h-[20px] w-[20px]"
-							src="./settings-solid.svg"
+							src="/settings-solid.svg"
 						/>
 					</ClassmateButton>
 				)}

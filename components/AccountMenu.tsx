@@ -18,7 +18,7 @@ import { setAccountTab } from "../redux/account-tab/accountActions";
 
 const defaultMenuItems: MenuItem[] = [
 	{
-		icon: "./graduation-cap-solid.svg",
+		icon: "/graduation-cap-solid.svg",
 		label: "Profile",
 		id: "profile",
 		width: 20,
@@ -27,7 +27,7 @@ const defaultMenuItems: MenuItem[] = [
 		alt: "Graduation cap icon linking to my profile",
 	},
 	{
-		icon: "./user-solid.svg",
+		icon: "/user-solid.svg",
 		label: "Account",
 		id: "account",
 		width: 17,
@@ -36,7 +36,7 @@ const defaultMenuItems: MenuItem[] = [
 		alt: "User icon linking to my account",
 	},
 	{
-		icon: "./star-solid.svg",
+		icon: "/star-solid.svg",
 		label: "My Reviews",
 		id: "reviews",
 		width: 20,
@@ -45,7 +45,7 @@ const defaultMenuItems: MenuItem[] = [
 		alt: "Star icon linking to my reviews",
 	},
 	{
-		icon: "./bookmark-solid.svg",
+		icon: "/bookmark-solid.svg",
 		label: "My Bookmarks",
 		id: "bookmarks",
 		width: 20,
@@ -54,7 +54,7 @@ const defaultMenuItems: MenuItem[] = [
 		alt: "Bookmark",
 	},
 	{
-		icon: "./signout-solid.svg",
+		icon: "/signout-solid.svg",
 		label: "Sign Out",
 		id: "sign-out",
 		width: 20,
@@ -66,7 +66,7 @@ const defaultMenuItems: MenuItem[] = [
 
 const additionalMenuItems: MenuItem[] = [
 	{
-		icon: "./home-solid.svg",
+		icon: "/home-solid.svg",
 		label: "Home",
 		id: "home",
 		width: 20,
@@ -75,7 +75,7 @@ const additionalMenuItems: MenuItem[] = [
 		alt: "Home icon to go to the homepage",
 	},
 	{
-		icon: "./search-solid.svg",
+		icon: "/search-solid.svg",
 		label: "Search",
 		id: "search",
 		width: 20,
@@ -87,7 +87,7 @@ const additionalMenuItems: MenuItem[] = [
 
 const registrationNotCompletedMenuItems: MenuItem[] = [
 	{
-		icon: "./graduation-cap-solid.svg",
+		icon: "/graduation-cap-solid.svg",
 		label: "Profile",
 		id: "profile",
 		width: 20,
@@ -96,7 +96,7 @@ const registrationNotCompletedMenuItems: MenuItem[] = [
 		alt: "Graduation cap icon linking to my profile",
 	},
 	{
-		icon: "./signout-solid.svg",
+		icon: "/signout-solid.svg",
 		label: "Sign Out",
 		id: "sign-out",
 		width: 20,

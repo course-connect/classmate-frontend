@@ -17,7 +17,7 @@ import {
 
 const menuItems = [
 	{
-		icon: "./graduation-cap-solid.svg",
+		icon: "/graduation-cap-solid.svg",
 		label: "School",
 		id: "school",
 		width: 20,
@@ -25,7 +25,7 @@ const menuItems = [
 		alt: "",
 	},
 	{
-		icon: "./glasses-solid.svg",
+		icon: "/glasses-solid.svg",
 		label: "Professor",
 		id: "professor",
 		width: 20,
@@ -33,7 +33,7 @@ const menuItems = [
 		alt: "",
 	},
 	{
-		icon: "./book-solid.svg",
+		icon: "/book-solid.svg",
 		label: "Course",
 		id: "course",
 		width: 20,
@@ -70,18 +70,18 @@ const MainSearchSelect = ({ setValue }) => {
 	let iconSrc, iconAlt, iconClassName;
 	switch (mainSearch.type) {
 		case "school":
-			iconSrc = "./graduation-cap-solid.svg";
+			iconSrc = "/graduation-cap-solid.svg";
 			iconAlt = "Graduation Cap";
 			iconClassName = "min-w-[25px]";
 			break;
 		case "professor":
-			iconSrc = "./glasses-solid.svg";
+			iconSrc = "/glasses-solid.svg";
 			iconAlt = "Glasses";
 			iconClassName = "min-w-[25px]";
 			break;
 
 		default:
-			iconSrc = "./book-solid.svg";
+			iconSrc = "/book-solid.svg";
 			iconAlt = "Book";
 			iconClassName = "max-h-[23px] min-w-[25px]";
 			break;
@@ -102,7 +102,7 @@ const MainSearchSelect = ({ setValue }) => {
 						className={`filter-classmate-green-7 h-[25px] w-[25px] ${iconClassName}`}
 					/>
 					<Image
-						src="./caret-solid.svg"
+						src="/caret-solid.svg"
 						className={`filter-classmate-green-4 h-[10px] w-[10px] min-w-[10px] ${
 							menuOpen ? "rotate-180" : ""
 						}`}

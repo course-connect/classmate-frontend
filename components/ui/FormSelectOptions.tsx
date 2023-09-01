@@ -36,7 +36,7 @@ const FormSelectOptions = ({
 					<Image
 						width={16}
 						height={10}
-						src="./check-green.svg"
+						src="/check-green.svg"
 						alt="check mark"
 					/>
 				</div>

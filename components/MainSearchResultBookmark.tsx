@@ -38,7 +38,7 @@ const MainSearchResultBookmark = ({ bookmarkType, itemID }) => {
 			styles="!p-1 h-fit min-w-[30px]">
 			<Image
 				src={
-					userHasBookmarked ? "./bookmark-solid.svg" : "./bookmark-outline.svg"
+					userHasBookmarked ? "/bookmark-solid.svg" : "/bookmark-outline.svg"
 				}
 				height={0}
 				width={0}

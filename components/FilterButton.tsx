@@ -86,7 +86,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 							<Image
 								width={0}
 								height={0}
-								src="./xmark-solid.svg"
+								src="/xmark-solid.svg"
 								alt="x mark"
 								className="filter-classmate-gray-6 pointer-events-none h-[6px] w-[6px]"
 							/>

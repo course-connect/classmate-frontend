@@ -64,7 +64,7 @@ export default function WhatWeOffer() {
 					<Image
 						width={700}
 						height={700}
-						src="./our-goal.svg"
+						src="/our-goal.svg"
 						alt="a group of helpful people"
 						className="h-auto w-[700px]"
 					/>

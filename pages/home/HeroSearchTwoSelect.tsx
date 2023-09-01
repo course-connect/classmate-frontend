@@ -25,7 +25,7 @@ interface MenuItem {
 // Create an array of menu items
 const menuItems: MenuItem[] = [
 	{
-		icon: "./book-solid.svg",
+		icon: "/book-solid.svg",
 		label: "Course",
 		id: "course",
 		width: 17,
@@ -33,7 +33,7 @@ const menuItems: MenuItem[] = [
 		alt: "",
 	},
 	{
-		icon: "./glasses-solid.svg",
+		icon: "/glasses-solid.svg",
 		label: "Professor",
 		id: "professor",
 		width: 20,

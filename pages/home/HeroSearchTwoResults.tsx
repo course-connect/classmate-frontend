@@ -81,8 +81,8 @@ const HeroSearchTwoResults: React.FC = () => {
 					width={0}
 					src={
 						heroSearchTwo.type === "course"
-							? "./book-solid.svg"
-							: "./glasses-solid.svg"
+							? "/book-solid.svg"
+							: "/glasses-solid.svg"
 					}
 					className="filter-classmate-green-7 mr-5 h-[20px] w-[20px]"
 					alt="visiual depiction of a graduation cap or glasses that represents what you are searching for"

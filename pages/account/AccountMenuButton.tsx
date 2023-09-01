@@ -17,7 +17,7 @@ const AccountMenuButton = ({ text, icon, iconAlt, selected, callback }) => {
 			/>
 			<p className="font-classmate text-classmate-green-6">{text}</p>
 			<Image
-				src="./caret-solid.svg"
+				src="/caret-solid.svg"
 				width={0}
 				height={0}
 				alt={iconAlt}

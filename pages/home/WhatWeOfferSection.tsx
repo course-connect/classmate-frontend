@@ -21,22 +21,22 @@ interface Offering {
 // Data for each offering card
 const whatWeOfferInfoCard: Offering[] = [
 	{
-		icon: "./folder-solid.svg",
+		icon: "/folder-solid.svg",
 		title: "Save Your Courses",
 		description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
 	},
 	{
-		icon: "./pie-solid.svg",
+		icon: "/pie-solid.svg",
 		title: "Better Insights",
 		description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
 	},
 	{
-		icon: "./robot-solid.svg",
+		icon: "/robot-solid.svg",
 		title: "AI Powered",
 		description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
 	},
 	{
-		icon: "./hand-heart-solid.svg",
+		icon: "/hand-heart-solid.svg",
 		title: "Easy To Use",
 		description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
 	},
