@@ -4,12 +4,17 @@ import {
 	BOOKMARKS_LOADING,
 	BOOKMARKS_SUCCESS,
 	BOOKMARKS_FAILURE,
+	REVIEWS_LOADING,
+	REVIEWS_SUCCESS,
+	REVIEWS_FAILURE,
 } from "./userProfileTypes";
 
 const initialState = {
 	userData: null,
 	bookmarks: null,
 	bookmarksLoading: false,
+	reviews: null,
+	reviewsLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -24,6 +29,22 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				userData: payload,
+			};
+		case REVIEWS_LOADING:
+			return {
+				...state,
+				reviewsLoading: true,
+			};
+		case REVIEWS_SUCCESS:
+			return {
+				...state,
+				reviews: payload,
+				reviewsLoading: false,
+			};
+		case REVIEWS_FAILURE:
+			return {
+				...state,
+				reviewsLoading: false,
 			};
 		case BOOKMARKS_LOADING:
 			return {

@@ -5,6 +5,9 @@ import {
 	BOOKMARKS_LOADING,
 	BOOKMARKS_SUCCESS,
 	BOOKMARKS_FAILURE,
+	REVIEWS_LOADING,
+	REVIEWS_SUCCESS,
+	REVIEWS_FAILURE,
 } from "./userProfileTypes";
 
 export const clearUserProfile = () => async (dispatch) => {
@@ -47,6 +50,50 @@ export const removeBookmark =
 			dispatch(bookmarksFailure());
 		}
 	};
+
+export const getReviews = () => async (dispatch) => {
+	dispatch(reviewsLoading());
+
+	try {
+		const res = await dispatch(attemptReviewsRetrieval());
+		dispatch(reviewsSuccess(results));
+	} catch (err) {
+		dispatch(reviewsFailure());
+	}
+};
+
+const attemptReviewsRetrieval = () => (dispatch, getState) => {
+	const { accessToken } = getState().auth;
+	const userID = 0;
+
+	const header = {
+		headers: {
+			"content-type": "application/json",
+			authorization: `Bearer ${accessToken}`,
+		},
+	};
+
+	return axios.get(`/student/reviews/${userID}`, header);
+};
+
+const reviewsLoading = () => (dispatch) => {
+	dispatch({
+		type: REVIEWS_LOADING,
+	});
+};
+
+const reviewsSuccess = (reviews) => (dispatch) => {
+	dispatch({
+		type: REVIEWS_SUCCESS,
+		payload: reviews,
+	});
+};
+
+const reviewsFailure = () => (dispatch) => {
+	dispatch({
+		type: REVIEWS_FAILURE,
+	});
+};
 
 export const getBookmarks = () => async (dispatch) => {
 	dispatch(bookmarksLoading());
