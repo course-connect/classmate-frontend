@@ -7,18 +7,19 @@ import ProfessorDescription from "../ProfessorDescription";
 import ProfessorTabs from "../ProfessorTabs";
 
 export default function Professor({ professor }) {
-	console.log(professor);
 	// <h1>{JSON.stringify(professor, null, 2)}</h1>
 	return (
-		<div className="section-padding grid-cols-8 bg-classmate-tan-2 py-6 xs:py-8 md:grid md:gap-10">
-			<div className="col-start-1 col-end-4">
-				<ProfessorImage professor={professor} />
-				<ProfessorTags professor={professor} />
-			</div>
+		<div className="section-padding flex justify-center bg-classmate-tan-2 pb-16 pt-8 xs:py-8 md:pb-20 lg:pt-12">
+			<div className="max-w max-w-4xl grid-cols-12 md:grid md:gap-10 lg:gap-16 xl:max-w-5xl 2xl:max-w-6xl">
+				<div className="col-start-1 col-end-5">
+					<ProfessorImage professor={professor} />
+					<ProfessorTags professor={professor} />
+				</div>
 
-			<div className="col-start-4 col-end-9 flex flex-col gap-8">
-				<ProfessorDescription professor={professor} />
-				<ProfessorTabs professor={professor} />
+				<div className="col-start-5 col-end-13 flex flex-col gap-8 md:gap-10">
+					<ProfessorDescription professor={professor} />
+					<ProfessorTabs professor={professor} />
+				</div>
 			</div>
 		</div>
 	);

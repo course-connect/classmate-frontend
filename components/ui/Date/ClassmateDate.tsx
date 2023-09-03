@@ -9,7 +9,10 @@ const ClassmateDate = ({ seconds }) => {
 		const day = date.getDate();
 		const daySuffix = getDaySuffix(day);
 
-		return formattedDate.replace(/\d{1,2}$/, (match) => match + daySuffix);
+		const dateSplit = formattedDate.split(",");
+		const result = dateSplit[0] + daySuffix + "," + dateSplit[1];
+
+		return result;
 	}
 
 	function getDaySuffix(day) {
@@ -33,7 +36,7 @@ const ClassmateDate = ({ seconds }) => {
 	const date = new Date(milliseconds);
 	const formattedDate = formatDate(date);
 
-	return <p>{formattedDate}</p>;
+	return <p className="whitespace-nowrap text-sm">{formattedDate}</p>;
 };
 
 export default ClassmateDate;

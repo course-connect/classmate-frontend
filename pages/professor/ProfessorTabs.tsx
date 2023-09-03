@@ -45,14 +45,14 @@ const ProfessorTabs = ({ professor }) => {
 	}, []);
 
 	return (
-		<div className="flex flex-col gap-6">
+		<div className="flex flex-col gap-6 lg:gap-8">
 			<Tabs handleTabClick={handleTabClick} value={value}>
 				<Tab label={"Overview"} index={0} />
 				<Tab label={"Reviews"} index={1} />
 				{windowWidth < 768 && <Tab label={"Tags"} index={2} />}
 			</Tabs>
 			<CustomTabPanel value={value} index={0}>
-				<div className="flex flex-col gap-6">
+				<div className="flex flex-col gap-6 lg:gap-8">
 					<div className="font-classmate flex flex-col gap-3 rounded-xl bg-classmate-tan-1 p-8 text-left text-classmate-green-6 shadow-lg">
 						<h3 className="font-classmate-bold text-2xl leading-6">
 							Strengths

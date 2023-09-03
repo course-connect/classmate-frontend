@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import useWindowSize from "../hooks/useWindowSize";
+import RankGraphSelect from "./RankGraphSelect";
 
 import { useSelector } from "react-redux";
 
@@ -69,6 +70,7 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 	const [graphWidth, setGraphWidth] = useState(0);
 	const [transitionEffect, setTransitionEffect] = useState("width 1s ease");
 	const [showLargeGraph, setShowLargeGraph] = useState(false);
+	const [numResultsToShow, setNumResultsToShow] = useState(5);
 
 	const results = useSelector((state) => state.mainSearch.results);
 	let resultsToDisplay = [];
@@ -112,13 +114,24 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 		}
 	};
 
+	const handleAddFilterClick = (e) => {
+		setNumResultsToShow(Number(e.target.dataset.filtervalue));
+	};
+
 	return (
 		<div className={`w-full p-8 ${styles}`}>
-			<div className={`${showLargeGraph ? "mb-8" : "mb-12"}`}>
+			<div
+				className={`flex justify-between ${showLargeGraph ? "mb-8" : "mb-12"}`}>
 				<p
 					className={`font-classmate-bold-italic ${titleStyles} text-2xl sm:text-3xl lg:text-4xl ${titleStyles}`}>
 					Professor rank
 				</p>
+				{!isHomepage && (
+					<RankGraphSelect
+						handleAddFilterClick={handleAddFilterClick}
+						label={numResultsToShow}
+					/>
+				)}
 			</div>
 			<div className="flex">
 				{showLargeGraph && (
@@ -151,38 +164,40 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 						className={`absolute z-10  ${
 							showLargeGraph ? "flex flex-col gap-3 " : "-translate-y-[26px]"
 						}`}>
-						{resultsToDisplay.map((professor, index) => (
-							<div
-								onClick={handleGraphItemClick}
-								key={index}
-								className={`relative h-16 transition-transform duration-1000 ${
-									showLargeGraph ? "!h-10" : ""
-								}`}
-								style={{
-									width: graphWidth
-										? (professor.data.score / 5) * graphWidth
-										: graphWidth,
-									transition: transitionEffect,
-								}}>
-								{!showLargeGraph && (
-									<p className="font-classmate absolute bottom-[40px] whitespace-nowrap text-xs capitalize text-classmate-green-6">
-										{`${professor.data.first_name} ${professor.data.last_name}`}
-									</p>
-								)}
-								<button
-									tabIndex={isHomepage ? -1 : 0}
-									id={professor.firebaseID}
-									className={`absolute bottom-0 flex h-3/5 w-full items-center rounded-md border-none outline-none ring-classmate-gold-1 focus:ring ${getColor(
-										professor.data.score
-									)} ${showLargeGraph ? "h-full" : ""} ${
-										isHomepage ? "pointer-events-none" : ""
-									}`}>
-									<span className="font-classmate absolute -right-2 w-0 text-classmate-green-6">
-										{professor.data.score}
-									</span>
-								</button>
-							</div>
-						))}
+						{resultsToDisplay
+							.slice(0, numResultsToShow)
+							.map((professor, index) => (
+								<div
+									onClick={handleGraphItemClick}
+									key={index}
+									className={`relative h-16 transition-transform duration-1000 ${
+										showLargeGraph ? "!h-10" : ""
+									}`}
+									style={{
+										width: graphWidth
+											? (professor.data.score / 5) * graphWidth
+											: graphWidth,
+										transition: transitionEffect,
+									}}>
+									{!showLargeGraph && (
+										<p className="font-classmate absolute bottom-[40px] whitespace-nowrap text-xs capitalize text-classmate-green-6">
+											{`${professor.data.first_name} ${professor.data.last_name}`}
+										</p>
+									)}
+									<button
+										tabIndex={isHomepage ? -1 : 0}
+										id={professor.firebaseID}
+										className={`absolute bottom-0 flex h-3/5 w-full items-center rounded-md border-none outline-none ring-classmate-gold-1 focus:ring ${getColor(
+											professor.data.score
+										)} ${showLargeGraph ? "h-full" : ""} ${
+											isHomepage ? "pointer-events-none" : ""
+										}`}>
+										<span className="font-classmate absolute -right-2 w-0 text-classmate-green-6">
+											{professor.data.score}
+										</span>
+									</button>
+								</div>
+							))}
 					</div>
 
 					<div className="absolute grid h-full w-full grid-flow-col grid-cols-5 text-sm">

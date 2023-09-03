@@ -7,18 +7,18 @@ import ClassmateButton from "../../components/ClassmateButton";
 
 const ProfessorDescription = ({ professor }) => {
 	return (
-		<div className=" flex flex-col gap-6 xs:gap-8">
+		<div className="flex flex-col gap-6 xs:gap-8 md:gap-4">
 			<div className="flex justify-between">
-				<div className="flex flex-col gap-1">
-					<div className="font-classmate-bold text-3xl capitalize xs:text-4xl">{`${professor.data.first_name} ${professor.data.last_name}`}</div>
+				<div className="flex flex-wrap items-center">
+					<div className="font-classmate-bold mr-4 text-3xl capitalize xs:text-4xl">{`${professor.data.first_name} ${professor.data.last_name}`}</div>
 					<ResultQualityTag score={professor.data.score} />
 				</div>
 				<MainSearchResultBookmark
 					bookmarkType="professor"
-					itemID={professor.firebaseID}
+					itemID={professor.firestoreID}
 				/>
 			</div>
-			<p className="font-classmate text-classmate-green-7">
+			<p className="font-classmate mr-14 text-classmate-green-7">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est aut
 				sapiente sunt adipisci architecto beatae sit consequatur labore
 				possimus, atque mollitia numquam. Voluptates omnis debitis quos ipsa
@@ -46,7 +46,7 @@ const ProfessorDescription = ({ professor }) => {
 					score={professor.data.take_again * 100}
 				/>
 			</div>
-			<div className="flex flex-wrap gap-3">
+			<div className="mt-2 flex flex-wrap gap-3">
 				<ClassmateButton
 					size="md"
 					variant="outlined"

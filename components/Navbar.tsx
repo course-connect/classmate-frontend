@@ -29,7 +29,7 @@ export default function Navbar() {
 	const pathname = router.asPath.split("/")[1];
 
 	// Check if current path should have a light or dark navbar
-	const pagesWithDarkNavbar = [];
+	const pagesWithDarkNavbar = ["professor"];
 	const bgColor = pagesWithDarkNavbar.includes(pathname)
 		? "bg-classmate-tan-1"
 		: "bg-classmate-tan-2";
@@ -88,7 +88,7 @@ export default function Navbar() {
 
 			{/*   */}
 			<ul
-				className={`font-classmate absolute left-0 top-0 z-40 !m-0 flex h-full w-full grow list-none flex-col items-center justify-center gap-4 bg-classmate-tan-2 text-xl  text-classmate-green-6 md:static  md:z-0 md:!ml-10 md:w-fit md:grow-0 md:flex-row md:gap-6  md:text-sm lg:!ml-12 lg:gap-8 ${
+				className={`font-classmate C absolute left-0 top-0 z-40 !m-0 flex h-full w-full grow list-none flex-col items-center justify-center gap-4 text-xl  text-classmate-green-6 md:static  md:z-0 md:!ml-10 md:w-fit md:grow-0 md:flex-row md:gap-6  md:text-sm lg:!ml-12 lg:gap-8 ${
 					mobileMenuOpen || width >= 768
 						? "pointer-events-auto opacity-100"
 						: "pointer-events-none opacity-0"
@@ -96,7 +96,7 @@ export default function Navbar() {
 					addMobileTransitions
 						? "transition-opacity duration-200 ease-in-out"
 						: ""
-				}`}>
+				} ${bgColor}`}>
 				<ClassmateButton
 					size="xs"
 					variant="text"

@@ -175,6 +175,13 @@ const AccountMenu = () => {
 		handleMenuClick(); // Close the menu
 	};
 
+	// Check if current path should have a light or dark navbar
+	const pathname = router.asPath.split("/")[1];
+	const pagesWithDarkNavbar = ["professor"];
+	const bgColor = pagesWithDarkNavbar.includes(pathname)
+		? "bg-classmate-tan-2"
+		: "bg-classmate-tan-1";
+
 	return (
 		<div className="relative !ml-auto">
 			{/* ToolTip component */}
@@ -184,7 +191,8 @@ const AccountMenu = () => {
 					onClick={handleMenuClick}
 					style={{ transition: "all 200ms", transitionDelay: "100ms" }}
 					className="flex cursor-pointer items-center justify-center rounded-full bg-transparent p-1 outline-none ring-classmate-gold-1 transition delay-100 duration-200 hover:bg-classmate-tan-1 focus:ring">
-					<div className="font-classmate-bold text-classmate-green-1r flex h-10 w-10 select-none items-center justify-center rounded-full bg-classmate-tan-1 text-lg">
+					<div
+						className={`font-classmate-bold text-classmate-green-1r flex h-10 w-10 select-none items-center justify-center rounded-full text-lg ${bgColor}`}>
 						A
 					</div>
 				</button>

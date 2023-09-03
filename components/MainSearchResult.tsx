@@ -85,15 +85,15 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 					data-resultid={result.firebaseID}
 					className="font-classmate flex cursor-pointer flex-col gap-6 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl ring-classmate-gold-1 focus:ring">
 					<div className="flex w-full justify-between gap-6">
-						<div className="flex flex-wrap gap-4">
-							<div>
+						<div className="flex flex-wrap gap-2">
+							<div className="mr-4">
 								<p className="font-classmate-bold text-2xl capitalize text-classmate-green-1">{`${result.data.first_name} ${result.data.last_name}`}</p>
 
 								{filters ? (
-									<p className="flex flex-col text-sm">
+									<p className=" flex flex-col text-sm">
 										{filters.school.filter_text
 											? filters.school.filter_text
-											: result.data.school_names?.map((school_name, index) => (
+											: result.data.schools?.map(({ school_name }, index) => (
 													<span key={index}>{school_name}</span>
 											  ))}
 									</p>
@@ -127,7 +127,7 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 						tenetur inventore harum minima sit odio!
 					</p>
 
-					<div className="flex flex-col gap-6 sm:flex-row sm:gap-6">
+					<div className="flex flex-wrap gap-6 sm:flex-row sm:gap-6">
 						<div className="flex flex-wrap gap-2">
 							<ResultScore title="Score" score={result.data.score} />
 							<ResultScore title="Difficulty" score={result.data.difficulty} />

@@ -40,7 +40,7 @@ export default function Search() {
 
 	return (
 		<div
-			className={`section-padding flex w-full justify-center gap-10 bg-classmate-tan-1 py-10 ${
+			className={`section-padding flex w-full justify-center gap-10 bg-classmate-tan-1 py-10 pb-20 ${
 				width >= 768 ? "" : "flex-col items-center"
 			}`}>
 			<div className="w-full max-w-3xl">
