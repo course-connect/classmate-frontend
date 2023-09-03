@@ -1,6 +1,6 @@
 import React from "react";
 
-const ResultScore = ({ title, score, variant = "default" }) => {
+const ResultScore = ({ title, score, variant = "default", review = false }) => {
 	const defaultDisplay = variant === "default";
 
 	const getColor = (score) => {
@@ -67,6 +67,10 @@ const ResultScore = ({ title, score, variant = "default" }) => {
 		}
 	};
 
+	const getTakeAgainReviewColor = (wouldTakeAgain) => {
+		return wouldTakeAgain ? "bg-classmate-green-2" : "bg-classmate-red-1";
+	};
+
 	let color;
 	switch (title) {
 		case "Score":
@@ -79,19 +83,30 @@ const ResultScore = ({ title, score, variant = "default" }) => {
 			color = getReviewsColor(score);
 			break;
 		case "Take Again":
-			color = getTakeAgainColor(score);
+			if (review) {
+				color = getTakeAgainReviewColor(score);
+			} else {
+				color = getTakeAgainColor(score);
+			}
+
 			break;
 	}
 
 	let scoreDisplay;
 	switch (title) {
 		case "Take Again":
-			scoreDisplay = `${score}%`;
+			if (review) {
+				scoreDisplay = score ? "Yes" : "No";
+			} else {
+				scoreDisplay = `${score}%`;
+			}
+
 			break;
 		case "Score":
 			scoreDisplay = score.toFixed(1);
 			break;
 		case "Difficulty":
+			console.log(score);
 			scoreDisplay = score.toFixed(1);
 			break;
 		default:

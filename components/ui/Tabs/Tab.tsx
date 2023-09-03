@@ -1,7 +1,6 @@
 import React from "react";
 
 const Tab = ({ label, handleTabClick, value, index }) => {
-	console.log(label, index, value);
 	const tabSelected = value === index;
 	return (
 		<button

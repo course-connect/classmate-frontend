@@ -9,6 +9,7 @@ import formSearch from "./form-search/formSearchReducers";
 import account from "./account-tab/accountReducers";
 import bookmarksSearch from "./bookmarks-search/bookmarksSearchReducers";
 import userProfile from "./user-profile/userProfileReducers";
+import professor from "./professor/professorReducers";
 
 export default combineReducers({
 	auth,
@@ -21,4 +22,5 @@ export default combineReducers({
 	account,
 	userProfile,
 	bookmarksSearch,
+	professor,
 });

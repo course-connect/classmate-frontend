@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const ProfessorImage = () => {
 	return (
-		<div className=" mb-6 flex aspect-square w-full items-center justify-center rounded-3xl bg-classmate-tan-1 xs:mb-8">
+		<div className="mb-6 flex aspect-square w-full items-center justify-center rounded-3xl bg-classmate-tan-1 xs:mb-8 md:mb-14">
 			<Image
 				src="/male-avatar-1.svg"
 				width={0}
