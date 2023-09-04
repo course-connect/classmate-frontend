@@ -5,11 +5,11 @@ import ProfessorImage from "../ProfessorImage";
 import ProfessorTags from "../ProfessorTags";
 import ProfessorDescription from "../ProfessorDescription";
 import ProfessorTabs from "../ProfessorTabs";
-import Modal from "../../../components/ui/Modal/Modal";
+
+import ReviewModal from "../ReviewModal";
 
 export default function Professor({ professor }) {
 	const [showModal, setShowModal] = useState(false);
-	// <h1>{JSON.stringify(professor, null, 2)}</h1>
 
 	const handleCloseModal = () => {
 		setShowModal(false);
@@ -21,7 +21,11 @@ export default function Professor({ professor }) {
 
 	return (
 		<>
-			<Modal showModal={showModal} handleCloseModal={handleCloseModal} />
+			<ReviewModal
+				professor={professor}
+				showModal={showModal}
+				handleCloseModal={handleCloseModal}
+			/>
 			<div className="section-padding flex justify-center bg-classmate-tan-2 pb-16 pt-8 xs:py-8 md:pb-20 lg:pt-12">
 				<div className="max-w max-w-4xl grid-cols-12 md:grid md:gap-10 lg:gap-16 xl:max-w-5xl 2xl:max-w-6xl">
 					<div className="col-start-1 col-end-5">

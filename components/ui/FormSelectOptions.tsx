@@ -36,7 +36,8 @@ const FormSelectOptions = ({
 					<Image
 						width={16}
 						height={10}
-						src="/check-green.svg"
+						src="/check-solid.svg"
+						className="filter-classmate-green-4"
 						alt="check mark"
 					/>
 				</div>
