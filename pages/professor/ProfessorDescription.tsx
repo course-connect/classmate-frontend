@@ -5,7 +5,7 @@ import MainSearchResultBookmark from "../../components/MainSearchResultBookmark"
 import ResultScore from "../../components/ResultScore";
 import ClassmateButton from "../../components/ClassmateButton";
 
-const ProfessorDescription = ({ professor }) => {
+const ProfessorDescription = ({ professor, handleOpenModal }) => {
 	return (
 		<div className="flex flex-col gap-6 xs:gap-8 md:gap-4">
 			<div className="flex justify-between">
@@ -51,7 +51,7 @@ const ProfessorDescription = ({ professor }) => {
 					size="md"
 					variant="outlined"
 					styles="text-classmate-green-7 border-classmate-green-7"
-					callback={() => console.log("hello")}>
+					callback={handleOpenModal}>
 					Submit Review
 				</ClassmateButton>
 				<ClassmateButton
