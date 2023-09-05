@@ -106,7 +106,6 @@ const ResultScore = ({ title, score, variant = "default", review = false }) => {
 			scoreDisplay = score.toFixed(1);
 			break;
 		case "Difficulty":
-			console.log(score);
 			scoreDisplay = score.toFixed(1);
 			break;
 		default:
