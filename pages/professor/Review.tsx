@@ -10,7 +10,9 @@ const Review = ({ review }) => {
 	return (
 		<div className="font-classmate flex flex-col gap-6 rounded-xl bg-classmate-tan-1 p-8 text-left text-classmate-green-6 shadow-xl ring-classmate-gold-1 focus:ring">
 			<div className="flex w-full flex-col justify-between gap-4 sm:flex-row-reverse">
-				<div className="pt-1">
+				<div
+					className="pt-1
+				">
 					<ClassmateDate seconds={review.date._seconds} />
 				</div>
 				<div className="flex flex-wrap gap-2">
