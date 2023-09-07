@@ -9,16 +9,22 @@ const YesNoRadio = ({ name, methods }) => {
 	const handleYesClick = () => {
 		const isNull = getValues(name) === null;
 		const noSelected = !getValues(name);
+		const yesSelected = !noSelected;
 		if (noSelected || isNull) {
 			setValue(name, true);
+		} else if (yesSelected) {
+			setValue(name, null);
 		}
 	};
 
 	const handleNoClick = () => {
 		const isNull = getValues(name) === null;
 		const yesSelected = getValues(name);
+		const noSelected = !yesSelected;
 		if (yesSelected || isNull) {
 			setValue(name, false);
+		} else if (noSelected) {
+			setValue(name, null);
 		}
 	};
 
