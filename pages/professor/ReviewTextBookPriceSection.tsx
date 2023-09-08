@@ -9,7 +9,7 @@ const ReviewTextBookPriceSection = ({
 }) => {
 	return (
 		<>
-			<YesNoRadio name="paidForTextbook" methods={methods} />
+			<YesNoRadio name="textbookFree" methods={methods} />
 			{!paidForTextbookSelected && paidForTextbookSelected !== null && (
 				<>
 					<BasicInput

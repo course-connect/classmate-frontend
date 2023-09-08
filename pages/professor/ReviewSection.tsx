@@ -10,7 +10,7 @@ const ReviewSection = ({ title, icon, iconAlt, required, children }) => {
 					alt={iconAlt}
 					width={0}
 					height={0}
-					className="filter-classmate-green-1 h-[20px] w-[20px]"
+					className="filter-classmate-green-7 h-[20px] w-[20px]"
 				/>
 				<p className="text-classmate-green-1">
 					{title}

@@ -10,7 +10,7 @@ const ReviewCourseSection = ({ professor, methods }) => {
 			name="grade"
 			size="sm"
 			label="Grade*"
-			type="local-search"
+			type="select"
 			backgroundColor="bg-classmate-tan-2"
 			setValue={methods.setValue}
 			getValues={methods.getValues}

@@ -7,6 +7,11 @@ import ReviewCourseSection from "./ReviewCourseSection";
 import ReviewGradeSection from "./ReviewGradeSection";
 import ReviewTextBookSection from "./ReviewTextbookSection";
 import ReviewTextBookPriceSection from "./ReviewTextBookPriceSection";
+import ReviewExamSection from "./ReviewExamSection";
+import ReviewExamTimedSection from "./ReviewExamTimedSection";
+import ReviewClassFormatSection from "./ReviewClassFormatSection";
+import ReviewAttendanceSection from "./ReviewAttendanceSection";
+import ReviewRecommendSection from "./ReviewRecommendSection";
 
 import ClassmateButton from "../../components/ClassmateButton";
 
@@ -18,6 +23,7 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 	const [newCourseSelected, setNewCourseSelected] = useState(false);
 	const [textbookRequired, setTextbookRequired] = useState(false);
 	const [paidForTextbookSelected, setPaidForTextbookSelected] = useState(false);
+	const [examExistsSelected, setExamExistsSelected] = useState(false);
 
 	const methods = useForm({
 		defaultValues: {
@@ -31,8 +37,13 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 			textbookRequired: null,
 			textbookTitle: "",
 			textbookAuthor: "",
-			paidForTextbook: null,
+			textbookFree: null,
 			textbookPrice: "",
+			examFormat: "",
+			examTimed: null,
+			classFormat: "",
+			attendanceMandatory: null,
+			wouldRecommend: null,
 		},
 	});
 	const { handleSubmit, setError, setValue, getValues, watch } = methods;
@@ -106,6 +117,17 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 		}
 	}, [watch("paidForTextbook")]);
 
+	useEffect(() => {
+		const examFormat = getValues("examFormat");
+		const examExists = examFormat !== "No Exams" && examFormat !== "";
+		const timeSelected = getValues("examTimed") !== null;
+
+		setExamExistsSelected(examExists);
+		if (!examExists && timeSelected) {
+			setValue("examTimed", null);
+		}
+	}, [watch("examFormat")]);
+
 	function onSubmit(values) {
 		console.log(values);
 	}
@@ -171,6 +193,47 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 							/>
 						</ReviewSection>
 					)}
+					<ReviewSection
+						title={"Exam format"}
+						icon={"/file-pen-solid.svg"}
+						iconAlt={"paper and pen"}
+						required={true}>
+						<ReviewExamSection professor={professor} methods={methods} />
+					</ReviewSection>
+					{examExistsSelected && (
+						<ReviewSection
+							title={"Was the exam timed?"}
+							icon={"/clock-solid.svg"}
+							iconAlt={"clock"}
+							required={true}>
+							<ReviewExamTimedSection
+								professor={professor}
+								methods={methods}
+								examExistsSelected={examExistsSelected}
+							/>
+						</ReviewSection>
+					)}
+					<ReviewSection
+						title={"Class Format"}
+						icon={"/chalkboard-user-solid.svg"}
+						iconAlt={"user in front of chalkboard"}
+						required={true}>
+						<ReviewClassFormatSection professor={professor} methods={methods} />
+					</ReviewSection>
+					<ReviewSection
+						title={"Was attendance mandatory?"}
+						icon={"/attendance-solid.svg"}
+						iconAlt={"user clipboard"}
+						required={true}>
+						<ReviewAttendanceSection professor={professor} methods={methods} />
+					</ReviewSection>
+					<ReviewSection
+						title={"Would you recommend this professor?"}
+						icon={"/thumbs-up-solid.svg"}
+						iconAlt={"thumbs up"}
+						required={true}>
+						<ReviewRecommendSection professor={professor} methods={methods} />
+					</ReviewSection>
 				</FormProvider>
 				<div className="mt-4 flex w-full justify-end">
 					<ClassmateButton

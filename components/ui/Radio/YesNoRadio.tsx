@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import Image from "next/image";
 
-const YesNoRadio = ({ name, methods }) => {
+const YesNoRadio = ({ name, methods, rules }) => {
 	const { control } = useFormContext();
-	const { getValues, setValue } = methods;
+	const { getValues, setValue, watch, clearErrors } = methods;
 
 	const handleYesClick = () => {
 		const isNull = getValues(name) === null;
@@ -28,10 +28,15 @@ const YesNoRadio = ({ name, methods }) => {
 		}
 	};
 
+	useEffect(() => {
+		clearErrors(name);
+	}, [watch(name)]);
+
 	return (
 		<Controller
 			control={control}
 			name={name}
+			rules={rules}
 			render={({ field: { onChange, value }, fieldState: { error } }) => {
 				return (
 					<div className="flex justify-center gap-8">
@@ -41,7 +46,7 @@ const YesNoRadio = ({ name, methods }) => {
 								onClick={handleYesClick}
 								className={`flex h-10 w-10 items-center justify-center rounded-full bg-classmate-gray-4 outline-none ring-classmate-gold-1 focus:ring ${
 									value && value !== null ? "bg-classmate-green-3" : ""
-								}`}>
+								} ${error ? "ring-[2px] ring-classmate-error-red" : ""}`}>
 								{value && value !== null && (
 									<Image
 										src="/check-solid.svg"
@@ -60,7 +65,7 @@ const YesNoRadio = ({ name, methods }) => {
 								onClick={handleNoClick}
 								className={`flex h-10 w-10 items-center justify-center rounded-full bg-classmate-gray-4 outline-none ring-classmate-gold-1 focus:ring ${
 									!value && value !== null ? "bg-classmate-red-1" : ""
-								}`}>
+								} ${error ? "ring-[2px] ring-classmate-error-red" : ""}`}>
 								{!value && value !== null && (
 									<Image
 										src="/xmark-solid.svg"
