@@ -5,12 +5,12 @@ import BasicInput from "../../components/BasicInput";
 const ReviewTextBookPriceSection = ({
 	professor,
 	methods,
-	paidForTextbookSelected,
+	textbookFreeSelected,
 }) => {
 	return (
 		<>
 			<YesNoRadio name="textbookFree" methods={methods} />
-			{!paidForTextbookSelected && paidForTextbookSelected !== null && (
+			{!textbookFreeSelected && textbookFreeSelected !== null && (
 				<>
 					<BasicInput
 						name="textbookPrice"

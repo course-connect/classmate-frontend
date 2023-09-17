@@ -17,7 +17,9 @@ const ReviewSection = ({ title, icon, iconAlt, required, children }) => {
 					{required && <span>*</span>}
 				</p>
 			</div>
-			<div className="flex w-[200px] flex-col gap-4">{children}</div>
+			<div className="flex w-[200px] flex-col items-center justify-center gap-4">
+				{children}
+			</div>
 		</div>
 	);
 };

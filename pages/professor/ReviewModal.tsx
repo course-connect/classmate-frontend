@@ -12,6 +12,7 @@ import ReviewExamTimedSection from "./ReviewExamTimedSection";
 import ReviewClassFormatSection from "./ReviewClassFormatSection";
 import ReviewAttendanceSection from "./ReviewAttendanceSection";
 import ReviewRecommendSection from "./ReviewRecommendSection";
+import ReviewRatingSection from "./ReviewRatingSection";
 
 import ClassmateButton from "../../components/ClassmateButton";
 
@@ -22,7 +23,7 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 	const [newSchoolSelected, setNewSchoolSelected] = useState(false);
 	const [newCourseSelected, setNewCourseSelected] = useState(false);
 	const [textbookRequired, setTextbookRequired] = useState(false);
-	const [paidForTextbookSelected, setPaidForTextbookSelected] = useState(false);
+	const [textbookFreeSelected, setTextbookFreeSelected] = useState(false);
 	const [examExistsSelected, setExamExistsSelected] = useState(false);
 
 	const methods = useForm({
@@ -44,6 +45,7 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 			classFormat: "",
 			attendanceMandatory: null,
 			wouldRecommend: null,
+			rating: 3,
 		},
 	});
 	const { handleSubmit, setError, setValue, getValues, watch } = methods;
@@ -94,28 +96,28 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 			setValue("textbookAuthor", "");
 		}
 
-		const paidForTextbookSelected = getValues("paidForTextbook");
+		const textbookFreeSelected = getValues("textbookFree");
 		const textbookPriceEntered = getValues("textbookPrice");
 		if (
-			paidForTextbookSelected ||
-			(!paidForTextbookSelected && paidForTextbookSelected !== null)
+			textbookFreeSelected ||
+			(!textbookFreeSelected && textbookFreeSelected !== null)
 		) {
-			setValue("paidForTextbook", null);
+			setValue("textbookFree", null);
 		}
-		if (!paidForTextbookSelected && textbookPriceEntered) {
+		if (!textbookFreeSelected && textbookPriceEntered) {
 			setValue("textbookPrice", "");
 		}
 	}, [watch("textbookRequired")]);
 
 	useEffect(() => {
-		const paidForTextbookSelected = getValues("paidForTextbook");
+		const textbookFreeSelected = getValues("textbookFree");
 		const textbookPriceEntered = getValues("textbookPrice");
 
-		setPaidForTextbookSelected(getValues("paidForTextbook"));
-		if (!paidForTextbookSelected && textbookPriceEntered) {
+		setTextbookFreeSelected(getValues("textbookFree"));
+		if (!textbookFreeSelected && textbookPriceEntered) {
 			setValue("textbookPrice", "");
 		}
-	}, [watch("paidForTextbook")]);
+	}, [watch("textbookFree")]);
 
 	useEffect(() => {
 		const examFormat = getValues("examFormat");
@@ -189,7 +191,7 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 							<ReviewTextBookPriceSection
 								professor={professor}
 								methods={methods}
-								paidForTextbookSelected={paidForTextbookSelected}
+								textbookFreeSelected={textbookFreeSelected}
 							/>
 						</ReviewSection>
 					)}
@@ -233,6 +235,13 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 						iconAlt={"thumbs up"}
 						required={true}>
 						<ReviewRecommendSection professor={professor} methods={methods} />
+					</ReviewSection>
+					<ReviewSection
+						title={"Raiting"}
+						icon={"/star-solid.svg"}
+						iconAlt={"star"}
+						required={true}>
+						<ReviewRatingSection professor={professor} methods={methods} />
 					</ReviewSection>
 				</FormProvider>
 				<div className="mt-4 flex w-full justify-end">
