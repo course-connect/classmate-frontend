@@ -7,6 +7,9 @@ const ReviewRatingSection = ({ professor, methods }) => {
 	const handleStarClick = (index) => {
 		setValue("rating", index + 1);
 	};
+
+	const textOptions = ["Very Bad", "Bad", "Average", "Good", "Very Good"];
+
 	return (
 		<Raiting
 			name={"rating"}
@@ -14,6 +17,7 @@ const ReviewRatingSection = ({ professor, methods }) => {
 			iconAlt={"star"}
 			callback={handleStarClick}
 			rules={{ required: true }}
+			textOptions={textOptions}
 		/>
 	);
 };

@@ -12,7 +12,10 @@ import ReviewExamTimedSection from "./ReviewExamTimedSection";
 import ReviewClassFormatSection from "./ReviewClassFormatSection";
 import ReviewAttendanceSection from "./ReviewAttendanceSection";
 import ReviewRecommendSection from "./ReviewRecommendSection";
+import ReviewTagsSection from "./ReviewTagsSection";
+
 import ReviewRatingSection from "./ReviewRatingSection";
+import ReviewDifficultySection from "./ReviewDifficultySection";
 
 import ClassmateButton from "../../components/ClassmateButton";
 
@@ -46,6 +49,8 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 			attendanceMandatory: null,
 			wouldRecommend: null,
 			rating: 3,
+			difficulty: 3,
+			tags: [],
 		},
 	});
 	const { handleSubmit, setError, setValue, getValues, watch } = methods;
@@ -142,7 +147,7 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 			</h4>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<FormProvider {...methods}>
-					<ReviewSection
+					{/* <ReviewSection
 						title={"School"}
 						icon={"/school-solid.svg"}
 						iconAlt={"school"}
@@ -235,13 +240,28 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 						iconAlt={"thumbs up"}
 						required={true}>
 						<ReviewRecommendSection professor={professor} methods={methods} />
-					</ReviewSection>
+					</ReviewSection> */}
 					<ReviewSection
 						title={"Raiting"}
 						icon={"/star-solid.svg"}
 						iconAlt={"star"}
 						required={true}>
 						<ReviewRatingSection professor={professor} methods={methods} />
+					</ReviewSection>
+					<ReviewSection
+						title={"Difficulty"}
+						icon={"/weight-solid.svg"}
+						iconAlt={"weight"}
+						required={true}>
+						<ReviewDifficultySection professor={professor} methods={methods} />
+					</ReviewSection>
+					<ReviewSection
+						title={"Which tags best describe this professor?"}
+						icon={"/tag-solid.svg"}
+						iconAlt={"weight"}
+						fullWidth
+						required={true}>
+						<ReviewTagsSection professor={professor} methods={methods} />
 					</ReviewSection>
 				</FormProvider>
 				<div className="mt-4 flex w-full justify-end">

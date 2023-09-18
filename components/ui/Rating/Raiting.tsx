@@ -2,32 +2,8 @@ import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import Image from "next/image";
 
-const Raiting = ({ name, callback, icon, iconAlt, rules }) => {
+const Raiting = ({ name, callback, icon, iconAlt, rules, textOptions }) => {
 	const { control } = useFormContext();
-
-	const getScoreText = (score) => {
-		let text;
-		switch (score) {
-			case 1:
-				text = "Very Bad";
-				break;
-			case 2:
-				text = "Bad";
-				break;
-			case 3:
-				text = "Average";
-				break;
-			case 4:
-				text = "Good";
-				break;
-			case 5:
-				text = "Very Good";
-				break;
-			default:
-				text = "default";
-		}
-		return text;
-	};
 
 	return (
 		<Controller
@@ -56,7 +32,7 @@ const Raiting = ({ name, callback, icon, iconAlt, rules }) => {
 					<p className="flex text-classmate-green-6">
 						<span>{value}</span>
 						<span>/5&nbsp;-&nbsp;</span>
-						<span>{getScoreText(value)}</span>
+						<span>{textOptions[value - 1]}</span>
 					</p>
 				</div>
 			)}

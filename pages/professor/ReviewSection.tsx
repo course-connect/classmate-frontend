@@ -1,7 +1,14 @@
 import React from "react";
 import Image from "next/image";
 
-const ReviewSection = ({ title, icon, iconAlt, required, children }) => {
+const ReviewSection = ({
+	title,
+	icon,
+	iconAlt,
+	required,
+	children,
+	fullWidth = false,
+}) => {
 	return (
 		<div className="font-classmate flex flex-col flex-wrap items-center justify-center gap-6 border-b-2 border-classmate-gray-4 py-6">
 			<div className="flex gap-3 self-start">
@@ -17,7 +24,10 @@ const ReviewSection = ({ title, icon, iconAlt, required, children }) => {
 					{required && <span>*</span>}
 				</p>
 			</div>
-			<div className="flex w-[200px] flex-col items-center justify-center gap-4">
+			<div
+				className={`flex flex-col items-center justify-center gap-4 ${
+					fullWidth ? "w-full" : " w-[200px]"
+				}`}>
 				{children}
 			</div>
 		</div>
