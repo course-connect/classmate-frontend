@@ -6,7 +6,7 @@ const ReviewTextBookSection = ({ professor, methods, textbookRequired }) => {
 	return (
 		<>
 			<YesNoRadio name="textbookRequired" methods={methods} />
-			{textbookRequired && (
+			{textbookRequired === "yes" && (
 				<>
 					<BasicInput
 						name="textbookTitle"

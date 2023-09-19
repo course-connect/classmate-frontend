@@ -13,6 +13,7 @@ import ReviewClassFormatSection from "./ReviewClassFormatSection";
 import ReviewAttendanceSection from "./ReviewAttendanceSection";
 import ReviewRecommendSection from "./ReviewRecommendSection";
 import ReviewTagsSection from "./ReviewTagsSection";
+import ReviewTextAreaSection from "./ReviewTextAreaSection";
 
 import ReviewRatingSection from "./ReviewRatingSection";
 import ReviewDifficultySection from "./ReviewDifficultySection";
@@ -25,8 +26,8 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 	// console.log(professor);
 	const [newSchoolSelected, setNewSchoolSelected] = useState(false);
 	const [newCourseSelected, setNewCourseSelected] = useState(false);
-	const [textbookRequired, setTextbookRequired] = useState(false);
-	const [textbookFreeSelected, setTextbookFreeSelected] = useState(false);
+	const [textbookRequired, setTextbookRequired] = useState(null);
+	const [textbookFreeSelected, setTextbookFreeSelected] = useState(null);
 	const [examExistsSelected, setExamExistsSelected] = useState(false);
 
 	const methods = useForm({
@@ -51,6 +52,7 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 			rating: 3,
 			difficulty: 3,
 			tags: [],
+			review: "",
 		},
 	});
 	const { handleSubmit, setError, setValue, getValues, watch } = methods;
@@ -89,7 +91,8 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 	}, [watch("newCourseSelected")]);
 
 	useEffect(() => {
-		const textbookRequiredSelected = getValues("textbookRequired");
+		const textbookRequiredSelected = getValues("textbookRequired") === "yes";
+		console.log(getValues("textbookRequired"));
 		const textbookTitleEntered = getValues("textbookTitle");
 		const textbookAuthorEntered = getValues("textbookAuthor");
 
@@ -101,7 +104,7 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 			setValue("textbookAuthor", "");
 		}
 
-		const textbookFreeSelected = getValues("textbookFree");
+		const textbookFreeSelected = getValues("textbookFree") === "yes";
 		const textbookPriceEntered = getValues("textbookPrice");
 		if (
 			textbookFreeSelected ||
@@ -115,7 +118,7 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 	}, [watch("textbookRequired")]);
 
 	useEffect(() => {
-		const textbookFreeSelected = getValues("textbookFree");
+		const textbookFreeSelected = getValues("textbookFree") === "yes";
 		const textbookPriceEntered = getValues("textbookPrice");
 
 		setTextbookFreeSelected(getValues("textbookFree"));
@@ -141,13 +144,13 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 
 	return (
 		<Modal showModal={showModal} handleCloseModal={handleCloseModal}>
-			<h4 className="font-classmate-bold border-b-2 border-classmate-gray-4 pb-4 text-classmate-green-1 ">
+			<h4 className="font-classmate-bold border-b-2 border-classmate-gray-4 pb-4 text-lg text-classmate-green-1 sm:text-2xl">
 				Review for:{" "}
 				<span className="font-classmate whitespace-nowrap capitalize text-classmate-green-6">{`${professor.data.first_name} ${professor.data.last_name}`}</span>
 			</h4>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<FormProvider {...methods}>
-					{/* <ReviewSection
+					<ReviewSection
 						title={"School"}
 						icon={"/school-solid.svg"}
 						iconAlt={"school"}
@@ -187,7 +190,7 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 							textbookRequired={textbookRequired}
 						/>
 					</ReviewSection>
-					{textbookRequired && (
+					{textbookRequired === "yes" && (
 						<ReviewSection
 							title={"Was the texbook free?"}
 							icon={"/book-solid.svg"}
@@ -240,7 +243,7 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 						iconAlt={"thumbs up"}
 						required={true}>
 						<ReviewRecommendSection professor={professor} methods={methods} />
-					</ReviewSection> */}
+					</ReviewSection>
 					<ReviewSection
 						title={"Raiting"}
 						icon={"/star-solid.svg"}
@@ -262,6 +265,15 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 						fullWidth
 						required={true}>
 						<ReviewTagsSection professor={professor} methods={methods} />
+					</ReviewSection>
+					<ReviewSection
+						title={"Review"}
+						subtext="What should students know before taking this professor?"
+						icon={"/document-check-solid.svg"}
+						iconAlt={"document"}
+						fullWidth
+						required={true}>
+						<ReviewTextAreaSection professor={professor} methods={methods} />
 					</ReviewSection>
 				</FormProvider>
 				<div className="mt-4 flex w-full justify-end">

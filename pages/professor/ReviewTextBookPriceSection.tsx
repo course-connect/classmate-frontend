@@ -10,7 +10,7 @@ const ReviewTextBookPriceSection = ({
 	return (
 		<>
 			<YesNoRadio name="textbookFree" methods={methods} />
-			{!textbookFreeSelected && textbookFreeSelected !== null && (
+			{textbookFreeSelected === "no" && textbookFreeSelected !== null && (
 				<>
 					<BasicInput
 						name="textbookPrice"

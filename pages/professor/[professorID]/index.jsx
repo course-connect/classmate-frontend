@@ -8,15 +8,20 @@ import ProfessorTabs from "../ProfessorTabs";
 
 import ReviewModal from "../ReviewModal";
 
+import useLockScroll from "../../../hooks/useLockScroll";
+
 export default function Professor({ professor }) {
+	const [blockScroll, allowScroll] = useLockScroll();
 	const [showModal, setShowModal] = useState(false);
 
 	const handleCloseModal = () => {
 		setShowModal(false);
+		allowScroll();
 	};
 
 	const handleOpenModal = () => {
 		setShowModal(true);
+		blockScroll();
 	};
 
 	return (

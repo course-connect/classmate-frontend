@@ -44,14 +44,17 @@ const ReviewTagsSection = ({ professor, methods }) => {
 			rules={{ required: true }}
 			render={({ field: { onChange, value }, fieldState: { error } }) => (
 				<div className="flex flex-col items-center gap-4">
-					<div className="flex flex-wrap gap-1">
+					<div
+						className={`flex flex-wrap gap-1 rounded-lg p-2 ${
+							!!error ? "border-[1px] border-classmate-error-red" : ""
+						}`}>
 						{professorTags.map((tag, index) => {
 							const selected = value.includes(tag);
 							return (
 								<button
 									type="button"
 									onClick={() => handleTagClick(tag, value, selected)}
-									className={`h-fit w-fit whitespace-nowrap rounded-md px-[12px] py-[7px] text-[12px] tracking-wide text-classmate-tan-2 ring-classmate-gold-1 focus:ring ${
+									className={`h-fit w-fit whitespace-nowrap rounded-md px-[12px] py-[7px] text-[12px] tracking-wide text-classmate-tan-2 outline-none ring-classmate-gold-1 transition-all duration-75 focus:ring ${
 										selected ? "bg-classmate-green-2" : "bg-classmate-gray-3"
 									}`}>
 									{tag}

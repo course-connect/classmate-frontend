@@ -8,10 +8,10 @@ const YesNoRadio = ({ name, methods, rules }) => {
 
 	const handleYesClick = () => {
 		const isNull = getValues(name) === null;
-		const noSelected = !getValues(name);
+		const noSelected = getValues(name) === "no";
 		const yesSelected = !noSelected;
 		if (noSelected || isNull) {
-			setValue(name, true);
+			setValue(name, "yes");
 		} else if (yesSelected) {
 			setValue(name, null);
 		}
@@ -19,10 +19,10 @@ const YesNoRadio = ({ name, methods, rules }) => {
 
 	const handleNoClick = () => {
 		const isNull = getValues(name) === null;
-		const yesSelected = getValues(name);
+		const yesSelected = getValues(name) === "yes";
 		const noSelected = !yesSelected;
 		if (yesSelected || isNull) {
-			setValue(name, false);
+			setValue(name, "no");
 		} else if (noSelected) {
 			setValue(name, null);
 		}
@@ -38,6 +38,8 @@ const YesNoRadio = ({ name, methods, rules }) => {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, value }, fieldState: { error } }) => {
+				const yesSelected = value === "yes" && value !== null;
+				const noSelected = value === "no" && value !== null;
 				return (
 					<div className="flex justify-center gap-8">
 						<div className="flex flex-col items-center gap-1">
@@ -45,9 +47,9 @@ const YesNoRadio = ({ name, methods, rules }) => {
 								type="button"
 								onClick={handleYesClick}
 								className={`flex h-10 w-10 items-center justify-center rounded-full bg-classmate-gray-4 outline-none ring-classmate-gold-1 focus:ring ${
-									value && value !== null ? "bg-classmate-green-3" : ""
-								} ${error ? "ring-[2px] ring-classmate-error-red" : ""}`}>
-								{value && value !== null && (
+									yesSelected ? "bg-classmate-green-3" : ""
+								} ${!!error ? "ring-[2px] !ring-classmate-error-red" : ""}`}>
+								{yesSelected && (
 									<Image
 										src="/check-solid.svg"
 										alt="check mark"
@@ -64,9 +66,9 @@ const YesNoRadio = ({ name, methods, rules }) => {
 								type="button"
 								onClick={handleNoClick}
 								className={`flex h-10 w-10 items-center justify-center rounded-full bg-classmate-gray-4 outline-none ring-classmate-gold-1 focus:ring ${
-									!value && value !== null ? "bg-classmate-red-1" : ""
-								} ${error ? "ring-[2px] ring-classmate-error-red" : ""}`}>
-								{!value && value !== null && (
+									noSelected ? "bg-classmate-red-1" : ""
+								} ${!!error ? "ring-[2px] !ring-classmate-error-red" : ""}`}>
+								{noSelected && (
 									<Image
 										src="/xmark-solid.svg"
 										alt="check mark"
