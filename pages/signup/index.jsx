@@ -4,25 +4,11 @@ import SignUpStepper from "./SignUpStepper";
 
 export default function SignUp() {
 	return (
-		<SignUpStepper>
-			<SignUpOrSignIn
-				heading="Sign Up"
-				subheading="Sign up to get access to insights and create your prefect semester"
-				form={<SignUpForm />}
-				variant="signup"
-			/>
-			<SignUpOrSignIn
-				heading="Sign Up"
-				subheading="Sign up to get access to insights and create your prefect semester"
-				form={<SignUpForm />}
-				variant="signup"
-			/>
-			<SignUpOrSignIn
-				heading="Sign Up"
-				subheading="Sign up to get access to insights and create your prefect semester"
-				form={<SignUpForm />}
-				variant="signup"
-			/>
-		</SignUpStepper>
+		<SignUpOrSignIn
+			heading="Sign Up"
+			subheading="Sign up and be among the first to get access to Classmates professor insights"
+			form={<SignUpForm />}
+			variant="signup"
+		/>
 	);
 }

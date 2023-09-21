@@ -1,1 +1,0 @@
-export const SET_ACCOUNT_TAB = ' SET_ACCOUNT_TAB';

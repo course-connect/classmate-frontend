@@ -39,7 +39,7 @@ const ToolTip = ({ children, spacing = 5, hideOn: hideToolTip }) => {
 					transitionDelay: "100ms",
 				}}
 				className="font-classmate group-hover opacity-1 pointer-events-none absolute scale-100 rounded-md bg-black  px-2 py-1 text-xs tracking-wide text-white">
-				Account Menu
+				Menu
 			</span>
 			<div
 				ref={toolTipChildren}

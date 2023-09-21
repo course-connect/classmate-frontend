@@ -10,14 +10,14 @@ export default function signin() {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			router.push("/account");
+			router.push("/dashboard");
 		}
 	}, [isAuthenticated]);
 
 	return (
 		<SignUpOrSignIn
-			heading="Welcome"
-			subheading="Sign in to manage your courses and create the prefect semester"
+			heading="Welcome!"
+			subheading="Sign in to get early access to insights that help you craft the perfect semester"
 			form={<SignInForm />}
 			variant="signin"
 		/>

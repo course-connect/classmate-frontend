@@ -5,10 +5,6 @@ import {
 	removeTokenInLocalStorage,
 } from "./authHelpers";
 import {
-	profileRetrieved,
-	clearUserProfile,
-} from "../user-profile/userProfileActions";
-import {
 	AUTH_FAILURE,
 	AUTH_SUCCESS,
 	AUTH_LOADING,
@@ -30,7 +26,6 @@ export const signUp =
 
 			// Autherization attempt succeeded
 			dispatch(authSuccess(res.data));
-			dispatch(profileRetrieved(res.data.account));
 		} catch (err) {
 			// Autherization attempt failed
 			dispatch(authFailure(err));
@@ -81,7 +76,6 @@ export const signIn =
 				// Autherization attempt succeeded
 				dispatch(removeAuthError());
 				dispatch(authSuccess(res.data));
-				dispatch(profileRetrieved(res.data.account));
 			}
 		} catch (err) {
 			// Autherization attempt failed
@@ -93,7 +87,6 @@ export const signIn =
 export const signOut = () => (dispatch) => {
 	removeTokenInLocalStorage();
 	dispatch({ type: UN_AUTH_USER });
-	dispatch(clearUserProfile());
 };
 
 // Attempt to sign in with creditials given

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-// Project hooks
-import useWindowSize from "../hooks/useWindowSize";
+import Image from "next/image";
 
 // Project components
 import ToolTip from "./ToolTip";
@@ -14,143 +12,59 @@ import { useRouter } from "next/router";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { useSelector } from "react-redux";
 import { signOut } from "../redux/auth/authActions";
-import { setAccountTab } from "../redux/account-tab/accountActions";
-
-const defaultMenuItems: MenuItem[] = [
-	{
-		icon: "/graduation-cap-solid.svg",
-		label: "Profile",
-		id: "profile",
-		width: 20,
-		height: 20,
-		href: "/account",
-		alt: "Graduation cap icon linking to my profile",
-	},
-	{
-		icon: "/user-solid.svg",
-		label: "Account",
-		id: "account",
-		width: 17,
-		height: 17,
-		href: "/account",
-		alt: "User icon linking to my account",
-	},
-	{
-		icon: "/star-solid.svg",
-		label: "My Reviews",
-		id: "reviews",
-		width: 20,
-		height: 20,
-		href: "/account",
-		alt: "Star icon linking to my reviews",
-	},
-	{
-		icon: "/bookmark-solid.svg",
-		label: "My Bookmarks",
-		id: "bookmarks",
-		width: 20,
-		height: 20,
-		href: "/account",
-		alt: "Bookmark",
-	},
-	{
-		icon: "/signout-solid.svg",
-		label: "Sign Out",
-		id: "sign-out",
-		width: 20,
-		height: 20,
-		href: "/signin",
-		alt: "Sign out icon to sign out of your account",
-	},
-];
-
-const additionalMenuItems: MenuItem[] = [
-	{
-		icon: "/home-solid.svg",
-		label: "Home",
-		id: "home",
-		width: 20,
-		height: 20,
-		href: "/",
-		alt: "Home icon to go to the homepage",
-	},
-	{
-		icon: "/search-solid.svg",
-		label: "Search",
-		id: "search",
-		width: 20,
-		height: 20,
-		href: "/search",
-		alt: "Search icon to go to the search page",
-	},
-];
-
-const registrationNotCompletedMenuItems: MenuItem[] = [
-	{
-		icon: "/graduation-cap-solid.svg",
-		label: "Profile",
-		id: "profile",
-		width: 20,
-		height: 20,
-		href: "/account",
-		alt: "Graduation cap icon linking to my profile",
-	},
-	{
-		icon: "/signout-solid.svg",
-		label: "Sign Out",
-		id: "sign-out",
-		width: 20,
-		height: 20,
-		href: "/signin",
-		alt: "Sign out icon to sign out of your account",
-	},
-];
 
 const AccountMenu = () => {
-	const dispatch = useAppDispatch();
-	const auth = useSelector((state) => state.auth);
-
-	const [menuOpen, toggleMenuOpen] = useState(false);
 	const router = useRouter();
-	const { width: screenWidth } = useWindowSize();
-	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+	const dispatch = useAppDispatch();
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+	const [menuOpen, toggleMenuOpen] = useState(false);
+	const [menuItems, setMenuItems] = useState<MenuItem[]>([,]);
 
 	useEffect(() => {
-		const completedFirstStep =
-			auth.userData.hasOwnProperty("first_name") &&
-			auth.userData.hasOwnProperty("last_name") &&
-			auth.userData.hasOwnProperty("zipcode");
-
-		const completedSecondStep =
-			auth.userData.school && auth.userData.school.length !== 0;
-		auth.userData.hasOwnProperty("major") &&
-			auth.userData.hasOwnProperty("graduation_year");
-
-		if (screenWidth !== undefined) {
-			if (!completedFirstStep || !completedSecondStep) {
-				if (screenWidth < 768 && menuItems.length < 4) {
-					setMenuItems([
-						...additionalMenuItems,
-						...registrationNotCompletedMenuItems,
-					]);
-				} else if (
-					screenWidth >= 768 &&
-					(menuItems.length === 4 || menuItems.length === 0)
-				) {
-					setMenuItems([...registrationNotCompletedMenuItems]);
-				}
-			} else {
-				if (screenWidth < 768 && menuItems.length < 6) {
-					setMenuItems([...additionalMenuItems, ...defaultMenuItems]);
-				} else if (
-					screenWidth >= 768 &&
-					(menuItems.length === 6 || menuItems.length === 0)
-				) {
-					setMenuItems([...defaultMenuItems]);
-				}
-			}
+		if (isAuthenticated) {
+			setMenuItems([
+				{
+					icon: "/home-solid.svg",
+					label: "Home",
+					id: "home",
+					width: 20,
+					height: 20,
+					href: "/",
+					alt: "Home icon to go to the homepage",
+				},
+				{
+					icon: "/document-check-solid.svg",
+					label: "Dashboard",
+					id: "dashboard",
+					width: 20,
+					height: 20,
+					href: "/dashboard",
+					alt: "dashboard",
+				},
+				{
+					icon: "/signout-solid.svg",
+					label: "Sign Out",
+					id: "sign-out",
+					width: 20,
+					height: 20,
+					href: "/signin",
+					alt: "Sign out icon to sign out of your account",
+				},
+			]);
+		} else {
+			setMenuItems([
+				{
+					icon: "/home-solid.svg",
+					label: "Home",
+					id: "home",
+					width: 20,
+					height: 20,
+					href: "/",
+					alt: "Home icon to go to the homepage",
+				},
+			]);
 		}
-	}, [screenWidth, menuItems.length]);
+	}, [isAuthenticated]);
 
 	const handleMenuClick = () => {
 		toggleMenuOpen((current) => !current); // Toggle the menu open state
@@ -163,13 +77,6 @@ const AccountMenu = () => {
 		const { id } = e.target as HTMLLIElement; // Destructure the id property from e.target
 		if (id === "sign-out") {
 			dispatch(signOut()); // Dispatch sign out action if the "Sign Out" item is clicked
-		} else if (
-			id === "profile" ||
-			id === "account" ||
-			id === "reviews" ||
-			id === "bookmarks"
-		) {
-			dispatch(setAccountTab(id));
 		}
 		router.push(href); // Navigate to the specified href
 		handleMenuClick(); // Close the menu
@@ -177,7 +84,7 @@ const AccountMenu = () => {
 
 	// Check if current path should have a light or dark navbar
 	const pathname = router.asPath.split("/")[1];
-	const pagesWithDarkNavbar = ["professor"];
+	const pagesWithDarkNavbar = ["", "signin", "signup"];
 	const bgColor = pagesWithDarkNavbar.includes(pathname)
 		? "bg-classmate-tan-2"
 		: "bg-classmate-tan-1";
@@ -193,7 +100,12 @@ const AccountMenu = () => {
 					className="flex cursor-pointer items-center justify-center rounded-full bg-transparent p-1 outline-none ring-classmate-gold-1 transition delay-100 duration-200 hover:bg-classmate-tan-1 focus:ring">
 					<div
 						className={`font-classmate-bold text-classmate-green-1r flex h-10 w-10 select-none items-center justify-center rounded-full text-lg ${bgColor}`}>
-						A
+						<Image
+							src="hamburger-solid.svg"
+							width={0}
+							height={0}
+							className="filter-classmate-green-1 h-4 w-4"
+						/>
 					</div>
 				</button>
 			</ToolTip>

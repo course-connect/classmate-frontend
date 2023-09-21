@@ -9,9 +9,8 @@ import Link from "next/link";
 
 export default function SignUpOrSignIn({ form, heading, subheading, variant }) {
 	return (
-		// bg-classmate-tan-1
-		<div className="section-padding flex w-full justify-center  py-14 md:pb-[140px] md:pt-[90px]">
-			<div className="flex w-full max-w-[380px] flex-col items-center justify-center rounded-2xl bg-classmate-tan-2 px-10 py-12 shadow-xl sm:max-w-[480px] sm:p-[68px]">
+		<div className="section-padding flex h-screen w-full items-center justify-center  bg-classmate-tan-1 py-14">
+			<div className="flex h-fit w-full max-w-[380px] flex-col  items-center justify-center rounded-2xl bg-classmate-tan-2 px-10 py-12 shadow-xl sm:max-w-[480px] sm:p-[68px]">
 				<HomepageHeading
 					headingStyles="text-2xl xl:text-[40px]"
 					lineStyles="xl:top-14">
@@ -22,53 +21,6 @@ export default function SignUpOrSignIn({ form, heading, subheading, variant }) {
 				</p>
 				{form}
 				<div className="flex w-full flex-col items-center gap-6 sm:gap-9">
-					{/* <p className="font-classmate relative flex w-[180px] items-center justify-center text-classmate-green-6">
-						<span className="absolute left-0 h-[2px] w-6 rounded-lg bg-classmate-green-7"></span>
-						{`Or Sign ${variant === "signup" ? "up" : "in"} with`}
-						<span className="absolute right-0 h-[2px] w-6 rounded-lg bg-classmate-green-7"></span>
-					</p>
-
-					<div className="flex w-full flex-col gap-2 xs:flex-row">
-						<ClassmateButton
-							variant="outlined"
-							size="small-full"
-							styles="border-classmate-green-7 text-classmate-green-7 !text-xs sm:h-10">
-							<Image
-								src={googleLogo}
-								width={0}
-								height={0}
-								className="mr-2 h-3 w-3 sm:h-5 sm:w-5"
-								alt="google logo"
-							/>
-							Google
-						</ClassmateButton>
-						<ClassmateButton
-							variant="outlined"
-							size="small-full"
-							styles="border-classmate-green-7 text-classmate-green-7 !text-xs sm:h-10">
-							<Image
-								src={appleLogo}
-								width={0}
-								height={0}
-								className="mr-2 h-3 w-[10px] sm:h-5 sm:w-[17px]"
-								alt="apple logo"
-							/>
-							Apple
-						</ClassmateButton>
-						<ClassmateButton
-							variant="outlined"
-							size="small-full"
-							styles="border-classmate-green-7 text-classmate-green-7 !text-xs sm:h-10">
-							<Image
-								src={facebookLogo}
-								width={0}
-								height={0}
-								className="mr-2 h-4 w-4 sm:h-5 sm:w-5"
-								alt="facebook logo"
-							/>
-							Facebook
-						</ClassmateButton>
-					</div> */}
 					{variant === "signin" && (
 						<p className="font-classmate mt-4 text-classmate-green-6">
 							Don't have an account?&nbsp;

@@ -7,24 +7,14 @@ export default function middleware(req) {
 	const { cookies, url } = req;
 
 	const isAuthenticated = cookies.get("isAuthenticated")?.value === "true";
-	const completedRegistration =
-		cookies.get("completedRegistration")?.value === "true";
-	const requestingAccountPage = url.includes("/account");
+	const requestingAccountPage = url.includes("/dashboard");
 	const requestingSignInOrSignUpPage =
 		url.includes("/signin") || url.includes("/signup");
 
 	// Will redirect user to account page if they attempt to go to the sign up or
 	// sign in page when they are already signed in
-	if (
-		requestingSignInOrSignUpPage &&
-		isAuthenticated &&
-		completedRegistration
-	) {
-		return NextResponse.redirect(frontEndUrl + "/account");
-	}
-
-	if (requestingAccountPage && isAuthenticated && !completedRegistration) {
-		return NextResponse.redirect(frontEndUrl + "/signup");
+	if (requestingSignInOrSignUpPage && isAuthenticated) {
+		return NextResponse.redirect(frontEndUrl + "/dashboard");
 	}
 
 	// Will redirect user to signin page if they attempt to go to the private account
