@@ -11,7 +11,7 @@ import {
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import ReviewSkeleton from "./ReviewSkeleton";
 import { useSelector } from "react-redux";
-import Review from "./Review";
+import Review from "../../components/Review";
 
 const ProfessorTabs = ({ professor }) => {
 	const professorData = useSelector((state) => state.professor);

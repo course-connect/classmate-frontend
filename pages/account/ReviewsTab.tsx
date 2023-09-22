@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReviewsSearch from "./ReviewsSearch";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { useSelector } from "react-redux";
 import { getReviews } from "../../redux/user-profile/userProfileActions";
-import Review from "../professor/Review";
+
+import ReviewFilterd from "./ReviewFilterd";
 
 const ReviewsTab = () => {
+	const [reviewSearch, setReviewSearch] = useState("");
 	const dispatch = useAppDispatch();
 	const userProfile = useSelector((state) => state.userProfile);
 
@@ -20,12 +22,16 @@ const ReviewsTab = () => {
 					<p className="font-classmate-bold mb-5 text-2xl capitalize leading-5 text-classmate-green-1">
 						Reviews
 					</p>
-					<ReviewsSearch />
+					<ReviewsSearch setReviewSearch={setReviewSearch} />
 				</div>
 			</div>
-			<div className="w-full  rounded-2xl bg-classmate-tan-2 p-7 shadow-lg ">
-				Reviews
-			</div>
+			{userProfile.reviewsLoading && <p>loading...</p>}
+			{!userProfile.reviewsLoading && (
+				<ReviewFilterd
+					reviews={userProfile.reviews}
+					reviewSearch={reviewSearch}
+				/>
+			)}
 		</div>
 	);
 };

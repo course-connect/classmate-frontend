@@ -1,14 +1,13 @@
 import React from "react";
-import ResultQualityTag from "../../components/ResultQualityTag";
-import ResultScore from "../../components/ResultScore";
-import Tag from "../../components/Tag";
-import ClassmateDate from "../../components/ui/Date/ClassmateDate";
+import ResultQualityTag from "./ResultQualityTag";
+import ResultScore from "./ResultScore";
+import Tag from "./Tag";
+import ClassmateDate from "./ui/Date/ClassmateDate";
 
-const Review = ({ review }) => {
-	const date = new Date(review.date._seconds * 1000);
-
+const Review = ({ review, backgroundColor = "bg-classmate-tan-1" }) => {
 	return (
-		<div className="font-classmate flex flex-col gap-6 rounded-xl bg-classmate-tan-1 p-8 text-left text-classmate-green-6 shadow-xl ring-classmate-gold-1 focus:ring">
+		<div
+			className={`font-classmate flex flex-col gap-6 rounded-xl p-8 text-left text-classmate-green-6 shadow-xl ring-classmate-gold-1 focus:ring ${backgroundColor}`}>
 			<div className="flex w-full flex-col justify-between gap-4 sm:flex-row-reverse">
 				<div className="pt-1">
 					<ClassmateDate seconds={review.date._seconds} />

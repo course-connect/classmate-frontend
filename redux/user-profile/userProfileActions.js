@@ -56,24 +56,27 @@ export const getReviews = () => async (dispatch) => {
 
 	try {
 		const res = await dispatch(attemptReviewsRetrieval());
-		dispatch(reviewsSuccess(results));
+		console.log(res.data);
+		dispatch(reviewsSuccess(res.data));
 	} catch (err) {
 		dispatch(reviewsFailure());
 	}
 };
 
 const attemptReviewsRetrieval = () => (dispatch, getState) => {
-	const { accessToken } = getState().auth;
-	const userID = 0;
+	// const { accessToken } = getState().auth;
 
-	const header = {
-		headers: {
-			"content-type": "application/json",
-			authorization: `Bearer ${accessToken}`,
-		},
-	};
+	// FIX THIS, use access token instead
+	const userID = "CYfnxTD0QD8aL4hXmbYb";
 
-	return axios.get(`/student/reviews/${userID}`, header);
+	// const header = {
+	// 	headers: {
+	// 		"content-type": "application/json",
+	// 		authorization: `Bearer ${accessToken}`,
+	// 	},
+	// };
+
+	return axios.get(`/student/reviews/${userID}`);
 };
 
 const reviewsLoading = () => (dispatch) => {

@@ -16,27 +16,17 @@ import {
 	clearFilterSearch,
 } from "../../redux/filter-search/filterSearchActions";
 
-const ReviewsSearch = () => {
+const ReviewsSearch = ({ setReviewSearch }) => {
 	const dispatch = useAppDispatch();
 	const filterSearch = useSelector((state) => state.filterSearch);
 	const { handleSubmit, watch, register, setValue } = useForm();
 
 	useEffect(() => {
-		const subscription = watch((value, { name }) => {
-			const hasSearchInput = value.userInput !== "";
-			if (name === "userInput" && hasSearchInput) {
-				handleSubmit(onSubmit)();
-			} else if (name === "userInput") {
-				dispatch(clearFilterSearch());
-			}
-		});
-		return () => {
-			subscription.unsubscribe();
-		};
-	}, [watch]);
+		handleSubmit(onSubmit)();
+	}, [watch("userInput")]);
 
 	const onSubmit = useDebounce(({ userInput }) => {
-		console.log(userInput);
+		setReviewSearch(userInput);
 	}, 300);
 
 	return (
