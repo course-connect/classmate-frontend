@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 import useDebounce from "../hooks/useDebounce";
 
@@ -20,11 +20,15 @@ const MainSearch = () => {
 	const dispatch = useAppDispatch();
 	const mainSearch = useSelector((state) => state.mainSearch);
 	const { handleSubmit, watch, register, setValue } = useForm();
+	const allowSearch = useRef(true);
 
 	useEffect(() => {
 		const subscription = watch((_, { name }) => {
-			if (name === "userInput") {
+			if (name === "userInput" && allowSearch.current) {
 				handleSubmit(onSubmit)();
+			}
+			if (!allowSearch.current) {
+				allowSearch.current = true;
 			}
 		});
 		return () => {
@@ -33,7 +37,12 @@ const MainSearch = () => {
 	}, [watch]);
 
 	useEffect(() => {
-		handleSubmit(onSubmit)();
+		if (!mainSearch.userInput) {
+			handleSubmit(onSubmit)();
+		} else {
+			allowSearch.current = false;
+			setValue("userInput", mainSearch.userInput);
+		}
 	}, []);
 
 	const onSubmit = useDebounce(({ userInput }) => {

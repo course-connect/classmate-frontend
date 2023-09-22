@@ -16,7 +16,7 @@ export default function Professor({ professor }) {
 
 	const handleCloseModal = () => {
 		setShowModal(false);
-		allowScroll();
+		setTimeout(() => allowScroll(), 75);
 	};
 
 	const handleOpenModal = () => {

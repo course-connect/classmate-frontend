@@ -50,14 +50,14 @@ const ProfessorDescription = ({ professor, handleOpenModal }) => {
 				<ClassmateButton
 					size="md"
 					variant="outlined"
-					styles="text-classmate-green-7 border-classmate-green-7"
+					styles="text-classmate-green-2 border-classmate-green-2"
 					callback={handleOpenModal}>
 					Submit Review
 				</ClassmateButton>
 				<ClassmateButton
 					size="md"
 					variant="outlined"
-					styles="text-classmate-green-7 border-classmate-green-7"
+					styles="text-classmate-green-2 border-classmate-green-2"
 					callback={() => console.log("hello")}>
 					Claim Account
 				</ClassmateButton>

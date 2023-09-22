@@ -88,17 +88,17 @@ const HeroSearchTwoResults: React.FC = () => {
 					alt="visiual depiction of a graduation cap or glasses that represents what you are searching for"
 				/>
 				<div className="flex flex-col justify-center gap-1">
-					<p className="font-classmate leading-none text-classmate-green-6">
+					<p className="font-classmate capitalize leading-none text-classmate-green-6">
 						{/* Display course name or professor's full name */}
 						{heroSearchTwo.type === "course"
 							? item.data.course_name
 							: `${item.data.first_name} ${item.data.last_name}`}
 					</p>
-					<p className="font-classmate w-fit text-sm leading-none text-classmate-green-7">
+					<p className="font-classmate w-fit text-sm capitalize leading-none text-classmate-green-7">
 						{/* Display course code or school name */}
 						{heroSearchTwo.type === "course"
 							? item.data.course_code
-							: item.data.school_names?.[0]}
+							: item.data.schools[0].school_name}
 					</p>
 				</div>
 			</button>

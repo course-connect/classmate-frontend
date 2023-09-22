@@ -26,7 +26,7 @@ const ReviewsTab = () => {
 				</div>
 			</div>
 			{userProfile.reviewsLoading && <p>loading...</p>}
-			{!userProfile.reviewsLoading && (
+			{!userProfile.reviewsLoading && userProfile.reviews && (
 				<ReviewFilterd
 					reviews={userProfile.reviews}
 					reviewSearch={reviewSearch}

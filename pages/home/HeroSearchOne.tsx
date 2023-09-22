@@ -21,6 +21,10 @@ import {
 	clearSearchOne,
 	saveSearchOneInput,
 } from "../../redux/hero-search-one/heroSearchOneActions";
+import {
+	search,
+	setMainSearchType,
+} from "../../redux/main-search/mainSearchActions";
 
 interface HeroSearchOneProps {
 	setShowFirstSearch: React.Dispatch<React.SetStateAction<boolean>>;
@@ -68,6 +72,8 @@ const HeroSearchOne: React.FC<HeroSearchOneProps> = ({
 
 	// Handle search button click
 	const handleSearchClick = () => {
+		dispatch(setMainSearchType(heroSearchOne.type));
+		dispatch(search(heroSearchOne.userInput));
 		router.push("/search");
 	};
 

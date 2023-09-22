@@ -24,6 +24,10 @@ import {
 	setSearchTwoType,
 	saveSearchTwoInput,
 } from "../../redux/hero-search-two/heroSearchTwoActions";
+import {
+	search,
+	setMainSearchType,
+} from "../../redux/main-search/mainSearchActions";
 
 const HeroSearchTwo: React.FC<{
 	setShowFirstSearch: React.Dispatch<React.SetStateAction<boolean>>;
@@ -75,7 +79,8 @@ const HeroSearchTwo: React.FC<{
 	}, 300);
 
 	const handleSearchClick = () => {
-		// Redirect to search page when search button is clicked
+		dispatch(setMainSearchType(heroSearchTwo.type));
+		dispatch(search(heroSearchTwo.userInput));
 		router.push("/search");
 	};
 

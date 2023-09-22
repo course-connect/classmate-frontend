@@ -92,7 +92,6 @@ const ReviewModal = ({ professor, showModal, handleCloseModal }) => {
 
 	useEffect(() => {
 		const textbookRequiredSelected = getValues("textbookRequired") === "yes";
-		console.log(getValues("textbookRequired"));
 		const textbookTitleEntered = getValues("textbookTitle");
 		const textbookAuthorEntered = getValues("textbookAuthor");
 

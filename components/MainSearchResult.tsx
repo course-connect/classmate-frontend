@@ -99,7 +99,7 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 									</p>
 								) : (
 									<p className="flex flex-col text-sm">
-										{result.data.school_names?.map((school_name, index) => (
+										{result.data.schools?.map(({ school_name }, index) => (
 											<span key={index}>{school_name}</span>
 										))}
 									</p>

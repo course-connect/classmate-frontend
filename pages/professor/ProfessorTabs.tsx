@@ -12,6 +12,7 @@ import { useAppDispatch } from "../../hooks/reduxHooks";
 import ReviewSkeleton from "./ReviewSkeleton";
 import { useSelector } from "react-redux";
 import Review from "../../components/Review";
+import Image from "next/image";
 
 const ProfessorTabs = ({ professor }) => {
 	const professorData = useSelector((state) => state.professor);
@@ -53,23 +54,47 @@ const ProfessorTabs = ({ professor }) => {
 			</Tabs>
 			<CustomTabPanel value={value} index={0}>
 				<div className="flex flex-col gap-6 lg:gap-8">
-					<div className="font-classmate flex flex-col gap-3 rounded-xl bg-classmate-tan-1 p-8 text-left text-classmate-green-6 shadow-lg">
-						<h3 className="font-classmate-bold text-2xl leading-6">
-							Strengths
-						</h3>
-						<ul className="flex list-disc flex-col gap-2 pl-4">
+					<div className="font-classmate flex flex-col gap-3 rounded-xl bg-classmate-tan-1 p-8 text-left text-classmate-green-1 shadow-lg">
+						<div className="flex items-center gap-3">
+							<div className="flex h-6 w-6 items-center justify-center rounded-full bg-classmate-green-3">
+								<Image
+									src="/check-solid.svg"
+									width={0}
+									height={0}
+									className="filter-classmate-tan-1 h-[14px] w-[14px]"
+									filter-classmate-tan-1
+									alt="checkmark"
+								/>
+							</div>
+							<p className="font-classmate-bold text-2xl leading-6">
+								Strengths
+							</p>
+						</div>
+						<ul className="flex list-disc flex-col gap-2 pl-4 ">
 							{professor.data.summary.strengths.map((strength) => (
 								<li className="font-classmate">{strength}</li>
 							))}
 						</ul>
 					</div>
-					<div className="font-classmate flex flex-col gap-3 rounded-xl bg-classmate-tan-1 p-8 text-left text-classmate-green-6 shadow-lg">
-						<h3 className="font-classmate-bold text-2xl leading-6">
-							Weaknesses
-						</h3>
+					<div className="font-classmate flex flex-col gap-3 rounded-xl bg-classmate-tan-1 p-8 text-left text-classmate-green-1 shadow-lg">
+						<div className="flex items-center gap-3">
+							<div className="flex h-6 w-6 items-center justify-center rounded-full bg-classmate-red-1">
+								<Image
+									src="/xmark-solid.svg"
+									width={0}
+									height={0}
+									className="filter-classmate-tan-1 h-[10px] w-[10px]"
+									filter-classmate-tan-1
+									alt="checkmark"
+								/>
+							</div>
+							<p className="font-classmate-bold text-2xl leading-6">
+								Weaknesses
+							</p>
+						</div>
 						<ul className="flex list-disc flex-col gap-2 pl-4">
-							{professor.data.summary.weaknesses.map((strength) => (
-								<li className="font-classmate">{strength}</li>
+							{professor.data.summary.weaknesses.map((weakness) => (
+								<li className="font-classmate">{weakness}</li>
 							))}
 						</ul>
 					</div>

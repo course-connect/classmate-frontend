@@ -14,7 +14,7 @@ const Review = ({ review, backgroundColor = "bg-classmate-tan-1" }) => {
 				</div>
 				<div className="flex flex-wrap gap-2">
 					<div className="flex flex-col gap-1">
-						<p className="font-classmate-bold text-[22px] capitalize leading-6 text-classmate-green-1 sm:text-2xl">{`${review.course.course_code} - ${review.course.course_name}`}</p>
+						<p className="font-classmate-bold text-[22px] capitalize !leading-7 text-classmate-green-1 sm:text-2xl">{`${review.course.course_code} - ${review.course.course_name}`}</p>
 						<p className="text-sm">{review.school.school_name}</p>
 					</div>
 					<ResultQualityTag score={review.score} />

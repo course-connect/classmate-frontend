@@ -2,6 +2,7 @@ export default interface heroSearchOneInterface {
 	loading: boolean;
 	results: any[]; // Change "any" to the actual type of results
 	type: string;
+	userInput: string;
 	filters: {
 		professor: {
 			filter_value: string | null;

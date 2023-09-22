@@ -70,12 +70,12 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 	const [graphWidth, setGraphWidth] = useState(0);
 	const [transitionEffect, setTransitionEffect] = useState("width 1s ease");
 	const [showLargeGraph, setShowLargeGraph] = useState(false);
-	const [numResultsToShow, setNumResultsToShow] = useState(5);
+	const [numResultsToShow, setNumResultsToShow] = useState(isHomepage ? 6 : 5);
 
-	const results = useSelector((state) => state.mainSearch.results);
+	const mainSearch = useSelector((state) => state.mainSearch);
 	let resultsToDisplay = [];
-	if (results.length > 0) {
-		resultsToDisplay = results;
+	if (mainSearch.results.length > 0 && mainSearch.type === "professor") {
+		resultsToDisplay = mainSearch.results;
 	} else if (isHomepage) {
 		resultsToDisplay = dummyResults;
 	}
@@ -102,6 +102,7 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 	}, []);
 
 	const handleGraphItemClick = (e) => {
+		console.log(e.target);
 		const itemId = e.target.id;
 		if (itemId) {
 			const targetElement = document.querySelector(
@@ -136,6 +137,7 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 			<div className="flex">
 				{showLargeGraph && (
 					<div
+						onClick={handleGraphItemClick}
 						id="large-graph-text"
 						className={`mr-2 flex max-w-[75px] flex-col gap-3${
 							showLargeGraph ? "" : "-translate-y-[26px]"
@@ -143,10 +145,12 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 						{resultsToDisplay.map((professor, index) => {
 							return (
 								<div
+									id={professor.firebaseID}
 									key={index}
-									className="font-classmate text-right text-sm text-classmate-green-6">
-									<p>{professor.data.first_name}</p>
-									<p>{professor.data.last_name}</p>
+									className="font-classmate cursor-pointer text-right text-sm text-classmate-green-6">
+									<p className="pointer-events-none capitalize">
+										{`${professor.data.first_name} ${professor.data.last_name}`}
+									</p>
 								</div>
 							);
 						})}
@@ -180,7 +184,9 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 										transition: transitionEffect,
 									}}>
 									{!showLargeGraph && (
-										<p className="font-classmate absolute bottom-[40px] whitespace-nowrap text-xs capitalize text-classmate-green-6">
+										<p
+											id={professor.firebaseID}
+											className="font-classmate absolute bottom-[40px] cursor-pointer whitespace-nowrap text-xs capitalize text-classmate-green-6">
 											{`${professor.data.first_name} ${professor.data.last_name}`}
 										</p>
 									)}
