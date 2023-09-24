@@ -21,9 +21,9 @@ const ReviewFilterd = ({ reviews, reviewSearch }) => {
 		}));
 	};
 
-	useEffect(() => {
-		console.log(getLocalSearchResults());
-	}, [reviewSearch]);
+	// useEffect(() => {
+	// 	console.log(getLocalSearchResults());
+	// }, [reviewSearch]);
 
 	return getLocalSearchResults().map((review) => (
 		<Review review={review.item} backgroundColor="bg-classmate-tan-2" />

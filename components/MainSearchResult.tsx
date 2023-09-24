@@ -154,12 +154,10 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 		case "course":
 			searchResult = (
 				<div
-					tabIndex={0}
-					role="button"
 					id="result"
 					data-resulttype={resultType}
 					data-resultid={result.firebaseID}
-					className="font-classmate flex cursor-pointer flex-col gap-6 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl ring-classmate-gold-1 focus:ring">
+					className="font-classmate flex flex-col gap-6 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl">
 					<div className="flex justify-between gap-12">
 						<div className="flex flex-col gap-1">
 							<div className="font-classmate-bold  h-fit w-fit whitespace-nowrap rounded-md bg-classmate-gold-1 px-4 py-[6px] text-xs text-classmate-tan-2">
