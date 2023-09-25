@@ -50,13 +50,13 @@ const BasicInput: FC<InputProps> = ({
 					<span
 						ref={labelRef}
 						className={`font-classmate pointer-events-none absolute left-[18px] px-1 text-base text-classmate-green-7 transition-all duration-200 ${background} ${
-							movePlaceHolder ? `${labelTranslate} text-sm` : ""
+							movePlaceHolder || value ? `${labelTranslate} text-sm` : ""
 						}`}>
 						<p
 							className={`whitespace-nowrap ${
 								changeLabelColor ? "text-classmate-gold-1" : ""
 							} ${error ? "!text-classmate-error-red" : ""} ${
-								disabled ? "text-classmate-gray-4" : ""
+								disabled ? "text-classmate-gray-3" : ""
 							}`}>
 							{label}
 						</p>
@@ -74,7 +74,11 @@ const BasicInput: FC<InputProps> = ({
 							!!error
 								? `!border-classmate-error-red !placeholder-classmate-error-red focus:!outline-classmate-error-red`
 								: "focus:!outline-classmate-gold-1"
-						} ${disabled ? "pointer-events-none border-classmate-gray-4" : ""}`}
+						} ${
+							disabled
+								? "pointer-events-none border-classmate-gray-4 !text-classmate-gray-3"
+								: ""
+						}`}
 					/>
 				</div>
 			)}

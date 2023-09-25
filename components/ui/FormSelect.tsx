@@ -249,7 +249,7 @@ const FormSelect: FC<InputProps> = ({
 					<span
 						ref={labelRef}
 						className={`font-classmate pointer-events-none absolute left-[18px] px-1 text-base text-classmate-green-7 transition-all duration-200 ${backgroundColor} ${
-							moveLabel ? `${labelTranslate} text-sm` : ""
+							moveLabel || value ? `${labelTranslate} text-sm` : ""
 						}`}>
 						<p
 							className={`whitespace-nowrap ${

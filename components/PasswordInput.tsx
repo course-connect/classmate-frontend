@@ -35,7 +35,7 @@ export default function PasswordInput({ name, label, rules, background }) {
 					<span
 						ref={labelRef}
 						className={`font-classmate pointer-events-none absolute left-[18px] px-1 text-base text-classmate-green-7 transition-all duration-200 ${background} ${
-							movePlaceHolder ? "-translate-y-[29px] text-sm" : ""
+							movePlaceHolder || value ? "-translate-y-[29px] text-sm" : ""
 						}`}>
 						<p
 							className={`whitespace-nowrap ${

@@ -93,6 +93,7 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 							src={"/caret-solid.svg"}
 							width={0}
 							height={0}
+							alt="small arrow"
 							className="filter-classmate-tan-1 h-3 w-3 rotate-90"
 						/>
 						Back
@@ -109,6 +110,7 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 							src={"/caret-solid.svg"}
 							width={0}
 							height={0}
+							alt="small arrow"
 							className="filter-classmate-tan-1 h-3 w-3 -rotate-90"
 						/>
 					</ClassmateButton>

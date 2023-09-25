@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useRef } from "react";
 import AccountSection from "./AccountSection";
 import { useForm, FormProvider } from "react-hook-form";
 import BasicInput from "../../components/BasicInput";
@@ -6,25 +6,61 @@ import FormSelect from "../../components/ui/FormSelect";
 import FormSelectOptions from "../../components/ui/FormSelectOptions";
 import ClassmateButton from "../../components/ClassmateButton";
 
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useSelector } from "react-redux";
+import { setSnackBar } from "../../redux/account-tab/accountActions";
+
 const AccountTab = () => {
+	const dispatch = useAppDispatch();
+	const userData = useSelector((state) => state.userProfile.userData);
+	const [allowSave, setAllowSave] = useState(false);
+	const saveTimeout = useRef(false);
+
+	const defaultValues = {
+		accountType: userData.account_type,
+		email: userData.email,
+		oldPassword: "",
+		newPassword: "",
+		confirmPassword: "",
+	};
+
 	const methods = useForm({
-		defaultValues: {
-			accountType: "",
-			email: "",
-			oldPassword: "",
-			newPassword: "",
-			confirmPassword: "",
-		},
+		defaultValues,
 	});
 	const { handleSubmit, setError, setValue, getValues } = methods;
 
+	function handleFormChange() {
+		const formChanged =
+			JSON.stringify(defaultValues) !== JSON.stringify(getValues());
+		if (formChanged) {
+			setAllowSave(true);
+		} else if (allowSave && !formChanged) {
+			setAllowSave(false);
+		}
+	}
+
 	function onSubmit(values) {
-		console.log(values);
+		if (allowSave && !saveTimeout.current) {
+			dispatch(
+				setSnackBar({
+					type: "success",
+					text: "Profile saved!",
+				})
+			);
+
+			saveTimeout.current = true;
+			console.log(values);
+
+			setTimeout(() => {
+				saveTimeout.current = false;
+			}, 3000);
+		}
 	}
 
 	return (
 		<AccountSection title="Account">
 			<form
+				onChange={handleFormChange}
 				onSubmit={handleSubmit(onSubmit)}
 				className="mt-8 flex w-full flex-col gap-4 lg:gap-6">
 				<FormProvider {...methods}>
@@ -77,7 +113,7 @@ const AccountTab = () => {
 					variant="filled"
 					fullWidth={true}
 					size="lg"
-					styles="bg-classmate-green-2 text-classmate-tan-2 mt-5">
+					styles="text-classmate-tan-2 mt-5 bg-classmate-green-2">
 					Save
 				</ClassmateButton>
 			</form>
