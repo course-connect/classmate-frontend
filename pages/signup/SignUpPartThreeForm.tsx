@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import Image from "next/image";
 import FormSelect from "../../components/ui/FormSelect";
 import FormSelectOptions from "../../components/ui/FormSelectOptions";
-import { useForm, FormProvider } from "react-hook-form";
 import ClassmateButton from "../../components/ClassmateButton";
+
+import { useForm, FormProvider } from "react-hook-form";
+
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
 import majors from "../../assests/data/majors";
 
 export default function SignUpForm({ slideLeft, slideRight }) {
