@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function SignUpOrSignIn({ form, heading, subheading, variant }) {
 	return (
 		// bg-classmate-tan-1
-		<div className="section-padding flex w-full justify-center  py-14 md:pb-[140px] md:pt-[90px]">
+		<div className="section-padding flex w-full justify-center bg-classmate-tan-1  py-14 md:pb-[140px] md:pt-[90px]">
 			<div className="flex w-full max-w-[380px] flex-col items-center justify-center rounded-2xl bg-classmate-tan-2 px-10 py-12 shadow-xl sm:max-w-[480px] sm:p-[68px]">
 				<HomepageHeading
 					headingStyles="text-2xl xl:text-[40px]"
