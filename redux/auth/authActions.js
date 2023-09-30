@@ -14,6 +14,10 @@ import {
 	RESET_REQUEST_LOADING,
 	RESET_REQUEST_SUCCESS,
 	RESET_REQUEST_FAILURE,
+	RESET_PASSWORD_LOADING,
+	RESET_PASSWORD_SUCCESS,
+	RESET_PASSWORD_FAILURE,
+	CLEAR_RESET_PASSWORD_SUCCESS,
 } from "./authTypes";
 
 // Authenticate User
@@ -86,6 +90,19 @@ export const signIn =
 		}
 	};
 
+// Attempt to sign in with creditials given
+const attemptSignIn = ({ email, password }) => {
+	const body = {
+		account_info: { email, password },
+	};
+	const header = {
+		headers: {
+			"content-type": "application/json",
+		},
+	};
+	return axios.post("/user/login", body, header);
+};
+
 // Unauthenticate User
 export const signOut = () => (dispatch) => {
 	removeTokenInLocalStorage();
@@ -131,10 +148,64 @@ const resetRequestSuccess = () => (dispatch) => {
 	});
 };
 
-// Autherization attempt failed
-const resetRequestFailure = (err) => (dispatch) => {
+const resetRequestFailure = () => (dispatch) => {
 	dispatch({
 		type: RESET_REQUEST_FAILURE,
+	});
+};
+
+export const resetPassword =
+	({ newPassword, token, id }) =>
+	async (dispatch) => {
+		dispatch(resetPasswordLoading());
+
+		try {
+			// Attempt to sign in with creditials given
+			await attemptResetPassword({ newPassword, token, id });
+
+			dispatch(removeAuthError());
+			dispatch(resetPasswordSuccess());
+		} catch (err) {
+			// Autherization attempt failed
+			dispatch(resetPasswordFailure());
+		}
+	};
+
+const attemptResetPassword = ({ newPassword, token, id }) => {
+	const body = {
+		newPass: newPassword,
+		token: token,
+		userId: id,
+	};
+	console.log(body);
+	const header = {
+		headers: {
+			"content-type": "application/json",
+		},
+	};
+	return axios.patch("/user/resetPassword", body, header);
+};
+
+const resetPasswordLoading = () => (dispatch) => {
+	dispatch({
+		type: RESET_PASSWORD_LOADING,
+	});
+};
+
+const resetPasswordSuccess = () => (dispatch) => {
+	dispatch({
+		type: RESET_PASSWORD_SUCCESS,
+	});
+	setTimeout(() => {
+		dispatch({
+			type: CLEAR_RESET_PASSWORD_SUCCESS,
+		});
+	}, 3000);
+};
+
+const resetPasswordFailure = () => (dispatch) => {
+	dispatch({
+		type: RESET_PASSWORD_FAILURE,
 	});
 };
 

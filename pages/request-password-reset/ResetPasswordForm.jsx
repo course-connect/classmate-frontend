@@ -104,7 +104,7 @@ export default function ResetPasswordForm() {
 					</span>
 				</div>
 			)}
-			{resetRequestSent && !auth.resetPasswordLoading && (
+			{resetRequestSent && !auth.resetRequestLoading && (
 				<div className="mt-2 flex items-center gap-2">
 					<Image
 						src="/check-solid.svg"
@@ -122,7 +122,7 @@ export default function ResetPasswordForm() {
 				type="submit"
 				variant="filled"
 				fullWidth={true}
-				loading={auth.resetPasswordLoading}
+				loading={auth.resetRequestLoading}
 				size={windowWidth >= 640 ? "lg" : "sm"}
 				styles="my-6 bg-classmate-gold-1 text-classmate-tan-2 sm:my-12">
 				Send Reset Link

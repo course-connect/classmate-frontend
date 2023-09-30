@@ -17,17 +17,9 @@ export default function ResetPass() {
 
 	return (
 		<SignUpOrSignIn
-			heading="Reset Password"
-			subheading="We’ll send you an email with a link to reset the password to your account."
+			heading="New Password"
+			subheading="Enter your new password"
 			form={<ResetPassForm />}
-			additional={
-				<p className="font-classmate mt-4 text-classmate-green-6">
-					Have an account?&nbsp;
-					<Link href="/signin" className="text-classmate-green-1 underline">
-						Sign In
-					</Link>
-				</p>
-			}
 		/>
 	);
 }

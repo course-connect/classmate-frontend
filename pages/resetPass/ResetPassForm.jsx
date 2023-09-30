@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -7,16 +6,19 @@ import useWindowSize from "../../hooks/useWindowSize";
 import { useForm, FormProvider } from "react-hook-form";
 import ClassmateButton from "../../components/ClassmateButton";
 import PasswordInput from "../../components/PasswordInput";
-import BasicInput from "../../components/BasicInput";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
 	removeAuthError,
 	setAuthError,
-	requestResetPassword,
+	resetPassword,
 } from "../../redux/auth/authActions";
 
 export default function ResetPasswordForm() {
+	const [resetPasswordSent, setResetPasswordSent] = useState(false);
+	const [resetSuccessMessage, setResetSuccessMessage] = useState(
+		"Password successfully reset!"
+	);
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
@@ -84,9 +86,9 @@ export default function ResetPasswordForm() {
 		);
 
 		if (!passwordError && !confirmPasswordError) {
-			console.log("succcess");
+			setResetPasswordSent(true);
 			dispatch(removeAuthError());
-			// dispatch(signUp({ newPassword, token, id }));
+			dispatch(resetPassword({ newPassword, token, id }));
 		} else {
 			dispatch(setAuthError());
 		}
@@ -95,6 +97,7 @@ export default function ResetPasswordForm() {
 	useEffect(() => {
 		const handleBeforeUnload = (e) => {
 			e.preventDefault();
+			setResetPasswordSent(false);
 			dispatch(removeAuthError());
 		};
 
@@ -104,6 +107,17 @@ export default function ResetPasswordForm() {
 			window.removeEventListener("beforeunload", handleBeforeUnload);
 		};
 	}, []);
+
+	useEffect(() => {
+		if (auth.resetSuccess) {
+			setTimeout(() => {
+				setResetSuccessMessage("Redirecting to sign in page.");
+			}, 1000);
+			setTimeout(() => {
+				router.push("/signin");
+			}, 2000);
+		}
+	}, [auth.resetSuccess]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="mt-8 w-full sm:mt-12">
@@ -141,10 +155,25 @@ export default function ResetPasswordForm() {
 					</span>
 				</div>
 			)}
+			{resetPasswordSent && !auth.resetPasswordLoading && (
+				<div className="mt-2 flex items-center gap-2">
+					<Image
+						src="/check-solid.svg"
+						width={0}
+						height={0}
+						alt="exclamation mark"
+						className="filter-classmate-green-3 h-[12px] w-[12px]"
+					/>
+					<span className="font-classmate text-sm text-classmate-green-3">
+						{resetSuccessMessage}
+					</span>
+				</div>
+			)}
 			<ClassmateButton
 				type="submit"
 				variant="filled"
 				fullWidth={true}
+				loading={auth.resetPasswordLoading}
 				size={windowWidth >= 640 ? "lg" : "sm"}
 				styles="my-6 bg-classmate-gold-1 text-classmate-tan-2 sm:my-12">
 				Reset Password
