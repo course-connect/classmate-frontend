@@ -4,7 +4,11 @@ const frontEndUrl =
 	process.env.NODE_ENV == "production" ? "" : "http://localhost:3000";
 
 export default function middleware(req) {
-	const { cookies, url } = req;
+	const {
+		cookies,
+		url,
+		nextUrl: { search },
+	} = req;
 
 	const isAuthenticated = cookies.get("isAuthenticated")?.value === "true";
 	const completedRegistration =
@@ -12,6 +16,18 @@ export default function middleware(req) {
 	const requestingAccountPage = url.includes("/account");
 	const requestingSignInOrSignUpPage =
 		url.includes("/signin") || url.includes("/signup");
+
+	const requestingResetPasswordPage = url.includes("/resetPass");
+
+	if (requestingResetPasswordPage) {
+		const urlSearchParams = new URLSearchParams(search);
+		const { token, id, ts } = Object.fromEntries(urlSearchParams.entries());
+
+		if ((!token || !id) && !ts) {
+			console.log("nope", url);
+			return NextResponse.redirect(frontEndUrl + "/request-password-reset");
+		}
+	}
 
 	// Will redirect user to account page if they attempt to go to the sign up or
 	// sign in page when they are already signed in

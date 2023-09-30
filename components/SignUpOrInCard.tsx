@@ -7,7 +7,12 @@ import appleLogo from "../public/apple.png";
 import facebookLogo from "../public/facebook.png";
 import Link from "next/link";
 
-export default function SignUpOrSignIn({ form, heading, subheading, variant }) {
+export default function SignUpOrSignIn({
+	form,
+	heading,
+	subheading,
+	additional,
+}) {
 	return (
 		// bg-classmate-tan-1
 		<div className="section-padding flex w-full justify-center bg-classmate-tan-1  py-14 md:pb-[140px] md:pt-[90px]">
@@ -69,14 +74,7 @@ export default function SignUpOrSignIn({ form, heading, subheading, variant }) {
 							Facebook
 						</ClassmateButton>
 					</div> */}
-					{variant === "signin" && (
-						<p className="font-classmate mt-4 text-classmate-green-6">
-							Don't have an account?&nbsp;
-							<Link href="/signup" className="text-classmate-green-1 underline">
-								Sign Up
-							</Link>
-						</p>
-					)}
+					{additional}
 				</div>
 			</div>
 		</div>
