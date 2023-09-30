@@ -1,22 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import useWindowSize from "../hooks/useWindowSize";
+import useWindowSize from "../../hooks/useWindowSize";
 import { useForm, FormProvider } from "react-hook-form";
-import ClassmateButton from "./ClassmateButton";
+import ClassmateButton from "../../components/ClassmateButton";
+import BasicInput from "../../components/BasicInput";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
 	removeAuthError,
 	setAuthError,
-	signIn,
-} from "../redux/auth/authActions";
+	requestResetPassword,
+} from "../../redux/auth/authActions";
 
-import BasicInput from "./BasicInput";
-import PasswordInput from "./PasswordInput";
-
-export default function SignInForm() {
+export default function ResetPasswordForm() {
+	const [resetRequestSent, setResetRequestSent] = useState(false);
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
 	const { width: windowWidth } = useWindowSize();
@@ -24,14 +23,11 @@ export default function SignInForm() {
 	const methods = useForm({
 		defaultValues: {
 			email: "",
-			password: "",
 		},
 	});
 	const {
 		handleSubmit,
 		setError,
-		setValue,
-		getValues,
 		formState: { errors },
 	} = methods;
 
@@ -41,25 +37,20 @@ export default function SignInForm() {
 		return !email.match(emailRegex);
 	}
 
-	function validatePassword(password) {
-		const passwordRegex = `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,64}$`;
-		return !password.match(passwordRegex);
-	}
-
 	function setLoginError() {
-		setError("email");
-		setError("password", {
+		setError("email", {
 			type: "custom",
-			message: "Your login or password is incorrect",
+			message: "Invalid email",
 		});
 	}
 
 	function onSubmit({ email, password }) {
 		const emailError = validateEmail(email);
-		const passwordError = validatePassword(password);
 
-		if (!emailError && !passwordError) {
-			dispatch(signIn({ email, password }));
+		if (!emailError) {
+			setResetRequestSent(true);
+			dispatch(removeAuthError());
+			dispatch(requestResetPassword(email));
 		} else {
 			dispatch(setAuthError());
 		}
@@ -75,6 +66,7 @@ export default function SignInForm() {
 		const handleBeforeUnload = (e) => {
 			e.preventDefault();
 			dispatch(removeAuthError());
+			setResetRequestSent(false);
 		};
 
 		window.addEventListener("beforeunload", handleBeforeUnload);
@@ -96,14 +88,6 @@ export default function SignInForm() {
 							required: true,
 						}}
 					/>
-					<PasswordInput
-						name="password"
-						label="Password"
-						background="bg-classmate-tan-2"
-						rules={{
-							required: true,
-						}}
-					/>
 				</FormProvider>
 			</div>
 			{auth.error && (
@@ -116,24 +100,32 @@ export default function SignInForm() {
 						className="filter-classmate-red-error h-[12px] w-[12px]"
 					/>
 					<span className="font-classmate text-sm text-classmate-error-red">
-						incorrect credentials
+						invalid email
 					</span>
 				</div>
 			)}
-			<p className="font-classmate mt-4 text-classmate-green-6">
-				<Link
-					href="/request-password-reset"
-					className="text-classmate-green-1 underline">
-					Forgot Password?
-				</Link>
-			</p>
+			{resetRequestSent && !auth.resetPasswordLoading && (
+				<div className="mt-2 flex items-center gap-2">
+					<Image
+						src="/check-solid.svg"
+						width={0}
+						height={0}
+						alt="exclamation mark"
+						className="filter-classmate-green-3 h-[12px] w-[12px]"
+					/>
+					<span className="font-classmate text-sm text-classmate-green-3">
+						Password reset link sent
+					</span>
+				</div>
+			)}
 			<ClassmateButton
 				type="submit"
 				variant="filled"
 				fullWidth={true}
+				loading={auth.resetPasswordLoading}
 				size={windowWidth >= 640 ? "lg" : "sm"}
 				styles="my-6 bg-classmate-gold-1 text-classmate-tan-2 sm:my-12">
-				Sign In
+				Send Reset Link
 			</ClassmateButton>
 		</form>
 	);

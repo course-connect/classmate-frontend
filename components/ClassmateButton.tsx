@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from "react";
+import Spinner from "./Spinner";
 
 // Next.js components
 import Link from "next/link";
@@ -11,6 +12,7 @@ type ClassmateButtonProps = {
 	styles?: string;
 	size: "xs" | "sm" | "md" | "lg";
 	callback?: () => void;
+	loading?: boolean;
 	type?: "button" | "submit" | "reset";
 };
 
@@ -28,16 +30,18 @@ const sizeStylesMap = {
 };
 
 const baseStyles =
-	"whitespace-nowrap !transition !duration-800 ease-in-out duration-200 outline-none ring-classmate-gold-1 focus:ring w-fit";
+	"whitespace-nowrap !transition !duration-800 ease-in-out duration-200 outline-none ring-classmate-gold-1 focus:ring w-fit flex justify-center";
 
 const ClassmateButton: FC<ClassmateButtonProps> = ({
 	type = "button",
+	loading = false,
 	fullWidth = false,
 	href,
 	variant,
 	size,
 	styles,
 	callback,
+
 	children,
 }) => {
 	const variantStyles = variantStylesMap[variant] || "";
@@ -61,7 +65,7 @@ const ClassmateButton: FC<ClassmateButtonProps> = ({
 			className={`${baseStyles} ${variantStyles} ${sizeStyles} ${styles} ${
 				fullWidth ? "w-full" : ""
 			}`}>
-			{children}
+			{loading ? <Spinner /> : children}
 		</button>
 	);
 };

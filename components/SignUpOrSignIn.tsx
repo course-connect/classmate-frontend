@@ -5,9 +5,13 @@ import Image from "next/image";
 import googleLogo from "../public/google.png";
 import appleLogo from "../public/apple.png";
 import facebookLogo from "../public/facebook.png";
-import Link from "next/link";
 
-export default function SignUpOrSignIn({ form, heading, subheading, variant }) {
+export default function SignUpOrSignIn({
+	form,
+	heading,
+	subheading,
+	additional,
+}) {
 	return (
 		<div className="section-padding flex h-screen w-full items-center justify-center  bg-classmate-tan-1 py-14">
 			<div className="flex h-fit w-full max-w-[380px] flex-col  items-center justify-center rounded-2xl bg-classmate-tan-2 px-10 py-12 shadow-xl sm:max-w-[480px] sm:p-[68px]">
@@ -21,14 +25,7 @@ export default function SignUpOrSignIn({ form, heading, subheading, variant }) {
 				</p>
 				{form}
 				<div className="flex w-full flex-col items-center gap-6 sm:gap-9">
-					{variant === "signin" && (
-						<p className="font-classmate mt-4 text-classmate-green-6">
-							Don't have an account?&nbsp;
-							<Link href="/signup" className="text-classmate-green-1 underline">
-								Sign Up
-							</Link>
-						</p>
-					)}
+					{additional}
 				</div>
 			</div>
 		</div>

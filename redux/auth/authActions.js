@@ -11,6 +11,9 @@ import {
 	UN_AUTH_USER,
 	SET_AUTH_ERROR,
 	REMOVE_AUTH_ERROR,
+	RESET_REQUEST_LOADING,
+	RESET_REQUEST_SUCCESS,
+	RESET_REQUEST_FAILURE,
 } from "./authTypes";
 
 // Authenticate User
@@ -71,7 +74,7 @@ export const signIn =
 			const res = await attemptSignIn({ email, password });
 			if (res.data.error) {
 				dispatch(setAuthError());
-				throw new Error("Error loging in");
+				throw new Error("Error logging in");
 			} else {
 				// Autherization attempt succeeded
 				dispatch(removeAuthError());
@@ -89,17 +92,50 @@ export const signOut = () => (dispatch) => {
 	dispatch({ type: UN_AUTH_USER });
 };
 
-// Attempt to sign in with creditials given
-const attemptSignIn = ({ email, password }) => {
+export const requestResetPassword = (email) => async (dispatch) => {
+	dispatch(resetRequestLoading());
+
+	try {
+		// Attempt to sign in with creditials given
+		await attemptResetRequest(email);
+
+		dispatch(removeAuthError());
+		dispatch(resetRequestSuccess());
+	} catch (err) {
+		// Autherization attempt failed
+		dispatch(resetRequestFailure());
+	}
+};
+
+const attemptResetRequest = (email) => {
 	const body = {
-		account_info: { email, password },
+		email,
 	};
 	const header = {
 		headers: {
 			"content-type": "application/json",
 		},
 	};
-	return axios.post("/user/login", body, header);
+	return axios.post("/user/resetRequest", body, header);
+};
+
+const resetRequestLoading = () => (dispatch) => {
+	dispatch({
+		type: RESET_REQUEST_LOADING,
+	});
+};
+
+const resetRequestSuccess = () => (dispatch) => {
+	dispatch({
+		type: RESET_REQUEST_SUCCESS,
+	});
+};
+
+// Autherization attempt failed
+const resetRequestFailure = (err) => (dispatch) => {
+	dispatch({
+		type: RESET_REQUEST_FAILURE,
+	});
 };
 
 // Flag autherization as loading

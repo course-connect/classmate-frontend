@@ -5,6 +5,9 @@ import {
 	UN_AUTH_USER,
 	SET_AUTH_ERROR,
 	REMOVE_AUTH_ERROR,
+	RESET_REQUEST_LOADING,
+	RESET_REQUEST_SUCCESS,
+	RESET_REQUEST_FAILURE,
 } from "./authTypes";
 
 const initialState = {
@@ -12,6 +15,7 @@ const initialState = {
 	isAuthenticated: false,
 	accessToken: null,
 	error: false,
+	resetPasswordLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -54,6 +58,17 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				error: false,
+			};
+		case RESET_REQUEST_LOADING:
+			return {
+				...state,
+				resetPasswordLoading: true,
+			};
+		case RESET_REQUEST_SUCCESS:
+		case RESET_REQUEST_FAILURE:
+			return {
+				...state,
+				resetPasswordLoading: false,
 			};
 		default:
 			return state;

@@ -1,11 +1,11 @@
 import SignUpOrSignIn from "../../components/SignUpOrSignIn";
-import SignInForm from "../../components/SignInForm";
+import ResetPassForm from "./ResetPassForm";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-export default function signin() {
+export default function ResetPass() {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const router = useRouter();
 
@@ -17,14 +17,14 @@ export default function signin() {
 
 	return (
 		<SignUpOrSignIn
-			heading="Welcome!"
-			subheading="Sign in to get early access to insights that help you craft the perfect semester"
-			form={<SignInForm />}
+			heading="Reset Password"
+			subheading="We’ll send you an email with a link to reset the password to your account."
+			form={<ResetPassForm />}
 			additional={
 				<p className="font-classmate mt-4 text-classmate-green-6">
-					Don't have an account?&nbsp;
-					<Link href="/signup" className="text-classmate-green-1 underline">
-						Sign Up
+					Have an account?&nbsp;
+					<Link href="/signin" className="text-classmate-green-1 underline">
+						Sign In
 					</Link>
 				</p>
 			}
