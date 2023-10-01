@@ -1,5 +1,6 @@
 import SignUpOrInCard from "../../components/SignUpOrInCard";
 import SignInForm from "../../components/SignInForm";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -19,7 +20,14 @@ export default function signin() {
 			heading="Welcome"
 			subheading="Sign in to manage your courses and create the prefect semester"
 			form={<SignInForm />}
-			variant="signin"
+			additional={
+				<p className="font-classmate mt-4 text-classmate-green-6">
+					Don't have an account?&nbsp;
+					<Link href="/signup" className="text-classmate-green-1 underline">
+						Sign Up
+					</Link>
+				</p>
+			}
 		/>
 	);
 }

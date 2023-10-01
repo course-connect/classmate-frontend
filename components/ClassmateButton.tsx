@@ -30,7 +30,7 @@ const sizeStylesMap = {
 };
 
 const baseStyles =
-	"whitespace-nowrap !transition !duration-800 ease-in-out duration-200 outline-none ring-classmate-gold-1 focus:ring w-fit";
+	"whitespace-nowrap !transition !duration-800 ease-in-out duration-200 outline-none ring-classmate-gold-1 focus:ring w-fit flex justify-center";
 
 const ClassmateButton: FC<ClassmateButtonProps> = ({
 	type = "button",

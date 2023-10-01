@@ -1,6 +1,5 @@
-import SignUpOrSignIn from "../../components/SignUpOrSignIn";
+import SignUpOrInCard from "../../components/SignUpOrInCard";
 import ResetPassForm from "./ResetPassForm";
-import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -16,7 +15,7 @@ export default function ResetPass() {
 	}, [isAuthenticated]);
 
 	return (
-		<SignUpOrSignIn
+		<SignUpOrInCard
 			heading="New Password"
 			subheading="Enter your new password"
 			form={<ResetPassForm />}

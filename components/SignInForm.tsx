@@ -121,7 +121,9 @@ export default function SignInForm() {
 				</div>
 			)}
 			<p className="font-classmate mt-4 text-classmate-green-6">
-				<Link href="/signin" className="text-classmate-green-1 underline">
+				<Link
+					href="/request-password-reset"
+					className="text-classmate-green-1 underline">
 					Forgot Password?
 				</Link>
 			</p>

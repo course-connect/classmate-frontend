@@ -108,7 +108,7 @@ const registrationNotCompletedMenuItems: MenuItem[] = [
 
 const AccountMenu = () => {
 	const dispatch = useAppDispatch();
-	const auth = useSelector((state) => state.auth);
+	const userProfile = useSelector((state) => state.userProfile);
 
 	const [menuOpen, toggleMenuOpen] = useState(false);
 	const router = useRouter();
@@ -117,14 +117,14 @@ const AccountMenu = () => {
 
 	useEffect(() => {
 		const completedFirstStep =
-			auth.userData.hasOwnProperty("first_name") &&
-			auth.userData.hasOwnProperty("last_name") &&
-			auth.userData.hasOwnProperty("zipcode");
+			userProfile.userData?.hasOwnProperty("first_name") &&
+			userProfile.userData?.hasOwnProperty("last_name") &&
+			userProfile.userData?.hasOwnProperty("zipcode");
 
 		const completedSecondStep =
-			auth.userData.school && auth.userData.school.length !== 0;
-		auth.userData.hasOwnProperty("major") &&
-			auth.userData.hasOwnProperty("graduation_year");
+			userProfile.userData?.school && userProfile.userData?.school.length !== 0;
+		userProfile.userData?.hasOwnProperty("major") &&
+			userProfile.userData?.hasOwnProperty("graduation_year");
 
 		if (screenWidth !== undefined) {
 			if (!completedFirstStep || !completedSecondStep) {

@@ -1,4 +1,4 @@
-import SignUpOrSignIn from "../../components/SignUpOrSignIn";
+import SignUpOrInCard from "../../components/SignUpOrInCard";
 import ResetPasswordForm from "./ResetPasswordForm";
 import Link from "next/link";
 import { useSelector } from "react-redux";
@@ -16,7 +16,7 @@ export default function signin() {
 	}, [isAuthenticated]);
 
 	return (
-		<SignUpOrSignIn
+		<SignUpOrInCard
 			heading="Reset Password"
 			subheading="We’ll send you an email with a link to reset the password to your account."
 			form={<ResetPasswordForm />}

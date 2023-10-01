@@ -19,14 +19,14 @@ const CookieHandler = () => {
 	useEffect(() => {
 		const isAuthenticated = auth.isAuthenticated;
 		const completedFirstStep =
-			auth.userData.hasOwnProperty("first_name") &&
-			auth.userData.hasOwnProperty("last_name") &&
-			auth.userData.hasOwnProperty("zipcode");
+			userProfile.userData?.hasOwnProperty("first_name") &&
+			userProfile.userData?.hasOwnProperty("last_name") &&
+			userProfile.userData?.hasOwnProperty("zipcode");
 
 		const completedSecondStep =
-			auth.userData.school && auth.userData.school.length !== 0;
-		auth.userData.hasOwnProperty("major") &&
-			auth.userData.hasOwnProperty("graduation_year");
+			userProfile.userData?.school && userProfile.userData?.school.length !== 0;
+		userProfile.userData?.hasOwnProperty("major") &&
+			userProfile.userData?.hasOwnProperty("graduation_year");
 
 		if (isAuthenticated && completedFirstStep && completedSecondStep) {
 			Cookie.set("completedRegistration", true);
