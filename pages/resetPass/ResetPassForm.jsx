@@ -12,6 +12,7 @@ import {
 	removeAuthError,
 	setAuthError,
 	resetPassword,
+	resetPasswordFailure,
 } from "../../redux/auth/authActions";
 
 export default function ResetPasswordForm() {
@@ -97,14 +98,21 @@ export default function ResetPasswordForm() {
 	useEffect(() => {
 		const handleBeforeUnload = (e) => {
 			e.preventDefault();
-			setResetPasswordSent(false);
 			dispatch(removeAuthError());
+			dispatch(resetPasswordFailure(""));
 		};
 
 		window.addEventListener("beforeunload", handleBeforeUnload);
 
 		return () => {
 			window.removeEventListener("beforeunload", handleBeforeUnload);
+		};
+	}, []);
+
+	useEffect(() => {
+		return () => {
+			dispatch(removeAuthError());
+			dispatch(resetPasswordFailure(""));
 		};
 	}, []);
 

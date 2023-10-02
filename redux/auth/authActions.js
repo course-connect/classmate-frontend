@@ -215,16 +215,18 @@ const resetPasswordSuccess = () => (dispatch) => {
 	}, 3000);
 };
 
-const resetPasswordFailure = (message) => (dispatch) => {
+export const resetPasswordFailure = (message) => (dispatch) => {
 	dispatch({
 		type: RESET_PASSWORD_FAILURE,
 		payload: message,
 	});
-	setTimeout(() => {
-		dispatch({
-			type: CLEAR_RESET_PASSWORD_FAILURE,
-		});
-	}, 3000);
+	if (message === "Session has expired.") {
+		setTimeout(() => {
+			dispatch({
+				type: CLEAR_RESET_PASSWORD_FAILURE,
+			});
+		}, 3000);
+	}
 };
 
 // Flag autherization as loading
