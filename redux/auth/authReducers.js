@@ -12,6 +12,7 @@ import {
 	RESET_PASSWORD_SUCCESS,
 	RESET_PASSWORD_FAILURE,
 	CLEAR_RESET_PASSWORD_SUCCESS,
+	CLEAR_RESET_PASSWORD_FAILURE,
 } from "./authTypes";
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
 	resetRequestLoading: false,
 	resetPasswordLoading: false,
 	resetSuccess: false,
+	resetErrorMessage: "",
 };
 
 export default (state = initialState, action) => {
@@ -87,6 +89,7 @@ export default (state = initialState, action) => {
 				...state,
 				resetPasswordLoading: false,
 				resetSuccess: false,
+				resetErrorMessage: payload,
 			};
 		case RESET_PASSWORD_SUCCESS:
 			return {
@@ -98,6 +101,12 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				resetSuccess: false,
+			};
+		case CLEAR_RESET_PASSWORD_FAILURE:
+			return {
+				...state,
+				resetSuccess: false,
+				resetErrorMessage: "",
 			};
 		default:
 			return state;
