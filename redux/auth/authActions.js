@@ -22,6 +22,7 @@ import {
 	RESET_PASSWORD_SUCCESS,
 	RESET_PASSWORD_FAILURE,
 	CLEAR_RESET_PASSWORD_SUCCESS,
+	CLEAR_RESET_PASSWORD_FAILURE,
 } from "./authTypes";
 
 // Authenticate User
@@ -169,12 +170,16 @@ export const resetPassword =
 		try {
 			// Attempt to sign in with creditials given
 			await attemptResetPassword({ newPassword, token, id });
-
 			dispatch(removeAuthError());
 			dispatch(resetPasswordSuccess());
 		} catch (err) {
-			// Autherization attempt failed
-			dispatch(resetPasswordFailure());
+			if (err.response.data.message === "Invalid reset token") {
+				dispatch(resetPasswordFailure("Session has expired."));
+			} else if (err.response.data.message === "reused password") {
+				dispatch(resetPasswordFailure("You cannot reuse old passwords."));
+			} else {
+				dispatch(resetPasswordFailure("Server error, please try again later."));
+			}
 		}
 	};
 
@@ -210,10 +215,16 @@ const resetPasswordSuccess = () => (dispatch) => {
 	}, 3000);
 };
 
-const resetPasswordFailure = () => (dispatch) => {
+const resetPasswordFailure = (message) => (dispatch) => {
 	dispatch({
 		type: RESET_PASSWORD_FAILURE,
+		payload: message,
 	});
+	setTimeout(() => {
+		dispatch({
+			type: CLEAR_RESET_PASSWORD_FAILURE,
+		});
+	}, 3000);
 };
 
 // Flag autherization as loading

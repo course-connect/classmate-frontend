@@ -111,13 +111,14 @@ export default function ResetPasswordForm() {
 	useEffect(() => {
 		if (auth.resetSuccess) {
 			setTimeout(() => {
-				setResetSuccessMessage("Redirecting to sign in page.");
-			}, 1000);
-			setTimeout(() => {
 				router.push("/signin");
-			}, 2000);
+			}, 1500);
+		} else if (auth.resetErrorMessage === "Session has expired.") {
+			setTimeout(() => {
+				router.push("/request-password-reset");
+			}, 1500);
 		}
-	}, [auth.resetSuccess]);
+	}, [auth]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="mt-8 w-full sm:mt-12">
@@ -155,7 +156,7 @@ export default function ResetPasswordForm() {
 					</span>
 				</div>
 			)}
-			{resetPasswordSent && !auth.resetPasswordLoading && (
+			{resetPasswordSent && !auth.resetPasswordLoading && auth.resetSuccess && (
 				<div className="mt-2 flex items-center gap-2">
 					<Image
 						src="/check-solid.svg"
@@ -169,6 +170,22 @@ export default function ResetPasswordForm() {
 					</span>
 				</div>
 			)}
+			{resetPasswordSent &&
+				!auth.resetPasswordLoading &&
+				!auth.resetSuccess && (
+					<div className="mt-2 flex items-center gap-2">
+						<Image
+							src="/circle-exclamation-solid.svg"
+							width={0}
+							height={0}
+							alt="exclamation mark"
+							className="filter-classmate-red-error h-[12px] w-[12px]"
+						/>
+						<span className="font-classmate text-sm text-classmate-error-red">
+							{auth.resetErrorMessage}
+						</span>
+					</div>
+				)}
 			<ClassmateButton
 				type="submit"
 				variant="filled"
