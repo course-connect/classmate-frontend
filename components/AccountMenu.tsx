@@ -62,6 +62,24 @@ const AccountMenu = () => {
 					href: "/",
 					alt: "Home icon to go to the homepage",
 				},
+				{
+					icon: "/user-solid.svg",
+					label: "Sign In",
+					id: "sign-in",
+					width: 20,
+					height: 20,
+					href: "/signin",
+					alt: "Sign in icon to sign into your account",
+				},
+				{
+					icon: "/signout-solid.svg",
+					label: "Sign Up",
+					id: "sign-up",
+					width: 20,
+					height: 20,
+					href: "/signup",
+					alt: "Sign up icon",
+				},
 			]);
 		}
 	}, [isAuthenticated]);

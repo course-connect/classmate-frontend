@@ -106,12 +106,12 @@ export default function SignUpForm() {
 	useEffect(() => {
 		const handleBeforeUnload = (e) => {
 			e.preventDefault();
-			dispatch(removeAuthError());
 		};
 
 		window.addEventListener("beforeunload", handleBeforeUnload);
 
 		return () => {
+			dispatch(removeAuthError());
 			window.removeEventListener("beforeunload", handleBeforeUnload);
 		};
 	}, []);

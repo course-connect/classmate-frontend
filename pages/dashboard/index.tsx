@@ -5,7 +5,6 @@ const Dashboard = () => {
 	const { width: windowWidth } = useWindowSize();
 
 	useEffect(() => {
-		console.log(windowWidth);
 		const vizElement = document.getElementById("tableauViz");
 
 		if (windowWidth > 800) {
