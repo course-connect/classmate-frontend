@@ -5,6 +5,10 @@ import {
 	removeTokenInLocalStorage,
 } from "./authHelpers";
 import {
+	profileRetrieved,
+	clearUserProfile,
+} from "../user-profile/userProfileActions";
+import {
 	AUTH_FAILURE,
 	AUTH_SUCCESS,
 	AUTH_LOADING,
@@ -32,9 +36,15 @@ export const signUp =
 			// Attempt to sign in with creditials given
 			const res = await attemptSignUp({ email, password, confirmPassword });
 
-			// Autherization attempt succeeded
+			dispatch(removeAuthError());
 			dispatch(authSuccess(res.data));
+			dispatch(profileRetrieved(res.data.account));
 		} catch (err) {
+			if (err.response.data.message === "Email has been taken") {
+				dispatch(setAuthError("Email already in use"));
+			} else {
+				dispatch(setAuthError("Server error"));
+			}
 			// Autherization attempt failed
 			dispatch(authFailure(err));
 		}
@@ -78,12 +88,13 @@ export const signIn =
 			// Attempt to sign in with creditials given
 			const res = await attemptSignIn({ email, password });
 			if (res.data.error) {
-				dispatch(setAuthError());
+				dispatch(setAuthError("Hello"));
 				throw new Error("Error logging in");
 			} else {
 				// Autherization attempt succeeded
 				dispatch(removeAuthError());
 				dispatch(authSuccess(res.data));
+				dispatch(profileRetrieved(res.data.account));
 			}
 		} catch (err) {
 			// Autherization attempt failed
@@ -108,6 +119,7 @@ const attemptSignIn = ({ email, password }) => {
 export const signOut = () => (dispatch) => {
 	removeTokenInLocalStorage();
 	dispatch({ type: UN_AUTH_USER });
+	dispatch(clearUserProfile());
 };
 
 export const requestResetPassword = (email) => async (dispatch) => {
@@ -246,9 +258,10 @@ const authFailure = (err) => (dispatch) => {
 };
 
 // Set auth Error
-export const setAuthError = () => (dispatch) => {
+export const setAuthError = (message) => (dispatch) => {
 	dispatch({
 		type: SET_AUTH_ERROR,
+		payload: message,
 	});
 };
 

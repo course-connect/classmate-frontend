@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import Spinner from "./Spinner";
 import useWindowSize from "../hooks/useWindowSize";
 import { useForm, FormProvider } from "react-hook-form";
 import ClassmateButton from "./ClassmateButton";
@@ -131,9 +132,9 @@ export default function SignInForm() {
 				type="submit"
 				variant="filled"
 				fullWidth={true}
-				size={windowWidth >= 640 ? "lg" : "sm"}
+				size={windowWidth >= 640 ? "lg" : "md"}
 				styles="my-6 bg-classmate-gold-1 text-classmate-tan-2 sm:my-12">
-				Sign In
+				{auth.authLoading ? <Spinner /> : "Sign In"}
 			</ClassmateButton>
 		</form>
 	);

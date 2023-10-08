@@ -17,8 +17,8 @@ export default function signin() {
 
 	return (
 		<SignUpOrSignIn
-			heading="Welcome!"
-			subheading="Sign in to get early access to insights that help you craft the perfect semester"
+			heading="Welcome"
+			subheading="Sign in to manage your courses and create the prefect semester"
 			form={<SignInForm />}
 			additional={
 				<p className="font-classmate mt-4 text-classmate-green-6">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import Spinner from "../../components/Spinner";
 import useWindowSize from "../../hooks/useWindowSize";
 import { useForm, FormProvider } from "react-hook-form";
 import ClassmateButton from "../../components/ClassmateButton";
@@ -40,7 +41,8 @@ export default function SignUpForm() {
 			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 		if (!email.match(emailRegex)) {
 			setError("email");
-			setErrorMessage("invalid email address");
+			dispatch(setAuthError("invalid email address"));
+			// setErrorMessage();
 			return true;
 		}
 		return false;
@@ -72,7 +74,8 @@ export default function SignUpForm() {
 		if (errorMessage) {
 			setError("password");
 			setError("confirmPassword");
-			setErrorMessage(errorMessage);
+			dispatch(setAuthError(errorMessage));
+			// setErrorMessage(errorMessage);
 			return true;
 		}
 		return false;
@@ -82,7 +85,8 @@ export default function SignUpForm() {
 		if (password !== confirmPassword) {
 			setError("password");
 			setError("confirmPassword");
-			setErrorMessage("passwords do not match");
+			dispatch(setAuthError("passwords do not match"));
+			// setErrorMessage("passwords do not match");
 			return true;
 		}
 		return false;
@@ -98,8 +102,6 @@ export default function SignUpForm() {
 
 		if (!emailError && !passwordError && !confirmPasswordError) {
 			dispatch(signUp({ email, password, confirmPassword }));
-		} else {
-			dispatch(setAuthError());
 		}
 	}
 
@@ -156,7 +158,7 @@ export default function SignUpForm() {
 						className="filter-classmate-red-error h-[12px] w-[12px]"
 					/>
 					<span className="font-classmate text-sm text-classmate-error-red">
-						{errorMessage}
+						{auth.errorMessage}
 					</span>
 				</div>
 			)}
@@ -172,7 +174,7 @@ export default function SignUpForm() {
 				fullWidth={true}
 				size={windowWidth >= 640 ? "lg" : "md"}
 				styles="my-6 bg-classmate-gold-1 text-classmate-tan-2 sm:my-12">
-				Sign Up
+				{auth.authLoading ? <Spinner /> : "Sign Up"}
 			</ClassmateButton>
 		</form>
 	);
