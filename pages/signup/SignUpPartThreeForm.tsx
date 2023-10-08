@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import FormSelect from "../../components/ui/FormSelect";
 import FormSelectOptions from "../../components/ui/FormSelectOptions";
 import ClassmateButton from "../../components/ClassmateButton";
+import Spinner from "../../components/ui/Spinner/Spinner";
 
 import { useForm, FormProvider } from "react-hook-form";
+import { updateUserProfile } from "../../redux/user-profile/userProfileActions";
 
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 import majors from "../../assests/data/majors";
 
 export default function SignUpForm({ slideLeft, slideRight }) {
+	const router = useRouter();
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
+	const userProfile = useSelector((state) => state.userProfile);
 	const [errorMessage, setErrorMessage] = useState("");
 
 	function generateYearArray() {
@@ -32,9 +37,10 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 
 	const methods = useForm({
 		defaultValues: {
-			school: "",
-			major: "",
-			graduationYear: "",
+			school: userProfile.userData?.school?.school_name || "",
+			school_id: userProfile.userData?.school?.school_id || "",
+			major: userProfile.userData?.major || "",
+			graduationYear: userProfile.userData?.graduation_year || "",
 		},
 	});
 	const {
@@ -42,9 +48,29 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 		formState: { errors },
 	} = methods;
 
-	function onSubmit({ school, major, graduationYear }) {
-		console.log(school, major, graduationYear);
+	const handleNextButtonClick = () => {
+		handleSubmit(onSubmit);
+	};
+
+	function onSubmit({ school, school_id, major, graduationYear }) {
+		dispatch(
+			updateUserProfile({
+				school: { school_name: school, school_id: school_id },
+				major: major,
+				graduation_year: graduationYear,
+			})
+		);
 	}
+
+	useEffect(() => {
+		const completedSecondStep =
+			userProfile.userData?.hasOwnProperty("school") &&
+			userProfile.userData?.hasOwnProperty("major") &&
+			userProfile.userData?.hasOwnProperty("graduation_year");
+		if (completedSecondStep) {
+			router.push("/account");
+		}
+	}, [userProfile.userData]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="mt-8 w-full sm:mt-12">
@@ -75,8 +101,8 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 						rules={{
 							required: true,
 						}}>
-						{majors.map((major) => (
-							<FormSelectOptions text={major} />
+						{majors.map((major, index) => (
+							<FormSelectOptions key={index} text={major} />
 						))}
 					</FormSelect>
 					<FormSelect
@@ -90,8 +116,8 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 						rules={{
 							required: true,
 						}}>
-						{years.map((year) => (
-							<FormSelectOptions text={year} />
+						{years.map((year, index) => (
+							<FormSelectOptions key={index} text={year} />
 						))}
 					</FormSelect>
 				</FormProvider>
@@ -118,13 +144,20 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 						size="lg"
 						fullWidth
 						styles="bg-classmate-gold-1 text-classmate-tan-2 flex items-center gap-3 justify-center">
-						<Image
-							src={"/caret-solid.svg"}
-							width={0}
-							height={0}
-							className="filter-classmate-tan-1 h-3 w-3 rotate-90"
-						/>
-						Back
+						{userProfile.userProfileUpdateLoading ? (
+							<Spinner />
+						) : (
+							<>
+								<Image
+									src={"/caret-solid.svg"}
+									width={0}
+									height={0}
+									alt="small arrow"
+									className="filter-classmate-tan-1 h-3 w-3 rotate-90"
+								/>
+								Back
+							</>
+						)}
 					</ClassmateButton>
 					<ClassmateButton
 						callback={slideRight}
@@ -133,13 +166,20 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 						size="lg"
 						fullWidth
 						styles="bg-classmate-gold-1 text-classmate-tan-2 flex items-center gap-3 justify-center">
-						Finish
-						<Image
-							src={"/caret-solid.svg"}
-							width={0}
-							height={0}
-							className="filter-classmate-tan-1 h-3 w-3 -rotate-90"
-						/>
+						{userProfile.userProfileUpdateLoading ? (
+							<Spinner />
+						) : (
+							<>
+								Finish
+								<Image
+									src={"/caret-solid.svg"}
+									width={0}
+									height={0}
+									alt="small arrow"
+									className="filter-classmate-tan-1 h-3 w-3 -rotate-90"
+								/>
+							</>
+						)}
 					</ClassmateButton>
 				</div>
 				<div className="flex items-center justify-center gap-5">
@@ -151,7 +191,7 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 					<button
 						type="submit"
 						className="h-4 w-4 cursor-pointer rounded-full bg-classmate-gold-1"
-						onClick={slideRight}
+						onClick={handleNextButtonClick}
 					/>
 				</div>
 			</div>

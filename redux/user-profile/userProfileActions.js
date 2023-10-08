@@ -8,8 +8,58 @@ import {
 	REVIEWS_LOADING,
 	REVIEWS_SUCCESS,
 	REVIEWS_FAILURE,
+	UPDATE_USER_PROFILE_LOADING,
+	UPDATE_USER_PROFILE_SUCCESS,
+	UPDATE_USER_PROFILE_FAILURE,
 } from "./userProfileTypes";
+import { headers } from "next/dist/client/components/headers";
 
+export const updateUserProfile = (updatedInfo) => async (dispatch) => {
+	dispatch(updateUserProfileLoading());
+
+	try {
+		const res = await dispatch(attemptUpdateUserProfile(updatedInfo));
+		dispatch(updateUserProfileSuccess(res.data));
+	} catch (err) {
+		console.log(err);
+		dispatch(updateUserProfileFailure());
+	}
+};
+
+const updateUserProfileLoading = () => (dispatch) => {
+	dispatch({
+		type: UPDATE_USER_PROFILE_LOADING,
+	});
+};
+
+const attemptUpdateUserProfile = (updatedInfo) => (dispatch, getState) => {
+	const body = { ...updatedInfo };
+	const { accessToken } = getState().auth;
+
+	const header = {
+		headers: {
+			"content-type": "application/json",
+			authorization: `Bearer ${accessToken}`,
+		},
+	};
+
+	return axios.patch("/student/updateUserProfile", body, header);
+};
+
+const updateUserProfileSuccess = (updatedUser) => (dispatch) => {
+	dispatch({
+		type: UPDATE_USER_PROFILE_SUCCESS,
+		payload: updatedUser,
+	});
+};
+
+const updateUserProfileFailure = () => (dispatch) => {
+	dispatch({
+		type: UPDATE_USER_PROFILE_FAILURE,
+	});
+};
+
+///////////////////////////////////////
 export const clearUserProfile = () => async (dispatch) => {
 	dispatch({
 		type: CLEAR_USER_PROFILE,

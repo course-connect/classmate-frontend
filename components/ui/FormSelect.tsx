@@ -133,6 +133,7 @@ const FormSelect: FC<InputProps> = ({
 		const searchInputClicked = e.target.closest("#local-search-input");
 		const selectName = e.target.dataset.selectname;
 		const selectedOption = e.target.dataset.value;
+		const selectedOptionId = e.target.dataset.id;
 		if (!searchInputClicked) {
 			const currentOption = getValues(name);
 			if (
@@ -140,6 +141,9 @@ const FormSelect: FC<InputProps> = ({
 				name === selectName &&
 				selectedOption != currentOption
 			) {
+				if (selectName === "school") {
+					setValue("school_id", selectedOptionId);
+				}
 				setValue(selectName, selectedOption);
 			} else if (!currentOption) {
 				setMoveLabel(false);
@@ -320,7 +324,6 @@ const FormSelect: FC<InputProps> = ({
 										onChange={(e) => handleLocalSearchChange(e)}
 										onKeyDown={(e) => handleResultsSearchKeyDown(e)}
 										placeholder="Search"
-										defaultValue=""
 										type="text"
 										className={`font-classmate z-10 h-10 w-full bg-transparent text-classmate-green-7 placeholder-classmate-green-7 outline-none`}
 									/>
@@ -351,13 +354,14 @@ const FormSelect: FC<InputProps> = ({
 									/>
 								</div>
 								<div className="flex flex-col gap-2">
-									{formSearch.results.map(({ data }, index) => {
+									{formSearch.results.map(({ firebaseID, data }, index) => {
 										return searchType === "school" ? (
 											<FormSelectOptions
 												key={index}
 												icon="/graduation-cap-solid.svg"
 												text={data.school_name}
 												selected={data.school_name === getValues(name)}
+												id={firebaseID}
 												selectName={name}
 											/>
 										) : (

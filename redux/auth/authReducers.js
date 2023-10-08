@@ -20,6 +20,7 @@ const initialState = {
 	isAuthenticated: false,
 	accessToken: null,
 	error: false,
+	errorMessage: "",
 	resetRequestLoading: false,
 	resetPasswordLoading: false,
 	resetSuccess: false,
@@ -61,11 +62,13 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				error: true,
+				errorMessage: payload,
 			};
 		case REMOVE_AUTH_ERROR:
 			return {
 				...state,
 				error: false,
+				errorMessage: "",
 			};
 		case RESET_REQUEST_LOADING:
 			return {

@@ -69,9 +69,9 @@ function HowItWorksSection() {
 
 				{/* Steps */}
 				<div className="my-10 flex flex-wrap justify-center xl:mt-16 xl:px-20">
-					{stepsData.map((step) => (
+					{stepsData.map((step, index) => (
 						<div
-							key={step.number}
+							key={index}
 							className="my-14 flex flex-grow flex-col items-center">
 							{/* Step number and title */}
 							<h6 className="font-classmate text-center text-2xl sm:text-[28px]">

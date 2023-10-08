@@ -71,8 +71,10 @@ const ProfessorTabs = ({ professor }) => {
 							</p>
 						</div>
 						<ul className="flex list-disc flex-col gap-2 pl-4 ">
-							{professor.data.summary.strengths.map((strength) => (
-								<li className="font-classmate">{strength}</li>
+							{professor.data.summary.strengths.map((strength, index) => (
+								<li key={index} className="font-classmate">
+									{strength}
+								</li>
 							))}
 						</ul>
 					</div>
@@ -93,8 +95,10 @@ const ProfessorTabs = ({ professor }) => {
 							</p>
 						</div>
 						<ul className="flex list-disc flex-col gap-2 pl-4">
-							{professor.data.summary.weaknesses.map((weakness) => (
-								<li className="font-classmate">{weakness}</li>
+							{professor.data.summary.weaknesses.map((weakness, index) => (
+								<li key={index} className="font-classmate">
+									{weakness}
+								</li>
 							))}
 						</ul>
 					</div>
@@ -105,8 +109,8 @@ const ProfessorTabs = ({ professor }) => {
 					<ReviewSkeleton />
 				) : (
 					<div>
-						{professorData.professorReviews.map((review) => (
-							<Review review={review} />
+						{professorData.professorReviews.map((review, index) => (
+							<Review key={index} review={review} />
 						))}
 					</div>
 				)}
@@ -119,8 +123,12 @@ const ProfessorTabs = ({ professor }) => {
 								Top Tags
 							</h3>
 							<div className="flex flex-wrap gap-2">
-								{sortedTags.map((tag) => (
-									<Tag text={tag.description} score={professor.data.score} />
+								{sortedTags.map((tag, index) => (
+									<Tag
+										key={index}
+										text={tag.description}
+										score={professor.data.score}
+									/>
 								))}
 							</div>
 						</div>
@@ -129,8 +137,12 @@ const ProfessorTabs = ({ professor }) => {
 								Courses Taught
 							</h3>
 							<div className="flex flex-wrap gap-2">
-								{professor.data.courses.map((course) => (
-									<Tag text={course.course_code} score={professor.data.score} />
+								{professor.data.courses.map((course, index) => (
+									<Tag
+										key={index}
+										text={course.course_code}
+										score={professor.data.score}
+									/>
 								))}
 							</div>
 						</div>
@@ -139,8 +151,12 @@ const ProfessorTabs = ({ professor }) => {
 								Departments
 							</h3>
 							<div className="flex flex-wrap gap-2">
-								{professor.data.department_names.map((department) => (
-									<Tag text={department} score={professor.data.score} />
+								{professor.data.department_names.map((department, index) => (
+									<Tag
+										key={index}
+										text={department}
+										score={professor.data.score}
+									/>
 								))}
 							</div>
 						</div>

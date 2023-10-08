@@ -52,6 +52,7 @@ const ReviewTagsSection = ({ professor, methods }) => {
 							const selected = value.includes(tag);
 							return (
 								<button
+									key={index}
 									type="button"
 									onClick={() => handleTagClick(tag, value, selected)}
 									className={`h-fit w-fit whitespace-nowrap rounded-md px-[12px] py-[7px] text-[12px] tracking-wide text-classmate-tan-2 outline-none ring-classmate-gold-1 transition-all duration-75 focus:ring ${

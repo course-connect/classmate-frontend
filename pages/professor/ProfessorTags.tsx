@@ -17,8 +17,12 @@ const ProfessorTags = ({ professor }) => {
 						<div className="h-[2px] w-full rounded-full bg-classmate-gray-4" />
 					</h3>
 					<div className="flex flex-wrap gap-2">
-						{sortedTags.map((tag) => (
-							<Tag text={tag.description} score={professor.data.score} />
+						{sortedTags.map((tag, index) => (
+							<Tag
+								key={index}
+								text={tag.description}
+								score={professor.data.score}
+							/>
 						))}
 					</div>
 				</div>
@@ -28,8 +32,12 @@ const ProfessorTags = ({ professor }) => {
 						<div className="h-[2px] w-full rounded-full bg-classmate-gray-4" />
 					</h3>
 					<div className="flex flex-wrap gap-2">
-						{professor.data.courses.map((course) => (
-							<Tag text={course.course_code} score={professor.data.score} />
+						{professor.data.courses.map((course, index) => (
+							<Tag
+								key={index}
+								text={course.course_code}
+								score={professor.data.score}
+							/>
 						))}
 					</div>
 				</div>
@@ -39,8 +47,8 @@ const ProfessorTags = ({ professor }) => {
 						<div className="h-[2px] w-full rounded-full bg-classmate-gray-4" />
 					</h3>
 					<div className="flex flex-wrap gap-2">
-						{professor.data.department_names.map((department) => (
-							<Tag text={department} score={professor.data.score} />
+						{professor.data.department_names.map((department, index) => (
+							<Tag key={index} text={department} score={professor.data.score} />
 						))}
 					</div>
 				</div>

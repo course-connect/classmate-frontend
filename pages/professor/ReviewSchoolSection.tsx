@@ -28,8 +28,8 @@ const ReviewSchoolSection = ({ professor, methods, newSchoolSelected }) => {
 					rules={{
 						required: !newSchoolSelected,
 					}}>
-					{professor.data.schools.map(({ school_name }) => (
-						<FormSelectOptions text={school_name} />
+					{professor.data.schools.map(({ school_name }, index) => (
+						<FormSelectOptions key={index} text={school_name} />
 					))}
 				</FormSelect>
 			)}

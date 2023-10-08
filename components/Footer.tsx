@@ -65,11 +65,11 @@ const Footer: React.FC = () => {
 					className="filter-classmate-green-5 h-6 w-auto"
 				/>
 				<ul className="font-classmate flex flex-col items-center justify-center gap-5 text-sm sm:flex-row sm:gap-14">
-					{menuItems.map((item) => (
+					{menuItems.map((item, index) => (
 						<ClassmateButton
 							size="xs"
 							variant="text"
-							key={item.link}
+							key={index}
 							href={item.link}
 							styles="text-classmate-green-5  hover:bg-classmate-green-2 !text-sm">
 							{item.text}

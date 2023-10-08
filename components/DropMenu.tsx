@@ -46,10 +46,10 @@ const DropMenu: React.FC<DropMenuProps> = ({
 						: "pointer-events-none scale-75 opacity-0"
 				} ${styles}`}>
 				{menuItems.map(
-					({ icon, label, width, height, alt, id, href }: MenuItem) => (
+					({ icon, label, width, height, alt, id, href }: MenuItem, index) => (
 						<li
 							tabIndex={1}
-							key={label}
+							key={index}
 							onClick={(e) => callback(e, href || "")}
 							id={id}
 							className="flex cursor-pointer whitespace-nowrap border-b-[1px] border-classmate-gray-5 px-5 py-4 transition delay-0 duration-75 hover:bg-classmate-gray-5">

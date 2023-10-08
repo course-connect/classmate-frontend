@@ -193,6 +193,14 @@
     border-color: #788473;
 }
 
+.fade-in{
+	animation: fade-in 100ms ease-in-out forwards;
+}
+
+.fade-out{
+	animation: fade-out 100ms ease-in-out forwards;
+}
+
 @keyframes rotation {
 	0% {
 		transform: rotate(0deg);
@@ -211,6 +219,17 @@
 		opacity: 1;
 	}
 }
+
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
 
 @keyframes slide-in {
 	from {
@@ -243,7 +262,6 @@
 		transform:  scale(0.75);
 	}
 }
-
 
 
 

@@ -122,8 +122,8 @@ const AccountMenu = () => {
 			userProfile.userData?.hasOwnProperty("zipcode");
 
 		const completedSecondStep =
-			userProfile.userData?.school && userProfile.userData?.school.length !== 0;
-		userProfile.userData?.hasOwnProperty("major") &&
+			userProfile.userData?.hasOwnProperty("school") &&
+			userProfile.userData?.hasOwnProperty("major") &&
 			userProfile.userData?.hasOwnProperty("graduation_year");
 
 		if (screenWidth !== undefined) {
@@ -161,7 +161,7 @@ const AccountMenu = () => {
 		href: string
 	) => {
 		const { id } = e.target as HTMLLIElement; // Destructure the id property from e.target
-		router.push(href); // Navigate to the specified href
+
 		if (id === "sign-out") {
 			dispatch(signOut()); // Dispatch sign out action if the "Sign Out" item is clicked
 		} else if (
@@ -172,6 +172,7 @@ const AccountMenu = () => {
 		) {
 			dispatch(setAccountTab(id));
 		}
+		router.push(href); // Navigate to the specified href
 		handleMenuClick(); // Close the menu
 	};
 

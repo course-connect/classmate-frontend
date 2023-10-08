@@ -74,12 +74,12 @@ export default function SignInForm() {
 	useEffect(() => {
 		const handleBeforeUnload = (e) => {
 			e.preventDefault();
-			dispatch(removeAuthError());
 		};
 
 		window.addEventListener("beforeunload", handleBeforeUnload);
 
 		return () => {
+			dispatch(removeAuthError());
 			window.removeEventListener("beforeunload", handleBeforeUnload);
 		};
 	}, []);
@@ -116,7 +116,7 @@ export default function SignInForm() {
 						className="filter-classmate-red-error h-[12px] w-[12px]"
 					/>
 					<span className="font-classmate text-sm text-classmate-error-red">
-						incorrect credentials
+						Invalid credentials
 					</span>
 				</div>
 			)}

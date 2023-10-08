@@ -1,31 +1,26 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
 
-import useWindowSize from "../../hooks/useWindowSize";
+import Spinner from "../../components/ui/Spinner/Spinner";
 import { useForm, FormProvider } from "react-hook-form";
 import ClassmateButton from "../../components/ClassmateButton";
-import {
-	signUp,
-	removeAuthError,
-	setAuthError,
-} from "../../redux/auth/authActions";
+import { updateUserProfile } from "../../redux/user-profile/userProfileActions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import BasicInput from "../../components/BasicInput";
-import PasswordInput from "../../components/PasswordInput";
 
 export default function SignUpForm({ slideLeft, slideRight }) {
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
+	const userProfile = useSelector((state) => state.userProfile);
 	const [errorMessage, setErrorMessage] = useState("");
 
 	const methods = useForm({
 		defaultValues: {
-			firstName: "",
-			lastName: "",
-			zipcode: "",
+			firstName: userProfile.userData?.first_name,
+			lastName: userProfile.userData?.last_name,
+			zipcode: userProfile.userData?.zipcode,
 		},
 	});
 	const {
@@ -34,8 +29,26 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 	} = methods;
 
 	function onSubmit({ firstName, lastName, zipcode }) {
-		console.log(firstName, lastName, zipcode);
+		if (!userProfile.useProfileUpdateLoading) {
+			dispatch(
+				updateUserProfile({
+					first_name: firstName,
+					last_name: lastName,
+					zipcode,
+				})
+			);
+		}
 	}
+
+	useEffect(() => {
+		const completedFirstStep =
+			userProfile.userData?.hasOwnProperty("first_name") &&
+			userProfile.userData?.hasOwnProperty("last_name") &&
+			userProfile.userData?.hasOwnProperty("zipcode");
+		if (completedFirstStep) {
+			slideRight();
+		}
+	}, [userProfile.userData]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="mt-8 w-full sm:mt-12">
@@ -89,30 +102,41 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 						size="lg"
 						fullWidth
 						styles="bg-classmate-gold-1 text-classmate-tan-2 flex items-center gap-3 justify-center">
-						<Image
-							src={"/caret-solid.svg"}
-							width={0}
-							height={0}
-							alt="small arrow"
-							className="filter-classmate-tan-1 h-3 w-3 rotate-90"
-						/>
-						Back
+						{userProfile.userProfileUpdateLoading ? (
+							<Spinner />
+						) : (
+							<>
+								<Image
+									src={"/caret-solid.svg"}
+									width={0}
+									height={0}
+									alt="small arrow"
+									className="filter-classmate-tan-1 h-3 w-3 rotate-90"
+								/>
+								Back
+							</>
+						)}
 					</ClassmateButton>
 					<ClassmateButton
-						callback={slideRight}
 						type="submit"
 						variant="filled"
 						size="lg"
 						fullWidth
 						styles="bg-classmate-gold-1 text-classmate-tan-2 flex items-center gap-3 justify-center">
-						Next
-						<Image
-							src={"/caret-solid.svg"}
-							width={0}
-							height={0}
-							alt="small arrow"
-							className="filter-classmate-tan-1 h-3 w-3 -rotate-90"
-						/>
+						{userProfile.userProfileUpdateLoading ? (
+							<Spinner />
+						) : (
+							<>
+								Next
+								<Image
+									src={"/caret-solid.svg"}
+									width={0}
+									height={0}
+									alt="small arrow"
+									className="filter-classmate-tan-1 h-3 w-3 -rotate-90"
+								/>
+							</>
+						)}
 					</ClassmateButton>
 				</div>
 				<div className="flex items-center justify-center gap-5">
@@ -124,7 +148,6 @@ export default function SignUpForm({ slideLeft, slideRight }) {
 					<button
 						type="submit"
 						className="h-4 w-4 cursor-pointer rounded-full bg-classmate-gray-4"
-						onClick={slideRight}
 					/>
 				</div>
 			</div>

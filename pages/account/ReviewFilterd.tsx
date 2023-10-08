@@ -25,8 +25,12 @@ const ReviewFilterd = ({ reviews, reviewSearch }) => {
 	// 	console.log(getLocalSearchResults());
 	// }, [reviewSearch]);
 
-	return getLocalSearchResults().map((review) => (
-		<Review review={review.item} backgroundColor="bg-classmate-tan-2" />
+	return getLocalSearchResults().map((review, index) => (
+		<Review
+			key={index}
+			review={review.item}
+			backgroundColor="bg-classmate-tan-2"
+		/>
 	));
 };
 

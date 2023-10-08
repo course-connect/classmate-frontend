@@ -7,6 +7,9 @@ import {
 	REVIEWS_LOADING,
 	REVIEWS_SUCCESS,
 	REVIEWS_FAILURE,
+	UPDATE_USER_PROFILE_LOADING,
+	UPDATE_USER_PROFILE_SUCCESS,
+	UPDATE_USER_PROFILE_FAILURE,
 } from "./userProfileTypes";
 
 const initialState = {
@@ -15,6 +18,7 @@ const initialState = {
 	bookmarksLoading: false,
 	reviews: null,
 	reviewsLoading: false,
+	userProfileUpdateLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -62,6 +66,23 @@ export default (state = initialState, action) => {
 				...state,
 				bookmarksLoading: false,
 			};
+		case UPDATE_USER_PROFILE_LOADING:
+			return {
+				...state,
+				userProfileUpdateLoading: true,
+			};
+		case UPDATE_USER_PROFILE_SUCCESS:
+			return {
+				...state,
+				userProfileUpdateLoading: false,
+				userData: payload,
+			};
+		case UPDATE_USER_PROFILE_FAILURE:
+			return {
+				...state,
+				userProfileUpdateLoading: false,
+			};
+
 		default:
 			return state;
 	}

@@ -24,8 +24,8 @@ const CookieHandler = () => {
 			userProfile.userData?.hasOwnProperty("zipcode");
 
 		const completedSecondStep =
-			userProfile.userData?.school && userProfile.userData?.school.length !== 0;
-		userProfile.userData?.hasOwnProperty("major") &&
+			userProfile.userData?.hasOwnProperty("school") &&
+			userProfile.userData?.hasOwnProperty("major") &&
 			userProfile.userData?.hasOwnProperty("graduation_year");
 
 		if (isAuthenticated && completedFirstStep && completedSecondStep) {

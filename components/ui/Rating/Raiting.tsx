@@ -14,7 +14,7 @@ const Raiting = ({ name, callback, icon, iconAlt, rules, textOptions }) => {
 				<div className="flex flex-col items-center gap-4">
 					<div className="flex w-fit justify-center gap-1">
 						{new Array(5).fill(0).map((_, index) => (
-							<button type="button" onClick={() => callback(index)}>
+							<button key={index} type="button" onClick={() => callback(index)}>
 								<Image
 									src={icon}
 									alt={iconAlt}

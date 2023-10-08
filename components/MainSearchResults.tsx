@@ -10,7 +10,7 @@ const MainSearchResults = () => {
 	const router = useRouter();
 
 	const handlerItemClick = (e) => {
-		if (e.target.id !== "classmate-button") {
+		if (e.target.dataset.id !== "classmate-button") {
 			const resultClicked = e.target.closest("#result");
 			const resultType = resultClicked.dataset.resulttype;
 			const resultID = resultClicked.dataset.resultid;

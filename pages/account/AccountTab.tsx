@@ -17,8 +17,8 @@ const AccountTab = () => {
 	const saveTimeout = useRef(false);
 
 	const defaultValues = {
-		accountType: userData.account_type,
-		email: userData.email,
+		accountType: userData?.account_type,
+		email: userData?.email,
 		oldPassword: "",
 		newPassword: "",
 		confirmPassword: "",

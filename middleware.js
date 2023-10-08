@@ -24,7 +24,6 @@ export default function middleware(req) {
 		const { token, id, ts } = Object.fromEntries(urlSearchParams.entries());
 
 		if ((!token || !id) && !ts) {
-			console.log("nope", url);
 			return NextResponse.redirect(frontEndUrl + "/request-password-reset");
 		}
 	}

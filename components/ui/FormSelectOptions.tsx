@@ -7,6 +7,7 @@ type InputProps = {
 	text: string;
 	selected?: boolean;
 	selectName?: string;
+	id?: string;
 };
 
 const FormSelectOptions = ({
@@ -14,12 +15,14 @@ const FormSelectOptions = ({
 	text,
 	selected,
 	selectName,
+	id,
 }: InputProps) => {
 	return (
 		<button
 			tabIndex={-1}
 			data-selectname={selectName}
 			data-value={text}
+			data-id={id}
 			className="font-classmate relative flex min-h-[40px] w-full items-center overflow-hidden rounded-md bg-classmate-gray-6 px-3 py-2 text-left leading-5 text-classmate-green-7 outline-none ring-classmate-gold-1 transition-all hover:bg-classmate-gray-6 focus:ring">
 			{icon && (
 				<Image
@@ -27,7 +30,7 @@ const FormSelectOptions = ({
 					height={19}
 					src={icon}
 					alt={""}
-					className="pointer-events-none mr-4"
+					className="filter-classmate-green-7 pointer-events-none mr-4"
 				/>
 			)}
 			<span className="pointer-events-none !mr-auto">{text}</span>

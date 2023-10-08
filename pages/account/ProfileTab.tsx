@@ -31,12 +31,12 @@ const AccountProfileSection = () => {
 	const [years, setYears] = useState(generateYearArray());
 
 	const defaultValues = {
-		firstName: userData.first_name,
-		lastName: userData.last_name,
-		zipcode: userData.zipcode,
-		major: userData.major,
-		school: userData.school[0]?.school_name,
-		graduationYear: userData.graduation_year,
+		firstName: userData?.first_name,
+		lastName: userData?.last_name,
+		zipcode: userData?.zipcode,
+		major: userData?.major,
+		school: userData?.school?.school_name || "",
+		graduationYear: userData?.graduation_year,
 	};
 
 	const methods = useForm({
@@ -141,8 +141,8 @@ const AccountProfileSection = () => {
 						rules={{
 							required: true,
 						}}>
-						{years.map((year) => (
-							<FormSelectOptions text={year} />
+						{years.map((year, index) => (
+							<FormSelectOptions key={index} text={year} />
 						))}
 					</FormSelect>
 				</FormProvider>
