@@ -33,12 +33,14 @@ type InputProps = {
 	setValue: any;
 	getValues: any;
 	children?: any;
+	disabled?: boolean;
 	rules: Record<string, unknown>;
 };
 
 const FormSelect: FC<InputProps> = ({
 	name,
 	size = "lg",
+	disabled = false,
 	label,
 	rules,
 	type = "select",
@@ -258,11 +260,14 @@ const FormSelect: FC<InputProps> = ({
 						<p
 							className={`whitespace-nowrap ${
 								changeLabelColor ? "text-classmate-gold-1" : ""
-							} ${error ? "!text-classmate-error-red" : ""}`}>
+							} ${error ? "!text-classmate-error-red" : ""} ${
+								disabled ? "text-classmate-gray-3" : ""
+							}`}>
 							{label}
 						</p>
 					</span>
 					<input
+						disabled={disabled}
 						id={name}
 						data-selectname={name}
 						ref={selectRef}
@@ -280,6 +285,10 @@ const FormSelect: FC<InputProps> = ({
 								: `${
 										inputFocused ? "outline-classmate-gold-1" : "outline-none"
 								  }`
+						} ${
+							disabled
+								? "pointer-events-none !border-classmate-gray-4 !text-classmate-gray-3"
+								: ""
 						}`}
 					/>
 					<div
@@ -291,7 +300,7 @@ const FormSelect: FC<InputProps> = ({
 							width={0}
 							className={`filter-classmate-green-7 h-[12px] w-[12px] transition-all ${
 								inputFocused ? "rotate-180" : ""
-							}`}
+							} ${disabled ? "filter-classmate-gray-4" : ""}`}
 						/>
 					</div>
 

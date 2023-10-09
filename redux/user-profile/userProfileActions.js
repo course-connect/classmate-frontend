@@ -13,6 +13,7 @@ import {
 	UPDATE_USER_PROFILE_FAILURE,
 } from "./userProfileTypes";
 import { headers } from "next/dist/client/components/headers";
+import { setSnackBar } from "../account-tab/accountActions";
 
 export const updateUserProfile = (updatedInfo) => async (dispatch) => {
 	dispatch(updateUserProfileLoading());
@@ -20,8 +21,20 @@ export const updateUserProfile = (updatedInfo) => async (dispatch) => {
 	try {
 		const res = await dispatch(attemptUpdateUserProfile(updatedInfo));
 		dispatch(updateUserProfileSuccess(res.data));
+		dispatch(
+			setSnackBar({
+				type: "success",
+				text: "Profile saved!",
+			})
+		);
 	} catch (err) {
 		console.log(err);
+		dispatch(
+			setSnackBar({
+				type: "error",
+				text: "Save failed",
+			})
+		);
 		dispatch(updateUserProfileFailure());
 	}
 };

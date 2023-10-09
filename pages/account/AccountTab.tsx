@@ -65,6 +65,7 @@ const AccountTab = () => {
 				className="mt-8 flex w-full flex-col gap-4 lg:gap-6">
 				<FormProvider {...methods}>
 					<FormSelect
+						disabled={true}
 						name="accountType"
 						size="lg"
 						label="Account Type *"
@@ -83,6 +84,7 @@ const AccountTab = () => {
 						name="email"
 						label="Email *"
 						background="bg-classmate-tan-2"
+						disabled={true}
 						rules={{
 							required: true,
 						}}

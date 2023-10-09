@@ -9,12 +9,14 @@ import ClassmateButton from "../../components/ClassmateButton";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { useSelector } from "react-redux";
 import { setSnackBar } from "../../redux/account-tab/accountActions";
+import { updateUserProfile } from "../../redux/user-profile/userProfileActions";
+import Spinner from "../../components/ui/Spinner/Spinner";
 
 import majors from "../../assests/data/majors";
 
 const AccountProfileSection = () => {
 	const dispatch = useAppDispatch();
-	const userData = useSelector((state) => state.userProfile.userData);
+	const userProfile = useSelector((state) => state.userProfile);
 	const [allowSave, setAllowSave] = useState(false);
 	const saveTimeout = useRef(false);
 
@@ -33,12 +35,13 @@ const AccountProfileSection = () => {
 	const [years, setYears] = useState(generateYearArray());
 
 	const defaultValues = {
-		firstName: userData?.first_name,
-		lastName: userData?.last_name,
-		zipcode: userData?.zipcode,
-		major: userData?.major,
-		school: userData?.school?.school_name || "",
-		graduationYear: userData?.graduation_year,
+		firstName: userProfile.userData?.first_name,
+		lastName: userProfile.userData?.last_name,
+		zipcode: userProfile.userData?.zipcode,
+		major: userProfile.userData?.major,
+		school: userProfile.userData?.school?.school_name || "",
+		school_id: userProfile.userData?.school?.school_id || "",
+		graduationYear: userProfile.userData?.graduation_year,
 	};
 
 	const methods = useForm({
@@ -57,16 +60,23 @@ const AccountProfileSection = () => {
 	}
 
 	function onSubmit(values) {
-		if (allowSave && !saveTimeout.current) {
+		if (
+			allowSave &&
+			!saveTimeout.current &&
+			!userProfile.userProfileUpdateLoading
+		) {
 			dispatch(
-				setSnackBar({
-					type: "success",
-					text: "Profile saved!",
+				updateUserProfile({
+					first_name: values.firstName,
+					last_name: values.lastName,
+					zipcode: values.zipcode,
+					school: { school_name: values.school, school_id: values.school_id },
+					major: values.major,
+					graduation_year: values.graduationYear,
 				})
 			);
 
 			saveTimeout.current = true;
-			console.log(values);
 
 			setTimeout(() => {
 				saveTimeout.current = false;
@@ -160,7 +170,7 @@ const AccountProfileSection = () => {
 					fullWidth={true}
 					size="lg"
 					styles="text-classmate-tan-2 mt-5 bg-classmate-green-2">
-					Save
+					{userProfile.userProfileUpdateLoading ? <Spinner /> : "Save"}
 				</ClassmateButton>
 			</form>
 		</AccountSection>
