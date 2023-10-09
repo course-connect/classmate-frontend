@@ -83,6 +83,7 @@ export default (state = initialState, action) => {
 		case CLEAR_HERO_SEARCH_TWO:
 			return {
 				...state,
+				userInput: "",
 				results: [],
 			};
 		case SET_HERO_SEARCH_TWO_FILTER:

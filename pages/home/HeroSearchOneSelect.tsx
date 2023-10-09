@@ -9,7 +9,10 @@ import Image from "next/image";
 // Redux components
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../hooks/reduxHooks";
-import { setSearchOneType } from "../../redux/hero-search-one/heroSearchOneActions";
+import {
+	setSearchOneType,
+	clearSearchOne,
+} from "../../redux/hero-search-one/heroSearchOneActions";
 
 // Interface for the individual menu item
 interface MenuItem {
@@ -63,8 +66,9 @@ const HeroSchoolAndProfessorSelect: React.FC<{ setValue: Function }> = ({
 	) => {
 		const { id } = e.target as HTMLLIElement;
 		if (id !== heroSearchOne.type) {
-			dispatch(setSearchOneType(id)); // Update search type
 			setValue("userInput", ""); // Clear input field
+			dispatch(clearSearchOne());
+			dispatch(setSearchOneType(id)); // Update search type
 		}
 		setMenuOpen(false); // Close the menu
 	};

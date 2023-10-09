@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { getReviews } from "../../redux/user-profile/userProfileActions";
 
 import ReviewFilterd from "./ReviewFilterd";
+import ReviewSkeleton from "../professor/ReviewSkeleton";
 
 const ReviewsTab = () => {
 	const [reviewSearch, setReviewSearch] = useState("");
@@ -25,7 +26,9 @@ const ReviewsTab = () => {
 					<ReviewsSearch setReviewSearch={setReviewSearch} />
 				</div>
 			</div>
-			{userProfile.reviewsLoading && <p>loading...</p>}
+			{userProfile.reviewsLoading && (
+				<ReviewSkeleton backgroundColor="bg-classmate-tan-2" />
+			)}
 			{!userProfile.reviewsLoading && userProfile.reviews && (
 				<ReviewFilterd
 					reviews={userProfile.reviews}

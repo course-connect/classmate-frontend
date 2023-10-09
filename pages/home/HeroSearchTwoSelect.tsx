@@ -10,7 +10,10 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import heroSearchTwoInterface from "../../redux/hero-search-two/heroSearchTwoInterface";
-import { setSearchTwoType } from "../../redux/hero-search-two/heroSearchTwoActions";
+import {
+	setSearchTwoType,
+	clearSearchTwo,
+} from "../../redux/hero-search-two/heroSearchTwoActions";
 
 // Define the shape of each menu item
 interface MenuItem {
@@ -70,8 +73,9 @@ const HeroSearchTwoSelect: React.FC<HeroSearchTwoSelectProps> = ({
 	) => {
 		const { id } = e.currentTarget;
 		if (id !== heroSearchTwo.type) {
-			dispatch(setSearchTwoType(id));
 			setValue("userInput", "");
+			dispatch(clearSearchTwo());
+			dispatch(setSearchTwoType(id));
 		}
 		setMenuOpen(false);
 	};

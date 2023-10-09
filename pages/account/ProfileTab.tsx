@@ -10,6 +10,8 @@ import { useAppDispatch } from "../../hooks/reduxHooks";
 import { useSelector } from "react-redux";
 import { setSnackBar } from "../../redux/account-tab/accountActions";
 
+import majors from "../../assests/data/majors";
+
 const AccountProfileSection = () => {
 	const dispatch = useAppDispatch();
 	const userData = useSelector((state) => state.userProfile.userData);
@@ -108,15 +110,21 @@ const AccountProfileSection = () => {
 							required: true,
 						}}
 					/>
-					<BasicInput
-						size="lg"
+					<FormSelect
 						name="major"
+						size="lg"
 						label="Major *"
-						background="bg-classmate-tan-2"
+						type="local-search"
+						backgroundColor="bg-classmate-tan-2"
+						setValue={methods.setValue}
+						getValues={methods.getValues}
 						rules={{
 							required: true,
-						}}
-					/>
+						}}>
+						{majors.map((major, index) => (
+							<FormSelectOptions key={index} text={major} />
+						))}
+					</FormSelect>
 					<FormSelect
 						name="school"
 						size="lg"
