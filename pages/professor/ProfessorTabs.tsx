@@ -13,6 +13,7 @@ import ReviewSkeleton from "./ReviewSkeleton";
 import { useSelector } from "react-redux";
 import Review from "../../components/Review";
 import Image from "next/image";
+import Distribution from "./Distribution";
 
 const ProfessorTabs = ({ professor }) => {
 	const professorData = useSelector((state) => state.professor);
@@ -108,7 +109,8 @@ const ProfessorTabs = ({ professor }) => {
 				{professorData.professorReviewsLoading ? (
 					<ReviewSkeleton />
 				) : (
-					<div>
+					<div className="flex flex-col gap-8">
+						<Distribution professor={professor} />
 						{professorData.professorReviews.map((review, index) => (
 							<Review key={index} review={review} />
 						))}
