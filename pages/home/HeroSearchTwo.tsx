@@ -46,6 +46,12 @@ const HeroSearchTwo: React.FC<{
 	// Destructure form-related functions from useForm hook
 	const { handleSubmit, watch, register, setValue } = useForm();
 
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter") {
+			handleSearchClick();
+		}
+	};
+
 	useEffect(() => {
 		// Subscribe to the "userInput" field changes for debouncing
 		const subscription = watch((_, { name }) => {
@@ -93,6 +99,7 @@ const HeroSearchTwo: React.FC<{
 	// Render the component
 	return (
 		<form
+			onKeyDown={(e) => handleKeyDown(e)}
 			onSubmit={handleSubmit(onSubmit)}
 			className="relative flex w-full items-center rounded-full bg-classmate-tan-2 shadow-lg">
 			{/* Dropdown menu for selecting search type */}

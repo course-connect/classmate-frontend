@@ -77,6 +77,12 @@ const HeroSearchOne: React.FC<HeroSearchOneProps> = ({
 		router.push("/search");
 	};
 
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter") {
+			handleSearchClick();
+		}
+	};
+
 	useEffect(() => {
 		return () => {
 			dispatch(saveSearchOneInput(""));
@@ -86,6 +92,7 @@ const HeroSearchOne: React.FC<HeroSearchOneProps> = ({
 	return (
 		// Hero Search Form
 		<form
+			onKeyDown={(e) => handleKeyDown(e)}
 			onSubmit={handleSubmit(onSubmit)}
 			className="relative flex w-full items-center rounded-full bg-classmate-tan-2 shadow-lg">
 			{/* Dropdown for selecting search type */}

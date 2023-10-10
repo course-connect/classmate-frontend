@@ -23,10 +23,12 @@ const MainSearchResultBookmark = ({ bookmarkType, itemID }) => {
 	const handleBookmarkClick = () => {
 		if (!auth.isAuthenticated) {
 			router.push("/signin");
-		} else if (userHasBookmarked) {
-			dispatch(removeBookmark({ bookmarkType, itemID }));
-		} else {
-			dispatch(saveBookmark({ bookmarkType, itemID }));
+		} else if (!userProfile.bookmarksLoading) {
+			if (userHasBookmarked) {
+				dispatch(removeBookmark({ bookmarkType, itemID }));
+			} else {
+				dispatch(saveBookmark({ bookmarkType, itemID }));
+			}
 		}
 	};
 

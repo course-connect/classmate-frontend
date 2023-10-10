@@ -58,7 +58,6 @@ export default (state = initialState, action) => {
 		case BOOKMARKS_SUCCESS:
 			return {
 				...state,
-				bookmarks: payload,
 				bookmarksLoading: false,
 			};
 		case BOOKMARKS_FAILURE:
