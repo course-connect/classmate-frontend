@@ -8,7 +8,6 @@ import ClassmateButton from "../../components/ClassmateButton";
 
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { useSelector } from "react-redux";
-import { setSnackBar } from "../../redux/account-tab/accountActions";
 import { updateUserProfile } from "../../redux/user-profile/userProfileActions";
 import Spinner from "../../components/ui/Spinner/Spinner";
 

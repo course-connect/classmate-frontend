@@ -58,7 +58,7 @@ const BookmarksFiltered = () => {
 	return (
 		<>
 			{bookmarksSearch.type === "professor" ? (
-				<div onClick={handlerItemClick} className="w-full">
+				<div onClick={handlerItemClick} className="flex w-full flex-col gap-8">
 					{getProfessorSearchResults().map((result, index) => (
 						<MainSearchResult
 							key={index}
@@ -73,7 +73,7 @@ const BookmarksFiltered = () => {
 					))}
 				</div>
 			) : (
-				<div onClick={handlerItemClick} className="w-full">
+				<div onClick={handlerItemClick} className="flex w-full flex-col gap-8">
 					{getCourseSearchResults().map((result, index) => (
 						<MainSearchResult
 							key={index}

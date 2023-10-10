@@ -241,27 +241,7 @@
 	}
 }
 
-@keyframes snackbar {
-	0% {
-		opacity: 0;
-		transform: scale(0.75);
-	}
 
-	5% {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	95% {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	100% {
-		opacity: 0;
-		transform:  scale(0.75);
-	}
-}
 
 
 

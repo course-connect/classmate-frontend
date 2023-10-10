@@ -70,7 +70,6 @@ const Account = () => {
 							Back
 						</ClassmateButton>
 					)}
-					{account.snackBar.text && <SnackBar />}
 					{account.currentTab === "profile" && <ProfileTab />}
 					{account.currentTab === "account" && <AccountTab />}
 					{account.currentTab === "reviews" && <ReviewsTab />}

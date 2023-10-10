@@ -5,6 +5,7 @@ import {SET_ACCOUNT_TAB,
 
 const initialState = {
 	currentTab: "",
+	snackBarActive: false,
 	snackBar: {
 		type: "",
 		text: "",
@@ -23,6 +24,7 @@ export default (state = initialState, action) => {
 		case SET_SNACKBAR:
 			return {
 				...state,
+				snackBarActive: true,
 				snackBar: {
 					type: payload.type,
 					text: payload.text,
@@ -31,10 +33,11 @@ export default (state = initialState, action) => {
 		case CLEAR_SNACKBAR:
 			return {
 				...state,
-				snackBar: {
-					type: "",
-					text: "",
-				},
+				snackBarActive: false,
+				// snackBar: {
+				// 	type: "",
+				// 	text: "",
+				// },
 			};
 		default:
 			return state;

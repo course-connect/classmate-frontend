@@ -94,7 +94,8 @@ export const saveBookmark =
 		try {
 			const res = await dispatch(attemptSaveBookmark({ bookmarkType, itemID }));
 			dispatch(updateUserProfileSuccess(res.data));
-			dispatch(bookmarksSuccess());
+			dispatch(bookmarksSuccess(res.data.bookmarks));
+			dispatch(getBookmarks());
 			dispatch(
 				setSnackBar({
 					type: "success",
@@ -137,7 +138,8 @@ export const removeBookmark =
 				attemptRemoveBookmark({ bookmarkType, itemID })
 			);
 			dispatch(updateUserProfileSuccess(res.data));
-			dispatch(bookmarksSuccess());
+			dispatch(bookmarksSuccess(res.data.bookmarks));
+			dispatch(getBookmarks());
 			dispatch(
 				setSnackBar({
 					type: "success",

@@ -5,7 +5,6 @@ import ProfessorImage from "../ProfessorImage";
 import ProfessorTags from "../ProfessorTags";
 import ProfessorDescription from "../ProfessorDescription";
 import ProfessorTabs from "../ProfessorTabs";
-import SnackBar from "../../../components/ui/SnackBar/SnackBar";
 
 import ReviewModal from "../ReviewModal";
 
@@ -14,7 +13,6 @@ import useLockScroll from "../../../hooks/useLockScroll";
 import { useSelector } from "react-redux";
 
 export default function Professor({ professor }) {
-	const account = useSelector((state) => state.account);
 	const [blockScroll, allowScroll] = useLockScroll();
 	const [showModal, setShowModal] = useState(false);
 
@@ -51,7 +49,6 @@ export default function Professor({ professor }) {
 					</div>
 				</div>
 			</div>
-			{account.snackBar.text && <SnackBar />}
 		</>
 	);
 }

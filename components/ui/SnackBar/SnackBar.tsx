@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 
 const SnackBar = () => {
-	const snackBar = useSelector((state) => state.account.snackBar);
+	const account = useSelector((state) => state.account);
 
 	const getIcon = (type) => {
 		switch (type) {
@@ -43,24 +43,22 @@ const SnackBar = () => {
 
 	return (
 		<div
-			style={{
-				animation: "snackbar 3s ease-in-out forwards",
-			}}
+			style={{ animationDuration: "150ms" }}
 			className={`font-classmate fixed bottom-6 left-6 flex items-center justify-center gap-3 rounded-lg px-5 py-3 text-classmate-tan-2 ${getBgColor(
-				snackBar.type
-			)}`}>
+				account.snackBar.type
+			)} ${account.snackBarActive ? "fade-in" : "fade-out"}`}>
 			<div className="flex h-4 w-4 items-center justify-center rounded-full bg-classmate-tan-2">
 				<Image
-					src={getIcon(snackBar.type)}
+					src={getIcon(account.snackBar.type)}
 					width={0}
 					height={0}
 					alt="popup"
-					className={`${getIconSize(snackBar.type)} ${getIconColor(
-						snackBar.type
+					className={`${getIconSize(account.snackBar.type)} ${getIconColor(
+						account.snackBar.type
 					)}`}
 				/>
 			</div>
-			{snackBar.text}
+			{account.snackBar.text}
 		</div>
 	);
 };

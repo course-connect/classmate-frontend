@@ -4,7 +4,6 @@ import MainSearchResults from "../../components/MainSearchResults";
 import MobileSlideUpMenus from "../../components/MobileSlideUpMenus";
 import useWindowSize from "../../hooks/useWindowSize";
 import RankGraph from "../../components/RankGraph";
-import SnackBar from "../../components/ui/SnackBar/SnackBar";
 
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { useSelector } from "react-redux";
@@ -15,7 +14,6 @@ export default function Search() {
 
 	const dispatch = useAppDispatch();
 	const mainSearch = useSelector((state) => state.mainSearch);
-	const account = useSelector((state) => state.account);
 
 	const [showGraph, toggleGraph] = useState(false);
 	const [showFilters, toggleFilters] = useState(false);
@@ -73,7 +71,6 @@ export default function Search() {
 					</div>
 				)
 			)}
-			{account.snackBar.text && <SnackBar />}
 		</div>
 	);
 }

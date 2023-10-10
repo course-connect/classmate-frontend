@@ -11,13 +11,27 @@ export const setAccountTab = (tabName) => (dispatch) => {
 	};
 
 
+let snackBarTimeoutId = null; // Variable to store the timeout ID
+
 export const setSnackBar = (data) => async (dispatch) => {
+    // Dispatch the action to set the snackbar
     dispatch({
         type: SET_SNACKBAR,
         payload: data,
     });
-    setTimeout(() => {dispatch(clearSnackBar())}, 3000)
+
+    // Clear the previous timeout, if it exists
+    if (snackBarTimeoutId !== null) {
+        clearTimeout(snackBarTimeoutId);
+    }
+
+    // Set a new timeout for clearing the snackbar
+    snackBarTimeoutId = setTimeout(() => {
+        dispatch(clearSnackBar());
+        snackBarTimeoutId = null; // Reset the timeout ID after clearing
+    }, 3000);
 };
+
 
 export const clearSnackBar = () => async (dispatch) => {
     dispatch({
