@@ -124,7 +124,7 @@ export default function RankGraph({ styles, titleStyles, isHomepage }) {
 			<div
 				className={`flex justify-between ${showLargeGraph ? "mb-8" : "mb-12"}`}>
 				<p
-					className={`font-classmate-bold-italic ${titleStyles} text-2xl sm:text-3xl lg:text-4xl ${titleStyles}`}>
+					className={`font-classmate-bold-italic mr-4 ${titleStyles} text-2xl sm:text-3xl lg:text-4xl ${titleStyles}`}>
 					Professor rank
 				</p>
 				{!isHomepage && (

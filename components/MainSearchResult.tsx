@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ResultQualityTag from "./ResultQualityTag";
 import ResultScore from "./ResultScore";
 import Tag from "./Tag";
 import MatchText from "./MatchText";
 import SchoolScoreDisplay from "./SchoolScoreDisplay";
 import MainSearchResultBookmark from "./MainSearchResultBookmark";
+import useWindowSize from "../hooks/useWindowSize";
+import Image from "next/image";
 
 const MainSearchResult = ({ result, filters, userInput, resultType }) => {
+	const [resultWideEnough, setResultWideEnough] = useState(false);
+	const [wideEnoughForScores, setWideEnoughForScores] = useState(false);
+	const [wideEnoughForProfessorTitle, setWideEnoughForProfessorTitle] =
+		useState(false);
+	const resultRef = useRef();
+	const { width: windowWidth } = useWindowSize();
+
+	useEffect(() => {
+		const resultWidth = resultRef.current.offsetWidth;
+		if (resultWidth >= 650 && !resultWideEnough) {
+			setResultWideEnough(true);
+		} else if (resultWidth < 650 && resultWideEnough) {
+			setResultWideEnough(false);
+		}
+
+		if (resultWidth >= 450 && !wideEnoughForProfessorTitle) {
+			setWideEnoughForProfessorTitle(true);
+		} else if (resultWidth < 450 && wideEnoughForProfessorTitle) {
+			setWideEnoughForProfessorTitle(false);
+		}
+
+		if (resultWidth >= 350 && !wideEnoughForScores) {
+			setWideEnoughForScores(true);
+		} else if (resultWidth < 350 && wideEnoughForScores) {
+			setWideEnoughForScores(false);
+		}
+	}, [windowWidth]);
+
 	let searchResult;
+
 	switch (resultType) {
 		case "school":
 			const scores = Object.entries(result.data.score).filter(
@@ -18,6 +49,7 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 			const rightScores = scores.slice(5, 10);
 			searchResult = (
 				<div
+					ref={resultRef}
 					tabIndex={0}
 					role="button"
 					id="result"
@@ -78,6 +110,7 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 		case "professor":
 			searchResult = (
 				<div
+					ref={resultRef}
 					tabIndex={0}
 					role="button"
 					id="result"
@@ -85,27 +118,33 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 					data-resultid={result.firebaseID}
 					className="font-classmate flex cursor-pointer flex-col gap-6 rounded-xl bg-classmate-tan-2 p-8 text-left text-classmate-green-6 shadow-xl ring-classmate-gold-1 focus:ring">
 					<div className="flex w-full justify-between gap-6">
-						<div className="flex flex-wrap gap-2">
-							<div className="mr-4">
-								<p className="font-classmate-bold text-2xl capitalize text-classmate-green-1">{`${result.data.first_name} ${result.data.last_name}`}</p>
-
-								{filters ? (
-									<p className=" flex flex-col text-sm">
-										{filters.school.filter_text
-											? filters.school.filter_text
-											: result.data.schools?.map(({ school_name }, index) => (
-													<span key={index}>{school_name}</span>
-											  ))}
-									</p>
-								) : (
-									<p className="flex flex-col text-sm">
-										{result.data.schools?.map(({ school_name }, index) => (
-											<span key={index}>{school_name}</span>
-										))}
-									</p>
-								)}
+						<div
+							className={`flex flex-col ${
+								wideEnoughForProfessorTitle ? "!flex-row gap-4" : ""
+							}`}>
+							<div className="mb-2 flex aspect-square h-[112px] max-h-[112px] min-h-[112px] w-[112px] min-w-[112px] max-w-[112px] items-center justify-center rounded-xl bg-classmate-tan-1">
+								<Image
+									src="/male-avatar-1.svg"
+									width={0}
+									height={0}
+									className="h-auto w-3/5"
+								/>
 							</div>
-							<ResultQualityTag score={result.data.score} />
+							<div className="flex flex-col gap-2">
+								<div>
+									<p className="font-classmate-bold text-2xl capitalize text-classmate-green-1">{`${result.data.first_name} ${result.data.last_name}`}</p>
+
+									{result.data.schools && (
+										<p className="flex flex-col text-sm">
+											<span>{result.data.schools[0]?.school_name}</span>
+											{result.data.schools.length > 0 && (
+												<span>and other schools</span>
+											)}
+										</p>
+									)}
+								</div>
+								<ResultQualityTag score={result.data.score} />
+							</div>
 						</div>
 						<MainSearchResultBookmark
 							bookmarkType="professor"
@@ -127,17 +166,41 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 						tenetur inventore harum minima sit odio!
 					</p>
 
-					<div className="flex flex-wrap gap-6 sm:flex-row sm:gap-6">
-						<div className="flex flex-wrap gap-2">
-							<ResultScore title="Score" score={result.data.score} />
-							<ResultScore title="Difficulty" score={result.data.difficulty} />
-							<ResultScore title="Reviews" score={result.data.num_of_reviews} />
+					<div
+						className={`flex flex-wrap gap-6 sm:flex-row sm:gap-6 ${
+							resultWideEnough ? "flex-nowrap !gap-4" : ""
+						}`}>
+						<div
+							className={`flex flex-wrap gap-2 ${
+								resultWideEnough ? "flex-nowrap" : ""
+							}`}>
+							<ResultScore
+								title="Score"
+								score={result.data.score}
+								height={wideEnoughForScores ? "h-[65px]" : "h-[50px] "}
+								width={wideEnoughForScores ? "w-[85px]" : "w-[70px]"}
+								fontSize={wideEnoughForScores ? "text-[28px]" : ""}
+							/>
+							<ResultScore
+								title="Difficulty"
+								score={result.data.difficulty}
+								height={wideEnoughForScores ? "h-[65px]" : "h-[50px] "}
+								width={wideEnoughForScores ? "w-[85px]" : "w-[70px]"}
+								fontSize={wideEnoughForScores ? "text-[28px]" : ""}
+							/>
+							<ResultScore
+								title="Reviews"
+								score={result.data.num_of_reviews}
+								height={wideEnoughForScores ? "h-[65px]" : "h-[50px] "}
+								width={wideEnoughForScores ? "w-[85px]" : "w-[70px]"}
+								fontSize={wideEnoughForScores ? "text-[28px]" : ""}
+							/>
 						</div>
 						<div>
 							<p className="font-classmate-italic text-classmate-green-1">
 								Top Tags
 							</p>
-							<div className="mt-1 flex flex-wrap gap-1">
+							<div className="flex flex-wrap gap-1">
 								{result.data.tags.map(({ description }, index) => (
 									<Tag
 										key={index}
@@ -154,6 +217,7 @@ const MainSearchResult = ({ result, filters, userInput, resultType }) => {
 		case "course":
 			searchResult = (
 				<div
+					ref={resultRef}
 					id="result"
 					data-resulttype={resultType}
 					data-resultid={result.firebaseID}

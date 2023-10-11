@@ -22,7 +22,7 @@ const MobileSlideUpMenus = ({
 						callback={handleShowGraphClick}
 						variant="filled"
 						size="md"
-						styles="fixed bottom-6 bg-classmate-gold-1 text-classmate-tan-2 shadow-md !px-5 flex justify-center items-center ">
+						styles="fixed bottom-6 bg-classmate-gold-1 text-classmate-tan-2 shadow-md !px-5 flex justify-center items-center z-10">
 						Graph
 						<Image
 							className="filter-classmate-tan-2 ml-2 h-[10px] w-[10px] rotate-180"

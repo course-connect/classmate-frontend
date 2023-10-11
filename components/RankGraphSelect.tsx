@@ -58,7 +58,7 @@ const RankGraphSelect = ({ handleAddFilterClick, label }) => {
 				<button
 					onClick={openFilterMenu}
 					className="font-classmate flex w-fit items-center justify-between rounded-md bg-classmate-gray-6 px-3 py-1 text-left text-classmate-green-7 outline-none ring-classmate-gold-1 focus:ring">
-					<div className="pointer-events-none flex w-full items-center justify-center gap-3">
+					<div className="pointer-events-none flex w-full items-center justify-center gap-3 whitespace-nowrap">
 						{data.text}
 						<Image
 							width={0}

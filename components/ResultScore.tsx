@@ -1,6 +1,14 @@
 import React from "react";
 
-const ResultScore = ({ title, score, variant = "default", review = false }) => {
+const ResultScore = ({
+	title,
+	score,
+	variant = "default",
+	review = false,
+	width = "",
+	height = "",
+	fontSize = "",
+}) => {
 	const defaultDisplay = variant === "default";
 
 	const getColor = (score) => {
@@ -120,13 +128,13 @@ const ResultScore = ({ title, score, variant = "default", review = false }) => {
 				</p>
 			)}
 			<div
-				className={`font-classmate-bold-italic flex h-[50px] w-[70px]  items-center justify-center rounded-lg text-xl  text-classmate-tan-2 xs:h-[60px] xs:w-[80px] xs:text-2xl  ${color} ${
+				className={`font-classmate-bold-italic flex items-center justify-center rounded-lg text-xl  text-classmate-tan-2  ${color} ${
 					!defaultDisplay ? "!h-auto !w-[90px] !flex-col !gap-2 !py-[10px]" : ""
-				}`}>
+				} ${width} ${height}`}>
 				<p
 					className={`-translate-y-[2px] leading-6 ${
 						!defaultDisplay ? "text-[26px]" : ""
-					}`}>
+					} ${fontSize}`}>
 					{scoreDisplay}
 				</p>
 				{!defaultDisplay && (
