@@ -15,7 +15,8 @@ const MobileSlideUp = ({ children, openMenu, toggleSlideUp }) => {
 					maxHeight: openMenu ? "100%" : 0,
 					transition: "all 0.2s ease",
 				}}
-				className={`fixed bottom-0 left-0 z-20 flex w-full justify-center overflow-hidden rounded-tl-2xl rounded-tr-2xl bg-classmate-tan-2 transition ${
+				// overflow-hidden
+				className={`fixed bottom-0 left-0 z-20 flex w-full justify-center  rounded-tl-2xl rounded-tr-2xl bg-classmate-tan-2 transition ${
 					openMenu ? "z-30" : "first-letter:"
 				}`}>
 				{children}

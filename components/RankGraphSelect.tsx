@@ -73,7 +73,7 @@ const RankGraphSelect = ({ handleAddFilterClick, label }) => {
 				</button>
 
 				<div
-					className={`absolute right-0 top-10 z-30 flex origin-top-left flex-col gap-2 rounded-lg bg-classmate-tan-2 p-4 shadow-md transition ${
+					className={`absolute bottom-10 right-0 z-30 flex h-fit origin-bottom-right flex-col gap-2 rounded-lg bg-classmate-tan-2 p-4 shadow-md transition  md:top-10 md:origin-top-left ${
 						dropDownOpen
 							? "pointer-events-auto scale-100 opacity-100"
 							: "pointer-events-none scale-75 opacity-0"

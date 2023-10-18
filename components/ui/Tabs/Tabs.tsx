@@ -16,8 +16,8 @@ const Tabs = ({ children, handleTabClick, value }) => {
 	};
 
 	return (
-		<div className="relative  w-full">
-			<div className="flex">{addProps(children)}</div>
+		<div className="relative w-full">
+			<div className="flex flex-wrap">{addProps(children)}</div>
 			<span className="absolute bottom-0 h-[2px] w-full bg-classmate-gray-4" />
 		</div>
 	);

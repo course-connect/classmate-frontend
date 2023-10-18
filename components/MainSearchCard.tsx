@@ -96,7 +96,7 @@ const MainSearchCard = ({
 									<button
 										data-filtertype={key}
 										onClick={(e) => handleRemoveClick(e)}
-										className="pointer flex h-3 w-3 items-center justify-center rounded-full bg-classmate-tan-2">
+										className="flex h-3 min-h-[12px] w-3 min-w-[12px]  items-center justify-center rounded-full bg-classmate-tan-2">
 										<Image
 											className="filter-classmate-green-4 pointer-events-none h-[6px] w-[6px]"
 											src="/xmark-solid.svg"

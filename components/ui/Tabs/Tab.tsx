@@ -5,7 +5,7 @@ const Tab = ({ label, handleTabClick, value, index }) => {
 	return (
 		<button
 			data-index={index}
-			className={`font-classmate relative z-10 rounded-tl-xl rounded-tr-xl px-4 py-2 text-lg text-classmate-green-7 outline-none ${
+			className={`font-classmate relative z-10 rounded-tl-xl rounded-tr-xl px-4 py-2 text-classmate-green-7 outline-none xs:text-lg ${
 				tabSelected
 					? "bg-classmate-tan-1 !bg-opacity-50 !text-classmate-green-1"
 					: ""
