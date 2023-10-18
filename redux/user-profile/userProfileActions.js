@@ -11,9 +11,13 @@ import {
 	UPDATE_USER_PROFILE_LOADING,
 	UPDATE_USER_PROFILE_SUCCESS,
 	UPDATE_USER_PROFILE_FAILURE,
+	UPDATE_USER_PASSWORD_LOADING,
+	UPDATE_USER_PASSWORD_SUCCESS,
+	UPDATE_USER_PASSWORD_FAILURE,
 } from "./userProfileTypes";
 import { headers } from "next/dist/client/components/headers";
 import { setSnackBar } from "../account-tab/accountActions";
+import { setAuthError } from "../auth/authActions";
 
 export const updateUserProfile = (updatedInfo) => async (dispatch) => {
 	dispatch(updateUserProfileLoading());
@@ -264,4 +268,67 @@ const attemptBookmarkRetrieval = () => (dispatch, getState) => {
 	const courses = axios.get("/student/bookmarks/courses", header);
 	const professors = axios.get("/student/bookmarks/professors", header);
 	return Promise.all([courses, professors]);
+};
+
+/////////////////////////////////////////
+export const updateUserPassword = (updatedInfo) => async (dispatch) => {
+	console.log(updatedInfo);
+	dispatch(updateUserPasswordLoading());
+
+	try {
+		const res = await dispatch(attemptUpdateUserPassword(updatedInfo));
+		dispatch(updateUserPasswordSuccess());
+		dispatch(
+			setSnackBar({
+				type: "success",
+				text: "Profile saved!",
+			})
+		);
+	} catch (err) {
+		console.log(err.response.data.message);
+		if (err.response.data.message === "invalid credentials") {
+			dispatch(setAuthError("invalid credentials"));
+		} else if (err.response.data.message === "reused password") {
+			dispatch(setAuthError("cannot reuse old passwords"));
+		}
+		dispatch(
+			setSnackBar({
+				type: "error",
+				text: "Save failed",
+			})
+		);
+		dispatch(updateUserPasswordFailure());
+	}
+};
+
+const updateUserPasswordLoading = () => (dispatch) => {
+	dispatch({
+		type: UPDATE_USER_PASSWORD_LOADING,
+	});
+};
+
+const attemptUpdateUserPassword = (updatedInfo) => (dispatch, getState) => {
+	const body = { ...updatedInfo };
+	const { accessToken } = getState().auth;
+
+	const header = {
+		headers: {
+			"content-type": "application/json",
+			authorization: `Bearer ${accessToken}`,
+		},
+	};
+
+	return axios.patch("/user/directResetPassword", body, header);
+};
+
+const updateUserPasswordSuccess = (updatedUser) => (dispatch) => {
+	dispatch({
+		type: UPDATE_USER_PASSWORD_SUCCESS,
+	});
+};
+
+const updateUserPasswordFailure = () => (dispatch) => {
+	dispatch({
+		type: UPDATE_USER_PASSWORD_FAILURE,
+	});
 };

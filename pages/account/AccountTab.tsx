@@ -1,17 +1,22 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+
 import AccountSection from "./AccountSection";
 import { useForm, FormProvider } from "react-hook-form";
 import BasicInput from "../../components/BasicInput";
+import PasswordInput from "../../components/PasswordInput";
 import FormSelect from "../../components/ui/FormSelect";
 import FormSelectOptions from "../../components/ui/FormSelectOptions";
 import ClassmateButton from "../../components/ClassmateButton";
 
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { useSelector } from "react-redux";
-import { setSnackBar } from "../../redux/account-tab/accountActions";
+import { updateUserPassword } from "../../redux/user-profile/userProfileActions";
+import { setAuthError, removeAuthError } from "../../redux/auth/authActions";
 
 const AccountTab = () => {
 	const dispatch = useAppDispatch();
+	const auth = useSelector((state) => state.auth);
 	const userData = useSelector((state) => state.userProfile.userData);
 	const [allowSave, setAllowSave] = useState(false);
 	const saveTimeout = useRef(false);
@@ -39,23 +44,97 @@ const AccountTab = () => {
 		}
 	}
 
-	function onSubmit(values) {
-		if (allowSave && !saveTimeout.current) {
-			dispatch(
-				setSnackBar({
-					type: "success",
-					text: "Profile saved!",
-				})
-			);
+	function validatePassword(password) {
+		const oneUpper = "(?=.*?[A-Z])";
+		const oneLower = "(?=.*?[a-z])";
+		const oneDigit = "(?=.*?[0-9])";
+		const oneSpecial = "(?=.*?[#?!@$%^&*-])";
+		const minChar = ".{8,}";
+		const maxChar = ".{8,64}";
 
+		let errorMessage = "";
+		if (!password.match(minChar)) {
+			errorMessage = "password must contain at least 8 characters";
+		} else if (!password.match(maxChar)) {
+			errorMessage = "password must contain at most 64 characters";
+		} else if (!password.match(oneUpper)) {
+			errorMessage = "password must contain one uppercase character";
+		} else if (!password.match(oneLower)) {
+			errorMessage = "password must contain one lowercase character";
+		} else if (!password.match(oneDigit)) {
+			errorMessage = "password must contain one digit";
+		} else if (!password.match(oneSpecial)) {
+			errorMessage = "password must contain one special character";
+		}
+
+		if (errorMessage) {
+			setError("newPassword");
+			setError("confirmPassword");
+			dispatch(setAuthError(errorMessage));
+			// setErrorMessage(errorMessage);
+			return true;
+		}
+		return false;
+	}
+
+	function validateConfirmPassword(password, confirmPassword) {
+		if (password !== confirmPassword) {
+			setError("newPassword");
+			setError("confirmPassword");
+			dispatch(setAuthError("passwords do not match"));
+			// setErrorMessage("passwords do not match");
+			return true;
+		}
+		return false;
+	}
+
+	function validateOldPassword(oldPassword) {
+		if (!oldPassword) {
+			setError("oldPassword");
+			dispatch(setAuthError("missing fields"));
+			return true;
+		}
+		return false;
+	}
+
+	function onSubmit({ oldPassword, newPassword, confirmPassword }) {
+		removeAuthError();
+		if (allowSave && !saveTimeout.current) {
+			const passwordError = validatePassword(newPassword);
+			const confirmPasswordError = validateConfirmPassword(
+				newPassword,
+				confirmPassword
+			);
+			const oldPasswordError = validateOldPassword(oldPassword);
+
+			if (!oldPasswordError && !passwordError && !confirmPasswordError) {
+				const passwordInputs = {
+					oldPass: oldPassword,
+					newPass: newPassword,
+					confirmPass: confirmPassword,
+				};
+				dispatch(updateUserPassword(passwordInputs));
+			}
 			saveTimeout.current = true;
-			console.log(values);
 
 			setTimeout(() => {
 				saveTimeout.current = false;
 			}, 3000);
 		}
 	}
+
+	useEffect(() => {
+		const handleBeforeUnload = (e) => {
+			e.preventDefault();
+		};
+
+		window.addEventListener("beforeunload", handleBeforeUnload);
+
+		return () => {
+			dispatch(removeAuthError());
+			window.removeEventListener("beforeunload", handleBeforeUnload);
+		};
+	}, []);
 
 	return (
 		<AccountSection title="Account">
@@ -90,25 +169,47 @@ const AccountTab = () => {
 						}}
 					/>
 
-					<BasicInput
+					<PasswordInput
 						size="lg"
 						name="oldPassword"
 						label="Old Password"
 						background="bg-classmate-tan-2"
+						rules={{
+							required: true,
+						}}
 					/>
-					<BasicInput
+					<PasswordInput
 						size="lg"
 						name="newPassword"
 						label="New Password"
 						background="bg-classmate-tan-2"
+						rules={{
+							required: true,
+						}}
 					/>
-
-					<BasicInput
+					<PasswordInput
 						size="lg"
 						name="confirmPassword"
 						label="Confirm Password"
 						background="bg-classmate-tan-2"
+						rules={{
+							required: true,
+						}}
 					/>
+					{auth.error && (
+						<div className="mt-2 flex items-center gap-2">
+							<Image
+								src="/circle-exclamation-solid.svg"
+								width={0}
+								height={0}
+								alt="exclamation mark"
+								className="filter-classmate-red-error h-[12px] w-[12px]"
+							/>
+							<span className="font-classmate text-sm text-classmate-error-red">
+								{auth.errorMessage}
+							</span>
+						</div>
+					)}
 				</FormProvider>
 				<ClassmateButton
 					type="submit"

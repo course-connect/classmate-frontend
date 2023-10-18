@@ -194,7 +194,7 @@ const AccountMenu = () => {
 					className="flex cursor-pointer items-center justify-center rounded-full bg-transparent p-1 outline-none ring-classmate-gold-1 transition delay-100 duration-200 hover:bg-classmate-tan-1 focus:ring">
 					<div
 						className={`font-classmate-bold text-classmate-green-1r flex h-10 w-10 select-none items-center justify-center rounded-full text-lg ${bgColor}`}>
-						{userProfile.userData.first_name.substr(0, 1).toUpperCase()}
+						{userProfile.userData?.first_name.substr(0, 1).toUpperCase()}
 					</div>
 				</button>
 			</ToolTip>

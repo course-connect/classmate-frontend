@@ -10,6 +10,9 @@ import {
 	UPDATE_USER_PROFILE_LOADING,
 	UPDATE_USER_PROFILE_SUCCESS,
 	UPDATE_USER_PROFILE_FAILURE,
+	UPDATE_USER_PASSWORD_LOADING,
+	UPDATE_USER_PASSWORD_SUCCESS,
+	UPDATE_USER_PASSWORD_FAILURE,
 } from "./userProfileTypes";
 
 const initialState = {
@@ -19,6 +22,7 @@ const initialState = {
 	reviews: null,
 	reviewsLoading: false,
 	userProfileUpdateLoading: false,
+	userPasswordUpdateLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -82,7 +86,17 @@ export default (state = initialState, action) => {
 				...state,
 				userProfileUpdateLoading: false,
 			};
-
+		case UPDATE_USER_PASSWORD_LOADING:
+			return {
+				...state,
+				userPasswordUpdateLoading: true,
+			};
+		case UPDATE_USER_PASSWORD_FAILURE:
+		case UPDATE_USER_PASSWORD_SUCCESS:
+			return {
+				...state,
+				userPasswordUpdateLoading: false,
+			};
 		default:
 			return state;
 	}
