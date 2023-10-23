@@ -16,6 +16,7 @@ export const search =
 		// Flag search as loading
 		dispatch(searchLoading());
 
+		
 		try {
 			// Attempt to search with credentials given
 			const res = await attemptSearch({ search, searchType });
