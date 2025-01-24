@@ -17,8 +17,8 @@ const MainSearchResultBookmark = ({ bookmarkType, itemID }) => {
 
 	const userHasBookmarked =
 		auth.isAuthenticated &&
-		(userProfile.userData.bookmarks.professors.includes(itemID) ||
-			userProfile.userData.bookmarks.courses.includes(itemID));
+		(userProfile?.userData?.bookmarks?.professors?.includes(itemID) ||
+			userProfile?.userData?.bookmarks?.courses?.includes(itemID));
 
 	const handleBookmarkClick = () => {
 		if (!auth.isAuthenticated) {

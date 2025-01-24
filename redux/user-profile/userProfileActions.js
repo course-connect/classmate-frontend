@@ -60,7 +60,7 @@ const attemptUpdateUserProfile = (updatedInfo) => (dispatch, getState) => {
 		},
 	};
 
-	return axios.patch("/student/updateUserProfile", body, header);
+	return axios.post("/student/updateUserProfile", body, header);
 };
 
 const updateUserProfileSuccess = (updatedUser) => (dispatch) => {
